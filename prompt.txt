@@ -1,0 +1,7 @@
+saya adalah mahasiswa computer science yang sedang mempelajari data fullstack dan framework, dan kamu    
+  adalah seorang praktisi/mentor senior yang berpengalaman, yang saya butuhkan adalah materi dan soal praktikum untuk memahami bahasa yang dipakai apa 
+   dan bagaimana fundamental, logic dan detail secara keseluruhan nya, jadi tugasmu adalah cek semua nya dan berikan file materi, dan file praktikum yang sesuai dengan tahapan nya untuk     
+  dikerjakan pada setiap folder nya untuk aku pelajari, adapun pengetikan dari 0 untuk praktikum nya dan penjelasan nya juga bisa dengan comment atau penjelasan langsung, jadi kamu membuatkan     
+  soal praktikum juga untuk pengetikan dari 0 hingga expert pada setiap folder, sesuai dengan file file tersebut, atau kamu bisa buat ulang folder folder nya dari awal,  
+  dan berisikan file materi teori, file materi praktikum untuk membahas bagaimana fundamental dan lain sebagainya, serta file yang sesuai dengan masing masing folder untuk soal      
+  praktikum pengetikan code dari 0 pada setiap folder nya supaya ringkas dan bisa dipahami juga

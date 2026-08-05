@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--
+  CODE 09 — Form Lanjutan & Validasi HTML5
+  =========================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: semua input types HTML5, validasi native (required, pattern, min/max), datalist.
+  Lihat soal/09-form-lanjutan.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> form -->
+  <title>[Formulir Pendaftaran Online]</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    fieldset {
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    legend { padding: 0 0.5rem; font-weight: 600; }
+    .row { margin-bottom: 0.75rem; }
+    label { display: inline-block; min-width: 160px; }
+    input, select, textarea {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TODO(human): <h1> judul form (misal: "Formulir Pendaftaran Online") -->
+
+
+  <!-- ============================================
+       BAGIAN 1: FORM
+       ============================================ -->
+  <!-- TODO(human): <form action="#" method="POST" novalidate>
+       novalidate = disable validasi browser (untuk testing, supaya semua tombol submit berfungsi).
+       Hapus novalidate untuk lihat validasi native browser. -->
+
+
+    <!-- ============================================
+         BAGIAN 1a: FIELDSET — Data Pribadi
+         ============================================ -->
+    <!-- TODO(human): <fieldset><legend>Data Pribadi</legend> ...
+         Isi: text, email, password, tel (dengan pattern), url -->
+
+
+      <!-- TODO(human): Input nama
+           Pola: <label for="nama">Nama</label>
+                 <input type="text" id="nama" name="nama" minlength="3" required> -->
+
+
+      <!-- TODO(human): Input email (required → field tidak boleh kosong) -->
+
+
+      <!-- TODO(human): Input password (minlength="8" → minimal 8 karakter) -->
+
+
+      <!-- TODO(human): Input telepon dengan pattern regex Indonesia
+           Pola: <input type="tel" id="phone" name="phone"
+                          pattern="08[0-9]{8,11}"
+                          placeholder="08xxxxxxxxxx"
+                          title="Nomor HP Indonesia dimulai dengan 08"> -->
+
+
+      <!-- TODO(human): Input URL website/portfolio (type="url" → auto-validasi format URL) -->
+
+
+    <!-- TODO(human): Tutup fieldset Data Pribadi -->
+
+
+    <!-- ============================================
+         BAGIAN 1b: FIELDSET — Preferensi
+         ============================================ -->
+    <!-- TODO(human): <fieldset><legend>Preferensi</legend>
+         Isi: color, range (dengan <output>), datetime-local, month, week, time -->
+
+
+      <!-- TODO(human): Color picker
+           Pola: <input type="color" id="favcolor" name="favcolor" value="#3b82f6"> -->
+
+
+      <!-- TODO(human): Range slider dengan <output> untuk tampilkan nilai live
+           Pola: <label for="rating">Rating: <output id="rating-val">5</output>/10</label>
+                 <input type="range" id="rating" name="rating" min="1" max="10" value="5"
+                        oninput="rating-val.value = this.value"> -->
+
+
+      <!-- TODO(human): Datetime-local (tanggal + waktu appointment)
+           Pola: <input type="datetime-local" id="appointment" name="appointment"> -->
+
+
+      <!-- TODO(human): Month (bulan + tahun lahir) -->
+
+
+      <!-- TODO(human): Week (minggu ke-) -->
+
+
+      <!-- TODO(human): Time (waktu preferensi) -->
+
+
+    <!-- TODO(human): Tutup fieldset Preferensi -->
+
+
+    <!-- ============================================
+         BAGIAN 1c: FIELDSET — Informasi Tambahan
+         ============================================ -->
+    <!-- TODO(human): <fieldset><legend>Informasi Tambahan</legend>
+         Isi: number (dengan min/max), search (dengan datalist), textarea, file -->
+
+
+      <!-- TODO(human): Number dengan validasi min/max
+           Pola: <input type="number" id="usia" name="usia" min="1" max="100" step="1"> -->
+
+
+      <!-- TODO(human): Search + datalist untuk autocomplete browser
+           Pola:
+             <label for="browser">Browser Favorit:</label>
+             <input type="search" id="browser" name="browser" list="browser-list">
+             <datalist id="browser-list">
+               <option value="Chrome">
+               <option value="Firefox">
+               <option value="Safari">
+               <option value="Edge">
+             </datalist> -->
+
+
+      <!-- TODO(human): Textarea dengan rows dan maxlength
+           Pola: <textarea id="komentar" name="komentar" rows="4" maxlength="200"></textarea> -->
+
+
+      <!-- TODO(human): File upload dengan accept (hanya izinkan tipe tertentu)
+           Pola: <input type="file" id="lampiran" name="lampiran" accept="image/*,.pdf"> -->
+
+
+    <!-- TODO(human): Tutup fieldset Informasi Tambahan -->
+
+
+    <!-- TODO(human): Tombol submit dan reset -->
+
+
+  <!-- TODO(human): Tutup </form> -->
+
+</body>
+</html>

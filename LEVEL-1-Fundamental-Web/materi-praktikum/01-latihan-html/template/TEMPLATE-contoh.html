@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  TEMPLATE CONTOH — Standar Repositori Belajar-Fullstack
+  =======================================================
+  File ini adalah TEMPLATE untuk `contoh/[nomor]-[slug].html` di setiap soal.
+  Copy file ini sebagai CONTOH JAWABAN JADI yang valid W3C.
+
+  Prinsip-prinsip template ini:
+  1. VALID W3C — bisa di-validate di https://validator.w3.org/ tanpa error
+  2. SEMUA acceptance criteria di soal terpenuhi
+  3. CSS yang dipakai SAMA dengan yang ada di code/ (konsistensi)
+  4. Ada komentar inline yang menjelaskan KEPUTUSAN TEKNIS (kenapa pakai X bukan Y)
+  5. Konten realistis, bukan Lorem Ipsum — supaya user bisa belajar dari contoh
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{Judul Halaman} — Contoh</title>
+  <meta name="description" content="{Deskripsi meta}">
+
+  <style>
+    /* CSS yang sama dengan TEMPLATE-code.html — supaya user bisa
+       bandingkan hasil mereka dengan contoh di browser yang sama */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    h1, h2, h3 { color: #111827; }
+    fieldset {
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    legend { padding: 0 0.5rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>{Judul Utama}</h1>
+    <p>{Tagline}</p>
+  </header>
+
+  <main>
+
+    <!-- {Section 1} — keputusan: {kenapa pakai tag X} -->
+    <section>
+      <h2>{Judul}</h2>
+      <p>{Konten realistis}</p>
+    </section>
+
+    <!-- {Section 2} — keputusan: {kenapa atribut Y} -->
+    <section>
+      <h2>{Judul}</h2>
+      <p>{Konten}</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 — Contoh jawaban untuk soal {nomor}</p>
+  </footer>
+
+</body>
+</html>

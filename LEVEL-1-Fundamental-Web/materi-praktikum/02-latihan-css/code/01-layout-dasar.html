@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Dasar - Biodata</title>
+  <style>
+    /* ========== RESET (WAJIB DI AWAL) ========== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      line-height: 1.6;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* ========== TODO 1: HEADER ========== */
+    /* Tambahkan style untuk header:
+       - background biru/ungu/gradient
+       - padding 20px
+       - text-align center
+       - color putih
+    */
+    .header {
+      /* tulis di sini */
+    }
+
+    .header h1 {
+      font-size: 2rem;
+    }
+
+    /* ========== TODO 2: CONTAINER ========== */
+    /* Tambahkan style untuk .container:
+       - max-width 800px
+       - margin 0 auto
+       - padding 20px
+    */
+    .container {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 3: SECTION TITLE ========== */
+    /* Tambahkan style untuk .section-title:
+       - font-size 1.5rem
+       - margin-bottom 16px
+       - border-bottom 2px solid ...
+    */
+    .section-title {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 4: CARD CONTAINER ========== */
+    /* Card container: 2 card berdampingan pakai flex */
+    .card-wrapper {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ========== TODO 5: CARD STYLING ========== */
+    /* Tambahkan style untuk .card:
+       - background putih
+       - border-radius 8px
+       - padding 20px
+       - border 1px solid #ddd
+       - box-shadow (shadow ringan)
+       - flex: 1, min-width 250px
+    */
+    .card {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 6: CARD HOVER ========== */
+    /* Tambahkan .card:hover:
+       - transform translateY(-4px)
+       - shadow lebih dalam
+       - transition 0.2s
+    */
+    .card:hover {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 7: HEADING DALAM CARD ========== */
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+
+    .card p {
+      margin-bottom: 8px;
+      color: #64748b;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      padding: 4px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card li:last-child {
+      border-bottom: none;
+    }
+
+    /* ========== TODO 8: TEXT CENTER ========== */
+    /* Tambahkan .text-center untuk centering teks */
+    .text-center {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 9: FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 0.875rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>Biodata Diri</h1>
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+
+    <!-- Section: Data Pribadi -->
+    <h2 class="section-title">Data Pribadi</h2>
+    <div class="card-wrapper">
+      <div class="card">
+        <h2>Informasi Utama</h2>
+        <p><strong>Nama:</strong> Andi Wijaya</p>
+        <p><strong>NIM:</strong> 12345678</p>
+        <p><strong>Jurusan:</strong> Informatika</p>
+        <p><strong>Semester:</strong> 3</p>
+      </div>
+      <div class="card">
+        <h2>Info Tambahan</h2>
+        <p><strong>Universitas:</strong> Universitas Indonesia</p>
+        <p><strong>Email:</strong> andi@email.com</p>
+        <p><strong>Telepon:</strong> 081234567890</p>
+        <p><strong>Alamat:</strong> Jakarta</p>
+      </div>
+    </div>
+
+    <!-- Section: Hobi -->
+    <h2 class="section-title" style="margin-top: 32px;">Hobi &amp; Minat</h2>
+    <div class="card-wrapper">
+      <div class="card">
+        <h2>Hobi</h2>
+        <ul>
+          <li>Coding &amp; Programming</li>
+          <li>Membaca Buku Teknologi</li>
+          <li>Main Game Strategi</li>
+          <li>Olahraga Fitness</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Minat</h2>
+        <ul>
+          <li>Web Development</li>
+          <li>Machine Learning</li>
+          <li>UI/UX Design</li>
+          <li>Open Source</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Dibuat dengan cinta &lt;3 | 2026</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animasi &amp; Transisi - Motion Design CSS</title>
+  <style>
+    /* ============================================================
+       RESET
+       ============================================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    h1 { text-align: center; margin-bottom: 8px; color: white; padding-top: 48px; }
+    .subtitle { text-align: center; color: #64748b; margin-bottom: 64px; }
+
+    .section { margin-bottom: 80px; }
+    .section-title {
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .section-desc { color: #64748b; margin-bottom: 32px; font-size: 0.9rem; }
+    .demo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+
+    /* ============================================================ */
+    <!-- TODO 1: TRANSITION — perubahan halus antar state -->
+    <!-- ============================================================ -->
+
+    .box {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+
+    /*
+      TRANSITION = mengubah value property SECARA PERLAHAN
+      transition: <property> <duration> <timing-function> <delay>
+
+      Contoh:
+        transition: background 0.3s ease
+        transition: all 0.3s ease-in-out
+
+      Timing function:
+        ease        → mulai lambat, accelerate, selesai lambat (default)
+        ease-in     → mulai lambat, accelerate tajam
+        ease-out    → cepat, decelerate ke lambat
+        ease-in-out → lambat di awal & akhir
+        linear      → kecepatan konstan
+        cubic-bezier(x1,y1,x2,y2) → custom easing
+    */
+
+    /* TODO: Tambahkan .transition-basic
+       - transition: background 0.3s ease
+       - transition: transform 0.3s ease, box-shadow 0.3s ease
+    */
+    .transition-basic {
+      /* tulis di sini */
+    }
+
+    /* TODO: Hover state — ubah warna & scale */
+    .transition-basic:hover {
+      background: #8b5cf6;
+      /* TODO: transform: scale(1.1) */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ */
+    <!-- TODO 2: COLOR TRANSITION -->
+    <!-- ============================================================ */
+
+    /* TODO: Transition untuk link/button hover
+       transition: color 0.2s, background 0.2s
+    */
+    .nav-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      /* TODO: transition: color 0.2s, background 0.2s, border-color 0.2s */
+      /* tulis di sini */
+    }
+
+    .nav-btn:hover {
+      color: white;
+      background: #1e293b;
+      border-color: #475569;
+    }
+
+    .nav-btn.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+
+
+    /* ============================================================ -->
+    <!-- TODO 3: @KEYFRAMES — animasi yang berjalan sendiri -->
+    <!-- ============================================================ -->
+
+    /*
+      @keyframes <nama> {
+        from { state awal }
+        to   { state akhir }
+      }
+
+      Atau dengan keyframe percentage:
+      @keyframes nama {
+        0%   { ... }
+        50%  { ... }
+        100% { ... }
+      }
+
+      Properti animasi:
+        animation-name        → nama @keyframes
+        animation-duration    → lama animasi (1s, 300ms)
+        animation-timing-function → easing
+        animation-iteration-count → berapa kali (1, 3, infinite)
+        animation-delay      → jeda sebelum mulai
+        animation-fill-mode  → forwards (jaga state akhir)
+        animation-direction  → normal | reverse | alternate
+    */
+
+    /* TODO: Keyframes pulse — scale 1 → 1.1 → 1 */
+    @keyframes pulse {
+      /* TODO 1: dari 0% ke 50% → scale 1.1, opacity 1 */
+      /* TODO 2: dari 50% ke 100% → scale 1, opacity 1 */
+      /* tulis di sini */
+    }
+
+    @keyframes fadeIn {
+      /* TODO: dari opacity 0 → ke opacity 1 */
+      /* tulis di sini */
+    }
+
+    @keyframes slideUp {
+      /* TODO: dari translateY(30px) + opacity 0 → translateY(0) + opacity 1 */
+      /* tulis di sini */
+    }
+
+    @keyframes slideInLeft {
+      /* TODO: dari translateX(-40px) + opacity 0 → translateX(0) + opacity 1 */
+      /* tulis di sini */
+    }
+
+    @keyframes rotate {
+      /* TODO: dari rotate(0deg) → rotate(360deg) */
+      /* tulis di sini */
+    }
+
+    @keyframes colorShift {
+      /* TODO: 0% #3b82f6, 33% #8b5cf6, 66% #ec4899, 100% #3b82f6 */
+      /* tulis di sini */
+    }
+
+    /* TODO: Terapkan animation ke element */
+    .anim-pulse {
+      background: #10b981;
+      /* TODO: animation-name: pulse
+         animation-duration: 1.5s
+         animation-timing-function: ease-in-out
+         animation-iteration-count: infinite
+         animation-direction: alternate
+      */
+      /* tulis di sini */
+    }
+
+    .anim-fade-in {
+      background: #f59e0b;
+      /* TODO: animation-name: fadeIn
+         animation-duration: 0.8s
+         animation-timing-function: ease
+         animation-fill-mode: forwards (jaga state akhir)
+      */
+      /* tulis di sini */
+    }
+
+    .anim-slide-up {
+      background: #ec4899;
+      /* TODO: animation-name: slideUp
+         animation-duration: 0.6s
+         animation-timing-function: ease-out
+         animation-fill-mode: forwards
+      */
+      /* tulis di sini */
+    }
+
+    .anim-rotate {
+      background: #8b5cf6;
+      border-radius: 50%;
+      /* TODO: animation-name: rotate
+         animation-duration: 2s
+         animation-timing-function: linear
+         animation-iteration-count: infinite
+      */
+      /* tulis di sini */
+    }
+
+    .anim-color {
+      background: #3b82f6;
+      /* TODO: animation-name: colorShift
+         animation-duration: 3s
+         animation-timing-function: ease
+         animation-iteration-count: infinite
+      */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ -->
+    <!-- TODO 4: TRANSFORM — scale, rotate, translate, skew -->
+    <!-- ============================================================ -->
+
+    .transform-demo {
+      background: #06b6d4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    /* scale */
+    /* TODO: .tscale:hover → scale(1.2) */
+    .tscale:hover {
+      /* tulis di sini */
+    }
+
+    /* rotate */
+    /* TODO: .trotate:hover → rotate(15deg) */
+    .trotate:hover {
+      /* tulis di sini */
+    }
+
+    /* translate (bergerak) */
+    /* TODO: .ttranslate:hover → translateY(-10px) */
+    .ttranslate:hover {
+      /* tulis di sini */
+    }
+
+    /* kombinasi */
+    /* TODO: .tcombo:hover → scale(1.1) rotate(5deg) translateY(-8px) */
+    .tcombo:hover {
+      /* tulis di sini */
+    }
+
+    /* 3D transform */
+    /* TODO: .tperspective → perspective(400px) + rotateY(25deg) di hover */
+    .tperspective {
+      /* TODO: transition: transform 0.4s
+         transform-style: preserve-3d
+      */
+      /* tulis di sini */
+    }
+
+    .tperspective:hover {
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ -->
+    <!-- TODO 5: LOADING SPINNER -->
+    <!-- ============================================================ -->
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255,255,255,0.1);
+      /* TODO: border-top-color: #3b82f6 */
+      /* TODO: border-radius: 50% */
+      /* TODO: animation-name: rotate, duration: 0.8s, infinite, linear */
+      /* tulis di sini */
+    }
+
+    .spinner-dual {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255,255,255,0.1);
+      border-top-color: #10b981;
+      border-right-color: #10b981;
+      /* TODO: border-radius: 50%
+         animation: rotate 1.2s linear infinite
+      */
+      /* tulis di sini */
+    }
+
+    .spinner-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .spinner-dots span {
+      width: 12px;
+      height: 12px;
+      background: #f59e0b;
+      border-radius: 50%;
+      /* TODO: animation: bounce 1.4s ease-in-out infinite */
+      /* tulis di sini */
+    }
+
+    .spinner-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .spinner-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      /* TODO: 0%, 80%, 100% → scale(1) translateY(0)
+         40% → scale(1.2) translateY(-16px)
+      */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ -->
+    <!-- TODO 6: HOVER CARD DENGAN ANIMASI -->
+    <!-- ============================================================ -->
+
+    .card-anim {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+      width: 220px;
+      text-align: center;
+      cursor: pointer;
+      /* TODO: transition: transform 0.3s, box-shadow 0.3s */
+      /* tulis di sini */
+    }
+
+    .card-anim:hover {
+      /* TODO: transform: translateY(-12px) + scale(1.02) */
+      /* TODO: box-shadow: 0 20px 40px rgba(0,0,0,0.3) */
+      /* tulis di sini */
+    }
+
+    .card-anim-icon {
+      width: 56px;
+      height: 56px;
+      background: #334155;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.5rem;
+      /* TODO: transition: background 0.3s, transform 0.3s */
+      /* tulis di sini */
+    }
+
+    .card-anim:hover .card-anim-icon {
+      background: #3b82f6;
+      /* TODO: transform: scale(1.1) rotate(5deg) */
+      /* tulis di sini */
+    }
+
+    .card-anim h3 { font-size: 1rem; color: white; margin-bottom: 8px; }
+    .card-anim p { font-size: 0.8rem; color: #64748b; margin-bottom: 16px; }
+
+    .card-anim .btn-small {
+      background: transparent;
+      color: #3b82f6;
+      border: 1px solid #3b82f6;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      /* TODO: transition: background 0.2s, color 0.2s */
+      /* tulis di sini */
+    }
+
+    .card-anim .btn-small:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+
+    /* ============================================================ -->
+    <!-- UTILITY -->
+    <!-- ============================================================ -->
+
+    .box-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .label {
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Animasi &amp; Transisi CSS</h1>
+  <p class="subtitle">transition + @keyframes + transform + animation</p>
+
+  <!-- Navigation -->
+  <div class="nav-row">
+    <button type="button" class="nav-btn active">Transitions</button>
+    <button type="button" class="nav-btn">Keyframes</button>
+    <button type="button" class="nav-btn">Transform</button>
+    <button type="button" class="nav-btn">Loading</button>
+    <button type="button" class="nav-btn">Hover Card</button>
+  </div>
+
+
+  <!-- SECTION 1: Transition -->
+  <div class="section">
+    <h2 class="section-title">1. Transition</h2>
+    <p class="section-desc">Perubahan halus saat property berubah (misal: hover).</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="box transition-basic">Hover</div>
+        <p class="label">Scale + Color transition</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 2: Keyframes -->
+  <div class="section">
+    <h2 class="section-title">2. @Keyframe Animations</h2>
+    <p class="section-desc">Animasi yang berjalan sendiri, berulang, atau sekali jalan.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="box anim-pulse">Pulse</div>
+        <p class="label">Infinite alternate</p>
+      </div>
+      <div>
+        <div class="box anim-fade-in">Fade In</div>
+        <p class="label">fill-mode: forwards</p>
+      </div>
+      <div>
+        <div class="box anim-slide-up">Slide Up</div>
+        <p class="label">slide + opacity</p>
+      </div>
+      <div>
+        <div class="box anim-rotate">Rotate</div>
+        <p class="label">linear infinite</p>
+      </div>
+      <div>
+        <div class="box anim-color">Color</div>
+        <p class="label">Color cycle</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 3: Transform -->
+  <div class="section">
+    <h2 class="section-title">3. Transform</h2>
+    <p class="section-desc">scale, rotate, translate — hover setiap box untuk lihat efek.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="box transform-demo tscale">Scale</div>
+        <p class="label">scale(1.2)</p>
+      </div>
+      <div>
+        <div class="box transform-demo trotate">Rotate</div>
+        <p class="label">rotate(15deg)</p>
+      </div>
+      <div>
+        <div class="box transform-demo ttranslate">Translate</div>
+        <p class="label">translateY(-10px)</p>
+      </div>
+      <div>
+        <div class="box transform-demo tcombo">Combo</div>
+        <p class="label">scale + rotate + translate</p>
+      </div>
+      <div>
+        <div class="box transform-demo tperspective" style="border-radius:0;">3D</div>
+        <p class="label">perspective rotateY</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 4: Loading Spinner -->
+  <div class="section">
+    <h2 class="section-title">4. Loading Spinner</h2>
+    <p class="section-desc">Animasi untuk loading state — spinner, dots, pulse.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="spinner"></div>
+        <p class="label">Border spin</p>
+      </div>
+      <div>
+        <div class="spinner-dual"></div>
+        <p class="label">Dual ring</p>
+      </div>
+      <div>
+        <div class="spinner-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="label">Bounce dots</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 5: Hover Card -->
+  <div class="section">
+    <h2 class="section-title">5. Hover Card Animation</h2>
+    <p class="section-desc">Card dengan multi-layer transition dan transform.</p>
+
+    <div class="demo-grid">
+      <div class="card-anim">
+        <div class="card-anim-icon">🚀</div>
+        <h3>Deploy Cepat</h3>
+        <p>Nyalakan dan deploy dalam hitungan detik.</p>
+        <button type="button" class="btn-small">Pelajari</button>
+      </div>
+      <div class="card-anim">
+        <div class="card-anim-icon">🔒</div>
+        <h3>Keamanan Tinggi</h3>
+        <p>Enkripsi end-to-end untuk setiap data.</p>
+        <button type="button" class="btn-small">Pelajari</button>
+      </div>
+      <div class="card-anim">
+        <div class="card-anim-icon">📊</div>
+        <h3>Analytics Real-time</h3>
+        <p>Pantau performa dengan dashboard interaktif.</p>
+        <button type="button" class="btn-small">Pelajari</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

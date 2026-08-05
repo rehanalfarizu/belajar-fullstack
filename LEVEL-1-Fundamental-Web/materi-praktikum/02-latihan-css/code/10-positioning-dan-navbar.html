@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Position &amp; Navbar - Fixed, Sticky, Absolute</title>
+  <style>
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: #f8fafc;
+      color: #333;
+    }
+
+    /* ============================================================ */
+    /* TODO 1: FIXED NAVBAR — tetap di atas saat scroll */
+    /* ============================================================ */
+
+    /*
+      POSITION FIXED:
+      - Element keluar dari normal document flow
+      - Posisi relatif terhadap VIEWPORT (jendela browser)
+      - Selalu tetap di posisi yang sama meskipun halaman di-scroll
+      - BUTUH: top/right/bottom/left untuk menentukan posisi
+      - BUTUH: z-index untuk layering (mana yang di atas)
+    */
+
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: #1e293b;
+      /* TODO: Tambahkan padding: 0 24px */
+      /* TODO: box-shadow agar terlihat elevasi */
+      /* tulis di sini */
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .navbar-fixed .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      /* TODO: flex-shrink: 0 */
+      /* tulis di sini */
+    }
+
+    .navbar-fixed .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .navbar-fixed .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      /* TODO: transition: background 0.2s, color 0.2s */
+      /* tulis di sini */
+    }
+
+    .navbar-fixed .nav-links a:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .navbar-fixed .nav-links a.active {
+      background: #3b82f6;
+      color: white;
+    }
+
+    /* Tombol hamburger (mobile) */
+    .navbar-fixed .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 2: STICKY SECTION — sticky di dalam container */
+    /* ============================================================ */
+
+    /*
+      POSITION STICKY:
+      - Hybrid relative + fixed
+      - Bersifat relative sampai threshold tertentu, lalu fixed
+      - Tetap di dalam parent container
+      - BUTUH: top/right/bottom/left sebagai threshold
+    */
+
+    .sticky-header {
+      position: sticky;
+      top: 64px; /* navbar fixed height = 64px */
+      background: #3b82f6;
+      color: white;
+      padding: 16px 24px;
+      /* TODO: z-index: 100 */
+      /* TODO: box-shadow */
+      /* tulis di sini */
+    }
+
+    .sticky-header h2 {
+      color: white;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    .content-with-sticky {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: white;
+      padding: 24px;
+      border-right: 1px solid #e2e8f0;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 24px;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 3: ABSOLUTE INSIDE RELATIVE — dropdown menu */
+    /* ============================================================ */
+
+    /*
+      POSITION ABSOLUTE:
+      - Keluar dari normal flow
+      - Posisi relatif terhadap PARENT NEAREST yang punya position (relative/absolute/fixed)
+      - Kalau tidak ada parent positioned → relatif ke <body>
+    */
+
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+      margin: 40px;
+    }
+
+    .dropdown-trigger {
+      background: #1e293b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      /* TODO: transition: background 0.2s */
+      /* tulis di sini */
+    }
+
+    .dropdown-trigger:hover { background: #334155; }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 8px;
+      background: white;
+      border-radius: 12px;
+      /* TODO: box-shadow: 0 8px 24px rgba(0,0,0,0.12) */
+      /* TODO: min-width: 180px */
+      /* TODO: overflow: hidden */
+      /* TODO: opacity: 0 */
+      /* TODO: transform: translateY(-8px) */
+      /* TODO: pointer-events: none */
+      /* TODO: transition: opacity 0.2s, transform 0.2s */
+      /* tulis di sini */
+
+      z-index: 999;
+    }
+
+    /* Aktif saat container di-hover */
+    .dropdown-container:hover .dropdown-menu {
+      /* TODO: opacity: 1 */
+      /* TODO: transform: translateY(0) */
+      /* TODO: pointer-events: auto */
+      /* tulis di sini */
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 20px;
+      color: #475569;
+      text-decoration: none;
+      font-size: 0.9rem;
+      /* TODO: transition: background 0.15s */
+      /* tulis di sini */
+    }
+
+    .dropdown-menu a:hover {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .dropdown-menu a:first-child { border-radius: 12px 12px 0 0; }
+    .dropdown-menu a:last-child { border-radius: 0 0 12px 12px; }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #e2e8f0;
+      margin: 4px 0;
+    }
+
+    .dropdown-badge {
+      background: #ef4444;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      float: right;
+      margin-top: 2px;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 4: FLOAT LABEL INPUT */
+    /* ============================================================ */
+
+    .float-label-group {
+      position: relative;
+      margin: 40px;
+      max-width: 320px;
+    }
+
+    .float-label-input {
+      width: 100%;
+      padding: 16px 16px 8px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      /* TODO: transition: border-color 0.2s */
+      /* tulis di sini */
+    }
+
+    .float-label-input:focus { border-color: #3b82f6; }
+
+    .float-label-label {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 1rem;
+      pointer-events: none;
+      /* TODO: transition: top 0.2s, font-size 0.2s, color 0.2s */
+      /* tulis di sini */
+    }
+
+    /* Float up saat input fokus atau ada value */
+    .float-label-input:focus + .float-label-label,
+    .float-label-input:not(:placeholder-shown) + .float-label-label {
+      top: 8px;
+      transform: translateY(0);
+      font-size: 0.7rem;
+      color: #3b82f6;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 5: CARD DENGAN ABSOLUTE BADGE */
+    /* ============================================================ */
+
+    .card-relative {
+      position: relative;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      /* TODO: box-shadow */
+      /* TODO: max-width: 280px */
+      /* tulis di sini */
+    }
+
+    .card-relative img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-relative-body {
+      padding: 20px;
+    }
+
+    .card-relative-body h3 { margin-bottom: 8px; color: #1e293b; }
+    .card-relative-body p { color: #64748b; font-size: 0.875rem; }
+
+    /* Badge absolute di pojok kanan atas */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #ef4444;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .card-badge.new { background: #10b981; }
+    .card-badge.hot { background: #f59e0b; }
+    .card-badge.trending { background: #8b5cf6; }
+
+    /* Category tag absolute di pojok kiri bawah gambar */
+    .card-category {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+    }
+
+    .card-price-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 24px 16px 12px;
+      color: white;
+    }
+
+    .card-price-overlay .price {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .card-price-overlay .original {
+      text-decoration: line-through;
+      opacity: 0.7;
+      font-size: 0.875rem;
+      margin-left: 8px;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 6: BACK TO TOP BUTTON (fixed + hidden/shown) */
+    /* ============================================================ */
+
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      cursor: pointer;
+      /* TODO: box-shadow */
+      /* TODO: opacity: 0 (awal) */
+      /* TODO: transform: translateY(20px) (awal, mundur sedikit) */
+      /* TODO: transition: opacity 0.3s, transform 0.3s */
+      /* tulis di sini */
+
+      z-index: 999;
+    }
+
+    .back-to-top:hover {
+      background: #2563eb;
+      /* TODO: transform: translateY(-4px) */
+      /* tulis di sini */
+    }
+
+    /* Simulasi: saat di-scroll ke bawah (di demo ini, tombol selalu terlihat) */
+    .back-to-top {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ============================================================ */
+    /* UTILITY */
+    /* ============================================================ */
+
+    .spacer { height: 1000px; background: #f1f5f9; padding: 64px 40px; }
+    .spacer h2 { color: #1e293b; margin-bottom: 16px; }
+    .spacer p { color: #64748b; max-width: 600px; }
+
+    .demo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 40px;
+    }
+
+    .demo-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .demo-section h3 {
+      color: #1e293b;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- FIXED NAVBAR -->
+  <!-- ============================================================ -->
+  <nav class="navbar-fixed">
+    <a href="#" class="logo">MyApp</a>
+    <div class="nav-links">
+      <a href="#" class="active">Beranda</a>
+      <a href="#">Produk</a>
+      <a href="#">Layanan</a>
+      <a href="#">Harga</a>
+      <a href="#">Kontak</a>
+    </div>
+    <button type="button" class="hamburger" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- Push content down (karena navbar fixed height=64px) -->
+  <div style="height:64px;"></div>
+
+
+  <!-- ============================================================ -->
+  <!-- STICKY HEADER SECTION -->
+  <!-- ============================================================ -->
+
+  <div class="sticky-header">
+    <h2>📌 Sticky Header — tetap di atas saat scroll dalam section ini</h2>
+  </div>
+
+  <div style="padding:24px; max-width:700px; margin:0 auto;">
+    <p style="margin-bottom:16px; color:#475569;">
+      Scroll ke bawah untuk melihat sticky header tetap di atas. Saat section ini keluar dari viewport, sticky header akan ikut hilang (beda dengan fixed yang selalu terlihat).
+    </p>
+    <p style="margin-bottom:16px; color:#475569;">
+      <strong>Perbedaan Fixed vs Sticky:</strong><br>
+      - <strong>Fixed</strong>: Selalu relatif terhadap viewport — tidak pernah hilang saat scroll.<br>
+      - <strong>Sticky</strong>: Relatif terhadap container/scroll — hilang saat container keluar viewport.
+    </p>
+    <p style="color:#94a3b8; font-size:0.875rem;">
+      Scroll ke bawah untuk lihat efek sticky...
+    </p>
+  </div>
+
+  <div style="padding:0 24px 800px; max-width:700px; margin:0 auto; color:#94a3b8; font-size:0.875rem;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
+    <br><br>
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <br><br>
+    (Scroll terus ke bawah...)
+    <br><br>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. More content to force scrolling...
+    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- DROPDOWN MENU -->
+  <!-- ============================================================ -->
+  <div class="demo-section">
+    <h3>Dropdown Menu (Absolute dalam Relative)</h3>
+    <p style="color:#64748b; font-size:0.875rem; margin-bottom:16px;">
+      Arahkan mouse ke tombol "Menu" untuk melihat dropdown.
+    </p>
+    <div class="dropdown-container">
+      <button type="button" class="dropdown-trigger">☰ Menu</button>
+      <div class="dropdown-menu">
+        <a href="#">🏠 Beranda</a>
+        <a href="#">👤 Profil</a>
+        <a href="#">⚙️ Pengaturan</a>
+        <div class="dropdown-divider"></div>
+        <a href="#">
+          🔔 Notifikasi
+          <span class="dropdown-badge">3</span>
+        </a>
+        <a href="#">🚪 Keluar</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- CARD DENGAN ABSOLUTE OVERLAYS -->
+  <!-- ============================================================ -->
+  <div class="demo-section">
+    <h3>Card dengan Absolute Overlays</h3>
+    <div class="demo-grid">
+      <div class="card-relative">
+        <img src="https://picsum.photos/400/250?random=10" alt="Product Keyboard">
+        <span class="card-badge hot">🔥 Hot</span>
+        <span class="card-category">Tech</span>
+        <div class="card-relative-body">
+          <h3>Keyboard Mechanical</h3>
+          <p>Keyboard gaming dengan switch Cherry MX dan RGB backlight.</p>
+        </div>
+      </div>
+
+      <div class="card-relative">
+        <img src="https://picsum.photos/400/250?random=11" alt="Product Headphone">
+        <span class="card-badge new">New</span>
+        <div class="card-price-overlay">
+          <span class="price">Rp 450.000</span>
+          <span class="original">Rp 600.000</span>
+        </div>
+        <div class="card-relative-body" style="margin-top:60px;">
+          <h3 style="color:white;">Headphone Wireless</h3>
+          <p style="color:rgba(255,255,255,0.8);">Noise-cancelling dengan baterai 30 jam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- FLOAT LABEL INPUT -->
+  <!-- ============================================================ -->
+  <div class="demo-section">
+    <h3>Float Label Input</h3>
+    <div class="float-label-group">
+      <input type="text" class="float-label-input" id="nama" placeholder=" ">
+      <label for="nama" class="float-label-label">Nama Lengkap</label>
+    </div>
+    <div class="float-label-group">
+      <input type="email" class="float-label-input" id="email" placeholder=" ">
+      <label for="email" class="float-label-label">Alamat Email</label>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- BACK TO TOP BUTTON -->
+  <!-- ============================================================ -->
+  <button type="button" class="back-to-top" title="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ↑
+  </button>
+
+
+  <!-- ============================================================ -->
+  <!-- EXPECTED OUTPUT:
+  │
+  │  ┌─ NAVBAR FIXED ─────────────────────────────┐  ← top:0, z-index:1000
+  │  │ MyApp   Beranda Produk Layanan Harga Kontak │
+  │  └────────────────────────────────────────────┘
+  │
+  │  ╔═ STICKY HEADER ══════════════════════════╗ ← top:64px
+  │  ║ 📌 Sticky Header...                      ║
+  │  ╚════════════════════════════════════���═════╝
+  │
+  │  ┌─ DROPDOWN ───────────────────────────────┐
+  │  │ [☰ Menu]                                 │
+  │  │   └─ dropdown-menu (absolute)           │
+  │  │       🏠 Beranda                         │
+  │  │       👤 Profil                          │
+  │  │       ⚙️ Pengaturan                       │
+  │  │       ─────────                          │
+  │  │       🔔 Notifikasi [3]                  │
+  │  │       🚪 Keluar                          │
+  │  └──────────────────────────────────────────┘
+  │
+  │  ┌─ CARD (relative) ───────────────────────┐
+  │  │ [image]          🔥 HOT  (absolute)     │
+  │  │                  Tech   (absolute)       │
+  │  │ ──────────────────────────────────────── │
+  │  │ Judul                                    │
+  │  │ Deskripsi...                             │
+  │  └──────────────────────────────���───────────┘
+  │
+  │                                  [↑]  ← fixed bottom-right
+  -->
+
+</body>
+</html>

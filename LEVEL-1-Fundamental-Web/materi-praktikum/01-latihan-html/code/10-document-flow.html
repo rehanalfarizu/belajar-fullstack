@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+  CODE 10 — Document Flow & Page Layout
+  ======================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: block vs inline elements, document flow, layout e-commerce.
+  Lihat soal/10-document-flow.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> halaman -->
+  <title>[Toko Online - E-Commerce Sederhana]</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    /* Layout 2 kolom: main (produk) + aside (keranjang) */
+    main { display: grid; grid-template-columns: 3fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+    article { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 1rem; }
+    article img { max-width: 100%; height: auto; border-radius: 4px; }
+    aside { background: #f9fafb; padding: 1rem; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       BAGIAN 1: HEADER E-COMMERCE
+       ============================================ -->
+  <!-- TODO(human): <header> berisi:
+       - Logo/nama toko: <h1>TokoOnline</h1> atau <span>
+       - <nav> dengan:
+         - <input type="search" placeholder="Cari produk...">
+         - <a>Cart (0)</a> -->
+
+
+  <!-- ============================================
+       BAGIAN 2: HERO / BANNER
+       ============================================ -->
+  <!-- TODO(human): <section> hero dengan:
+       - <h1> judul promo
+       - <p> deskripsi promo
+       - CTA link ke #products: <a href="#products">Lihat Produk</a> -->
+
+
+  <!-- ============================================
+       BAGIAN 3: PRODUCT LISTING
+       ============================================ -->
+  <!-- TODO(human): <main id="products">
+       Di dalam <main>: 4 <article> sebagai product cards, masing-masing berisi:
+       - <img> dengan alt deskriptif (pakai https://picsum.photos/300/200?random=1-4)
+       - <h3> nama produk
+       - <p> harga (bisa dibungkus <strong>)
+       - <p> deskripsi singkat
+       - <button> atau <a> "Beli Sekarang"
+       - <mark> badge "Sale" atau "New" -->
+
+
+    <!-- TODO(human): Product card 1 (random=1, produk pertama) -->
+
+
+    <!-- TODO(human): Product card 2 (random=2) -->
+
+
+    <!-- TODO(human): Product card 3 (random=3) -->
+
+
+    <!-- TODO(human): Product card 4 (random=4) -->
+
+
+  <!-- TODO(human): Tutup </main> -->
+
+
+  <!-- ============================================
+       BAGIAN 4: ASIDE (FILTER + KERANJANG)
+       ============================================ -->
+  <!-- TODO(human): <aside> untuk filter + keranjang.
+       CATATAN: aside boleh di LUAR <main> (konten pendukung, bukan konten utama). -->
+
+
+    <!-- TODO(human): Section "Filter Kategori"
+         <h3>Filter Kategori</h3>
+         <ul> + <li> + <label> + <input type="checkbox">
+         Minimal 3 kategori (Elektronik, Fashion, Buku, dll) -->
+
+
+    <!-- TODO(human): Section "Keranjang Belanja"
+         <h3>Keranjang Belanja</h3>
+         <ul> item produk di keranjang + total harga
+         <a>Checkout</a> -->
+
+
+  <!-- TODO(human): Tutup </aside> -->
+
+
+  <!-- ============================================
+       BAGIAN 5: DEMO BLOCK vs INLINE
+       ============================================ -->
+  <!-- TODO(human): <section> khusus untuk demonstrasi document flow:
+       - <h2>Demo: Block vs Inline Elements</h2>
+       - 3 <div> dengan teks pendek (block elements → akan menumpuk vertikal)
+       - 3 <span> dengan teks pendek (inline elements → akan sebaris)
+       - 1 <p> dengan mixed inline: teks + <strong> + <em> + <a> + <mark>
+       - <p> penjelasan kenapa hasilnya begitu -->
+
+
+  <!-- ============================================
+       BAGIAN 6: FOOTER
+       ============================================ -->
+  <!-- TODO(human): <footer> dengan 3 kolom:
+       - Tentang Kami (<p>)
+       - Link Cepat (<ul>)
+       - Kontak (<address>)
+       - Copyright dengan &copy; -->
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--
+  CODE 06 — Layout Artikel Lengkap (2 kolom: article + aside)
+  ===========================================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: <main>, <aside>, <nav>, semantic HTML lengkap, <dl>/<dt>/<dd>.
+  Lihat soal/06-layout-artikel.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> halaman -->
+  <title>[Blog Teknologi - Artikel Lengkap]</title>
+
+  <!-- TODO(human): <meta name="description"> untuk SEO (maks 160 karakter) -->
+
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    /* Layout 2 kolom pakai CSS Grid */
+    main { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+    nav ul { display: flex; gap: 1rem; list-style: none; padding: 0; }
+    article { background: #fff; }
+    aside { background: #f9fafb; padding: 1rem; border-radius: 6px; }
+    blockquote {
+      border-left: 4px solid #d1d5db;
+      padding: 0.5rem 1rem;
+      color: #4b5563;
+      font-style: italic;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       BAGIAN 1: HEADER (nama website + navigasi)
+       ============================================ -->
+  <!-- TODO(human): <header> berisi:
+       - <h1>: nama website (misal: "TechBlog")
+       - <nav> dengan <ul> + <li> + <a> minimal 4 link horizontal
+         (Beranda, Artikel, Tentang, Kontak)
+       Pola: <header>
+               <h1>TechBlog</h1>
+               <nav aria-label="Navigasi utama">
+                 <ul>
+                   <li><a href="#home">Beranda</a></li>
+                   <li><a href="#artikel">Artikel</a></li>
+                   <li><a href="#tentang">Tentang</a></li>
+                   <li><a href="#kontak">Kontak</a></li>
+                 </ul>
+               </nav>
+             </header> -->
+
+
+  <!-- ============================================
+       BAGIAN 2: MAIN (2 kolom: article + aside)
+       ============================================ -->
+  <!-- TODO(human): Buka <main>.
+       PENTING: <main> hanya boleh SATU per halaman. Ini container konten UTAMA. -->
+
+
+    <!-- ============================================
+         BAGIAN 2a: ARTICLE (kolom kiri)
+         ============================================ -->
+    <!-- TODO(human): <article> untuk artikel utuh.
+         Tes mandiri: "Apakah artikel ini bisa dipindah ke halaman lain dan tetap masuk akal?"
+         Kalau YA → <article>. -->
+
+
+      <!-- TODO(human): <header> di dalam <article>:
+           - <h2> judul artikel
+           - <p> meta info: "Oleh: [nama], <time datetime='YYYY-MM-DD'>[tanggal]</time>, Kategori: [kategori]" -->
+
+
+      <!-- TODO(human): Paragraf lead (paragraf pembuka, biasanya lebih menarik)
+           Pola: <p style="font-size: 1.1rem; font-weight: 500;">...</p> -->
+
+
+      <!-- TODO(human): <section> pertama dalam artikel:
+           - <h3> sub-judul
+           - 1-2 paragraf isi -->
+
+
+      <!-- TODO(human): <blockquote> untuk kutipan penting
+           Pola: <blockquote>
+                   "Isi kutipan di sini."
+                   <cite>— Sumber Kutipan</cite>
+                 </blockquote> -->
+
+
+      <!-- TODO(human): <figure> untuk gambar artikel
+           <figure>
+             <img src="https://picsum.photos/600/400" alt="[deskripsi]" width="100%">
+             <figcaption>Caption gambar</figcaption>
+           </figure> -->
+
+
+      <!-- TODO(human): <section> kedua:
+           - <h3> sub-judul
+           - 1-2 paragraf
+           - <ul> atau <ol> untuk list poin-poin -->
+
+
+      <!-- TODO(human): <footer> di dalam <article> (footer ARTIKEL, bukan halaman):
+           - tag labels (misal: <span>#web</span> <span>#html</span>)
+           - share links -->
+
+
+    <!-- TODO(human): Tutup </article> -->
+
+
+    <!-- ============================================
+         BAGIAN 2b: ASIDE (sidebar kanan)
+         ============================================ -->
+    <!-- TODO(human): <aside> untuk konten PENDUKUNG.
+         PENTING: aside adalah info yang BISA DIHILANGKAN tanpa mengubah arti halaman. -->
+
+
+      <!-- TODO(human): Section "Tentang Penulis" di dalam <aside>:
+           - <h3>Tentang Penulis</h3>
+           - <figure> dengan foto
+           - <p> bio singkat -->
+
+
+      <!-- TODO(human): Section "Artikel Terkait" di dalam <aside>:
+           - <h3>Artikel Terkait</h3>
+           - <ul> dengan minimal 3 link artikel lain -->
+
+
+      <!-- TODO(human): Section "Kategori" di dalam <aside>:
+           - <h3>Kategori</h3>
+           - daftar kategori sebagai link (pakai <a> dengan styling inline sederhana) -->
+
+
+    <!-- TODO(human): Tutup </aside> -->
+
+
+  <!-- TODO(human): Tutup </main> -->
+
+
+  <!-- ============================================
+       BAGIAN 3: FOOTER HALAMAN
+       ============================================ -->
+  <!-- TODO(human): <footer> halaman berisi:
+       - copyright dengan &copy; + tahun
+       - link sosmed (GitHub, LinkedIn, Twitter) target="_blank"
+       - link "Kembali ke atas" dengan <a href="#">↑ Kembali ke Atas</a> -->
+
+</body>
+</html>

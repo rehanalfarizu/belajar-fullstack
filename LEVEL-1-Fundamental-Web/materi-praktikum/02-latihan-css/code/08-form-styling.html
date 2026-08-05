@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Styling - Input, Button &amp; Focus States</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; line-height: 1.6; }
+
+    .container { max-width: 700px; margin: 0 auto; padding: 48px 24px; }
+
+    h1 { text-align: center; margin-bottom: 8px; color: #1e293b; }
+    .subtitle { text-align: center; color: #64748b; margin-bottom: 48px; }
+
+    /* ============================================================ */
+    /* TODO 1: FORM WRAPPER */
+    /* ============================================================ */
+    .form-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      /* TODO: box-shadow: 0 4px 20px rgba(0,0,0,0.08) */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 2: FORM GROUP (label + input wrapper) */
+    /* ============================================================ */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      /* TODO: font-weight: 600 */
+      /* TODO: color: #374151 */
+      /* TODO: margin-bottom: 8px */
+      /* TODO: font-size: 0.9rem */
+      /* tulis di sini */
+    }
+
+    .form-hint {
+      /* TODO: font-size: 0.8rem */
+      /* TODO: color: #94a3b8 */
+      /* TODO: margin-top: 4px */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 3: TEXT & EMAIL INPUT */
+    /* ============================================================ */
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 1rem;
+      /* TODO: font-family: inherit */
+      /* TODO: color: #1e293b */
+      /* TODO: background: white */
+      /* TODO: transition: border-color 0.2s, box-shadow 0.2s */
+      /* tulis di sini */
+
+      /* display, width, padding, border, border-radius udah di-set di atas */
+    }
+
+    /* TODO: FOCUS STATE — saat input di-klik/focus */
+    .form-input:focus {
+      outline: none;
+      /* TODO: border-color: #3b82f6 (blue) */
+      /* TODO: box-shadow: 0 0 0 3px rgba(59,130,246,0.15) */
+      /* tulis di sini */
+    }
+
+    /* TODO: ERROR STATE — saat validation fails */
+    .form-input.error {
+      border-color: #ef4444;
+      /* TODO: background: #fef2f2 */
+    }
+
+    .form-input.error:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+    }
+
+    /* TODO: SUCCESS STATE — saat validation passes */
+    .form-input.success {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 4: TEXTAREA */
+    /* ============================================================ */
+    textarea.form-input {
+      /* TODO: resize: vertical */
+      /* TODO: min-height: 120px */
+      /* TODO: line-height: 1.6 */
+    }
+
+
+    /* ============================================================ -->
+    /* TODO 5: SELECT */
+    /* ============================================================ */
+    .form-select {
+      width: 100%;
+      padding: 12px 40px 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #1e293b;
+      background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E") no-repeat right 12px center;
+      background-size: 20px;
+      appearance: none;
+      cursor: pointer;
+      /* TODO: transition: border-color 0.2s, box-shadow 0.2s */
+      /* tulis di sini */
+    }
+
+    .form-select:focus {
+      outline: none;
+      /* TODO: border-color: #3b82f6 */
+      /* TODO: box-shadow: 0 0 0 3px rgba(59,130,246,0.15) */
+    }
+
+
+    <!-- ============================================================ -->
+    <!-- TODO 6: CHECKBOX & RADIO -->
+    <!-- ============================================================ -->
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checkbox-group.inline,
+    .radio-group.inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Custom checkbox */
+    .custom-checkbox,
+    .custom-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      /* TODO: font-size: 0.95rem */
+      /* TODO: color: #374151 */
+      /* tulis di sini */
+    }
+
+    /* Hide default browser input */
+    .custom-checkbox input,
+    .custom-radio input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .checkmark,
+    .radiomark {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #cbd5e1;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    /* Checkbox specific */
+    .checkmark {
+      border-radius: 6px;
+    }
+
+    .custom-checkbox input:checked + .checkmark {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+
+    .custom-checkbox input:checked + .checkmark::after {
+      content: "";
+      width: 6px;
+      height: 10px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translate(-1px, -1px);
+      display: block;
+    }
+
+    /* Radio specific */
+    .radiomark {
+      border-radius: 50%;
+    }
+
+    .custom-radio input:checked + .radiomark {
+      border-color: #3b82f6;
+    }
+
+    .custom-radio input:checked + .radiomark::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #3b82f6;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Hover state */
+    .custom-checkbox:hover .checkmark,
+    .custom-radio:hover .radiomark {
+      border-color: #3b82f6;
+    }
+
+    /* Focus state for accessibility */
+    .custom-checkbox input:focus + .checkmark,
+    .custom-radio input:focus + .radiomark {
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+    }
+
+
+    /* ============================================================ */
+    /* TODO 7: BUTTON PRIMARY */
+    /* ============================================================ */
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      /* TODO: transition: all 0.2s */
+      /* tulis di sini */
+      border: none;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+      /* TODO: box-shadow: 0 4px 12px rgba(59,130,246,0.3) */
+      /* tulis di sini */
+    }
+
+    /* TODO: Button hover */
+    .btn-primary:hover {
+      background: #2563eb;
+      /* TODO: transform: translateY(-2px) */
+      /* TODO: box-shadow: 0 6px 20px rgba(59,130,246,0.4) */
+    }
+
+    /* TODO: Button active (saat diklik) */
+    .btn-primary:active {
+      background: #1d4ed8;
+      /* TODO: transform: translateY(0) */
+      /* TODO: box-shadow: 0 2px 8px rgba(59,130,246,0.3) */
+    }
+
+    /* TODO: Button focus (untuk keyboard navigation) */
+    .btn-primary:focus {
+      outline: none;
+      /* TODO: box-shadow: 0 0 0 3px rgba(59,130,246,0.4) */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 8: BUTTON SECONDARY & GHOST */
+    /* ============================================================ */
+    .btn-secondary {
+      background: #1e293b;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #3b82f6;
+      border: 2px solid #3b82f6;
+    }
+
+    .btn-ghost:hover {
+      background: #eff6ff;
+      transform: translateY(-2px);
+    }
+
+
+    /* ============================================================ */
+    /* TODO 9: BUTTON FULL WIDTH */
+    /* ============================================================ */
+    .btn-full {
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 10: PLACEHOLDER STYLE */
+    /* ============================================================ */
+    .form-input::placeholder {
+      color: #cbd5e1;
+      /* TODO: font-style: italic */
+      /* tulis di sini */
+    }
+
+
+    /* ============================================================ */
+    /* UTILITY */
+    /* ============================================================ */
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 32px 0;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Form Styling</h1>
+  <p class="subtitle">Input, button, focus states, dan interaksi user</p>
+
+  <div class="form-card">
+
+    <!-- Basic Inputs -->
+    <h2 style="font-size:1.25rem; margin-bottom:24px; color:#334155;">Data Diri</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nama-depan">Nama Depan</label>
+        <input type="text" id="nama-depan" class="form-input" placeholder="Andi">
+      </div>
+      <div class="form-group">
+        <label for="nama-belakang">Nama Belakang</label>
+        <input type="text" id="nama-belakang" class="form-input" placeholder="Wijaya">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-input" placeholder="andi@email.com">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-input" autocomplete="new-password" placeholder="Minimal 8 karakter">
+      <p class="form-hint">Gunakan kombinasi huruf besar, kecil, angka, dan simbol.</p>
+    </div>
+
+    <div class="form-group">
+      <label for="website">Website (opsional)</label>
+      <input type="url" id="website" class="form-input" placeholder="https://portofolioku.com">
+    </div>
+
+    <div class="form-group">
+      <label for="bio">Bio Singkat</label>
+      <textarea id="bio" class="form-input" placeholder="Ceritakan tentang dirimu..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="kota">Kota</label>
+      <select id="kota" class="form-select">
+        <option value="">-- Pilih Kota --</option>
+        <option value="jakarta">Jakarta</option>
+        <option value="bandung">Bandung</option>
+        <option value="surabaya">Surabaya</option>
+        <option value="yogyakarta">Yogyakarta</option>
+        <option value="medan">Medan</option>
+      </select>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Checkbox & Radio -->
+    <h2 style="font-size:1.25rem; margin-bottom:16px; color:#334155;">Preferensi</h2>
+
+    <div class="form-group">
+      <label style="margin-bottom:12px;">Bahasa Pemrograman (bisa pilih banyak)</label>
+      <div class="checkbox-group inline">
+        <label class="custom-checkbox">
+          <input type="checkbox" name="bahasa" value="javascript">
+          <span class="checkmark"></span>
+          JavaScript
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" name="bahasa" value="python">
+          <span class="checkmark"></span>
+          Python
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" name="bahasa" value="go">
+          <span class="checkmark"></span>
+          Go
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" name="bahasa" value="rust">
+          <span class="checkmark"></span>
+          Rust
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="margin-bottom:12px;">Level Pengalaman (hanya pilih 1)</label>
+      <div class="radio-group">
+        <label class="custom-radio">
+          <input type="radio" name="level" value="pemula">
+          <span class="radiomark"></span>
+          Pemula — baru mulai belajar
+        </label>
+        <label class="custom-radio">
+          <input type="radio" name="level" value="menengah">
+          <span class="radiomark"></span>
+          Menengah — sudah pernah bikin project
+        </label>
+        <label class="custom-radio">
+          <input type="radio" name="level" value="mahir">
+          <span class="radiomark"></span>
+          Mahir — bisa kerja freelance
+        </label>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
+      <button type="button" class="btn btn-ghost">Batal</button>
+    </div>
+
+    <!-- Full Width Button -->
+    <button type="button" class="btn btn-secondary btn-full" style="margin-top:16px;">
+      Login dengan Google
+    </button>
+
+  </div>
+</div>
+
+</body>
+</html>

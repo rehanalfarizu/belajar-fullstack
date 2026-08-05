@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+  CODE 08 — SEO & Accessibility
+  =============================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: meta tags SEO, Open Graph, Twitter Card, skip link, aria-label, alt text.
+  Lihat soal/08-seo-accessibility.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> yang deskriptif, MAKSIMAL 60 KARAKTER
+       (karakter > 60 akan terpotong di hasil Google) -->
+  <title>TODO — Tulis Judul Halaman Deskriptif</title>
+
+  <!-- ============================================
+       BAGIAN 1: META TAGS SEO DASAR
+       ============================================ -->
+  <!-- TODO(human): Tambah meta description (maks 160 karakter)
+       Deskripsi ini yang muncul di Google search result. -->
+  <!-- TODO(human): Tambah meta keywords (kata kunci dipisah koma) -->
+  <!-- TODO(human): Tambah meta author -->
+  <!-- TODO(human): Tambah meta robots (content="index, follow") -->
+  <!-- TODO(human): Tambah <link rel="canonical" href="https://..."> -->
+
+
+  <!-- ============================================
+       BAGIAN 2: OPEN GRAPH (UNTUK SOSMED)
+       ============================================ -->
+  <!-- TODO(human): Tambah 6 meta Open Graph (og:title, og:description, og:image, og:url, og:type, og:site_name)
+       Saat link di-share ke Facebook/LinkedIn/WhatsApp, yang muncul adalah meta OG ini. -->
+
+
+  <!-- ============================================
+       BAGIAN 3: TWITTER CARD
+       ============================================ -->
+  <!-- TODO(human): Tambah 4 meta Twitter Card:
+       twitter:card (summary / summary_large_image),
+       twitter:title, twitter:description, twitter:image -->
+
+
+  <!-- ============================================
+       BAGIAN 4: FAVICON
+       ============================================ -->
+  <!-- TODO(human): <link rel="icon" href="[URL favicon]"> -->
+
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    /* Skip link: hidden sampai di-focus (default browser behavior) */
+    .skip-link {
+      position: absolute; top: -999px;
+      background: #1d4ed8; color: #fff; padding: 0.5rem 1rem;
+    }
+    .skip-link:focus { top: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       BAGIAN 5: SKIP LINK (A11Y)
+       ============================================ -->
+  <!-- TODO(human): Skip link — link pertama yang muncul saat tekan Tab
+       Loncat langsung ke konten utama (untuk user keyboard-only / screen reader)
+       Pola: <a href="#main-content" class="skip-link">Langsung ke konten utama</a> -->
+
+
+  <!-- ============================================
+       BAGIAN 6: HEADER + NAVIGASI
+       ============================================ -->
+  <!-- TODO(human): <header> + <nav aria-label="Navigasi utama">
+       Berisi: nama website (<h1>), <ul> link horizontal ke section -->
+
+
+  <!-- ============================================
+       BAGIAN 7: MAIN CONTENT
+       ============================================ -->
+  <!-- TODO(human): <main id="main-content"> — ID ini yang ditarget skip link
+       PENTING: id="main-content" HARUS sama dengan href di skip link. -->
+
+
+    <!-- TODO(human): <article> dengan:
+         - <h2> judul artikel (HANYA SATU h1 di header, jadi di sini pakai h2)
+         - <p> paragraf pembuka
+         - 1 <img> dengan alt DESKRIPTIF (misal: "Foto pendiri Budi Santoso, 35 tahun, sedang presentasi") -->
+
+
+  <!-- TODO(human): Tutup </main> -->
+
+
+  <!-- ============================================
+       BAGIAN 8: FOOTER
+       ============================================ -->
+  <!-- TODO(human): <footer> dengan link kontak + copyright -->
+
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--
+  CODE 02 — Artikel Blog dengan Semantic HTML
+  ============================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Pola: kerangka + komentar TODO. Jangan copy-paste dari contoh/.
+  Lihat soal/02-artikel-blog.md untuk breakdown tiap tag.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): Isi <title> dengan judul artikel kamu (maks 60 karakter) -->
+  <title>pembelajaran html</title>
+
+  <!-- TODO(human): Isi meta description (maks 160 karakter) -->
+  <meta name="description" content="[Deskripsi singkat artikel]">
+
+  <style>
+    /* CSS minimal — biar layout tidak berantakan. Hapus saat masuk LEVEL 2. */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    article, figure { margin-bottom: 1.5rem; }
+    blockquote {
+      border-left: 4px solid #d1d5db;
+      margin: 1rem 0;
+      padding: 0.5rem 1rem;
+      color: #4b5563;
+      font-style: italic;
+    }
+    mark { background: #fef08a; padding: 0 0.2rem; }
+  </style>
+</head>
+<body>
+  <!-- ============================================
+       BAGIAN 1: HEADER HALAMAN (pembuka blog)
+       ============================================ -->
+  <!-- TODO(human): Tambahkan <header> berisi:
+       - <h1>: judul blog (nama blog kamu)
+       - <p>: tagline / deskripsi singkat blog
+       Pola: <header><h1>...</h1><p>...</p></header> -->
+<h1> 
+     Pembelajaran HTML: Membuat Artikel Blog dengan Semantic HTML
+</h1>
+<p> 
+     Pada latihan ini, kita akan membuat sebuah artikel blog sederhana menggunakan semantic HTML. 
+     Kita akan belajar bagaimana menggunakan tag-tag HTML yang tepat untuk menyusun konten artikel, 
+     mulai dari header, main content, hingga footer. Dengan mengikuti pola yang sudah disediakan, 
+     kamu akan dapat membuat struktur artikel yang baik dan mudah dipahami oleh pembaca maupun mesin pencari.
+</p>
+  <!-- ============================================
+       BAGIAN 2: KONTEN UTAMA
+       ============================================ -->
+  <!-- TODO(human): Buka <main> sebagai container konten utama.
+       Semua artikel/blog post HARUS di dalam <main>.
+       Pola: <main>...</main> -->
+<main>
+     <article>
+          <header>
+               <h2>Judul Artikel: Panduan Lengkap Membuat Artikel Blog dengan HTML</h2>
+               <p>Oleh: John Doe, <time datetime="2024-06-01">1 Juni 2024</time></p>
+          </header>
+
+          <section>
+               <h3>Pendahuluan</h3>
+               <p>HTML adalah bahasa markup yang digunakan untuk membuat struktur halaman web. Dalam artikel ini, kita akan belajar bagaimana membuat sebuah artikel blog yang terstruktur dengan baik menggunakan tag-tag HTML yang sesuai.</p>
+          </section>
+
+          <figure>
+               <img src="https://picsum.photos/600/400" alt="Contoh struktur artikel blog">
+               <figcaption>Gambar 1: Contoh struktur artikel blog yang baik.</figcaption>
+          </figure>
+
+          <section>
+               <h3>Pembahasan</h3>
+               <p>Untuk membuat artikel blog yang baik, kita perlu memperhatikan beberapa hal penting:</p>
+               <blockquote>
+                    "Konten yang berkualitas adalah kunci utama untuk menarik pembaca dan meningkatkan SEO."
+                    <cite>— Jane Smith, Pakar SEO</cite>
+               </blockquote>
+               <ol>
+                    <li>Gunakan tag header yang sesuai untuk judul dan subjudul.</li>
+                    <li>Sertakan gambar dengan deskripsi yang jelas menggunakan tag figure.</li>
+                    <li>Gunakan teks formatting seperti strong, em, dan mark untuk menekankan poin penting.</li>
+               </ol>
+          </section>
+
+          <section>
+               <h3>Penutup</h3>
+               <p>Dengan mengikuti panduan ini, kamu dapat membuat artikel blog yang tidak hanya menarik secara visual tetapi juga terstruktur dengan baik untuk SEO. Selamat mencoba!</p>
+          </section>
+
+          <footer>
+               <p>Tags: HTML, Blogging, SEO | Share: 
+                    <a href="#">Facebook</a>, 
+                    <a href="#">Twitter</a>, 
+                    <a href="#">LinkedIn</a>
+               </p>
+               <p>&copy; 2024 John Doe. All rights reserved.</p>
+          </footer>
+     </article>
+</main>
+
+    <!-- ============================================
+         BAGIAN 3: ARTIKEL (konten utama halaman)
+         ============================================ -->
+    <!-- TODO(human): Tulis 1 <article> utuh. Tes mandiri:
+         "Kalau artikel ini dicabut dan ditempel di tempat lain,
+         apakah masih masuk akal berdiri sendiri?"
+         Kalau YA → <article>. Kalau TIDAK → <section>. -->
+
+
+      <!-- ============================================
+           BAGIAN 3a: Header artikel (judul + penulis + tanggal)
+           ============================================ -->
+      <!-- TODO(human): Di dalam <article>, tambah <header> berisi:
+           - <h2>: judul artikel (beda dari <h1> blog di atas)
+           - <p>: "Oleh: [nama], <time datetime='YYYY-MM-DD'>[tanggal]</time>"
+           Catatan: <time datetime="..."> WAJIB atribut datetime untuk SEO. -->
+
+
+      <!-- ============================================
+           BAGIAN 3b: Section pendahuluan
+           ============================================ -->
+      <!-- TODO(human): <section> pertama dalam <article>:
+           - <h3> judul section (misal: "Pendahuluan")
+           - 1-2 paragraf pengantar (<p>) -->
+
+
+      <!-- ============================================
+           BAGIAN 3c: Figure (gambar + caption)
+           ============================================ -->
+      <!-- TODO(human): Tambah <figure> berisi:
+           - <img src="https://picsum.photos/600/400" alt="[deskripsi gambar]">
+           - <figcaption>caption untuk gambar</figcaption>
+           WAJIB: alt harus deskriptif (untuk screen reader tunanetra). -->
+
+
+      <!-- ============================================
+           BAGIAN 3d: Section pembahasan
+           ============================================ -->
+      <!-- TODO(human): <section> kedua:
+           - <h3> judul section (misal: "Pembahasan")
+           - 1 paragraf pembuka
+           - 1 <blockquote> untuk kutipan penting
+             (kutipan di dalam <blockquote>, sumber di <cite>)
+           - 1 list (pilih <ol> untuk langkah ATAU <ul> untuk poin) -->
+
+
+      <!-- ============================================
+           BAGIAN 3e: Text formatting inline
+           ============================================ -->
+      <!-- TODO(human): Di bagian manapun dalam artikel, gunakan:
+           - <strong> untuk teks penting
+           - <em> untuk penekanan (miring)
+           - <mark> untuk highlight/kata kunci
+           Contoh: <p>HTML <strong>bukan</strong> bahasa pemrograman, tetapi <em>markup language</em>. Pelajari <mark>semantic HTML</mark>.</p> -->
+
+
+      <!-- ============================================
+           BAGIAN 3f: Section penutup
+           ============================================ -->
+      <!-- TODO(human): <section> ketiga:
+           - <h3> judul section (misal: "Penutup")
+           - 1 paragraf kesimpulan -->
+
+
+      <!-- ============================================
+           BAGIAN 3g: Footer artikel (tag, share link)
+           ============================================ -->
+      <!-- TODO(human): Tutup <article> dengan <footer> berisi:
+           - <p> info tag atau share link
+           Catatan: ini footer DARI ARTIKEL, beda dari footer halaman. -->
+
+
+  <!-- ============================================
+       BAGIAN 4: FOOTER HALAMAN (penutup blog)
+       ============================================ -->
+  <!-- TODO(human): Tutup <main> dengan </main>, lalu tambah <footer> halaman:
+       - <p> copyright dengan &copy; + tahun + nama
+       - link kontak (misal: <a href="mailto:...">)
+       Pola: <footer><p>&copy; 2026 | <a href="mailto:...">Email</a></p></footer> -->
+
+</body>
+</html>

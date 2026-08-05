@@ -1,0 +1,139 @@
+# ============================================================
+# .dockerignore — Exclude Files dari Build Context
+# ============================================================
+#
+# TODO: Buat .dockerignore yang complete
+#
+# Prinsip: Jangan kirim ke Docker daemon file yang tidak perlu
+# - Mengurangi build context size → build lebih cepat
+# - Mengurangi image size (jika COPY setelah .dockerignore)
+# - Menghindari sensitive files masuk ke image
+#
+# Checklist:
+# [ ] node_modules (di-install ulang saat build)
+# [ ] .git dan version control
+# [ ] Environment files
+# [ ] Documentation
+# [ ] Development files
+# [ ] CI/CD files
+# [ ] IDE files
+# [ ] Test files (untuk production image)
+# [ ] Logs dan temporary files
+# ============================================================
+
+# ============================================================
+# VERSION CONTROL
+# ============================================================
+# TODO: Exclude .git folder dan version control files
+# .git
+# .gitignore
+# .gitattributes
+# .svn
+
+# ============================================================
+# NODE_MODULES
+# ============================================================
+# TODO: Exclude node_modules
+# node_modules/
+
+# ============================================================
+# ENVIRONMENT & SECRETS
+# ============================================================
+# TODO: Exclude environment files
+#.env
+# .env.*
+# !.env.example
+# .env.local
+# .env.production
+
+# ============================================================
+# DOCKER FILES (untuk multi-stage build, ini tidak diperlukan)
+# ============================================================
+# Dockerfile
+# docker-compose.yml
+# docker-compose.*.yml
+# .dockerignore
+
+# ============================================================
+# DOCUMENTATION
+# ============================================================
+# TODO: Exclude markdown files
+# *.md
+# README*
+# CONTRIBUTING*
+# LICENSE*
+
+# ============================================================
+# TEST & DEVELOPMENT FILES
+# ============================================================
+# TODO: Exclude test files dan coverage
+# coverage/
+# .nyc_output
+# test-results/
+# playwright-report/
+# *.test.js
+# *.spec.js
+# __tests__/
+# tests/
+
+# ============================================================
+# IDE & EDITOR FILES
+# ============================================================
+# TODO: Exclude IDE dan editor files
+# .vscode/
+# .vscode
+# .idea/
+# *.swp
+# *.swo
+# *~
+# .DS_Store
+# Thumbs.db
+
+# ============================================================
+# CI/CD FILES (tidak diperlukan di production image)
+# ============================================================
+# TODO: Exclude CI/CD configuration
+# .github/
+# .gitlab-ci.yml
+# .travis.yml
+# .circleci/
+# Jenkinsfile
+
+# ============================================================
+# LOGS & TEMPORARY FILES
+# ============================================================
+# TODO: Exclude log files dan temporary files
+# logs/
+# *.log
+# npm-debug.log*
+# yarn-debug.log*
+# yarn-error.log*
+# .tmp/
+# temp/
+# *.tmp
+
+# ============================================================
+# DEVELOPMENT SPECIFIC
+# ============================================================
+# TODO: Exclude development-specific files
+# .env.development
+# .env.local
+# vite.config.js.timestamp-*
+# tsconfig.tsbuildinfo
+# dist/.vite/
+# .parcel-cache/
+# .next/
+# .nuxt/
+
+# ============================================================
+# CACHING TOOLS
+# ============================================================
+# .eslintcache
+# .prettiercache
+# .sass-cache
+
+# ============================================================
+# VERIFY: Check build context size
+# ============================================================
+# docker build --no-cache -t myapp:check . 2>&1 | grep "Sending build context"
+# Ukuran ideal untuk project kecil: < 10MB (tanpa node_modules)

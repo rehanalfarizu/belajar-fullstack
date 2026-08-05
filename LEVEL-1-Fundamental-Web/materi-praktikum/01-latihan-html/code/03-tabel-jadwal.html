@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  CODE 03 — Tabel Jadwal
+  =======================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: <table>, <thead>, <tbody>, <tfoot>, colspan, rowspan.
+  Lihat soal/03-tabel-jadwal.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): Isi <title> dengan judul tabel jadwal kamu -->
+  <title>[Jadwal Kuliah Semester]</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem 0.75rem; text-align: left; }
+    thead { background: #f3f4f6; }
+    tfoot { background: #f9fafb; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <!-- TODO(human): <h1> judul halaman (misal: "Jadwal Kuliah Semester Genap 2026") -->
+<h1>Jadwal Kuliah Semester Genap 2026</h1>
+
+  <!-- ============================================
+       BAGIAN 1: TABEL
+       ============================================ -->
+  <!-- TODO(human): Buka <table>. Atribut yang dipakai: <table border="1">
+       (border="1" hanya untuk latihan; di produksi pakai CSS) -->
+
+<table border="1">
+    <!-- ============================================
+         BAGIAN 1a: HEADER TABEL
+         ============================================ -->
+    <!-- TODO(human): <thead> berisi 1 <tr> dengan <th>:
+         Kolom: Hari, Jam, Mata Kuliah, Ruang, Dosen
+         <th> untuk header kolom (penting: beda dari <td> yang untuk data) -->
+     <thead>
+        <tr>
+            <th>Hari</th>
+            <th>Jam</th>
+            <th>Mata Kuliah</th>
+            <th>Ruang</th>
+            <th>Dosen</th>
+        </tr>
+     </thead>
+
+    <!-- ============================================
+         BAGIAN 1b: BODY TABEL (data jadwal)
+         ============================================ -->
+    <!-- TODO(human): <tbody> berisi MINIMAL 5 <tr> (baris data).
+         Tiap <tr> punya 5 <td> sesuai kolom header.
+         TIPS: rowspan dipakai kalau 1 sel membentang ke beberapa baris
+         (misal: "Praktikum" yang occupy 2 baris waktu). -->
+<tbody>
+    <tr>
+        <td>Senin</td>
+        <td>08:00 - 10:00</td>
+        <td>Matematika Diskrit</td>     
+        <td>A101</td>
+        <td>Dr. John Doe</td>
+    </tr>
+     <tr>
+          <td>Selasa</td>
+          <td>10:00 - 12:00</td>
+          <td>Algoritma dan Struktur Data</td>
+          <td>B202</td>
+          <td>Dr. Jane Smith</td>
+     </tr>
+    <!-- Tambahkan baris data lainnya di sini -->
+  </tbody>
+
+    <!-- ============================================
+         BAGIAN 1c: FOOTER TABEL (rekapitulasi)
+         ============================================ -->
+    <!-- TODO(human): <tfoot> berisi 1 <tr> untuk total/rekap:
+         - Pakai colspan untuk gabung beberapa kolom jadi 1 (misal: colspan="3" untuk "Total SKS")
+         - Pakai rowspan untuk gabung beberapa baris jadi 1 sel
+         Pola: <td colspan="3">Total SKS: 18</td> -->
+
+<tfoot> 
+     <tr>
+          <td colspan="3">Total SKS: 18</td>
+          <td colspan="2">Jumlah Mata Kuliah: 6</td>
+     </tr>
+</tfoot>
+</table>
+
+  <p>Jadwal dapat berubah sewaktu-waktu.</p>
+</body>
+</html>

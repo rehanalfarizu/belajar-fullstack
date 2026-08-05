@@ -1,24 +1,49 @@
-# Compiled class file
-*.class
+# Dependencies
+node_modules/
+vendor/
 
-# Log file
+# Build, test, dan cache
+dist/
+build/
+coverage/
+.cache/
+.vite/
+.next/
+.nuxt/
+
+# Environment dan secret
+.env
+.env.*
+!.env.example
+
+# Runtime
 *.log
+*.pid
+*.seed
 
-# BlueJ files
-*.ctxt
+# Database lokal
+*.sqlite
+*.sqlite3
+database/database.sqlite
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Editor dan OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
+# PHP / Laravel
+bootstrap/cache/*.php
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+
+# Arsip dan crash dump
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*

@@ -1,0 +1,125 @@
+# ============================================================
+# Multi-Stage Dockerfile — React Frontend dengan Nginx
+# ============================================================
+#
+# TODO: Implementasikan multi-stage Dockerfile untuk React SPA
+#
+# Goals:
+# - Build stage: Compile React dengan Vite
+# - Production stage: Serve dengan Nginx
+# - Final image < 50MB
+# - SPA routing (fallback ke index.html)
+# - Security headers
+# - Gzip compression
+#
+# Run: docker build -t my-frontend:1.0 .
+# Run: docker run -p 8080:80 my-frontend:1.0
+# ============================================================
+
+# ============================================================
+# STAGE 1: Builder — Compile React App
+# ============================================================
+# TODO: Base image untuk build stage
+# Hint: Butuh Node.js + npm
+# FROM node:24-alpine AS builder
+
+# TODO: Set working directory
+# WORKDIR /app
+
+# TODO: Copy package files
+# COPY package*.json ./
+
+# TODO: Install ALL dependencies (karena perlu build tools)
+# Hint: npm ci (karena ada package-lock.json)
+
+# TODO: Copy source code
+# COPY . .
+
+# TODO: Run build command
+# Hint: Vite build: npm run build
+# Atau untuk Create React App: npm run build
+
+# ============================================================
+# STAGE 2: Production — Nginx
+# ============================================================
+# TODO: Base image untuk production stage
+# Hint:nginx:alpine (~50MB)
+# FROM nginx:alpine AS production
+
+# TODO: Copy built assets dari builder stage
+# COPY --from=builder /app/dist /usr/share/nginx/html
+
+# TODO: Copy nginx configuration
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# TODO: Expose port 80
+# EXPOSE 80
+
+# TODO: Start nginx
+# CMD harus foreground untuk container tidak exit immediately
+# CMD ["nginx", "-g", "daemon off;"]
+
+# ============================================================
+# NGINX CONFIGURATION (nginx.conf)
+# ============================================================
+# TODO: Buat file nginx.conf dengan:
+#
+# server {
+#   listen 80;
+#   server_name _;
+#   root /usr/share/nginx/html;
+#   index index.html;
+#
+#   # SPA routing — PENTING untuk React Router
+#   location / {
+#       try_files $uri $uri/ /index.html;
+#   }
+#
+#   # Cache static assets (CSS, JS, images)
+#   location /assets {
+#       expires 1y;
+#       add_header Cache-Control "public, immutable";
+#   }
+#
+#   # Security headers
+#   add_header X-Frame-Options "SAMEORIGIN" always;
+#   add_header X-Content-Type-Options "nosniff" always;
+#   add_header X-XSS-Protection "1; mode=block" always;
+#
+#   # Gzip compression
+#   gzip on;
+#   gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+# }
+
+# ============================================================
+# BUILD AND TEST
+# ============================================================
+# Build:
+# docker build -t my-frontend:1.0 --target production .
+#
+# Run:
+# docker run -p 8080:80 my-frontend:1.0
+#
+# Test SPA routing:
+# curl -I http://localhost:8080/
+# curl -I http://localhost:8080/dashboard  (should return 200, bukan 404!)
+# curl -I http://localhost:8080/nonexistent-route (should return 200!)
+
+# ============================================================
+# EXAMPLE SOLUTION (simplified — remove when implementing)
+# ============================================================
+
+# # Stage 1: Build
+# FROM node:24-alpine AS builder
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm ci
+# COPY . .
+# RUN npm run build
+
+# # Stage 2: Production
+# FROM nginx:alpine AS production
+# COPY --from=builder /app/dist /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selector &amp; Box Model</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; background: #f8fafc; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+
+    h1 { text-align: center; margin-bottom: 32px; color: #1e293b; }
+    h2 { margin-top: 32px; margin-bottom: 16px; color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+    h3 { color: #475569; margin-bottom: 12px; }
+
+    /* ========== TODO 1: ELEMENT SELECTOR ========== */
+    /* Style semua <p> di section dengan:
+       - color abu-abu
+       - margin-bottom 12px
+    */
+    section p {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 2: CLASS SELECTOR ========== */
+    /* Style .highlight dengan:
+       - background kuning/cream
+       - padding 16px
+       - border-left 4px solid ...
+       - border-radius 4px
+    */
+    .highlight {
+      /* tulis di sini */
+    }
+
+    /* Style .box-demo dengan background warna berbeda */
+    .box-demo {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 3: ID SELECTOR ========== */
+    /* Style #header-section dengan:
+       - background gradient
+       - padding 24px
+       - border-radius 12px
+    */
+    #header-section {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 4: DESCENDANT SELECTOR ========== */
+    /* Style semua <li> di dalam .menu:
+       - list-style none
+       - padding 8px 0
+       - border-bottom 1px solid #ddd
+    */
+    .menu li {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 5: CHILD SELECTOR ========== */
+    /* Style <li> langsung di bawah .menu (bukan nested):
+       - font-weight bold
+    */
+    .menu > li {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 6: ATTRIBUTE SELECTOR ========== */
+    /* Style input[type="text"] dan input[type="email"]:
+       - width 100%
+       - padding 10px
+       - border 1px solid #ccc
+       - border-radius 6px
+       - margin-bottom 12px
+    */
+    input[type="text"],
+    input[type="email"] {
+      /* tulis di sini */
+    }
+
+    /* ========== TODO 7: PSEUDO-CLASS ========== */
+    /* Button hover: background gelap + translateY(-2px) */
+    .btn:hover {
+      /* tulis di sini */
+    }
+
+    /* First dan last child */
+    .demo-list li:first-child { color: blue; font-weight: bold; }
+    .demo-list li:last-child { color: green; font-weight: bold; }
+
+    /* Nth-child */
+    .demo-list li:nth-child(even) { background: #f1f5f9; }
+    .demo-list li:nth-child(odd) { background: #ffffff; }
+
+    /* ========== TODO 8: BOX MODEL VISUAL ========== */
+    /* Buat box yang menunjukkan content, padding, border, margin */
+    .box-model-demo {
+      /* Content area */
+      width: 200px;
+
+      /* Padding — jarak dalam (biru muda) */
+      padding: 30px;
+
+      /* Border — garis tepi (merah) */
+      border: 10px solid #ef4444;
+
+      /* Margin — jarak luar (hijau) */
+      margin: 40px;
+
+      /* Border-box */
+      box-sizing: border-box;
+
+      background: #dbeafe; /* padding area */
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .box-inner {
+      background: white; /* content area */
+      padding: 20px;
+      border: 2px dashed #3b82f6;
+    }
+
+    /* ========== UTILITY ========== */
+    .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+    .demo-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .code { background: #1e293b; color: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 13px; }
+    .btn { padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+    ul, ol { padding-left: 24px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header Section -->
+  <div id="header-section">
+    <h1 style="color: white; margin: 0;">CSS Selector &amp; Box Model</h1>
+    <p style="color: rgba(255,255,255,0.8);">Belajar cara memilih elemen dan memahami box model</p>
+  </div>
+
+  <!-- Box Model Demo -->
+  <h2>Box Model Visualisasi</h2>
+  <p>Setiap elemen HTML adalah sebuah "box" dengan 4 lapisan:</p>
+  <div class="box-container" style="margin-top: 20px;">
+    <div class="box-model-demo">
+      <div class="box-inner">
+        <strong>Content</strong><br>
+        width / height
+      </div>
+    </div>
+  </div>
+  <p style="margin-top: 12px; text-align: center;">
+    <span style="color: #ef4444; font-weight: bold;">Merah = Margin</span> |
+    <span style="color: #3b82f6; font-weight: bold;">Biru = Padding</span> |
+    <span style="background: white; padding: 2px 8px;">Putih = Content</span>
+  </p>
+
+  <!-- Selector Demo -->
+  <h2>CSS Selector Demo</h2>
+
+  <div class="demo-card">
+    <h3>1. Element Selector</h3>
+    <p>Memilih semua elemen dengan tag tertentu.</p>
+    <div class="code">p { color: gray; }</div>
+  </div>
+
+  <div class="demo-card" style="margin-top: 16px;">
+    <h3>2. Class &amp; ID Selector</h3>
+    <!-- TODO: .highlight class diterapkan di bawah — lihat hasilnya -->
+    <div class="highlight">
+      <strong>.highlight</strong> — pakai class untuk styling grup elemen
+    </div>
+  </div>
+
+  <div class="demo-card" style="margin-top: 16px;">
+    <h3>3. Descendant &amp; Child Selector</h3>
+    <!-- TODO: Lihat di CSS untuk perbedaan .menu li vs .menu > li -->
+    <ul class="menu">
+      <li>Menu Item 1 (child &amp; descendant)
+        <ul>
+          <li>Sub Item (hanya descendant)</li>
+        </ul>
+      </li>
+      <li>Menu Item 2 (child &amp; descendant)</li>
+      <li>Menu Item 3 (child &amp; descendant)</li>
+    </ul>
+  </div>
+
+  <div class="demo-card" style="margin-top: 16px;">
+    <h3>4. Pseudo-classes</h3>
+    <ol class="demo-list">
+      <li>Baris pertama (nth-child odd)</li>
+      <li>Baris kedua (nth-child even)</li>
+      <li>Baris ketiga</li>
+      <li>Baris keempat</li>
+    </ol>
+    <p style="font-size: 12px; margin-top: 8px;">→ first-child = biru, last-child = hijau, even = backgroundabu</p>
+  </div>
+
+  <!-- Attribute Selector -->
+  <h2>Attribute Selector</h2>
+  <div class="demo-card">
+    <p>Coba ketik di input di bawah:</p>
+    <input type="text" placeholder="Input text">
+    <input type="email" placeholder="Input email">
+    <!-- TODO: Buka browser inspector — kedua input punya style yang sama
+         karena selector input[type="text"], input[type="email"] -->
+  </div>
+
+  <!-- Button Hover -->
+  <h2>Hover Effect</h2>
+  <button type="button" class="btn">Hover ke sini!</button>
+  <!-- TODO: Arahkan mouse ke tombol — lihat background berubah -->
+
+</div>
+</body>
+</html>

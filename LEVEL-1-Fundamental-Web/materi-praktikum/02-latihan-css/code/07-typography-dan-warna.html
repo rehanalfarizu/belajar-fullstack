@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography &amp; Warna - Desain Visual</title>
+  <style>
+    /* ============================================================
+       RESET
+       ============================================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8fafc;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+
+    /* ============================================================ */
+    /* TODO 1: TYPOGRAPHY — font, size, weight, spacing */
+    /* ============================================================ */
+
+    /* Body typography */
+    body {
+      /* TODO: line-height: 1.6 (udah ada di atas) */
+      /* TODO: color: #333 */
+    }
+
+    /* Heading styles */
+    h1 {
+      /* TODO: font-size: 2.5rem (40px) */
+      /* TODO: font-weight: 800 (extra bold) */
+      /* TODO: line-height: 1.2 */
+      /* TODO: color: #1e293b */
+      /* TODO: letter-spacing: -0.02em */
+ }
+
+    h2 {
+      /* TODO: font-size: 2rem (32px) */
+      /* TODO: font-weight: 700 */
+      /* TODO: line-height: 1.3 */
+      /* TODO: color: #334155 */
+      /* TODO: margin-bottom: 16px */
+    }
+
+    h3 {
+      /* TODO: font-size: 1.5rem (24px) */
+      /* TODO: font-weight: 600 */
+      /* TODO: color: #475569 */
+      /* TODO: margin-bottom: 12px */
+    }
+
+    h4 {
+      /* TODO: font-size: 1.125rem (18px) */
+      /* TODO: font-weight: 600 */
+      /* TODO: color: #64748b */
+ }
+
+    p {
+      /* TODO: font-size: 1rem (16px) */
+      /* TODO: line-height: 1.7 */
+      /* TODO: color: #475569 */
+      /* TODO: margin-bottom: 16px */
+    }
+
+    small {
+      /* TODO: font-size: 0.875rem (14px) */
+      /* TODO: color: #94a3b8 */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 2: TEXT ALIGNMENT& TRANSFORM */
+    /* ============================================================ */
+
+    .text-center {
+      /* TODO: text-align: center */
+    }
+
+    .text-right {
+      /* TODO: text-align: right */
+    }
+
+    .text-justify {
+      /* TODO: text-align: justify */
+    }
+
+    .text-uppercase {
+      /* TODO: text-transform: uppercase */
+      /* TODO: letter-spacing: 0.1em */
+      /* TODO: font-size: 0.875rem */
+    }
+
+    .text-gradient {
+      /* TODO: background-image: linear-gradient(...)
+         Hint: foreground text → -webkit-background-clip: text
+                                → -webkit-text-fill-color: transparent
+      */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 3: COLOR SYSTEM — primary, secondary, text, bg */
+    /* ============================================================ */
+
+    /*
+      Sistem warna yang akan dipakai:
+      - Primary:   #3b82f6 (blue)
+      - Secondary: #8b5cf6 (purple)
+      - Success:   #10b981 (green)
+      - Warning:   #f59e0b (amber)
+      - Danger:    #ef4444 (red)
+      - Dark:      #1e293b
+      - Gray:      #64748b
+      - Light:     #f1f5f9
+    */
+
+    .bg-primary { background: #3b82f6; color: white; }
+    .bg-secondary { background: #8b5cf6; color: white; }
+    .bg-success { background: #10b981; color: white; }
+    .bg-warning { background: #f59e0b; color: white; }
+    .bg-danger { background: #ef4444; color: white; }
+    .bg-dark { background: #1e293b; color: white; }
+    .bg-light { background: #f1f5f9; color: #1e293b; }
+
+    .text-primary { color: #3b82f6; }
+    .text-secondary { color: #8b5cf6; }
+    .text-success { color: #10b981; }
+    .text-warning { color: #f59e0b; }
+    .text-danger { color: #ef4444; }
+    .text-dark { color: #1e293b; }
+    .text-muted { color: #94a3b8; }
+
+    /* Badge / pill style */
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      /* TODO: text-transform: uppercase */
+      /* TODO: letter-spacing: 0.05em */
+    }
+
+    .badge-primary {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge-success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+
+    /* ============================================================ */
+    /* TODO 4: LINK STYLES */
+    /* ============================================================ */
+
+    a {
+      /* TODO: color: #3b82f6 */
+      /* TODO: text-decoration: none */
+      /* TODO: transition: color 0.2s */
+      /* tulis di sini */
+    }
+
+    a:hover {
+      /* TODO: color: #1d4ed8 (lebih gelap) */
+      /* TODO: text-decoration: underline */
+    }
+
+    a:visited {
+      /* TODO: color: #7c3aed (purple untuk visited) */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 5: LINE HEIGHT & PARAGRAPH SPACING */
+    /* ============================================================ */
+
+    .lead {
+      /* TODO: font-size: 1.25rem (20px) */
+      /* TODO: line-height: 1.6 */
+      /* TODO: color: #475569 */
+    }
+
+    .tight { line-height: 1.2; }
+    .normal { line-height: 1.6; }
+    .relaxed { line-height: 1.8; }
+    .loose { line-height: 2; }
+
+    p + p {
+      /* TODO: margin-top: 12px (spasi antar paragraf) */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 6: DIVIDER / HR STYLES */
+    /* ============================================================ */
+
+    hr {
+      border: none;
+      /* TODO: border-top: 2px solid #e2e8f0 */
+      /* TODO: margin: 32px 0 */
+    }
+
+    .hr-gradient {
+      border: none;
+      height: 4px;
+      /* TODO: background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) */
+      /* TODO: border-radius: 2px */
+      /* TODO: margin: 40px 0 */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 7: GRADIENT BACKGROUNDS */
+    /* ============================================================ */
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      /* TODO: color: white */
+      /* TODO: padding: 80px 0 */
+      /* TODO: text-align: center */
+    }
+
+    .card-gradient {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      /* TODO: border-radius: 16px */
+      /* TODO: padding: 32px */
+      /* TODO: color: white */
+    }
+
+    .section-warm {
+      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+      /* TODO: padding: 48px 0 */
+    }
+
+
+    /* ============================================================ */
+    /* TODO 8: TEXT OVERFLOW & TRUNCATION */
+    /* ============================================================ */
+
+    .truncate {
+      /* TODO: overflow: hidden */
+      /* TODO: text-overflow: ellipsis */
+      /* TODO: white-space: nowrap */
+    }
+
+    .line-clamp-2 {
+      /* TODO: display: -webkit-box */
+      /* TODO: -webkit-line-clamp: 2 */
+      /* TODO: -webkit-box-orient: vertical */
+      /* TODO: overflow: hidden */
+    }
+
+    .line-clamp-3 {
+      /* TODO: display: -webkit-box */
+      /* TODO: -webkit-line-clamp: 3 */
+      /* TODO: -webkit-box-orient: vertical */
+      /* TODO: overflow: hidden */
+    }
+
+
+    /* ============================================================ */
+    /* LAYOUT & UTILITY */
+    /* ============================================================ */
+
+    .section { padding: 64px 0; }
+    .section + .section { border-top: 1px solid #e2e8f0; }
+
+    .demo-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      /* TODO: box-shadow: 0 2px 8px rgba(0,0,0,0.08) */
+    }
+
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .color-swatch {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8px;
+      font-size: 11px;
+      color: white;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+ <!-- Section: Typography -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">1. Typography</div>
+
+      <div class="demo-card">
+        <h1>Heading Level 1 — Judul Utama</h1>
+        <p class="lead">Paragraf lead — sedikit lebih besar dari biasa. Digunakan untuk paragraf pembuka atau ringkasan.</p>
+        <p>Paragraf normal. Setiap elemen teks memiliki ukuran, berat, dan warna yang sudah ditentukan. Line-height yang tepat membuat teks mudah dibaca.</p>
+        <small>Small text — digunakan untuk caption, footer, atau teks bantuan.</small>
+      </div>
+
+      <div class="demo-card">
+        <h2>Heading Level 2 — Sub-judul</h2>
+        <h3>Heading Level 3 — Section Title</h3>
+        <h4>Heading Level 4 — Item Title</h4>
+      </div>
+
+      <div class="demo-card">
+        <h2 class="section-title">Text Alignment</h2>
+        <p class="text-center" style="background:#f1f5f9; padding:12px; border-radius:8px;">Teks di tengah (text-align: center)</p>
+        <p class="text-right" style="background:#f1f5f9; padding:12px; border-radius:8px; margin-top:8px;">Teks di kanan (text-align: right)</p>
+        <p class="text-justify" style="background:#f1f5f9; padding:12px; border-radius:8px; margin-top:8px;">Teks rata kiri-kanan (text-align: justify) — setiap baris memiliki panjang yang sama. Digunakan untuk artikel dan dokumen formal.</p>
+      </div>
+
+      <div class="demo-card">
+        <h2 class="section-title">Text Transform</h2>
+        <p class="text-uppercase" style="background:#f1f5f9; padding:12px; border-radius:8px;">teks uppercase — semua huruf kapital</p>
+        <p style="text-transform: capitalize; background:#f1f5f9; padding:12px; border-radius:8px; margin-top:8px;">teks capitalize — setiap kata diawali kapital</p>
+        <p style="text-transform: lowercase; background:#f1f5f9; padding:12px; border-radius:8px; margin-top:8px;">TEKS LOWERCASE — semua huruf kecil</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Section: Colors -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">2. Color System</div>
+
+      <div class="demo-card">
+        <h2>Color Palette</h2>
+        <div class="demo-row">
+          <div class="color-swatch bg-primary">#3b82f6<br>Primary</div>
+          <div class="color-swatch bg-secondary">#8b5cf6<br>Secondary</div>
+          <div class="color-swatch bg-success">#10b981<br>Success</div>
+          <div class="color-swatch bg-warning">#f59e0b<br>Warning</div>
+          <div class="color-swatch bg-danger">#ef4444<br>Danger</div>
+          <div class="color-swatch bg-dark">#1e293b<br>Dark</div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <h2>Text Colors</h2>
+        <p class="text-primary">Teks primary — biru utama</p>
+        <p class="text-secondary">Teks secondary — ungu</p>
+        <p class="text-success">Teks success — hijau</p>
+        <p class="text-warning">Teks warning — kuning/amber</p>
+        <p class="text-danger">Teks danger — merah</p>
+        <p class="text-muted">Teks muted — abu-abu terang</p>
+      </div>
+
+      <div class="demo-card">
+        <h2>Badges / Pills</h2>
+        <div class="demo-row">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-danger">Danger</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Section: Gradients -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">3. Gradients &amp; Backgrounds</div>
+
+      <div class="hero-gradient">
+        <h1 style="color:white; font-size:2.5rem; margin-bottom:16px;">Gradien Header</h1>
+        <p style="color:rgba(255,255,255,0.9); font-size:1.25rem;">Background gradient membuat elemen lebih menarik dan modern.</p>
+      </div>
+
+      <div class="demo-row" style="margin-top:24px;">
+        <div class="card-gradient" style="flex:1; min-width:200px;">
+          <h3 style="color:white; margin-bottom:8px;">Card Gradient</h3>
+          <p style="color:rgba(255,255,255,0.9); font-size:0.9rem;">Gradient background untuk card atau highlight section.</p>
+        </div>
+        <div class="section-warm" style="flex:1; min-width:200px; padding:32px; border-radius:12px;">
+          <h3 style="color:#92400e;">Warm Gradient</h3>
+          <p style="color:#92400e; font-size:0.9rem;">Warm colors untuk highlight atau caution areas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Section: Line Height -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">4. Line Height</div>
+
+      <div class="demo-card">
+        <h2 class="tight" style="margin-bottom:8px;">Line Height: 1.2 (Tight)</h2>
+        <p class="tight">Teks dengan line-height ketat. Cocok untuk judul atau elemen yang pendek. Jarak antar baris sangat rapat.</p>
+      </div>
+
+      <div class="demo-card">
+        <h2 class="normal" style="margin-bottom:8px;">Line Height: 1.6 (Normal)</h2>
+        <p class="normal">Teks dengan line-height normal. Standar untuk paragraf biasa. Mudah dibaca dan nyaman di mata.</p>
+      </div>
+
+      <div class="demo-card">
+        <h2 class="relaxed" style="margin-bottom:8px;">Line Height: 1.8 (Relaxed)</h2>
+        <p class="relaxed">Teks dengan line-height longgar. Sangat nyaman untuk artikel panjang atau dokumen yang panjang untuk dibaca.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Section: Links -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">5. Link Styles</div>
+
+      <div class="demo-card">
+        <h2>Interactive Links</h2>
+        <p>Ini adalah paragraf dengan<a href="#">link biasa</a> yang berubah warna saat di-hover. Link visited berwarna <a href="#" style="color:#7c3aed;">ungu</a>.<a href="#">Klik di sini</a> untuk navigasi.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Section: Truncation -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-title">6. Text Truncation</div>
+
+      <div class="demo-card">
+        <h2>Line Clamp</h2>
+        <p class="line-clamp-2" style="margin-bottom:16px; color:#475569;">
+          Ini adalah paragraf yang dibatasi hanya2 baris. Dengan line-clamp-2, teks yang melebihi2 baris akan disembunyikan dan diakhiri dengan ellipsis (...). Sangat berguna untuk card yang punya ruang terbatas.
+ </p>
+        <p class="line-clamp-3" style="color:#475569;">
+          Paragraf ini dibatasi 3 baris. Bisa digunakan untuk deskripsi produk, ringkasan artikel, atau konten yang perlu dipotong secara visual. Line-clamp-3 memberikan sedikit lebih banyak ruang dibanding2 baris, tapi tetap menjaga konsistensi tinggi card.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

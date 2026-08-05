@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Registrasi Akun Premium</title>
+  <meta name="description" content="Form registrasi akun premium dengan validasi lengkap">
+</head>
+<body>
+  <h1>Form Registrasi Akun Premium</h1>
+  <form action="/register" method="POST" novalidate>
+
+    <fieldset>
+      <legend>Data Akun</legend>
+
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"
+             placeholder="Minimal3 karakter, huruf dan angka saja"
+             pattern="[A-Za-z0-9]{3,}"
+             required><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email"
+             placeholder="email@domain.com"
+             required><br><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password"
+             autocomplete="new-password"
+             placeholder="Minimal 8 karakter,1 huruf besar, 1 angka"
+             pattern="(?=.*[A-Z])(?=.*[0-9]).{8,}"
+             required><br><br>
+
+      <label for="konfirmasi">Konfirmasi Password:</label><br>
+      <input type="password" id="konfirmasi" name="konfirmasi"
+             autocomplete="new-password"
+             placeholder="Ketik ulang password"
+             required><br><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Data Pribadi</legend>
+
+      <label for="nama_lengkap">Nama Lengkap:</label><br>
+      <input type="text" id="nama_lengkap" name="nama_lengkap"
+             placeholder="Sesuai KTP"
+             required><br><br>
+
+      <label for="nik">NIK (Nomor Induk Kependudukan):</label><br>
+      <input type="text" id="nik" name="nik"
+             placeholder="16 digit angka"
+             pattern="[0-9]{16}"
+             required><br><br>
+
+      <label for="telepon">Nomor WhatsApp:</label><br>
+      <input type="tel" id="telepon" name="telepon"
+             placeholder="08xxxxxxxxxx"
+             pattern="08[0-9]{8,11}"
+             required><br><br>
+
+      <label for="tanggal_lahir">Tanggal Lahir:</label><br>
+      <input type="date" id="tanggal_lahir" name="tanggal_lahir"
+             required><br><br>
+
+      <label for="website">Website Pribadi (opsional):</label><br>
+      <input type="url" id="website" name="website"
+             placeholder="https://website.com"><br><br>
+
+      <label for="umur">Umur:</label><br>
+      <input type="number" id="umur" name="umur"
+             min="17" max="100"
+             required><br><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Paket Berlangganan</legend>
+
+      <label for="paket">Pilih Paket:</label><br>
+      <select id="paket" name="paket" required>
+        <option value="">-- Pilih Paket --</option>
+        <option value="basic">Basic - Rp 49.000/bulan</option>
+        <option value="premium">Premium - Rp 99.000/bulan</option>
+        <option value="pro">Pro - Rp 199.000/bulan</option>
+      </select><br><br>
+
+      <label for="referral">Kode Referral (opsional):</label><br>
+      <input type="text" id="referral" name="referral"
+             placeholder="Masukkan kode referral jika ada"><br><br>
+
+      <input type="checkbox" id="syarat" name="syarat" required>
+      <label for="syarat">Saya telah membaca dan menyetujui <a href="#">Syarat &amp; Ketentuan</a></label><br>
+
+      <input type="checkbox" id="newsletter" name="newsletter">
+      <label for="newsletter">Saya ingin menerima newsletter dan promo</label><br><br>
+    </fieldset>
+
+    <button type="submit">Daftar Sekarang</button>
+    <button type="reset">Reset Form</button>
+  </form>
+</body>
+</html>

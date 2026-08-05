@@ -1,0 +1,21 @@
+{
+  "name": "belajar-fullstack-curriculum",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kurikulum belajar fullstack dari fundamental hingga expert",
+  "scripts": {
+    "validate": "node scripts/validate-curriculum.mjs && npm run validate:html && npm run validate:types",
+    "validate:html": "html-validate \"LEVEL-1-Fundamental-Web/**/*.html\"",
+    "validate:types": "tsc --strict --noEmit --lib ES2023,DOM \"LEVEL-1-Fundamental-Web/materi-praktikum/04-latihan-typescript/code/01-product-catalog.ts\" \"LEVEL-1-Fundamental-Web/materi-praktikum/04-latihan-typescript/contoh/01-product-catalog.ts\"",
+    "audit": "node scripts/validate-curriculum.mjs --verbose"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "devDependencies": {
+    "@babel/parser": "7.29.7",
+    "html-validate": "11.6.0",
+    "typescript": "7.0.2",
+    "yaml": "2.9.0"
+  }
+}

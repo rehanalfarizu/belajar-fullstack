@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  CODE 04 — Form Pendaftaran
+  ==========================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: <form>, <input>, <label>, <select>, <textarea>, <button>, <fieldset>, <legend>.
+  Lihat soal/04-form-pendaftaran.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> halaman form -->
+  <title>Form Pendaftaran Online</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    fieldset {
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    legend { padding: 0 0.5rem; font-weight: 600; }
+    .row { margin-bottom: 0.75rem; }
+    label { display: inline-block; min-width: 160px; }
+    input, select, textarea {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TODO(human): <h1> judul form (misal: "Pendaftaran Online") -->
+  <h1>Pendaftaran Online</h1>
+  <!-- TODO(human): <p> instruksi singkat di atas form (misal: "Isi semua field wajib (*)") -->
+<p>
+     selamat datang di form pendaftaran online, silakan isi semua field yang wajib dengan benar untuk melanjutkan proses pendaftaran. pastikan data yang kamu masukkan akurat dan sesuai dengan dokumen resmi kamu.
+</p>
+
+  <!-- ============================================
+       BAGIAN 1: FORM
+       ============================================ -->
+  <!-- TODO(human): Buka <form action="#" method="POST">
+       action="#" = data tidak benar-benar dikirim (untuk latihan)
+       method="POST" = data dikirim di body request (lebih aman) -->
+<form action="#" method="POST">
+     <fieldset> 
+          <legend>Data Pribadi</legend>
+           <!-- TODO(human): Input nama lengkap -->
+           <div class="row">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="silahkan isi nama lengkap anda" required>
+           </div>
+
+           <!-- TODO(human): Input email -->
+           <div class="row">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="silahkan isi email anda" required>
+           </div>
+
+           <!-- TODO(human): Input password -->
+           <div class="row">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="new-password" placeholder="silakan isi password Anda" required>
+           </div>
+
+           <!-- TODO(human): Input umur -->
+           <div class="row">
+                <label for="umur">Umur</label>
+                <input type="number" id="umur" name="umur" min="1" max="120" required>
+           </div>
+
+           <!-- TODO(human): Input tanggal lahir -->
+           <div class="row">
+                <label for="tgl_lahir">Tanggal Lahir</label>
+                <input type="date" id="tgl_lahir" name="tgl_lahir" required>
+           </div>
+
+           <!-- TODO(human): Input telepon -->
+           <div class="row">
+                <label for="telp">Telepon</label>
+                <input type="tel" id="telp" name="telp" pattern="[0-9]{10,15}" placeholder="081234567890" required>
+           </div>
+     </fieldset>
+
+    <fieldset>
+      <legend>Informasi Tambahan</legend>
+
+      <label for="jurusan">Program Studi</label>
+      <select id="jurusan" name="jurusan" required>
+        <option value="">-- Pilih Jurusan --</option>
+        <option value="ti">Teknik Informatika</option>
+        <option value="si">Sistem Informasi</option>
+      </select>
+
+      <label for="alamat">Alamat</label>
+      <textarea id="alamat" name="alamat" rows="4"></textarea>
+
+      <p>Hobi</p>
+      <label><input type="checkbox" name="hobi[]" value="ngoding"> Ngoding</label>
+      <label><input type="checkbox" name="hobi[]" value="membaca"> Membaca</label>
+
+      <p>Jenis Kelamin</p>
+      <label><input type="radio" name="gender" value="L"> Laki-laki</label>
+      <label><input type="radio" name="gender" value="P"> Perempuan</label>
+
+      <label for="foto">Foto</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+      <input type="hidden" name="form_id" value="pendaftaran-2026">
+    </fieldset>
+
+    <button type="submit">Daftar Sekarang</button>
+    <button type="reset">Reset</button>
+  </form>
+
+</body>
+</html>

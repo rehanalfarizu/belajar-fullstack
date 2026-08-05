@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Pendaftaran</title>
+  <meta name="description" content="Formulir pendaftaran mahasiswa baru Universitas Amikom Yogyakarta">
+</head>
+<body>
+  <h1>Formulir Pendaftaran</h1>
+  <form action="/submit" method="POST">
+
+    <fieldset>
+      <legend>Data Diri</legend>
+
+      <label for="nama">Nama Lengkap:</label><br>
+      <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap"><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required placeholder="email@domain.com"><br><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" placeholder="Minimal 8 karakter"><br><br>
+
+      <label for="umur">Umur:</label><br>
+      <input type="number" id="umur" name="umur" min="17"><br><br>
+
+      <label for="tanggal_lahir">Tanggal Lahir:</label><br>
+      <input type="date" id="tanggal_lahir" name="tanggal_lahir"><br><br>
+
+      <label for="telepon">Nomor Telepon:</label><br>
+      <input type="tel" id="telepon" name="telepon" placeholder="08xxxxxxxxxx"><br><br>
+
+      <label for="website">Website:</label><br>
+      <input type="url" id="website" name="website" placeholder="https://website.com"><br><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Informasi Tambahan</legend>
+
+      <label for="jurusan">Jurusan:</label><br>
+      <select id="jurusan" name="jurusan">
+        <option value="">-- Pilih Jurusan --</option>
+        <option value="informatika">Informatika</option>
+        <option value="si">Sistem Informasi</option>
+        <option value="dkv">Desain Komunikasi Visual</option>
+        <option value="komunikasi">Ilmu Komunikasi</option>
+        <option value="akuntansi">Akuntansi</option>
+      </select><br><br>
+
+      <label for="alamat">Alamat:</label><br>
+      <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan alamat lengkap"></textarea><br><br>
+
+      <label for="foto">Upload Foto:</label><br>
+      <input type="file" id="foto" name="foto" accept="image/*"><br><br>
+
+      <label>Hobi:</label><br>
+      <input type="checkbox" id="coding" name="hobi" value="coding">
+      <label for="coding">Coding</label><br>
+      <input type="checkbox" id="gaming" name="hobi" value="gaming">
+      <label for="gaming">Gaming</label><br>
+      <input type="checkbox" id="membaca" name="hobi" value="membaca">
+      <label for="membaca">Membaca</label><br>
+      <input type="checkbox" id="olahraga" name="hobi" value="olahraga">
+      <label for="olahraga">Olahraga</label><br><br>
+
+      <label>Jenis Kelamin:</label><br>
+      <input type="radio" id="laki" name="gender" value="laki">
+      <label for="laki">Laki-laki</label><br>
+      <input type="radio" id="perempuan" name="gender" value="perempuan">
+      <label for="perempuan">Perempuan</label><br><br>
+    </fieldset>
+
+    <button type="submit">Daftar Sekarang</button>
+    <button type="reset">Reset</button>
+  </form>
+</body>
+</html>

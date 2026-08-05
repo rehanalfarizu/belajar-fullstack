@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+  CODE 07 — Navigasi & Anchor Links (Single-Page Landing)
+  =======================================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: <nav>, anchor links (#id), <dl>/<dt>/<dd>, mailto/tel/wa.me.
+  Lihat soal/07-navigasi-dropdown.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> landing page -->
+  <title>[Landing Page - Nama Brand]</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    nav { background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #1d4ed8; }
+    nav a:hover { text-decoration: underline; }
+    section { padding: 2rem 0; border-bottom: 1px solid #e5e7eb; }
+    dl { display: grid; grid-template-columns: 150px 1fr; gap: 0.5rem 1rem; }
+    dt { font-weight: 600; }
+    figure img { max-width: 100%; height: auto; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       BAGIAN 1: HEADER + NAVIGASI
+       ============================================ -->
+  <!-- TODO(human): <header> berisi:
+       - Logo/nama brand (bisa <h1> atau <span>)
+       - <nav aria-label="Navigasi utama"> dengan link anchor ke section:
+         #hero, #about, #services, #gallery, #contact
+         PLUS link eksternal (GitHub) dengan target="_blank" rel="noopener noreferrer"
+       Pola: <nav aria-label="Navigasi utama">
+               <a href="#hero">Beranda</a>
+               <a href="#about">Tentang</a>
+               <a href="#services">Layanan</a>
+               <a href="#gallery">Galeri</a>
+               <a href="#contact">Kontak</a>
+               <a href="https://github.com/username" target="_blank" rel="noopener noreferrer">GitHub</a>
+             </nav> -->
+
+
+  <!-- ============================================
+       BAGIAN 2: HERO SECTION
+       ============================================ -->
+  <!-- TODO(human): <section id="hero"> berisi:
+       - <h1> judul besar
+       - <p> tagline
+       - CTA button: <a href="#contact">Hubungi Kami</a> -->
+
+
+  <!-- ============================================
+       BAGIAN 3: ABOUT SECTION
+       ============================================ -->
+  <!-- TODO(human): <section id="about"> berisi:
+       - <h2>Tentang Kami</h2>
+       - <dl> (definition list) untuk info terstruktur:
+         <dt>Nama</dt><dd>[nama]</dd>
+         <dt>Lokasi</dt><dd>[kota]</dd>
+         <dt>Spesialisasi</dt><dd>[bidang]</dd>
+         <dt>Berdiri Sejak</dt><dd>[tahun]</dd>
+       - <figure> dengan foto + <figcaption> -->
+
+
+  <!-- ============================================
+       BAGIAN 4: SERVICES SECTION
+       ============================================ -->
+  <!-- TODO(human): <section id="services"> berisi:
+       - <h2>Layanan</h2>
+       - <ul> dengan minimal 4 <li>, tiap <li> berisi:
+         <h3> nama layanan
+         <p> deskripsi singkat -->
+
+
+  <!-- ============================================
+       BAGIAN 5: GALLERY SECTION
+       ============================================ -->
+  <!-- TODO(human): <section id="gallery"> berisi:
+       - <h2>Galeri</h2>
+       - 6 <figure>, masing-masing dengan:
+         <img src="https://picsum.photos/300/200?random=N" alt="[deskripsi]" loading="lazy">
+         <figcaption>Caption N</figcaption>
+       Ganti N dengan 1, 2, 3, 4, 5, 6 untuk 6 gambar. -->
+
+
+  <!-- ============================================
+       BAGIAN 6: CONTACT SECTION
+       ============================================ -->
+  <!-- TODO(human): <section id="contact"> berisi:
+       - <h2>Kontak</h2>
+       - <address> untuk alamat fisik
+       - 3 link khusus:
+         - <a href="mailto:email@domain.com">email</a>
+         - <a href="https://wa.me/6281234567890">WhatsApp</a>
+         - <a href="tel:+6281234567890">telepon</a> -->
+
+
+  <!-- ============================================
+       BAGIAN 7: FOOTER
+       ============================================ -->
+  <!-- TODO(human): <footer> berisi:
+       - <p> copyright dengan &copy; + tahun
+       - link "Kembali ke atas": <a href="#">↑ Kembali ke Atas</a> -->
+
+</body>
+</html>

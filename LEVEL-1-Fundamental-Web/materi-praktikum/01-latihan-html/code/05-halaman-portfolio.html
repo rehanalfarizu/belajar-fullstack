@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+  CODE 05 — Halaman Portfolio dengan Multimedia
+  ==============================================
+  Tugas kamu: ketik sendiri semua bagian yang ditandai TODO(human).
+  Topik: <img>, <video>, <audio>, <iframe>, <figure>, <picture>, srcset, loading.
+  Lihat soal/05-halaman-portfolio.md untuk breakdown.
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TODO(human): <title> portfolio -->
+  <title>[Portfolio Pribadi]</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    figure { margin: 0 0 1.5rem 0; }
+    figure img { max-width: 100%; height: auto; border-radius: 6px; }
+    figcaption { font-size: 0.9rem; color: #6b7280; text-align: center; }
+    iframe, video, audio { display: block; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       BAGIAN 1: HEADER + NAVIGASI
+       ============================================ -->
+  <!-- TODO(human): <header> dengan:
+       - <h1>: nama kamu
+       - <p>: tagline / judul profesional
+       - <nav> dengan minimal 3 link anchor ke section (#tentang, #proyek, #kontak)
+       Pola: <header><h1>...</h1><p>...</p><nav><a href="#tentang">Tentang</a> | <a href="#proyek">Proyek</a></nav></header> -->
+
+
+  <!-- ============================================
+       BAGIAN 2: SECTION "Tentang"
+       ============================================ -->
+  <!-- TODO(human): <section id="tentang"> berisi:
+       - <h2>Tentang Saya</h2>
+       - <p> perkenalan singkat
+       - <figure> dengan foto profil:
+         <img src="https://i.pravatar.cc/300" alt="[deskripsi foto]" width="150">
+         <figcaption>Foto profil</figcaption> -->
+
+
+  <!-- ============================================
+       BAGIAN 3: SECTION "Proyek" (galeri)
+       ============================================ -->
+  <!-- TODO(human): <section id="proyek"> berisi:
+       - <h2>Proyek Saya</h2>
+       - 3 <figure> untuk 3 proyek:
+         <figure>
+           <img src="https://picsum.photos/300/200?random=1" alt="[deskripsi]" loading="lazy">
+           <figcaption>Proyek 1: [nama proyek]</figcaption>
+         </figure>
+       PENTING: loading="lazy" supaya browser tidak load gambar di luar viewport (hemat bandwidth).
+       Tambah 2 figure lagi untuk random=2 dan random=3. -->
+
+
+  <!-- ============================================
+       BAGIAN 4: SECTION "Video" (YouTube + lokal)
+       ============================================ -->
+  <!-- TODO(human): <section id="video"> berisi:
+       - <h2>Video</h2>
+       - 1 <iframe> embed YouTube
+         Pola: <iframe width="560" height="315"
+                      src="https://www.youtube.com/embed/VIDEO_ID"
+                      title="Judul video"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen></iframe>
+       Ganti VIDEO_ID dengan ID video YouTube yang kamu suka. -->
+
+
+  <!-- ============================================
+       BAGIAN 5: SECTION "Audio"
+       ============================================ -->
+  <!-- TODO(human): <section id="audio"> berisi:
+       - <h2>Audio</h2>
+       - 1 <audio controls> dengan <source>:
+         <audio controls>
+           <source src="[URL file audio]" type="audio/mpeg">
+           Browser tidak mendukung audio.
+         </audio>
+       Bisa pakai file audio publik (misal: https://www.soundjay.com/buttons/sounds/beep-07.mp3) atau biarkan kosong untuk testing. -->
+
+
+  <!-- ============================================
+       BAGIAN 6: FOOTER (kontak + sosmed)
+       ============================================ -->
+  <!-- TODO(human): <footer> berisi:
+       - <address> info kontak
+       - Link sosmed (GitHub, LinkedIn, Twitter) dengan target="_blank" rel="noopener noreferrer"
+       - <small> copyright
+       Pola: <footer>
+               <address>Email: <a href="mailto:...">...</a></address>
+               <a href="https://github.com/username" target="_blank" rel="noopener noreferrer">GitHub</a>
+               <small>&copy; 2026 [Nama]</small>
+             </footer> -->
+
+</body>
+</html>
