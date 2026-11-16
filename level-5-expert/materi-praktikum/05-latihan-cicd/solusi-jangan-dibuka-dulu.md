@@ -337,7 +337,7 @@ jobs:
 on:
   push:
     branches: [main, develop, 'feature/**']
- pull_request:
+  pull_request:
     branches: [main, develop]
   workflow_dispatch: # Manual trigger
 ````
@@ -407,7 +407,7 @@ concurrency:
     path: |
       node_modules
       .vite
- dist
+      dist
     key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
     restore-keys: |
       ${{ runner.os }}-build-
@@ -457,8 +457,8 @@ concurrency:
 
 ## 01-github-actions-basics — 4. Generate JUnit XML
 
-````yaml
-# jest.config.js
+````js
+// jest.config.js (ini JavaScript, bukan YAML)
 module.exports = {
   reporters: [
     'default',
@@ -633,14 +633,11 @@ on:
 jobs:
   deploy-production:
     runs-on: ubuntu-latest
+    # Job ini menunggu persetujuan manual kalau environment "production" punya
+    # required reviewers (atur di Settings → Environments).
     environment:
       name: production
       url: https://app.example.com
- environment:
-      name: production
-      url: https://app.example.com
-    # Wait for manual approval
-    environment: production
 ````
 
 ---
@@ -753,14 +750,13 @@ jobs:
 ## 02-deploy-pipeline — 3. Health Check Loop
 
 ````yaml
+# Tidak perlu action pihak ketiga: curl sudah bisa mengulang sendiri.
+# 24 percobaan x 5 detik = maksimal 120 detik menunggu.
 - name: Wait for health check
-  uses: joshmcgrath/await-verification-action@v1
-  with:
-    verify: |
-      curl -f https://staging.example.com/health
-    timeout: 120s
-    interval: 5s
-    retries: 24
+  run: |
+    curl --fail --silent --show-error \
+      --retry 24 --retry-delay 5 --retry-all-errors \
+      https://staging.example.com/health
 ````
 
 ---

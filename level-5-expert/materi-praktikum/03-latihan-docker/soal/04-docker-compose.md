@@ -70,7 +70,11 @@ services:
   backend:
     depends_on:
       - postgres # backend starts when postgres STARTS, not READY
+```
 
+Bandingkan dengan versi yang menunggu sampai service benar-benar sehat:
+
+```yaml
 # healthcheck: wait for service to be healthy
 services:
   backend:

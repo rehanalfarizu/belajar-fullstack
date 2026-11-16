@@ -25,20 +25,21 @@ Tujuan: убедиться bahwa semua edge cases tertutup test, dan regression 
 ### Arrange-Act-Assert (AAA) Pattern
 
 ```js
-describe('calculateDiscount', () => {
-  it('should return 10% discount for orders above 1M', () => {
+describe('hitungOngkir', () => {
+  it('gratis ongkir untuk belanja di atas 200 ribu', () => {
     // Arrange
-    const price = 1_500_000;
-    const expectedDiscount = 0.10;
+    const subtotal = 250_000;
 
     // Act
-    const result = calculateDiscount(price);
+    const ongkir = hitungOngkir(subtotal);
 
     // Assert
-    expect(result).toBe(expectedDiscount);
+    expect(ongkir).toBe(0);
   });
 });
 ```
+
+Contoh di atas memakai fungsi lain supaya kamu menulis test `calculateDiscount` sendiri di Bagian berikutnya. Belum ketemu? Contoh AAA versi `calculateDiscount` ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-unit-testing — Teori: contoh AAA `calculateDiscount`*.
 
 ### Jest Matchers yang Sering Dipakai
 

@@ -171,13 +171,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Railway tidak punya action resmi di Marketplace. Cara yang didukung adalah
+      # Railway CLI dengan project token di variabel RAILWAY_TOKEN.
       - name: Deploy to Railway
-        uses: railway-deploy-action@v1
-        with:
-          api-token: ${{ secrets.RAILWAY_API_TOKEN }}
-          project-id: ${{ secrets.RAILWAY_PROJECT_ID }}
-          service: blog-api
+        run: |
+          npm install --global @railway/cli
+          railway up --service blog-api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 ```
+
+> Cek dulu opsi yang berlaku di versi CLI-mu dengan `railway up --help`, karena
+> nama flag bisa berubah antar versi.
 
 ---
 
@@ -185,8 +190,7 @@ jobs:
 
 1. Buka repo di GitHub → **Settings** → **Secrets and variables** → **Actions**
 2. Tambahkan:
-   - `RAILWAY_API_TOKEN` — dari railway.app → Account Settings
-   - `RAILWAY_PROJECT_ID` — dari project Railway
+   - `RAILWAY_TOKEN` — *project token*, dibuat di railway.app → project kamu → Settings → Tokens
 
 ---
 
