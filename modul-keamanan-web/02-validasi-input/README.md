@@ -37,58 +37,58 @@ Demo: Buka DevTools di form manapun, hapus atribut `required`, submit form koson
 
 ## Jenis Validasi
 
+Contoh di bagian ini memakai kasus **peminjaman buku perpustakaan**, bukan form
+registrasi di lab. Terjemahkan polanya sendiri ke kasusmu.
+
 ### 1. Validasi Tipe Data
 ```javascript
 // ❌ Buruk - langsung pakai
-const age = req.body.age;
+const jumlah = req.body.jumlahBuku;
 
 // ✅ Baik - cek tipe dulu
-const age = parseInt(req.body.age, 10);
-if (isNaN(age)) {
-  return res.status(400).json({ error: 'Age must be a number' });
+const jumlah = parseInt(req.body.jumlahBuku, 10);
+if (isNaN(jumlah)) {
+  return res.status(400).json({ error: 'jumlahBuku harus angka' });
 }
 ```
 
 ### 2. Validasi Range/Batas
 ```javascript
 // Cek batas nilai
-if (age < 0 || age > 150) {
-  return res.status(400).json({ error: 'Age must be between 0 and 150' });
+if (jumlah < 1 || jumlah > 5) {
+  return res.status(400).json({ error: 'Maksimal pinjam 5 buku' });
 }
 
 // Cek panjang string
-if (username.length < 3 || username.length > 50) {
-  return res.status(400).json({ error: 'Username must be 3-50 characters' });
+if (catatan.length > 200) {
+  return res.status(400).json({ error: 'Catatan maksimal 200 karakter' });
 }
 ```
 
 ### 3. Validasi Format
 ```javascript
-// Email dengan regex sederhana
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!emailRegex.test(email)) {
-  return res.status(400).json({ error: 'Invalid email format' });
-}
-
-// Atau pakai library (lebih baik)
-const validator = require('validator');
-if (!validator.isEmail(email)) {
-  return res.status(400).json({ error: 'Invalid email format' });
+// Kode anggota berformat PST-0000 (regex sederhana)
+const formatKode = /^PST-\d{4}$/;
+if (!formatKode.test(kodeAnggota)) {
+  return res.status(400).json({ error: 'Format kode anggota salah' });
 }
 ```
+
+Pertanyaan: untuk format yang rumit seperti email atau nomor telepon, kenapa
+lebih aman memakai library yang sudah teruji daripada menulis regex sendiri?
 
 ### 4. Validasi Whitelist vs Blacklist
 ```javascript
 // ❌ Blacklist - mencoba blokir yang buruk (selalu bisa dilewati)
-const badChars = ['<', '>', '"', "'"];
-if (badChars.some(char => input.includes(char))) {
-  return res.status(400).json({ error: 'Invalid characters' });
+const karakterTerlarang = ['<', '>', '"', "'"];
+if (karakterTerlarang.some(c => kodeRak.includes(c))) {
+  return res.status(400).json({ error: 'Karakter tidak valid' });
 }
 
 // ✅ Whitelist - hanya izinkan yang baik (lebih aman)
-const allowedChars = /^[a-zA-Z0-9_-]+$/;
-if (!allowedChars.test(username)) {
-  return res.status(400).json({ error: 'Username can only contain letters, numbers, underscore, dash' });
+const formatRak = /^[A-C][0-9]{2}$/;   // contoh: rak A01, B12
+if (!formatRak.test(kodeRak)) {
+  return res.status(400).json({ error: 'Kode rak harus huruf A-C diikuti 2 angka' });
 }
 ```
 
@@ -106,24 +106,30 @@ if (!allowedChars.test(username)) {
 - **Laravel Validation** — Built-in, sangat lengkap
 
 ### Contoh dengan Zod
+
+Contoh ini untuk form peminjaman buku. Schema untuk lab-mu berbeda, jadi kamu
+tetap perlu menyusunnya sendiri dari aturan di file lab.
+
 ```javascript
 const { z } = require('zod');
 
-const UserSchema = z.object({
-  username: z.string().min(3).max(50).regex(/^[a-zA-Z0-9_-]+$/),
-  email: z.string().email(),
-  age: z.number().int().min(0).max(150),
-  password: z.string().min(8),
+const PinjamSchema = z.object({
+  kodeAnggota: z.string().regex(/^PST-\d{4}$/),
+  jumlahBuku: z.number().int().min(1).max(5),
+  layanan: z.enum(['reguler', 'kilat']),
 });
 
-// Validasi
-try {
-  const validData = UserSchema.parse(req.body);
-  // Data sudah bersih, lanjut proses
-} catch (error) {
-  return res.status(400).json({ errors: error.errors });
+const hasil = PinjamSchema.safeParse(req.body);
+if (!hasil.success) {
+  return res.status(400).json({ errors: hasil.error.issues });
 }
+// hasil.data sudah bersih
 ```
+
+Pertanyaan pemandu untuk lab:
+- Apa bedanya `parse` dan `safeParse`? Mana yang tidak melempar error?
+- Bagaimana menulis aturan "boleh dikosongkan" dan "punya nilai bawaan" di Zod?
+- Bagaimana membatasi nilai hanya pada daftar tertentu?
 
 ---
 

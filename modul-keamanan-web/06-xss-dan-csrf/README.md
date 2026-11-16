@@ -62,24 +62,16 @@ Penyerang membuat korban mengirim request tanpa sadar ke website yang sudah di-l
 2. **SameSite Cookie** — Cookie tidak dikirim dari domain lain
 3. **Cek Origin/Referer header** — Validasi asal request
 
-```javascript
-// Generate CSRF token
-app.use((req, res, next) => {
-  if (!req.session.csrfToken) {
-    req.session.csrfToken = crypto.randomUUID();
-  }
-  res.locals.csrfToken = req.session.csrfToken;
-  next();
-});
+Cara kerja token CSRF, tanpa kode supaya kamu menuliskannya sendiri di lab:
 
-// Validasi di POST request
-app.post('/transfer', (req, res) => {
-  if (req.body._csrf !== req.session.csrfToken) {
-    return res.status(403).json({ error: 'Invalid CSRF token' });
-  }
-  // Proses transfer
-});
-```
+1. Saat membuat halaman form, server membuat string acak yang sulit ditebak dan menyimpannya di sesi pengguna.
+2. String itu ikut dikirim di form sebagai field tersembunyi.
+3. Saat form dikirim, server membandingkan kiriman dengan yang ada di sesi. Kalau kosong atau beda, request ditolak.
+
+Pertanyaan pemandu:
+- Fungsi bawaan Node apa yang cocok untuk membuat string acak yang aman (cari modul `crypto`)?
+- Kenapa halaman penyerang tidak bisa mendapatkan token itu, padahal browser korban ikut mengirim cookie?
+- Status HTTP apa yang tepat untuk request yang ditolak?
 
 ---
 

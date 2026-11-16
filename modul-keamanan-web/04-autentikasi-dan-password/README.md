@@ -48,15 +48,23 @@ Cara pakai keduanya hampir sama.
 ```javascript
 const bcrypt = require('bcryptjs');
 
-// Hash password (saat registrasi)
-const saltRounds = 10;
-const hashedPassword = await bcrypt.hash('password123', saltRounds);
-// Hasilnya: $2b$10$randomsalt...randomhash...
+// Contoh: PIN loker penitipan barang (BUKAN password akun di lab)
+const putaran = 10; // makin besar, makin lambat (dan makin sulit ditebak)
 
-// Verifikasi password (saat login)
-const isMatch = await bcrypt.compare('password123', hashedPassword);
+// Simpan: ubah PIN polos jadi hash
+const hashPin = await bcrypt.hash('4821', putaran);
+// Hasilnya mirip: $2b$10$randomsalt...randomhash...
+
+// Cek: bandingkan PIN yang diketik dengan hash tersimpan
+const cocok = await bcrypt.compare('4821', hashPin);
 // true jika cocok, false jika tidak
 ```
+
+Pertanyaan pemandu untuk lab:
+- Kenapa hash dari PIN yang sama bisa berbeda tiap kali dibuat? Di mana "salt" tersimpan?
+- Kenapa memverifikasi dengan `hash(ulang) === hashTersimpan` itu salah?
+
+---
 
 ---
 
@@ -102,14 +110,12 @@ const isMatch = await bcrypt.compare('password123', hashedPassword);
 // ❌ RENTAN XSS
 localStorage.setItem('token', jwt);
 // Kalau ada XSS, attacker bisa ambil token
-
-// ✅ Untuk web: gunakan HttpOnly cookie
-res.cookie('token', jwt, {
-  httpOnly: true,  // JavaScript tidak bisa akses
-  secure: true,    // Hanya HTTPS
-  sameSite: 'strict'
-});
 ```
+
+Untuk web, simpan token di **cookie** yang diatur supaya (1) tidak bisa dibaca
+JavaScript, (2) hanya dikirim lewat HTTPS, dan (3) tidak ikut terkirim dari
+situs lain. Cari di dokumentasi `express-session` (bagian *cookie*): opsi apa
+yang mewakili masing-masing tiga hal itu? Isi sendiri di lab.
 
 ---
 
