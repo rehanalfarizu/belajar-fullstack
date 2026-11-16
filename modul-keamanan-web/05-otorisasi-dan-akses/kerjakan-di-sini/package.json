@@ -1,0 +1,16 @@
+{
+  "name": "otorisasi-akses-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lab IDOR dan RBAC - HANYA UNTUK BELAJAR DI LOCALHOST",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "rentan": "node 01-api-rentan.js",
+    "aman": "node 02-api-aman.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

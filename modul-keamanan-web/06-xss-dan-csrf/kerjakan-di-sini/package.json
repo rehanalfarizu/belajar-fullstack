@@ -1,0 +1,18 @@
+{
+  "name": "xss-csrf-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lab XSS dan CSRF - HANYA UNTUK BELAJAR DI LOCALHOST",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "xss": "node 02-xss-fix.js",
+    "cek-escape": "node 02-xss-fix.js --cek",
+    "csrf": "node 03-csrf-server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  }
+}

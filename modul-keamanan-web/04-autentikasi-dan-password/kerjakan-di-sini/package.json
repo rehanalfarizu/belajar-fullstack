@@ -1,0 +1,19 @@
+{
+  "name": "autentikasi-password-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lab hash password dan session login - HANYA UNTUK BELAJAR DI LOCALHOST",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "cek-hash": "node 01-hash-password.js",
+    "start": "node 02-auth-server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "konfigurasi-aman-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lab environment variable, security header, dan error handling - HANYA UNTUK BELAJAR DI LOCALHOST",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "start": "node 01-server-config.js",
+    "audit": "npm audit"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "helmet": "^8.0.0"
+  }
+}
