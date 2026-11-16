@@ -184,19 +184,8 @@ Tulis test untuk:
 
 Gunakan `test.each()` untuk menguji multiple cases:
 
-```js
-test.each`
-  originalPrice | discount | expected
-  ${100000}     | ${10}    | ${90000}
-  ${200000}     | ${25}    | ${150000}
-  ${500000}     | ${50}    | ${250000}
-  ${1000000}    | ${0}     | ${1000000}
-`('calculateDiscount($originalPrice, $discount) = $expected', 
-  ({ originalPrice, discount, expected }) => {
-    expect(calculateDiscount(originalPrice, discount)).toBe(expected);
-  }
-);
-```
+> **Tulis sendiri dulu.** Fungsi `calculateDiscount` punya banyak kombinasi input. Bagaimana menulis satu test yang dijalankan berulang dengan tabel data? Cari `test.each` di dokumentasi Jest.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-unit-testing — 1. Table-Driven Tests*.
 
 Implementasikan table-driven test untuk `formatCurrency` dengan minimal 10 kasus termasuk:
 - Mata uang berbeda (IDR, USD, EUR, JPY)

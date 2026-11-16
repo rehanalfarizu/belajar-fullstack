@@ -101,29 +101,13 @@ Buat file `src/mocks/handlers.js` dengan handlers untuk:
 
 **4. Setup Server di Test**
 
-```js
-// src/setupTests.js
-import { server } from './mocks/server';
-
-// Reset between tests
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-```
+> **Tulis sendiri dulu.** File setup apa yang dijalankan Jest sebelum semua test, dan bagaimana menyalakan, mereset, dan menutup server MSW di situ?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 4. Setup Server di Test*.
 
 **5. Custom Response untuk Specific Tests**
 
-```js
-// Contoh: Override handler untuk error scenario
-it('shows error when API fails', async () => {
-  server.use(
-    http.get('/api/products', () => HttpResponse.error())
-  );
-
-  renderWithProviders(<ProductListingPage />);
-  expect(await screen.findByRole('alert')).toHaveTextContent(/error/i);
-});
-```
+> **Tulis sendiri dulu.** Bagaimana menimpa handler MSW untuk satu test saja supaya API "gagal"? Cari `server.use`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 5. Custom Response untuk Specific Tests*.
 
 ### Bagian B — Page Integration Tests (30 menit)
 
@@ -135,67 +119,13 @@ it('shows error when API fails', async () => {
 
 **2. Cart Integration Test**
 
-```jsx
-describe('Product Listing Page — Cart Integration', () => {
-  it('adds product to cart when Add to Cart is clicked', async () => {
-    const user = userEvent.setup();
-    renderWithProviders(
-      <>
-        <Header />  {/* Contains cart badge */}
-        <ProductListingPage />
-      </>
-    );
-
-    const addButtons = await screen.findAllByRole('button', { name: /add to cart/i });
-    await user.click(addButtons[0]);
-
-    expect(screen.getByRole('status', { name: /cart count/i })).toHaveTextContent('1');
-  });
-
-  it('cart count persists after page navigation', async () => {
-    // Test bahwa cart state tidak reset saat komponen unmount/remount
-  });
-});
-```
+> **Tulis sendiri dulu.** Bagaimana test memastikan klik tombol di satu komponen mengubah badge di komponen lain? Render keduanya dalam satu tree.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 2. Cart Integration Test*.
 
 **3. Filter Integration Test**
 
-```jsx
-describe('Product Listing Page — Filtering', () => {
-  it('filters products by category when category is selected', async () => {
-    const user = userEvent.setup();
-    renderWithProviders(<ProductListingPage />);
-
-    // Wait for initial load
-    await screen.findByRole('list', { name: /products/i });
-
-    // Click category filter
-    const categoryFilter = screen.getByRole('combobox', { name: /category/i });
-    await user.selectOptions(categoryFilter, 'electronics');
-
-    // Verify URL changed (or filter state updated)
-    // Verify product list updated
-    expect(await screen.findByText(/electronics/i)).toBeInTheDocument();
-  });
-
-  it('shows empty state when no products match filter', async () => {
-    // Setup: mock returns empty array for selected filter
-    server.use(
-      http.get('/api/products', () => HttpResponse.json([], { status: 200 }))
-    );
-
-    renderWithProviders(<ProductListingPage />);
-
-    // Apply filter that returns no results
-    expect(await screen.findByText(/no products found/i)).toBeInTheDocument();
-    expect(screen.queryByRole('list', { name: /products/i })).not.toBeInTheDocument();
-  });
-
-  it('price range filter updates product list', async () => {
-    // TODO: Implementasikan
-  });
-});
-```
+> **Tulis sendiri dulu.** Tulis test filter: pilih kategori, lalu pastikan daftar berubah. Bagaimana kasus "hasil kosong" diuji?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 3. Filter Integration Test*.
 
 ### Bagian C — Error Scenarios (20 menit)
 
@@ -207,59 +137,20 @@ describe('Product Listing Page — Filtering', () => {
 
 **2. Loading States**
 
-```jsx
-describe('Product Listing Page — Loading States', () => {
-  it('skeleton is shown during initial load', () => {
-    renderWithProviders(<ProductListingPage />);
-    expect(screen.getByTestId('product-skeleton')).toBeInTheDocument();
-    expect(screen.queryByRole('list')).not.toBeInTheDocument();
-  });
-
-  it('pagination does not cause full page reload', async () => {
-    // Verify: no progress bar during pagination
-  });
-});
-```
+> **Tulis sendiri dulu.** Bagaimana menguji tampilan skeleton saat data belum datang?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 2. Loading States*.
 
 ### Bagian D — Performance & Async (15 menit)
 
 **1. Race Condition Handling**
 
-```jsx
-it('handles rapid filter changes correctly', async () => {
-  const user = userEvent.setup();
-  renderWithProviders(<ProductListingPage />);
-
-  // User clicks filter 1 → 2 → 3 rapidly
-  const categoryFilter = screen.getByRole('combobox', { name: /category/i });
-
-  await user.selectOptions(categoryFilter, 'cat1');
-  await user.selectOptions(categoryFilter, 'cat2');
-  await user.selectOptions(categoryFilter, 'cat3');
-
-  // Wait for final result
-  await waitFor(() => {
-    expect(screen.queryByText(/cat1/)).not.toBeInTheDocument();
-  });
-
-  // Verify final result is for cat3, not cat1 or cat2
-  expect(await screen.findByText(/category: cat3/i)).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Kalau pengguna mengganti filter cepat-cepat, hasil mana yang harus menang? Bagaimana test menunggu hasil akhir?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 1. Race Condition Handling*.
 
 **2. Suspense Boundary Testing**
 
-```jsx
-it('shows Suspense fallback during lazy loading', () => {
-  render(
-    <Suspense fallback={<LoadingSpinner />}>
-      <LazyProductDetail productId="123" />
-    </Suspense>
-  );
-
-  expect(screen.getByRole('progressbar')).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana menguji bahwa fallback `Suspense` tampil selama komponen lazy dimuat?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — 2. Suspense Boundary Testing*.
 
 ### Bagian E — Test Design Critique (15 menit)
 

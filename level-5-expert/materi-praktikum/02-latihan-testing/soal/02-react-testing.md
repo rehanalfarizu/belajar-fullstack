@@ -143,26 +143,13 @@ describe('AddToCartButton', () => {
 
 **3. Initial State Test**
 
-```jsx
-it('shows "Add to Cart" by default', () => {
-  render(<AddToCartButton productId="123" />);
-  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Query apa yang paling dianjurkan Testing Library untuk menemukan tombol? Tulis assertion bahwa teks awalnya "Add to Cart".
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 3. Initial State Test*.
 
 **4. Click Behavior Test**
 
-```jsx
-it('changes to "Added!" after click', async () => {
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-
-  const button = screen.getByRole('button', { name: /add to cart/i });
-  await user.click(button);
-
-  expect(screen.getByRole('button', { name: /added/i })).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana mensimulasikan klik pengguna lalu mengecek teks tombol berubah? Ingat `userEvent.setup()` dan `await`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 4. Click Behavior Test*.
 
 ### Bagian C — Cart State Integration (20 menit)
 
@@ -170,50 +157,18 @@ it('changes to "Added!" after click', async () => {
 
 Karena komponen ini menggunakan CartContext, kamu perlu wrap dengan provider:
 
-```jsx
-// Helper untuk render dengan context
-const renderWithContext = (ui, { cartState = {}, ...renderOptions } = {}) => {
-  const Wrapper = ({ children }) => (
-    <CartContext.Provider value={{ ...cartState }}>
-      {children}
-    </CartContext.Provider>
-  );
-  return render(ui, { wrapper: Wrapper, ...renderOptions });
-};
-```
+> **Tulis sendiri dulu.** Komponen butuh Context. Bagaimana membungkus `render` dengan Provider supaya tidak mengulang kode di tiap test? Cari opsi `wrapper`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 1. Testing Context Integration*.
 
 **2. Test Cart Count Update**
 
-```jsx
-it('increases cart count by 1 when added', async () => {
-  const user = userEvent.setup();
-  const onCartUpdate = jest.fn();
-
-  render(
-    <CartContext.Provider value={{ addToCart: onCartUpdate }}>
-      <AddToCartButton productId="123" />
-    </CartContext.Provider>
-  );
-
-  await user.click(screen.getByRole('button'));
-  expect(onCartUpdate).toHaveBeenCalledWith('123');
-});
-```
+> **Tulis sendiri dulu.** Bagaimana mengecek bahwa fungsi dari context terpanggil dengan argumen yang benar? Pikirkan `jest.fn()` dan matcher `toHaveBeenCalledWith`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 2. Test Cart Count Update*.
 
 **3. Toggle Behavior Test**
 
-```jsx
-it('toggles back to default on second click', async () => {
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-
-  const button = screen.getByRole('button', { name: /add to cart/i });
-  await user.click(button);
-  await user.click(screen.getByRole('button', { name: /added/i }));
-
-  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Skenario toggle: klik dua kali. Apa yang harus terlihat setelah klik kedua?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 3. Toggle Behavior Test*.
 
 ### Bagian D — Error Handling & Edge Cases (20 menit)
 
@@ -221,39 +176,13 @@ it('toggles back to default on second click', async () => {
 
 Jika ada loading state saat API call:
 
-```jsx
-it('shows loading text while adding', async () => {
-  // Setup: mock API call yang lambat
-  global.fetch = jest.fn(() =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve({ ok: true }), 3000)
-    )
-  );
-
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-
-  await user.click(screen.getByRole('button'));
-  expect(screen.getByRole('button', { name: /adding/i })).toBeDisabled();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana membuat request palsu yang lambat supaya state loading bisa diamati? Matcher apa untuk tombol nonaktif?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 1. Loading State*.
 
 **2. Error State**
 
-```jsx
-it('shows error and reverts on API failure', async () => {
-  global.fetch = jest.fn(() => Promise.reject(new Error('Network error')));
-
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-  render(<ErrorToast />); // Component yang menampilkan error
-
-  await user.click(screen.getByRole('button'));
-
-  expect(await screen.findByRole('alert')).toHaveTextContent(/error/i);
-  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana membuat `fetch` gagal di test, lalu menunggu elemen `alert` muncul? Bedakan `getBy`, `queryBy`, dan `findBy`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 2. Error State*.
 
 **3. Edge Cases**
 
@@ -266,52 +195,21 @@ Tulis test untuk:
 
 **1. Semantics Check**
 
-```jsx
-it('button has correct accessible name', () => {
-  render(<AddToCartButton productId="123" />);
-
-  const button = screen.getByRole('button');
-  expect(button).toHaveAccessibleName(/add to cart/i);
-});
-```
+> **Tulis sendiri dulu.** Bagaimana mengecek nama aksesibel sebuah tombol? Cari matcher dari jest-dom.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 1. Semantics Check*.
 
 **2. Focus Management**
 
-```jsx
-it('can be focused with keyboard', async () => {
-  render(<AddToCartButton productId="123" />);
+> **Tulis sendiri dulu.** Bagaimana mengecek elemen bisa difokus lewat keyboard?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 2. Focus Management*.
 
-  const button = screen.getByRole('button');
-  button.focus();
-  expect(button).toHaveFocus();
-});
-```
-
-```jsx
-it('toggles on Enter key press', async () => {
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-
-  const button = screen.getByRole('button');
-  await user.keyboard('{Enter}');
-
-  expect(screen.getByRole('button', { name: /added/i })).toBeInTheDocument();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana mensimulasikan tombol Enter pada tombol yang sedang fokus? Lihat `user.keyboard`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 2. Focus Management*.
 
 **3. Screen Reader Announcement**
 
-```jsx
-it('announces state change to screen reader', async () => {
-  const user = userEvent.setup();
-  render(<AddToCartButton productId="123" />);
-
-  // Gunakan jest-axe untuk automated a11y check
-  const { container } = render(<AddToCartButton productId="123" />);
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-```
+> **Tulis sendiri dulu.** Bagaimana menjalankan pengecekan aksesibilitas otomatis? Cari paket `jest-axe`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-react-testing — 3. Screen Reader Announcement*.
 
 Pertanyaan diskusi:
 - Apa perbedaan `aria-label` dan `<button>` children text untuk accessible name?

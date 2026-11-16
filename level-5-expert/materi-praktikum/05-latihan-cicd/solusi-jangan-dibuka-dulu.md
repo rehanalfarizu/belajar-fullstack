@@ -286,3 +286,513 @@ jobs:
           echo "| Build | ${{ needs.build.result == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| E2E Tests | ${{ needs.e2e.result == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
 ````
+
+---
+
+## 01-github-actions-basics — Workflow Structure
+
+````yaml
+name: CI Pipeline # Workflow name
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env: # Global environment variables
+  NODE_VERSION: '24'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest                 # Runner (VM)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+````
+
+---
+
+## 01-github-actions-basics — 2. Trigger Conditions
+
+````yaml
+on:
+  push:
+    branches: [main, develop, 'feature/**']
+ pull_request:
+    branches: [main, develop]
+  workflow_dispatch: # Manual trigger
+````
+
+---
+
+## 01-github-actions-basics — 1. Test Against Multiple Node Versions
+
+````yaml
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [22, 24]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+````
+
+---
+
+## 01-github-actions-basics — 2. Fast Fail
+
+````yaml
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [22, 24]
+      fail-fast: true  # Stop all jobs if one fails
+````
+
+---
+
+## 01-github-actions-basics — 3. Limit Concurrency
+
+````yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+````
+
+---
+
+## 01-github-actions-basics — 1. npm Cache
+
+````yaml
+- name: Setup Node.js
+  uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    cache: 'npm'
+````
+
+---
+
+## 01-github-actions-basics — 2. Build Cache (Vite/Webpack)
+
+````yaml
+- name: Cache build artifacts
+  uses: actions/cache@v6
+  with:
+    path: |
+      node_modules
+      .vite
+ dist
+    key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      ${{ runner.os }}-build-
+````
+
+---
+
+## 01-github-actions-basics — 1. Run Tests with Coverage
+
+````yaml
+- name: Run tests with coverage
+  run: npm test -- --coverage --ci
+  env:
+    CI: true
+````
+
+---
+
+## 01-github-actions-basics — 2. Upload Coverage Report
+
+````yaml
+- name: Upload coverage to Codecov
+  uses: codecov/codecov-action@v4
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}
+    files: ./coverage/lcov.info
+    flags: unittests
+````
+
+---
+
+## 01-github-actions-basics — 3. Artifact for Test Results
+
+````yaml
+- name: Upload test results
+  uses: actions/upload-artifact@v7
+  if: always()  # Upload even if tests fail
+  with:
+    name: test-results-${{ matrix.node-version }}
+    path: |
+      test-results/
+      coverage/
+    retention-days: 7
+````
+
+---
+
+## 01-github-actions-basics — 4. Generate JUnit XML
+
+````yaml
+# jest.config.js
+module.exports = {
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: 'test-results' }]
+  ]
+};
+````
+
+---
+
+## 01-github-actions-basics — 1. Linting
+
+````yaml
+- name: Run ESLint
+  run: npm run lint
+````
+
+---
+
+## 01-github-actions-basics — 2. Secret Scanning
+
+````yaml
+- name: Check for secrets in code
+  run: |
+    if grep -r "api_key\|password\|secret" --include="*.js" --include="*.jsx" .; then
+      echo "Found potential secrets in code!"
+      exit 1
+    fi
+````
+
+---
+
+## 01-github-actions-basics — 3. Dependency Audit
+
+````yaml
+- name: Audit dependencies
+  run: npm audit --audit-level=high
+````
+
+---
+
+## 01-github-actions-basics — 4. Build Verification
+
+````yaml
+- name: Build
+  run: npm run build
+
+- name: Upload build artifacts
+  uses: actions/upload-artifact@v7
+  with:
+    name: dist-${{ github.sha }}
+    path: dist/
+    retention-days: 14
+````
+
+---
+
+## 01-github-actions-basics — 5. Quality Gate Summary
+
+````yaml
+- name: Generate PR summary
+  if: always()
+  run: |
+    echo "## CI Results" >> $GITHUB_STEP_SUMMARY
+    echo "- Tests: ${{ steps.test.outcome }}" >> $GITHUB_STEP_SUMMARY
+    echo "- Lint: ${{ steps.lint.outcome }}" >> $GITHUB_STEP_SUMMARY
+    echo "- Build: ${{ steps.build.outcome }}" >> $GITHUB_STEP_SUMMARY
+````
+
+---
+
+## 02-deploy-pipeline — 1. Staging Workflow
+
+````yaml
+# TODO: Implementasikan
+# code/02-deploy-workflow.yml
+
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Docker image
+        run: |
+          docker build -t myapp:staging-${{ github.sha }} .
+
+      - name: Push to registry
+        run: |
+          docker push ${{ secrets.REGISTRY }}/myapp:staging-${{ github.sha }}
+
+      - name: Deploy to staging
+        run: |
+          # Deploy command untuk hosting provider
+          kubectl set image deployment/myapp-staging \
+            app=${{ secrets.REGISTRY }}/myapp:staging-${{ github.sha }}
+````
+
+---
+
+## 02-deploy-pipeline — 2. Environment Protection
+
+````yaml
+# Tambah environment protection
+environment:
+  name: staging
+  url: https://staging.example.com
+````
+
+---
+
+## 02-deploy-pipeline — 3. Notify on Failure
+
+````yaml
+- name: Notify failure
+  if: failure()
+  uses: slackapi/slack-github-action@v1
+  with:
+    payload: |
+      {
+        "text": "Staging deployment failed! :x:",
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Staging Deployment Failed* :x:\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"
+            }
+          }
+        ]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+````
+
+---
+
+## 02-deploy-pipeline — 1. Release Workflow
+
+````yaml
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+````
+
+---
+
+## 02-deploy-pipeline — 2. Approval Gate
+
+````yaml
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://app.example.com
+ environment:
+      name: production
+      url: https://app.example.com
+    # Wait for manual approval
+    environment: production
+````
+
+---
+
+## 02-deploy-pipeline — 3. Production Deployment Steps
+
+````yaml
+- name: Tag release
+  run: |
+    git tag ${{ github.ref_name }}
+    git push origin ${{ github.ref_name }}
+
+- name: Build and push production image
+  run: |
+    docker build -t myapp:${{ github.ref_name }} .
+    docker tag myapp:${{ github.ref_name }} ${{ secrets.REGISTRY }}/myapp:latest
+    docker push ${{ secrets.REGISTRY }}/myapp:latest
+
+- name: Deploy to production
+  run: |
+    kubectl rollout restart deployment/myapp-production
+    kubectl rollout status deployment/myapp-production --timeout=300s
+````
+
+---
+
+## 02-deploy-pipeline — 1. Smoke Test Job
+
+````yaml
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Run smoke tests
+        run: |
+          npx playwright test e2e/smoke.spec.js \
+            --base-url ${{ needs.deploy-staging.outputs.url }}
+
+      - name: Report smoke test results
+        if: always()
+        run: |
+          echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+````
+
+---
+
+## 02-deploy-pipeline — 3. Pass/Fail to Next Job
+
+````yaml
+deploy-production:
+  needs: [deploy-staging, smoke-test]
+  # Only runs if both deploy-staging AND smoke-test pass
+````
+
+---
+
+## 02-deploy-pipeline — 1. Automatic Rollback on Failure
+
+````yaml
+- name: Rollback on failure
+  if: failure()
+  run: |
+    echo "Deployment failed, rolling back..."
+    kubectl rollout undo deployment/myapp-staging
+
+- name: Verify rollback
+  run: |
+    kubectl rollout status deployment/myapp-staging
+    curl -f ${{ env.STAGING_URL }}/health || exit 1
+````
+
+---
+
+## 02-deploy-pipeline — 2. Manual Rollback Workflow
+
+````yaml
+# .github/workflows/rollback.yml
+name: Rollback Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to rollback to (e.g., v1.2.3)'
+        required: true
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Rollback to version
+        run: |
+          kubectl set image deployment/myapp-production \
+            app=${{ secrets.REGISTRY }}/myapp:${{ inputs.version }}
+
+      - name: Verify rollback
+        run: |
+          kubectl rollout status deployment/myapp-production --timeout=300s
+          curl -f https://app.example.com/health
+````
+
+---
+
+## 02-deploy-pipeline — 3. Health Check Loop
+
+````yaml
+- name: Wait for health check
+  uses: joshmcgrath/await-verification-action@v1
+  with:
+    verify: |
+      curl -f https://staging.example.com/health
+    timeout: 120s
+    interval: 5s
+    retries: 24
+````
+
+---
+
+## 02-deploy-pipeline — 1. Login to Registry
+
+````yaml
+- name: Login to Container Registry
+  uses: docker/login-action@v4
+  with:
+    registry: ${{ secrets.REGISTRY }}
+    username: ${{ secrets.REGISTRY_USER }}
+    password: ${{ secrets.REGISTRY_TOKEN }}
+````
+
+---
+
+## 02-deploy-pipeline — 2. Build and Push with Labels
+
+````yaml
+- name: Build and push
+  uses: docker/build-push-action@v7
+  with:
+    context: .
+    push: true
+    tags: |
+      ${{ secrets.REGISTRY }}/myapp:${{ github.sha }}
+      ${{ secrets.REGISTRY }}/myapp:latest
+      ${{ secrets.REGISTRY }}/myapp:${{ github.ref_name }}
+    cache-from: type=gha
+    cache-to: type=gha,mode=max
+    labels: |
+      org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+      org.opencontainers.image.version=${{ github.ref_name }}
+````

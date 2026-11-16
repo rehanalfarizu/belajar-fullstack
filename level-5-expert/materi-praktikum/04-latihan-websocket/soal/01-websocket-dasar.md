@@ -101,142 +101,54 @@ websocat ws://localhost:8080
 
 **1. Broadcast Function**
 
-```js
-function broadcast(message) {
-  wss.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(message);
-    }
-  });
-}
-```
+> **Tulis sendiri dulu.** Bagaimana mengirim satu pesan ke semua client yang masih terhubung? Cek `readyState` dulu, kenapa?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 1. Broadcast Function*.
 
 **2. Simulated Stock Data**
 
 Generate random stock prices:
 
-```js
-const stocks = [
-  { symbol: 'AAPL', name: 'Apple Inc.', basePrice: 175 },
-  { symbol: 'GOOGL', name: 'Alphabet Inc.', basePrice: 140 },
-  { symbol: 'MSFT', name: 'Microsoft Corp.', basePrice: 380 },
-  { symbol: 'AMZN', name: 'Amazon.com Inc.', basePrice: 175 },
-  { symbol: 'TSLA', name: 'Tesla Inc.', basePrice: 250 },
-];
-
-function generateStockUpdate() {
-  return stocks.map((stock) => ({
-    symbol: stock.symbol,
-    name: stock.name,
-    price: stock.basePrice + (Math.random() - 0.5) * 10,
-    change: (Math.random() - 0.5) * 5,
-    timestamp: Date.now(),
-  }));
-}
-```
+> **Tulis sendiri dulu.** Siapkan data saham palsu: daftar simbol dan fungsi yang menghasilkan harga acak di sekitar harga dasar.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 2. Simulated Stock Data*.
 
 **3. Periodic Broadcast**
 
-```js
-// Broadcast setiap1 detik
-setInterval(() => {
-  const data = JSON.stringify({
-    type: 'stock_update',
-    data: generateStockUpdate(),
-  });
-  broadcast(data);
-}, 1000);
-```
+> **Tulis sendiri dulu.** Bagaimana mengirim update berkala ke semua client? Pikirkan `setInterval` dan format pesan JSON dengan `type`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 3. Periodic Broadcast*.
 
 ### Bagian C — Connection Management (15 menit)
 
 **1. Track Connected Clients**
 
-```js
-wss.on('connection', (ws, req) => {
-  const clientId = generateClientId();
-  const clientIp = req.socket.remoteAddress;
-
-  console.log(`Client connected: ${clientId} from ${clientIp}`);
-
-  // Add metadata to WebSocket
-  ws.clientId = clientId;
-  ws.isAlive = true;
-
-  // Send welcome message
-  ws.send(JSON.stringify({
-    type: 'welcome',
-    clientId,
-    message: 'Connected to stock ticker',
-  }));
-});
-```
+> **Tulis sendiri dulu.** Saat client baru terhubung, apa yang perlu dicatat dan dikirim sebagai sapaan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 1. Track Connected Clients*.
 
 **2. Client Registry**
 
-```js
-const clients = new Map(); // clientId → { ws, ip, connectedAt }
-
-wss.on('connection', (ws, req) => {
-  const clientId = generateClientId();
-  clients.set(clientId, { ws, ip: req.socket.remoteAddress, connectedAt: new Date() });
-
-  ws.on('close', () => {
-    clients.delete(clientId);
-    console.log(`Client disconnected: ${clientId}`);
-  });
-});
-```
+> **Tulis sendiri dulu.** Bagaimana melacak daftar client yang terhubung dan membersihkannya saat mereka putus?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 2. Client Registry*.
 
 **3. Client Count Endpoint**
 
-```js
-app.get('/api/stats', (req, res) => {
-  res.json({
-    connectedClients: wss.clients.size,
-    uptime: process.uptime(),
-    memoryUsage: process.memoryUsage(),
-  });
-});
-```
+> **Tulis sendiri dulu.** Buat endpoint HTTP yang melaporkan jumlah client, uptime, dan pemakaian memori.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 3. Client Count Endpoint*.
 
 ### Bagian D — Heartbeat / Ping-Pong (15 menit)
 
 **1. Implementasi Heartbeat**
 
-```js
-// Ping semua client setiap 30 detik
-const HEARTBEAT_INTERVAL = 30000;
-
-setInterval(() => {
-  wss.clients.forEach((ws) => {
-    if (ws.isAlive === false) {
-      console.log(`Terminating inactive client: ${ws.clientId}`);
-      return ws.terminate();
-    }
-
-    ws.isAlive = false;
-    ws.ping();
-  });
-}, HEARTBEAT_INTERVAL);
-```
+> **Tulis sendiri dulu.** Bagaimana mendeteksi client yang "hantu" (koneksi mati tanpa close)? Pikirkan ping berkala dan penanda `isAlive`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 1. Implementasi Heartbeat*.
 
 **2. Handle Pong Response**
 
-```js
-ws.on('pong', () => {
-  ws.isAlive = true;
-});
-```
+> **Tulis sendiri dulu.** Event apa yang diterima server sebagai balasan ping, dan apa yang harus dilakukan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 2. Handle Pong Response*.
 
 **3. Detect Disconnect**
 
-```js
-ws.on('close', (code, reason) => {
-  console.log(`Client ${ws.clientId} disconnected: ${code} - ${reason}`);
-  clients.delete(ws.clientId);
-});
-```
+> **Tulis sendiri dulu.** Event `close` membawa kode dan alasan. Apa yang perlu dibersihkan di sini?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 3. Detect Disconnect*.
 
 **4. Test Heartbeat**
 
@@ -250,27 +162,13 @@ ws.on('close', (code, reason) => {
 
 **1. Error Handling**
 
-```js
-ws.on('error', (error) => {
-  console.error(`Error for client ${ws.clientId}:`, error.message);
-});
-```
+> **Tulis sendiri dulu.** Apa yang terjadi kalau event `error` tidak ditangani? Tulis handler minimalnya.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 1. Error Handling*.
 
 **2. Invalid Message Handling**
 
-```js
-ws.on('message', (data, isBinary) => {
-  try {
-    const message = isBinary ? data : JSON.parse(data.toString());
-    handleMessage(ws, message);
-  } catch (error) {
-    ws.send(JSON.stringify({
-      type: 'error',
-      message: 'Invalid message format',
-    }));
-  }
-});
-```
+> **Tulis sendiri dulu.** Pesan dari client bisa berupa sampah. Bagaimana mem-parse dengan aman dan membalas error yang rapi?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 2. Invalid Message Handling*.
 
 **3. Message Types**
 
@@ -286,21 +184,8 @@ Definisikan dan handle message types:
 
 **4. Graceful Shutdown**
 
-```js
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, closing server...');
-
-  wss.clients.forEach((ws) => {
-    ws.send(JSON.stringify({ type: 'server_shutdown' }));
-    ws.close(1001, 'Server shutting down');
-  });
-
-  wss.close(() => {
-    console.log('WebSocket server closed');
-    process.exit(0);
-  });
-});
-```
+> **Tulis sendiri dulu.** Saat server dimatikan (SIGTERM), bagaimana menutup semua koneksi dengan sopan lalu keluar?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-websocket-dasar — 4. Graceful Shutdown*.
 
 ---
 

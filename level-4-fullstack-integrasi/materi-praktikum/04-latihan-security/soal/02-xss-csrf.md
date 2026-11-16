@@ -92,10 +92,7 @@ Lihat file `code/02-xss-csrf.js`. Lengkapi:
 // - Style-src 'self' 'unsafe-inline' (hanya untuk demo)
 // - img-src 'self' data:
 // function setSecurityHeaders(app) {
-//   app.use((req, res, next) => {
-//     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; object-src 'none'");
-//     // ...
-//   });
+//   // (tulis sendiri: middleware yang memasang header CSP sesuai daftar di atas)
 // }
 
 // ============================================
@@ -159,12 +156,7 @@ Lihat file `code/02-xss-csrf.js`. Lengkapi:
 // Implementasikan cookie dengan SameSite attribute
 
 // function setAuthCookie(res, token) {
-//   res.cookie('session_token', token, {
-//     httpOnly: true,
-//     secure: process.env.NODE_ENV === 'production',
-//     sameSite: 'strict', // atau 'lax'
-//     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-//   });
+//   // (tulis sendiri: set cookie sesi dengan opsi httpOnly, secure, sameSite, dan masa berlaku)
 // }
 
 // Pertanyaan:
@@ -186,3 +178,4 @@ Lihat file `code/02-xss-csrf.js`. Lengkapi:
 - [ ] CSRF middleware diterapkan untuk semua mutating methods
 - [ ] SameSite cookie attribute dikonfigurasi
 - [ ] Memahami perbedaan XSS types dan cara mitigasi masing-masing
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

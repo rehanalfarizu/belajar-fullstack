@@ -57,39 +57,14 @@ Lihat file `code/04-environment-vars.js`. Lengkapi:
 // npm install dotenv
 
 // TODO 2: Create .env.example (TEMPLATE, tidak ada nilai asli)
-const envExample = `
-# Server
-PORT=3001
-NODE_ENV=development
-
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/myapp
-
-# JWT
-JWT_SECRET=your-secret-key-here
-
-# CORS
-FRONTEND_URL=http://localhost:5173
-`.trim();
+// (tulis sendiri: isi .env.example dengan nama variabel saja, tanpa nilai asli)
 
 // TODO 3: Load dotenv di entry point (server.js/app.js)
 require('dotenv').config();
 
 // TODO 4: Validate required env vars saat startup
-function validateEnv() {
-  const required = ['JWT_SECRET', 'DATABASE_URL'];
-  const missing = required.filter(key => !process.env[key]);
-
-  if (missing.length > 0) {
-    console.error(`Missing required env vars: ${missing.join(', ')}`);
-    process.exit(1);
-  }
-
-  // Validate JWT_SECRET strength
-  if (process.env.JWT_SECRET.length < 32) {
-    console.warn('Warning: JWT_SECRET should be at least 32 characters');
-  }
-}
+// (tulis sendiri: fungsi validateEnv. Cek variabel wajib, hentikan proses kalau ada yang hilang,
+//  dan beri peringatan kalau JWT_SECRET terlalu pendek)
 
 // TODO 5: Generate secure JWT_SECRET
 function generateSecret() {
@@ -118,12 +93,7 @@ function generateSecret() {
 // import.meta.env.VITE_APP_NAME
 
 // TODO 8: API Base URL configuration
-const getApiBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
-  return 'http://localhost:3001/api'; // fallback
-};
+// (tulis sendiri: fungsi yang memberi URL API dari env Vite, dengan nilai cadangan)
 
 // ============================================
 // PART 3: VERCEL DEPLOYMENT SETUP
@@ -204,3 +174,4 @@ module.exports = {
 - [ ] Frontend vars menggunakan prefix `VITE_`
 - [ ] Secrets (JWT_SECRET, DATABASE_URL) TIDAK di-expose ke browser
 - [ ] Environment variables diset di dashboard Vercel/Railway
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

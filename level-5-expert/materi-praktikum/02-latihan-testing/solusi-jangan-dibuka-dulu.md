@@ -2224,3 +2224,358 @@ jobs:
           path: playwright-report/
           retention-days: 14
 ````
+
+---
+
+## 01-unit-testing — 1. Table-Driven Tests
+
+````js
+test.each`
+  originalPrice | discount | expected
+  ${100000}     | ${10}    | ${90000}
+  ${200000}     | ${25}    | ${150000}
+  ${500000}     | ${50}    | ${250000}
+  ${1000000}    | ${0}     | ${1000000}
+`('calculateDiscount($originalPrice, $discount) = $expected', 
+  ({ originalPrice, discount, expected }) => {
+    expect(calculateDiscount(originalPrice, discount)).toBe(expected);
+  }
+);
+````
+
+---
+
+## 02-react-testing — 3. Initial State Test
+
+````jsx
+it('shows "Add to Cart" by default', () => {
+  render(<AddToCartButton productId="123" />);
+  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+});
+````
+
+---
+
+## 02-react-testing — 4. Click Behavior Test
+
+````jsx
+it('changes to "Added!" after click', async () => {
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+
+  const button = screen.getByRole('button', { name: /add to cart/i });
+  await user.click(button);
+
+  expect(screen.getByRole('button', { name: /added/i })).toBeInTheDocument();
+});
+````
+
+---
+
+## 02-react-testing — 1. Testing Context Integration
+
+````jsx
+// Helper untuk render dengan context
+const renderWithContext = (ui, { cartState = {}, ...renderOptions } = {}) => {
+  const Wrapper = ({ children }) => (
+    <CartContext.Provider value={{ ...cartState }}>
+      {children}
+    </CartContext.Provider>
+  );
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
+};
+````
+
+---
+
+## 02-react-testing — 2. Test Cart Count Update
+
+````jsx
+it('increases cart count by 1 when added', async () => {
+  const user = userEvent.setup();
+  const onCartUpdate = jest.fn();
+
+  render(
+    <CartContext.Provider value={{ addToCart: onCartUpdate }}>
+      <AddToCartButton productId="123" />
+    </CartContext.Provider>
+  );
+
+  await user.click(screen.getByRole('button'));
+  expect(onCartUpdate).toHaveBeenCalledWith('123');
+});
+````
+
+---
+
+## 02-react-testing — 3. Toggle Behavior Test
+
+````jsx
+it('toggles back to default on second click', async () => {
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+
+  const button = screen.getByRole('button', { name: /add to cart/i });
+  await user.click(button);
+  await user.click(screen.getByRole('button', { name: /added/i }));
+
+  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+});
+````
+
+---
+
+## 02-react-testing — 1. Loading State
+
+````jsx
+it('shows loading text while adding', async () => {
+  // Setup: mock API call yang lambat
+  global.fetch = jest.fn(() =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve({ ok: true }), 3000)
+    )
+  );
+
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+
+  await user.click(screen.getByRole('button'));
+  expect(screen.getByRole('button', { name: /adding/i })).toBeDisabled();
+});
+````
+
+---
+
+## 02-react-testing — 2. Error State
+
+````jsx
+it('shows error and reverts on API failure', async () => {
+  global.fetch = jest.fn(() => Promise.reject(new Error('Network error')));
+
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+  render(<ErrorToast />); // Component yang menampilkan error
+
+  await user.click(screen.getByRole('button'));
+
+  expect(await screen.findByRole('alert')).toHaveTextContent(/error/i);
+  expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+});
+````
+
+---
+
+## 02-react-testing — 1. Semantics Check
+
+````jsx
+it('button has correct accessible name', () => {
+  render(<AddToCartButton productId="123" />);
+
+  const button = screen.getByRole('button');
+  expect(button).toHaveAccessibleName(/add to cart/i);
+});
+````
+
+---
+
+## 02-react-testing — 2. Focus Management
+
+````jsx
+it('can be focused with keyboard', async () => {
+  render(<AddToCartButton productId="123" />);
+
+  const button = screen.getByRole('button');
+  button.focus();
+  expect(button).toHaveFocus();
+});
+````
+
+---
+
+## 02-react-testing — 2. Focus Management
+
+````jsx
+it('toggles on Enter key press', async () => {
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+
+  const button = screen.getByRole('button');
+  await user.keyboard('{Enter}');
+
+  expect(screen.getByRole('button', { name: /added/i })).toBeInTheDocument();
+});
+````
+
+---
+
+## 02-react-testing — 3. Screen Reader Announcement
+
+````jsx
+it('announces state change to screen reader', async () => {
+  const user = userEvent.setup();
+  render(<AddToCartButton productId="123" />);
+
+  // Gunakan jest-axe untuk automated a11y check
+  const { container } = render(<AddToCartButton productId="123" />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+````
+
+---
+
+## 03-integration-testing — 4. Setup Server di Test
+
+````js
+// src/setupTests.js
+import { server } from './mocks/server';
+
+// Reset between tests
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+````
+
+---
+
+## 03-integration-testing — 5. Custom Response untuk Specific Tests
+
+````js
+// Contoh: Override handler untuk error scenario
+it('shows error when API fails', async () => {
+  server.use(
+    http.get('/api/products', () => HttpResponse.error())
+  );
+
+  renderWithProviders(<ProductListingPage />);
+  expect(await screen.findByRole('alert')).toHaveTextContent(/error/i);
+});
+````
+
+---
+
+## 03-integration-testing — 2. Cart Integration Test
+
+````jsx
+describe('Product Listing Page — Cart Integration', () => {
+  it('adds product to cart when Add to Cart is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <>
+        <Header />  {/* Contains cart badge */}
+        <ProductListingPage />
+      </>
+    );
+
+    const addButtons = await screen.findAllByRole('button', { name: /add to cart/i });
+    await user.click(addButtons[0]);
+
+    expect(screen.getByRole('status', { name: /cart count/i })).toHaveTextContent('1');
+  });
+
+  it('cart count persists after page navigation', async () => {
+    // Test bahwa cart state tidak reset saat komponen unmount/remount
+  });
+});
+````
+
+---
+
+## 03-integration-testing — 3. Filter Integration Test
+
+````jsx
+describe('Product Listing Page — Filtering', () => {
+  it('filters products by category when category is selected', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<ProductListingPage />);
+
+    // Wait for initial load
+    await screen.findByRole('list', { name: /products/i });
+
+    // Click category filter
+    const categoryFilter = screen.getByRole('combobox', { name: /category/i });
+    await user.selectOptions(categoryFilter, 'electronics');
+
+    // Verify URL changed (or filter state updated)
+    // Verify product list updated
+    expect(await screen.findByText(/electronics/i)).toBeInTheDocument();
+  });
+
+  it('shows empty state when no products match filter', async () => {
+    // Setup: mock returns empty array for selected filter
+    server.use(
+      http.get('/api/products', () => HttpResponse.json([], { status: 200 }))
+    );
+
+    renderWithProviders(<ProductListingPage />);
+
+    // Apply filter that returns no results
+    expect(await screen.findByText(/no products found/i)).toBeInTheDocument();
+    expect(screen.queryByRole('list', { name: /products/i })).not.toBeInTheDocument();
+  });
+
+  it('price range filter updates product list', async () => {
+    // TODO: Implementasikan
+  });
+});
+````
+
+---
+
+## 03-integration-testing — 2. Loading States
+
+````jsx
+describe('Product Listing Page — Loading States', () => {
+  it('skeleton is shown during initial load', () => {
+    renderWithProviders(<ProductListingPage />);
+    expect(screen.getByTestId('product-skeleton')).toBeInTheDocument();
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  });
+
+  it('pagination does not cause full page reload', async () => {
+    // Verify: no progress bar during pagination
+  });
+});
+````
+
+---
+
+## 03-integration-testing — 1. Race Condition Handling
+
+````jsx
+it('handles rapid filter changes correctly', async () => {
+  const user = userEvent.setup();
+  renderWithProviders(<ProductListingPage />);
+
+  // User clicks filter 1 → 2 → 3 rapidly
+  const categoryFilter = screen.getByRole('combobox', { name: /category/i });
+
+  await user.selectOptions(categoryFilter, 'cat1');
+  await user.selectOptions(categoryFilter, 'cat2');
+  await user.selectOptions(categoryFilter, 'cat3');
+
+  // Wait for final result
+  await waitFor(() => {
+    expect(screen.queryByText(/cat1/)).not.toBeInTheDocument();
+  });
+
+  // Verify final result is for cat3, not cat1 or cat2
+  expect(await screen.findByText(/category: cat3/i)).toBeInTheDocument();
+});
+````
+
+---
+
+## 03-integration-testing — 2. Suspense Boundary Testing
+
+````jsx
+it('shows Suspense fallback during lazy loading', () => {
+  render(
+    <Suspense fallback={<LoadingSpinner />}>
+      <LazyProductDetail productId="123" />
+    </Suspense>
+  );
+
+  expect(screen.getByRole('progressbar')).toBeInTheDocument();
+});
+````

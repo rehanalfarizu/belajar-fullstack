@@ -820,3 +820,277 @@ server {
     }
 }
 ````
+
+---
+
+## 01-dockerfile-basics — 1. Non-root User
+
+````dockerfile
+# Tambahkan user non-root
+RUN addgroup -g 1001 -S nodejs && adduser -S nodeapp -u 1001
+
+# Gunakan user tersebut
+USER nodeapp
+````
+
+---
+
+## 01-dockerfile-basics — 2. Health Check
+
+````dockerfile
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
+````
+
+---
+
+## 01-dockerfile-basics — 1. Dependency Layer Optimization
+
+````dockerfile
+# Layer 1: Copy package files FIRST
+COPY package*.json ./
+
+# Layer 2: Install dependencies (cached if package.json unchanged)
+RUN npm ci --only=production
+
+# Layer 3: Copy source code (changed frequently)
+COPY . .
+
+# Layer 4: Non-root setup
+RUN adduser ...
+````
+
+---
+
+## 01-dockerfile-basics — 1. Setup Multi-Stage Dockerfile
+
+````dockerfile
+# Stage 1: Build
+FROM node:24-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build  # atau transpile TypeScript
+
+# Stage 2: Production
+FROM node:24-alpine AS production
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY --from=builder /app/dist ./dist
+USER nodeapp
+CMD ["node", "dist/server.js"]
+````
+
+---
+
+## 02-multi-stage-build — 2. Production Stage
+
+````dockerfile
+# Production stage
+FROM nginx:alpine AS production
+
+# Copy built assets from builder stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+````
+
+---
+
+## 02-multi-stage-build — 1. Security Headers
+
+````nginx
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+````
+
+---
+
+## 02-multi-stage-build — 2. Rate Limiting
+
+````nginx
+limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+limit_req zone=api burst=20;
+````
+
+---
+
+## 02-multi-stage-build — 3. Content Security Policy (CSP)
+
+````nginx
+add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.example.com;" always;
+````
+
+---
+
+## 04-docker-compose — 1. Health Checks
+
+````yaml
+postgres:
+  image: postgres:15-alpine
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+    interval: 5s
+    timeout: 5s
+    retries: 5
+    start_period: 10s
+````
+
+---
+
+## 04-docker-compose — 3. Backend Health Check
+
+````yaml
+backend:
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+    interval: 10s
+    timeout: 5s
+    retries: 3
+    start_period: 15s
+````
+
+---
+
+## 04-docker-compose — 2. Override File
+
+````yaml
+# docker-compose.override.yml (auto-loaded)
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+    volumes:
+      - ./frontend/src:/app/src  # Hot reload
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Watch mode untuk volume mount
+
+  backend:
+    volumes:
+      - ./backend/src:/app/src  # Hot reload
+    environment:
+      - NODE_ENV=development
+      - DEBUG=*
+````
+
+---
+
+## 04-docker-compose — 3. Profile untuk Development Tools
+
+````yaml
+services:
+  adminer:
+    image: adminer:4
+    profiles: [dev]
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  mailhog:
+    image: mailhog/mailhog
+    profiles: [dev]
+    ports:
+      - 8025:8025  # Web UI
+      - 1025:1025  # SMTP server
+````
+
+---
+
+## 04-docker-compose — 4. Production Build
+
+````yaml
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+    restart: unless-stopped
+ depends_on:
+      - backend
+
+ backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+````
+
+---
+
+## 04-docker-compose — 1. Restart Policies
+
+````yaml
+services:
+  frontend:
+    restart: unless-stopped
+  backend:
+    restart: unless-stopped
+  postgres:
+    restart: unless-stopped
+````
+
+---
+
+## 04-docker-compose — 2. Resource Limits
+
+````yaml
+services:
+  postgres:
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+````
+
+---
+
+## 04-docker-compose — 3. Logging Configuration
+
+````yaml
+services:
+  backend:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+````
+
+---
+
+## 04-docker-compose — 4. Security Hardening
+
+````yaml
+services:
+  postgres:
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /run
+
+  backend:
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+````

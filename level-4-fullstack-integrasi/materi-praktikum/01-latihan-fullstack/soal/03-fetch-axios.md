@@ -99,28 +99,8 @@ Di file yang sama, bagian **Axios section** perlu dilengkapi:
 
 ## Common Pitfalls (Perhatikan!)
 
-```javascript
-// ❌ SALAH: fetch tidak secara otomatis JSON-encode body
-fetch('/api/posts', {
-  body: { title: 'Hello' }  // Ini akan gagal!
-});
-
-// ✅ BENAR: stringify body
-fetch('/api/posts', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ title: 'Hello' })
-});
-
-// ❌ SALAH: tidak handle error response
-const data = await fetch('/api/posts');
-console.log(data); // tetap readable meskipun status 500
-
-// ✅ BENAR: check ok property
-const res = await fetch('/api/posts');
-if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-const data = await res.json();
-```
+> **Tulis sendiri dulu.** Kenapa `body` berupa objek gagal di `fetch`? Apa yang harus kamu lakukan pada body dan header? Lalu, kenapa `fetch` tetap "sukses" pada status 500 dan bagaimana kamu mendeteksinya (cari properti `ok`)?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-fetch-axios — Common Pitfalls (Perhatikan!)*.
 
 ---
 

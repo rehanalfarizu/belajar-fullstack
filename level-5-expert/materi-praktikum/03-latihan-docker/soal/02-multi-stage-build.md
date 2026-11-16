@@ -102,20 +102,8 @@ Konfigurasi harus:
 
 **2. Production Stage**
 
-```dockerfile
-# Production stage
-FROM nginx:alpine AS production
-
-# Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-```
+> **Tulis sendiri dulu.** Stage produksi untuk SPA: image dasar apa yang kecil, dari stage mana file hasil build diambil, dan ke folder mana nginx membacanya?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-multi-stage-build — 2. Production Stage*.
 
 ### Bagian C — Image Size Analysis (15 menit)
 
@@ -184,27 +172,20 @@ Pertanyaan:
 
 Tambahkan security headers di nginx.conf:
 
-```nginx
-add_header X-Frame-Options "SAMEORIGIN" always;
-add_header X-Content-Type-Options "nosniff" always;
-add_header X-XSS-Protection "1; mode=block" always;
-add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-```
+> **Tulis sendiri dulu.** Header keamanan apa saja yang layak ditambahkan di nginx? Cari nama headernya dan artinya satu per satu.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-multi-stage-build — 1. Security Headers*.
 
 **2. Rate Limiting**
 
-```nginx
-limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
-limit_req zone=api burst=20;
-```
+> **Tulis sendiri dulu.** Bagaimana membatasi laju request per IP di nginx? Cari `limit_req_zone`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-multi-stage-build — 2. Rate Limiting*.
 
 **3. Content Security Policy (CSP)**
 
 Untuk React app, CSP harus allow inline styles dan scripts (karena React build menghasilkan inline styles):
 
-```nginx
-add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.example.com;" always;
-```
+> **Tulis sendiri dulu.** Rancang Content-Security-Policy yang cukup ketat untuk SPA-mu. Sumber apa saja yang memang dibutuhkan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-multi-stage-build — 3. Content Security Policy (CSP)*.
 
 **4. Scan for Vulnerabilities**
 

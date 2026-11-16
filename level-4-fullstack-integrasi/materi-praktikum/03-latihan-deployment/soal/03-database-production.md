@@ -65,11 +65,7 @@ const config = {
 const env = process.env.NODE_ENV || 'development';
 
 // TODO 4: Create pool (PostgreSQL)
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: env === 'production' ? { rejectUnauthorized: false } : false,
-});
+// (tulis sendiri: buat pool dari DATABASE_URL; SSL hanya aktif di production)
 
 // TODO 5: Test connection
 async function testConnection() {
@@ -173,3 +169,4 @@ NODE_ENV=production
 - [ ] Connection SSL dikonfigurasi untuk production
 - [ ] Health check endpoint menguji koneksi database
 - [ ] Migration/seed functions tersedia
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

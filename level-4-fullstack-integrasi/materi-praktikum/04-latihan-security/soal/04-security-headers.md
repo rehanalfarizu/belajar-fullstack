@@ -89,13 +89,7 @@ const rateLimit = require('express-rate-limit');
 // - Message: "Terlalu banyak request, coba lagi nanti"
 // - Skip successful responses (optional: only count errors)
 
-// const globalLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-//   message: { error: 'Terlalu banyak request' },
-//   standardHeaders: true, // Return rate limit info in headers
-//   legacyHeaders: false,
-// });
+// (tulis sendiri: rateLimit global sesuai ketentuan di atas, termasuk header standar)
 
 // TODO 4: Auth-specific rate limiter ( lebih strict )
 // - Window: 15 minutes
@@ -103,11 +97,7 @@ const rateLimit = require('express-rate-limit');
 // - Key: based on IP + user agent
 // - Message: "Terlalu banyak percobaan login. Coba lagi dalam 15 menit."
 
-// const authLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 5,
-//   skipSuccessfulRequests: true, // Jangan hitung jika login berhasil
-// });
+// (tulis sendiri: rateLimit untuk login. Sesuaikan jendela waktu, batas, dan apakah login sukses ikut dihitung)
 
 // TODO 5: API-specific rate limiter
 // - Window: 1 minute
@@ -115,9 +105,7 @@ const rateLimit = require('express-rate-limit');
 // - Untuk: /api/posts, /api/users (heavy endpoints)
 
 // TODO 6: Apply rate limiters
-// app.use(globalLimiter);
-// app.use('/api/auth', authLimiter);
-// app.use('/api', apiLimiter);
+// (tulis sendiri: pasang tiap limiter pada cakupan yang tepat — global, /api/auth, /api)
 
 // ============================================
 // PART 3: SECURITY MONITORING
@@ -219,3 +207,4 @@ Final middleware order:
 - [ ] Security event logging diimplementasikan
 - [ ] Response headers di-test dan diverifikasi
 - [ ] Memahami perbedaan antara security headers dan rate limiting
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

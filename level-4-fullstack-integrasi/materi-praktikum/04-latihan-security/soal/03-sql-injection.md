@@ -72,21 +72,12 @@ Lihat file `code/03-sql-injection.js`. Lengkapi:
 // PART 1: PARAMETERIZED QUERIES (Vanilla SQL)
 // ============================================
 
-// TODO 1: Parameterized SELECT
-// Sebelum: `SELECT * FROM users WHERE email = '${email}'`
-// Sesudah: `SELECT * FROM users WHERE email = $1`
-// Dengan: pool.query(query, [email])
-
-// TODO 2: Parameterized INSERT
-// INSERT INTO users (name, email) VALUES ($1, $2)
-// Params: [name, email]
-
-// TODO 3: Parameterized UPDATE
-// UPDATE users SET bio = $1 WHERE id = $2
-// Params: [bio, id]
-
-// TODO 4: Parameterized DELETE
-// DELETE FROM posts WHERE id = $1
+// TODO 1: SELECT user berdasarkan email, tanpa interpolasi string
+// TODO 2: INSERT user (name, email)
+// TODO 3: UPDATE bio user berdasarkan id
+// TODO 4: DELETE post berdasarkan id
+// Petunjuk: baca dokumentasi `pg` tentang query dengan array nilai (values).
+// Pertanyaan: apa bedanya teks query dan nilainya saat sampai di database?
 
 // TODO 5: LIKE clause (dengan escaping)
 // - Gunakan parameterized query
@@ -99,10 +90,7 @@ Lihat file `code/03-sql-injection.js`. Lengkapi:
 // TODO 6: ORDER BY clause (dengan allowlist)
 // - ORDER BY harus di-allowlist, BUKAN dari user input langsung
 // function safeOrderBy(allowedColumns, userInput) {
-//   if (allowedColumns.includes(userInput)) {
-//     return userInput;
-//   }
-//   return 'id'; // default
+//   // (tulis sendiri: kembalikan kolom hanya jika ada di daftar yang diizinkan, kalau tidak pakai default)
 // }
 
 // ============================================
@@ -111,26 +99,12 @@ Lihat file `code/03-sql-injection.js`. Lengkapi:
 
 // TODO 7: Prisma example
 /*
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-
-// Safe by default — Prisma uses parameterized queries internally
-const users = await prisma.user.findMany({
-  where: { email: userInput }
-});
-
-// vs raw query (tetap harus parameterized):
-const users = await prisma.$queryRaw`SELECT * FROM users WHERE email = ${userInput}`;
-// CATATAN: tagged template ini baru di Prisma 4+
+(tulis sendiri: ambil user berdasarkan email dengan Prisma, lalu bandingkan dengan versi raw query-nya)
 */
 
 // TODO 8: Sequelize example
 /*
-const { User } = require('./models');
-
-const users = await User.findAll({
-  where: { email: userInput } // Sequelize auto-parameterizes
-});
+(tulis sendiri: query findAll dengan filter email memakai Sequelize)
 */
 
 // ============================================
@@ -160,8 +134,7 @@ const users = await User.findAll({
 // - DO NOT return: SQL syntax, stack trace, table names
 
 // function handleDatabaseError(err, res) {
-//   console.error('[DB ERROR]', err.message);
-//   res.status(500).json({ error: 'Terjadi kesalahan sistem' });
+//   // (tulis sendiri: catat detail error di server, balas klien dengan pesan generik)
 // }
 
 // ============================================
@@ -210,3 +183,4 @@ CHECKLIST SQL Injection Prevention:
 - [ ] Numeric IDs di-convert dengan type coercion + validation
 - [ ] Error messages TIDAK expose SQL details
 - [ ] Memahami bahwa ORM tidak automatically safe di semua case
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

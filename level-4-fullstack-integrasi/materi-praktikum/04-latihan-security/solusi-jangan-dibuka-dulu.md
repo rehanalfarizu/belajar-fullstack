@@ -742,3 +742,182 @@ module.exports = {
   securityChecklist,
 };
 ````
+
+---
+
+## 01-owasp-top-10 — TODO 4-5 — helper validate dan middleware validateBody
+
+````js
+/*
+// Validation function helper
+function validate(schema, data) {
+  try {
+    return { success: true, data: schema.parse(data) };
+  } catch (error) {
+    return { success: false, errors: error.errors };
+  }
+}
+*/
+
+// TODO 4: Create Express middleware untuk validasi
+// function validateBody(schema) {
+//   return (req, res, next) => {
+//     const result = validate(schema, req.body);
+//     if (!result.success) {
+//       return res.status(400).json({ errors: result.errors });
+//     }
+//     req.validatedBody = result.data;
+//     next();
+//   };
+// }
+
+// TODO 5: Apply ke endpoint
+// app.post('/api/auth/register',
+//   validateBody(userSchema),
+//   async (req, res) => { ... }
+// );
+````
+
+---
+
+## 02-xss-csrf — TODO 3 — header CSP
+
+````js
+// function setSecurityHeaders(app) {
+//   app.use((req, res, next) => {
+//     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; object-src 'none'");
+//     // ...
+//   });
+// }
+````
+
+---
+
+## 02-xss-csrf — SameSite cookie — setAuthCookie
+
+````js
+// function setAuthCookie(res, token) {
+//   res.cookie('session_token', token, {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === 'production',
+//     sameSite: 'strict', // atau 'lax'
+//     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+//   });
+// }
+````
+
+---
+
+## 03-sql-injection — TODO 1-4 — query berparameter
+
+````js
+// TODO 1: Parameterized SELECT
+// Sebelum: `SELECT * FROM users WHERE email = '${email}'`
+// Sesudah: `SELECT * FROM users WHERE email = $1`
+// Dengan: pool.query(query, [email])
+
+// TODO 2: Parameterized INSERT
+// INSERT INTO users (name, email) VALUES ($1, $2)
+// Params: [name, email]
+
+// TODO 3: Parameterized UPDATE
+// UPDATE users SET bio = $1 WHERE id = $2
+// Params: [bio, id]
+
+// TODO 4: Parameterized DELETE
+// DELETE FROM posts WHERE id = $1
+````
+
+---
+
+## 03-sql-injection — TODO 6 — safeOrderBy
+
+````js
+// function safeOrderBy(allowedColumns, userInput) {
+//   if (allowedColumns.includes(userInput)) {
+//     return userInput;
+//   }
+//   return 'id'; // default
+// }
+````
+
+---
+
+## 03-sql-injection — TODO 7 — contoh Prisma
+
+````js
+/*
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+// Safe by default — Prisma uses parameterized queries internally
+const users = await prisma.user.findMany({
+  where: { email: userInput }
+});
+
+// vs raw query (tetap harus parameterized):
+const users = await prisma.$queryRaw`SELECT * FROM users WHERE email = ${userInput}`;
+// CATATAN: tagged template ini baru di Prisma 4+
+*/
+````
+
+---
+
+## 03-sql-injection — TODO 8 — contoh Sequelize
+
+````js
+/*
+const { User } = require('./models');
+
+const users = await User.findAll({
+  where: { email: userInput } // Sequelize auto-parameterizes
+});
+*/
+````
+
+---
+
+## 03-sql-injection — TODO 11 — handleDatabaseError
+
+````js
+// function handleDatabaseError(err, res) {
+//   console.error('[DB ERROR]', err.message);
+//   res.status(500).json({ error: 'Terjadi kesalahan sistem' });
+// }
+````
+
+---
+
+## 04-security-headers — TODO 3 — globalLimiter
+
+````js
+// const globalLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+//   message: { error: 'Terlalu banyak request' },
+//   standardHeaders: true, // Return rate limit info in headers
+//   legacyHeaders: false,
+// });
+````
+
+---
+
+## 04-security-headers — TODO 4 — authLimiter
+
+````js
+// const authLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 5,
+//   skipSuccessfulRequests: true, // Jangan hitung jika login berhasil
+// });
+````
+
+---
+
+## 04-security-headers — TODO 6 — pasang rate limiter
+
+````js
+// app.use(globalLimiter);
+// app.use('/api/auth', authLimiter);
+// app.use('/api', apiLimiter);
+````

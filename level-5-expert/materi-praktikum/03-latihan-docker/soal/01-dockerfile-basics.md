@@ -97,13 +97,8 @@ Setelah mencoba Dockerfile dasar, analisis:
 
 Docker container berjalan sebagai root secara default — ini adalah security risk.
 
-```dockerfile
-# Tambahkan user non-root
-RUN addgroup -g 1001 -S nodejs && adduser -S nodeapp -u 1001
-
-# Gunakan user tersebut
-USER nodeapp
-```
+> **Tulis sendiri dulu.** Kenapa container sebaiknya tidak jalan sebagai root? Instruksi apa yang membuat user baru dan beralih ke user itu (image Alpine)?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-dockerfile-basics — 1. Non-root User*.
 
 Tugas: Modifikasi Dockerfile untuk:
 - Buat user `nodeapp` dengan UID 1001
@@ -114,10 +109,8 @@ Tugas: Modifikasi Dockerfile untuk:
 
 Tambahkan HEALTHCHECK instruction:
 
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:5000/health || exit 1
-```
+> **Tulis sendiri dulu.** Instruksi Dockerfile apa yang membuat Docker memeriksa kesehatan container secara berkala? Endpoint mana yang dipakai?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-dockerfile-basics — 2. Health Check*.
 
 Verifikasi:
 ```bash
@@ -146,19 +139,8 @@ Docker cache layer berdasarkan instruksi yang persis sama. Jika `package.json` t
 
 Desain Dockerfile yang optimal:
 
-```dockerfile
-# Layer 1: Copy package files FIRST
-COPY package*.json ./
-
-# Layer 2: Install dependencies (cached if package.json unchanged)
-RUN npm ci --only=production
-
-# Layer 3: Copy source code (changed frequently)
-COPY . .
-
-# Layer 4: Non-root setup
-RUN adduser ...
-```
+> **Tulis sendiri dulu.** Urutan `COPY` dan `RUN` mana yang membuat cache layer tahan lama? Mana yang berubah paling sering?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-dockerfile-basics — 1. Dependency Layer Optimization*.
 
 Pertanyaan:
 - Mengapa `COPY package*.json` dipisah dari `COPY . .`?
@@ -191,24 +173,8 @@ Dokumentasikan hasil timing untuk setiap scenario.
 
 Untuk Node.js apps, multi-stage build memisahkan build stage dari production stage:
 
-```dockerfile
-# Stage 1: Build
-FROM node:24-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build  # atau transpile TypeScript
-
-# Stage 2: Production
-FROM node:24-alpine AS production
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY --from=builder /app/dist ./dist
-USER nodeapp
-CMD ["node", "dist/server.js"]
-```
+> **Tulis sendiri dulu.** Pisahkan tahap build dan tahap produksi. Apa yang perlu disalin antar-stage, dan apa yang sebaiknya tidak ikut ke image akhir?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-dockerfile-basics — 1. Setup Multi-Stage Dockerfile*.
 
 Tugas: Modifikasi `code/02-Dockerfile` untuk multi-stage build.
 

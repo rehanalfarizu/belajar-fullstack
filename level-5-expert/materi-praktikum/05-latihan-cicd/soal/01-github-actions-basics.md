@@ -32,43 +32,8 @@ Tim development membutuhkan CI pipeline otomatis untuk:
 
 ### Workflow Structure
 
-```yaml
-name: CI Pipeline # Workflow name
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-env: # Global environment variables
-  NODE_VERSION: '24'
-
-jobs:
-  build:
-    runs-on: ubuntu-latest                 # Runner (VM)
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run lint
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build
-        run: npm run build
-```
+> **Tulis sendiri dulu.** Rancang workflow CI dari nol: kapan jalan (trigger), jalan di mana (runner), dan langkah apa berurutan (checkout, setup, install, lint, test, build)?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — Workflow Structure*.
 
 ### Key Concepts
 
@@ -101,14 +66,8 @@ Buat file `.github/workflows/ci.yml`:
 
 Konfigurasi trigger yang tepat:
 
-```yaml
-on:
-  push:
-    branches: [main, develop, 'feature/**']
- pull_request:
-    branches: [main, develop]
-  workflow_dispatch: # Manual trigger
-```
+> **Tulis sendiri dulu.** Selain push dan PR, trigger apa yang memungkinkan workflow dijalankan manual?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 2. Trigger Conditions*.
 
 Pertanyaan:
 - Apa perbedaan `push` dan `pull_request` trigger?
@@ -137,66 +96,30 @@ git push origin your-branch
 
 **1. Test Against Multiple Node Versions**
 
-```yaml
-jobs:
-  test:
-    strategy:
-      matrix:
-        node-version: [22, 24]
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: ${{ matrix.node-version }}
-```
+> **Tulis sendiri dulu.** Bagaimana menjalankan job yang sama di beberapa versi Node dan beberapa OS? Cari `strategy.matrix`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 1. Test Against Multiple Node Versions*.
 
 **2. Fast Fail**
 
-```yaml
-jobs:
-  test:
-    strategy:
-      matrix:
-        node-version: [22, 24]
-      fail-fast: true  # Stop all jobs if one fails
-```
+> **Tulis sendiri dulu.** Kalau satu job di matrix gagal, apa pilihan untuk job lainnya? Cari `fail-fast`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 2. Fast Fail*.
 
 **3. Limit Concurrency**
 
-```yaml
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-```
+> **Tulis sendiri dulu.** Bagaimana membatalkan run lama saat ada push baru ke branch yang sama? Cari `concurrency`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 3. Limit Concurrency*.
 
 ### Bagian C — Caching (15 menit)
 
 **1. npm Cache**
 
-```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v7
-  with:
-    node-version: '24'
-    cache: 'npm'
-```
+> **Tulis sendiri dulu.** Bagaimana mempercepat install dependency lewat cache bawaan setup-node?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 1. npm Cache*.
 
 **2. Build Cache (Vite/Webpack)**
 
-```yaml
-- name: Cache build artifacts
-  uses: actions/cache@v6
-  with:
-    path: |
-      node_modules
-      .vite
- dist
-    key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-    restore-keys: |
-      ${{ runner.os }}-build-
-```
+> **Tulis sendiri dulu.** Cache manual untuk artefak build: apa yang dijadikan `key` dan apa fungsinya `restore-keys`?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 2. Build Cache (Vite/Webpack)*.
 
 **3. Compare Build Times**
 
@@ -212,108 +135,56 @@ Dokumentasikan sebelum/setelah caching:
 
 **1. Run Tests with Coverage**
 
-```yaml
-- name: Run tests with coverage
-  run: npm test -- --coverage --ci
-  env:
-    CI: true
-```
+> **Tulis sendiri dulu.** Bagaimana menjalankan test dengan coverage dalam mode CI?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 1. Run Tests with Coverage*.
 
 **2. Upload Coverage Report**
 
-```yaml
-- name: Upload coverage to Codecov
-  uses: codecov/codecov-action@v4
-  with:
-    token: ${{ secrets.CODECOV_TOKEN }}
-    files: ./coverage/lcov.info
-    flags: unittests
-```
+> **Tulis sendiri dulu.** Bagaimana mengunggah laporan coverage ke layanan eksternal tanpa menaruh token di kode?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 2. Upload Coverage Report*.
 
 **3. Artifact for Test Results**
 
-```yaml
-- name: Upload test results
-  uses: actions/upload-artifact@v7
-  if: always()  # Upload even if tests fail
-  with:
-    name: test-results-${{ matrix.node-version }}
-    path: |
-      test-results/
-      coverage/
-    retention-days: 7
-```
+> **Tulis sendiri dulu.** Kenapa hasil test tetap perlu diunggah walau test gagal? Cari kondisi `if: always()`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 3. Artifact for Test Results*.
 
 **4. Generate JUnit XML**
 
 Konfigurasi Jest untuk output JUnit XML:
 
-```yaml
-# jest.config.js
-module.exports = {
-  reporters: [
-    'default',
-    ['jest-junit', { outputDirectory: 'test-results' }]
-  ]
-};
-```
+> **Tulis sendiri dulu.** Reporter apa yang menghasilkan file hasil test yang bisa dibaca mesin?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 4. Generate JUnit XML*.
 
 ### Bagian E — Security & Quality Gates (20 menit)
 
 **1. Linting**
 
-```yaml
-- name: Run ESLint
-  run: npm run lint
-```
+> **Tulis sendiri dulu.** Bagaimana menjalankan lint sebagai langkah CI?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 1. Linting*.
 
 **2. Secret Scanning**
 
 GitHub sudah otomatis scan secrets, tapi tambahkan pre-commit check:
 
-```yaml
-- name: Check for secrets in code
-  run: |
-    if grep -r "api_key\|password\|secret" --include="*.js" --include="*.jsx" .; then
-      echo "Found potential secrets in code!"
-      exit 1
-    fi
-```
+> **Tulis sendiri dulu.** Pengecekan sederhana agar secret tidak ikut ter-commit. Apa kelemahan pendekatan `grep` ini?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 2. Secret Scanning*.
 
 **3. Dependency Audit**
 
-```yaml
-- name: Audit dependencies
-  run: npm audit --audit-level=high
-```
+> **Tulis sendiri dulu.** Bagaimana memeriksa kerentanan dependency dari CI, dan level apa yang menggagalkan build?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 3. Dependency Audit*.
 
 **4. Build Verification**
 
-```yaml
-- name: Build
-  run: npm run build
-
-- name: Upload build artifacts
-  uses: actions/upload-artifact@v7
-  with:
-    name: dist-${{ github.sha }}
-    path: dist/
-    retention-days: 14
-```
+> **Tulis sendiri dulu.** Bagaimana menyimpan hasil build sebagai artefak, dengan nama unik per commit?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 4. Build Verification*.
 
 **5. Quality Gate Summary**
 
 Buat markdown report:
 
-```yaml
-- name: Generate PR summary
-  if: always()
-  run: |
-    echo "## CI Results" >> $GITHUB_STEP_SUMMARY
-    echo "- Tests: ${{ steps.test.outcome }}" >> $GITHUB_STEP_SUMMARY
-    echo "- Lint: ${{ steps.lint.outcome }}" >> $GITHUB_STEP_SUMMARY
-    echo "- Build: ${{ steps.build.outcome }}" >> $GITHUB_STEP_SUMMARY
-```
+> **Tulis sendiri dulu.** Bagaimana menampilkan ringkasan hasil CI di halaman run? Cari `GITHUB_STEP_SUMMARY`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *01-github-actions-basics — 5. Quality Gate Summary*.
 
 ---
 

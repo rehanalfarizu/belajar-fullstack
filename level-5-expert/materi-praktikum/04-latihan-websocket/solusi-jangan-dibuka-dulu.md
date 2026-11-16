@@ -1520,3 +1520,708 @@ socket.on("join_room", ({ roomId, username }) => {
   });
 });
 ````
+
+---
+
+## 01-websocket-dasar — 1. Broadcast Function
+
+````js
+function broadcast(message) {
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+}
+````
+
+---
+
+## 01-websocket-dasar — 2. Simulated Stock Data
+
+````js
+const stocks = [
+  { symbol: 'AAPL', name: 'Apple Inc.', basePrice: 175 },
+  { symbol: 'GOOGL', name: 'Alphabet Inc.', basePrice: 140 },
+  { symbol: 'MSFT', name: 'Microsoft Corp.', basePrice: 380 },
+  { symbol: 'AMZN', name: 'Amazon.com Inc.', basePrice: 175 },
+  { symbol: 'TSLA', name: 'Tesla Inc.', basePrice: 250 },
+];
+
+function generateStockUpdate() {
+  return stocks.map((stock) => ({
+    symbol: stock.symbol,
+    name: stock.name,
+    price: stock.basePrice + (Math.random() - 0.5) * 10,
+    change: (Math.random() - 0.5) * 5,
+    timestamp: Date.now(),
+  }));
+}
+````
+
+---
+
+## 01-websocket-dasar — 3. Periodic Broadcast
+
+````js
+// Broadcast setiap1 detik
+setInterval(() => {
+  const data = JSON.stringify({
+    type: 'stock_update',
+    data: generateStockUpdate(),
+  });
+  broadcast(data);
+}, 1000);
+````
+
+---
+
+## 01-websocket-dasar — 1. Track Connected Clients
+
+````js
+wss.on('connection', (ws, req) => {
+  const clientId = generateClientId();
+  const clientIp = req.socket.remoteAddress;
+
+  console.log(`Client connected: ${clientId} from ${clientIp}`);
+
+  // Add metadata to WebSocket
+  ws.clientId = clientId;
+  ws.isAlive = true;
+
+  // Send welcome message
+  ws.send(JSON.stringify({
+    type: 'welcome',
+    clientId,
+    message: 'Connected to stock ticker',
+  }));
+});
+````
+
+---
+
+## 01-websocket-dasar — 2. Client Registry
+
+````js
+const clients = new Map(); // clientId → { ws, ip, connectedAt }
+
+wss.on('connection', (ws, req) => {
+  const clientId = generateClientId();
+  clients.set(clientId, { ws, ip: req.socket.remoteAddress, connectedAt: new Date() });
+
+  ws.on('close', () => {
+    clients.delete(clientId);
+    console.log(`Client disconnected: ${clientId}`);
+  });
+});
+````
+
+---
+
+## 01-websocket-dasar — 3. Client Count Endpoint
+
+````js
+app.get('/api/stats', (req, res) => {
+  res.json({
+    connectedClients: wss.clients.size,
+    uptime: process.uptime(),
+    memoryUsage: process.memoryUsage(),
+  });
+});
+````
+
+---
+
+## 01-websocket-dasar — 1. Implementasi Heartbeat
+
+````js
+// Ping semua client setiap 30 detik
+const HEARTBEAT_INTERVAL = 30000;
+
+setInterval(() => {
+  wss.clients.forEach((ws) => {
+    if (ws.isAlive === false) {
+      console.log(`Terminating inactive client: ${ws.clientId}`);
+      return ws.terminate();
+    }
+
+    ws.isAlive = false;
+    ws.ping();
+  });
+}, HEARTBEAT_INTERVAL);
+````
+
+---
+
+## 01-websocket-dasar — 2. Handle Pong Response
+
+````js
+ws.on('pong', () => {
+  ws.isAlive = true;
+});
+````
+
+---
+
+## 01-websocket-dasar — 3. Detect Disconnect
+
+````js
+ws.on('close', (code, reason) => {
+  console.log(`Client ${ws.clientId} disconnected: ${code} - ${reason}`);
+  clients.delete(ws.clientId);
+});
+````
+
+---
+
+## 01-websocket-dasar — 1. Error Handling
+
+````js
+ws.on('error', (error) => {
+  console.error(`Error for client ${ws.clientId}:`, error.message);
+});
+````
+
+---
+
+## 01-websocket-dasar — 2. Invalid Message Handling
+
+````js
+ws.on('message', (data, isBinary) => {
+  try {
+    const message = isBinary ? data : JSON.parse(data.toString());
+    handleMessage(ws, message);
+  } catch (error) {
+    ws.send(JSON.stringify({
+      type: 'error',
+      message: 'Invalid message format',
+    }));
+  }
+});
+````
+
+---
+
+## 01-websocket-dasar — 4. Graceful Shutdown
+
+````js
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, closing server...');
+
+  wss.clients.forEach((ws) => {
+    ws.send(JSON.stringify({ type: 'server_shutdown' }));
+    ws.close(1001, 'Server shutting down');
+  });
+
+  wss.close(() => {
+    console.log('WebSocket server closed');
+    process.exit(0);
+  });
+});
+````
+
+---
+
+## 02-socketio-chatapp — 2. Leave Room
+
+````js
+socket.on("leave_room", ({ roomId }) => {
+  socket.leave(roomId);
+  socket.to(roomId).emit("user_left", {
+    username: socket.data.username,
+    socketId: socket.id,
+  });
+});
+````
+
+---
+
+## 02-socketio-chatapp — 3. Get Room Users
+
+````js
+function getRoomUsers(roomId) {
+  const sockets = await io.in(roomId).fetchSockets();
+  return sockets.map((s) => ({
+    socketId: s.id,
+    username: s.data.username,
+  }));
+}
+````
+
+---
+
+## 02-socketio-chatapp — 4. Room List Endpoint
+
+````js
+app.get("/api/rooms", async (req, res) => {
+  const rooms = [];
+  for (const [roomId, set] of io.of("/").adapter.rooms) {
+    if (roomId !== "" && typeof roomId === "string") {
+      rooms.push({
+        id: roomId,
+        userCount: set.size,
+      });
+    }
+  }
+  res.json(rooms);
+});
+````
+
+---
+
+## 02-socketio-chatapp — 1. Chat Message
+
+````js
+socket.on("chat_message", ({ roomId, content }) => {
+  const message = {
+    id: generateMessageId(),
+    roomId,
+    username: socket.data.username,
+    content,
+    timestamp: Date.now(),
+  };
+
+  // Save to message history (in-memory for now)
+  saveMessage(roomId, message);
+
+  // Broadcast to room (including sender)
+  io.to(roomId).emit("room_message", message);
+});
+````
+
+---
+
+## 02-socketio-chatapp — 2. Message History with Pagination
+
+````js
+const messageHistory = new Map();  // roomId → [messages]
+
+function getMessages(roomId, page = 1, limit = 50) {
+  const messages = messageHistory.get(roomId) || [];
+  const start = (page - 1) * limit;
+  return messages.slice(start, start + limit);
+}
+
+socket.on("get_history", ({ roomId, page = 1 }, callback) => {
+  const messages = getMessages(roomId, page);
+  const total = (messageHistory.get(roomId) || []).length;
+
+  callback({
+    messages,
+    page,
+    total,
+    hasMore: total > page * 50,
+  });
+});
+````
+
+---
+
+## 02-socketio-chatapp — 3. Typing Indicators
+
+````js
+// Timeout untuk stop typing
+const typingTimers = new Map();
+
+socket.on("typing", ({ roomId }) => {
+  socket.to(roomId).emit("typing", {
+    username: socket.data.username,
+  });
+
+  // Auto-clear typing after 3 seconds
+  clearTimeout(typingTimers.get(socket.id));
+  typingTimers.set(
+    socket.id,
+    setTimeout(() => {
+      socket.to(roomId).emit("stop_typing", {
+        username: socket.data.username,
+      });
+    }, 3000)
+  );
+});
+````
+
+---
+
+## 02-socketio-chatapp — 1. Send Private Message
+
+````js
+socket.on("private_message", ({ toSocketId, content }) => {
+  const message = {
+    id: generateMessageId(),
+    from: socket.data.username,
+    to: getUsernameBySocketId(toSocketId),
+    content,
+    timestamp: Date.now(),
+    type: "private",
+  };
+
+  // Send to recipient
+  io.to(toSocketId).emit("private_message", message);
+
+  // Send confirmation to sender
+  socket.emit("private_message", {
+    ...message,
+    delivered: true,
+  });
+});
+````
+
+---
+
+## 02-socketio-chatapp — 2. Get Online Users
+
+````js
+socket.on("get_online_users", (callback) => {
+  const users = [];
+  for (const [id, socketData] of onlineUsers) {
+    users.push({
+      socketId: id,
+      username: socketData.username,
+      currentRoom: socketData.roomId,
+    });
+  }
+  callback(users);
+});
+````
+
+---
+
+## 02-socketio-chatapp — 1. Client Reconnection
+
+````js
+// Client-side
+socket.on("connect", () => {
+  console.log("Connected:", socket.id);
+
+  // If was in a room, rejoin
+  if (previousRoomId) {
+    socket.emit("join_room", {
+      roomId: previousRoomId,
+      username: previousUsername,
+    });
+  }
+});
+
+socket.on("disconnect", (reason) => {
+  console.log("Disconnected:", reason);
+});
+````
+
+---
+
+## 02-socketio-chatapp — 2. Server-side Reconnection
+
+````js
+socket.on("reconnect_room", ({ roomId, username }) => {
+  // Verify user exists (could add auth here)
+  socket.join(roomId);
+  socket.data.username = username;
+  socket.data.roomId = roomId;
+
+  // Notify room
+  socket.to(roomId).emit("user_reconnected", {
+    username,
+    socketId: socket.id,
+  });
+});
+````
+
+---
+
+## 02-socketio-chatapp — 3. Message Buffering
+
+````js
+// Buffer messages sent while disconnected
+const messageBuffer = new Map();  // socketId → [messages]
+
+socket.on("chat_message", ({ roomId, content }) => {
+  if (!socket.rooms.has(roomId)) {
+    socket.emit("error", { message: "Not in this room" });
+    return;
+  }
+
+  // Normal message handling...
+});
+
+// On reconnect, send buffered messages
+socket.on("reconnect", () => {
+  const buffered = messageBuffer.get(socket.id) || [];
+  buffered.forEach((msg) => socket.emit("room_message", msg));
+  messageBuffer.delete(socket.id);
+});
+````
+
+---
+
+## 03-real-time-collaboration — 1. Presence Store
+
+````js
+// Server-side presence store
+const presenceStore = new Map();  // documentId → Map<socketId, presence>
+
+function updatePresence(documentId, socketId, presence) {
+  if (!presenceStore.has(documentId)) {
+    presenceStore.set(documentId, new Map());
+  }
+  presenceStore.get(documentId).set(socketId, {
+    ...presence,
+    lastActive: Date.now(),
+  });
+}
+
+function getDocumentPresence(documentId) {
+  return Array.from(presenceStore.get(documentId)?.values() || []);
+}
+
+function removePresence(documentId, socketId) {
+  presenceStore.get(documentId)?.delete(socketId);
+}
+````
+
+---
+
+## 03-real-time-collaboration — 2. Join Document
+
+````js
+socket.on("document:join", ({ documentId, user }) => {
+  socket.join(documentId);
+  socket.data.currentDocument = documentId;
+  socket.data.user = user;
+
+  // Broadcast presence to existing users
+  socket.to(documentId).emit("presence:user_joined", {
+    user: { ...user, socketId: socket.id },
+  });
+
+  // Send current presence to new user
+  socket.emit("presence:sync", {
+    users: getDocumentPresence(documentId),
+  });
+});
+````
+
+---
+
+## 03-real-time-collaboration — 3. Periodic Presence Update
+
+````js
+// Client-side: broadcast presence every 5 seconds
+useEffect(() => {
+  const interval = setInterval(() => {
+    socket.emit("presence:update", {
+      cursor: editorState.cursor,
+      selection: editorState.selection,
+      status: "active",
+    });
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
+````
+
+---
+
+## 03-real-time-collaboration — 1. Cursor Position Event
+
+````js
+// Client-side: emit cursor position on change
+socket.on("cursor:move", ({ documentId, position }) => {
+  socket.to(documentId).emit("presence:cursor_update", {
+    socketId: socket.id,
+    username: socket.data.user.name,
+    color: socket.data.user.color,
+    cursor: position,
+  });
+});
+````
+
+---
+
+## 03-real-time-collaboration — 2. Throttle Cursor Updates
+
+````js
+// Cursor updates should be throttled (50ms) to avoid flooding
+import { throttle } from "lodash";
+
+const throttledCursorMove = throttle((position) => {
+  socket.emit("cursor:move", { documentId, position });
+}, 50);
+````
+
+---
+
+## 03-real-time-collaboration — 1. Selection Event
+
+````js
+socket.on("selection:change", ({ documentId, selection }) => {
+  // Broadcast to all EXCEPT sender
+  socket.to(documentId).emit("presence:selection_update", {
+    socketId: socket.id,
+    username: socket.data.user.name,
+    color: socket.data.user.color,
+    selection,
+  });
+});
+````
+
+---
+
+## 03-real-time-collaboration — 2. Selection Color Generation
+
+````js
+// Generate consistent color from user ID
+function getUserColor(userId) {
+  const colors = [
+    "#FF5733", "#33FF57", "#3357FF", "#FF33F5",
+    "#33FFF5", "#F5FF33", "#FF8C33", "#8C33FF",
+  ];
+  const hash = userId.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return colors[hash % colors.length];
+}
+````
+
+---
+
+## 03-real-time-collaboration — 3. Apply Remote Selection
+
+````js
+// In editor component
+socket.on("presence:selection_update", ({ socketId, color, selection }) => {
+  // Create decoration for remote user's selection
+  const decoration = createSelectionDecoration(selection, color, socketId);
+  decorations.add(socketId, decoration);
+});
+````
+
+---
+
+## 03-real-time-collaboration — 1. Last Write Wins (Simple)
+
+````js
+// Server-side
+const documentState = new Map();  // documentId → { content, version }
+
+socket.on("document:edit", ({ documentId, change, timestamp }) => {
+  const doc = documentState.get(documentId);
+
+  // Last write wins
+  if (!doc || timestamp > doc.lastUpdate) {
+    documentState.set(documentId, {
+      content: applyChange(doc?.content || "", change),
+      lastUpdate: timestamp,
+    });
+  }
+
+  // Broadcast to all clients
+  io.to(documentId).emit("document:update", {
+    content: documentState.get(documentId).content,
+    version: documentState.get(documentId).version,
+  });
+});
+````
+
+---
+
+## 03-real-time-collaboration — 2. Operational Transformation (Basic)
+
+````js
+// Transform operation against concurrent operations
+function transformOperation(op1, op2) {
+  // If op1 and op2 operate on different positions, no transform needed
+  if (op1.position< op2.position) return op1;
+  if (op1.position > op2.position) {
+    return { ...op1, position: op1.position + getOpLength(op2) };
+  }
+
+  // Same position — need to transform
+  if (op1.type === "insert" && op2.type === "insert") {
+    return op1; // op2 already applied before op1
+  }
+
+  if (op1.type === "insert" && op2.type === "delete") {
+    return op1; // Delete affects original text, op1 inserts after
+  }
+
+  // ... more cases
+}
+````
+
+---
+
+## 03-real-time-collaboration — 3. Version Vectors
+
+````js
+// Simple version tracking
+const documentVersions = new Map();
+
+socket.on("document:sync", ({ documentId, clientVersion }) => {
+  const serverVersion = documentVersions.get(documentId) || 0;
+
+  if (clientVersion < serverVersion) {
+    // Client is behind, send full document
+    socket.emit("document:full_sync", {
+      content: getDocumentContent(documentId),
+      version: serverVersion,
+    });
+  } else if (clientVersion === serverVersion) {
+    // In sync
+    socket.emit("document:synced", { version: serverVersion });
+  } else {
+    // Client is ahead (shouldn't happen with single-server)
+    // Send conflict resolution request
+    socket.emit("document:conflict", {
+      serverVersion,
+      serverContent: getDocumentContent(documentId),
+    });
+  }
+});
+````
+
+---
+
+## 03-real-time-collaboration — 1. Idle Detection
+
+````js
+// Mark as idle after 60 seconds of no activity
+const IDLE_TIMEOUT = 60000;
+
+socket.on("presence:update", ({ documentId, ...presence }) => {
+  updatePresence(documentId, socket.id, {
+    ...presence,
+    status: "active",
+    lastActive: Date.now(),
+  });
+
+  // Reset idle timer
+  resetIdleTimer(socket, documentId);
+});
+
+function resetIdleTimer(socket, documentId) {
+  clearTimeout(socket.idleTimer);
+  socket.idleTimer = setTimeout(() => {
+    updatePresence(documentId, socket.id, { status: "idle" });
+    io.to(documentId).emit("presence:status_change", {
+      socketId: socket.id,
+      status: "idle",
+    });
+  }, IDLE_TIMEOUT);
+}
+````
+
+---
+
+## 03-real-time-collaboration — 2. Away on Disconnect
+
+````js
+socket.on("disconnect", () => {
+  const { currentDocument, user } = socket.data;
+  if (currentDocument) {
+    removePresence(currentDocument, socket.id);
+    io.to(currentDocument).emit("presence:user_left", {
+      socketId: socket.id,
+      username: user?.name,
+    });
+  }
+});
+````

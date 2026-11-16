@@ -52,155 +52,42 @@ feature/xyz ──▶ develop ──▶ main ──▶ tag ──▶ release
 
 **1. Staging Workflow**
 
-```yaml
-# TODO: Implementasikan
-# code/02-deploy-workflow.yml
-
-name: Deploy to Staging
-
-on:
-  push:
-    branches: [develop]
-
-jobs:
-  deploy-staging:
-    runs-on: ubuntu-latest
-    environment: staging
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build Docker image
-        run: |
-          docker build -t myapp:staging-${{ github.sha }} .
-
-      - name: Push to registry
-        run: |
-          docker push ${{ secrets.REGISTRY }}/myapp:staging-${{ github.sha }}
-
-      - name: Deploy to staging
-        run: |
-          # Deploy command untuk hosting provider
-          kubectl set image deployment/myapp-staging \
-            app=${{ secrets.REGISTRY }}/myapp:staging-${{ github.sha }}
-```
+> **Tulis sendiri dulu.** Rancang workflow deploy ke staging: dipicu branch apa, urutan langkahnya (test, build image, push, deploy), dan secret apa yang dibutuhkan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 1. Staging Workflow*.
 
 **2. Environment Protection**
 
-```yaml
-# Tambah environment protection
-environment:
-  name: staging
-  url: https://staging.example.com
-```
+> **Tulis sendiri dulu.** Apa gunanya blok `environment` dengan `name` dan `url` di GitHub Actions?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 2. Environment Protection*.
 
 **3. Notify on Failure**
 
-```yaml
-- name: Notify failure
-  if: failure()
-  uses: slackapi/slack-github-action@v1
-  with:
-    payload: |
-      {
-        "text": "Staging deployment failed! :x:",
-        "blocks": [
-          {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "*Staging Deployment Failed* :x:\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"
-            }
-          }
-        ]
-      }
-  env:
-    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-```
+> **Tulis sendiri dulu.** Bagaimana mengirim notifikasi hanya saat langkah sebelumnya gagal?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 3. Notify on Failure*.
 
 ### Bagian B — Production Deployment (15 menit)
 
 **1. Release Workflow**
 
-```yaml
-on:
-  push:
-    tags:
-      - 'v*.*.*'
-```
+> **Tulis sendiri dulu.** Bagaimana membuat workflow berjalan hanya saat ada tag versi seperti `v1.2.3`?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 1. Release Workflow*.
 
 **2. Approval Gate**
 
-```yaml
-jobs:
-  deploy-production:
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://app.example.com
- environment:
-      name: production
-      url: https://app.example.com
-    # Wait for manual approval
-    environment: production
-```
+> **Tulis sendiri dulu.** Bagaimana membuat deploy produksi menunggu persetujuan manual? Cari environment protection rules.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 2. Approval Gate*.
 
 **3. Production Deployment Steps**
 
-```yaml
-- name: Tag release
-  run: |
-    git tag ${{ github.ref_name }}
-    git push origin ${{ github.ref_name }}
-
-- name: Build and push production image
-  run: |
-    docker build -t myapp:${{ github.ref_name }} .
-    docker tag myapp:${{ github.ref_name }} ${{ secrets.REGISTRY }}/myapp:latest
-    docker push ${{ secrets.REGISTRY }}/myapp:latest
-
-- name: Deploy to production
-  run: |
-    kubectl rollout restart deployment/myapp-production
-    kubectl rollout status deployment/myapp-production --timeout=300s
-```
+> **Tulis sendiri dulu.** Alur produksi: tag release, build dan push image berversi, lalu deploy dan tunggu rollout selesai.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 3. Production Deployment Steps*.
 
 ### Bagian C — Smoke Testing (15 menit)
 
 **1. Smoke Test Job**
 
-```yaml
-jobs:
-  smoke-test:
-    runs-on: ubuntu-latest
-    needs: deploy-staging
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Run smoke tests
-        run: |
-          npx playwright test e2e/smoke.spec.js \
-            --base-url ${{ needs.deploy-staging.outputs.url }}
-
-      - name: Report smoke test results
-        if: always()
-        run: |
-          echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-```
+> **Tulis sendiri dulu.** Smoke test setelah deploy: job mana yang harus selesai dulu, dan bagaimana base URL diteruskan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 1. Smoke Test Job*.
 
 **2. Critical Smoke Tests**
 
@@ -215,104 +102,39 @@ Minimal smoke tests:
 
 **3. Pass/Fail to Next Job**
 
-```yaml
-deploy-production:
-  needs: [deploy-staging, smoke-test]
-  # Only runs if both deploy-staging AND smoke-test pass
-```
+> **Tulis sendiri dulu.** Bagaimana memastikan produksi hanya jalan kalau staging dan smoke test lolos? Cari `needs`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 3. Pass/Fail to Next Job*.
 
 ### Bagian D — Rollback Strategy (20 menit)
 
 **1. Automatic Rollback on Failure**
 
-```yaml
-- name: Rollback on failure
-  if: failure()
-  run: |
-    echo "Deployment failed, rolling back..."
-    kubectl rollout undo deployment/myapp-staging
-
-- name: Verify rollback
-  run: |
-    kubectl rollout status deployment/myapp-staging
-    curl -f ${{ env.STAGING_URL }}/health || exit 1
-```
+> **Tulis sendiri dulu.** Kalau deploy gagal, bagaimana mengembalikan versi sebelumnya dan memverifikasinya?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 1. Automatic Rollback on Failure*.
 
 **2. Manual Rollback Workflow**
 
 Buat workflow terpisah untuk rollback manual:
 
-```yaml
-# .github/workflows/rollback.yml
-name: Rollback Production
-
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to rollback to (e.g., v1.2.3)'
-        required: true
-
-jobs:
-  rollback:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Rollback to version
-        run: |
-          kubectl set image deployment/myapp-production \
-            app=${{ secrets.REGISTRY }}/myapp:${{ inputs.version }}
-
-      - name: Verify rollback
-        run: |
-          kubectl rollout status deployment/myapp-production --timeout=300s
-          curl -f https://app.example.com/health
-```
+> **Tulis sendiri dulu.** Workflow rollback manual: input apa yang diminta dari operator dan bagaimana diverifikasi?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 2. Manual Rollback Workflow*.
 
 **3. Health Check Loop**
 
-```yaml
-- name: Wait for health check
-  uses: joshmcgrath/await-verification-action@v1
-  with:
-    verify: |
-      curl -f https://staging.example.com/health
-    timeout: 120s
-    interval: 5s
-    retries: 24
-```
+> **Tulis sendiri dulu.** Bagaimana menunggu service benar-benar sehat sebelum lanjut, dengan batas waktu dan jumlah percobaan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 3. Health Check Loop*.
 
 ### Bagian E — Docker Registry Integration (15 menit)
 
 **1. Login to Registry**
 
-```yaml
-- name: Login to Container Registry
-  uses: docker/login-action@v4
-  with:
-    registry: ${{ secrets.REGISTRY }}
-    username: ${{ secrets.REGISTRY_USER }}
-    password: ${{ secrets.REGISTRY_TOKEN }}
-```
+> **Tulis sendiri dulu.** Bagaimana login ke container registry dengan kredensial dari secrets?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 1. Login to Registry*.
 
 **2. Build and Push with Labels**
 
-```yaml
-- name: Build and push
-  uses: docker/build-push-action@v7
-  with:
-    context: .
-    push: true
-    tags: |
-      ${{ secrets.REGISTRY }}/myapp:${{ github.sha }}
-      ${{ secrets.REGISTRY }}/myapp:latest
-      ${{ secrets.REGISTRY }}/myapp:${{ github.ref_name }}
-    cache-from: type=gha
-    cache-to: type=gha,mode=max
-    labels: |
-      org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-      org.opencontainers.image.version=${{ github.ref_name }}
-```
+> **Tulis sendiri dulu.** Bagaimana membangun dan mendorong image dengan beberapa tag dan cache dari GitHub Actions?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-deploy-pipeline — 2. Build and Push with Labels*.
 
 **3. Image Versioning Strategy**
 

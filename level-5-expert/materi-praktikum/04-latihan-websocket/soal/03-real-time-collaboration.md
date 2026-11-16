@@ -60,92 +60,30 @@ Kamu diminta membangun fitur **real-time collaboration** untuk document editor. 
 
 **1. Presence Store**
 
-```js
-// Server-side presence store
-const presenceStore = new Map();  // documentId → Map<socketId, presence>
-
-function updatePresence(documentId, socketId, presence) {
-  if (!presenceStore.has(documentId)) {
-    presenceStore.set(documentId, new Map());
-  }
-  presenceStore.get(documentId).set(socketId, {
-    ...presence,
-    lastActive: Date.now(),
-  });
-}
-
-function getDocumentPresence(documentId) {
-  return Array.from(presenceStore.get(documentId)?.values() || []);
-}
-
-function removePresence(documentId, socketId) {
-  presenceStore.get(documentId)?.delete(socketId);
-}
-```
+> **Tulis sendiri dulu.** Rancang penyimpanan presence di server: per dokumen, per socket. Fungsi apa saja yang kamu perlukan (ubah, baca, hapus)?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 1. Presence Store*.
 
 **2. Join Document**
 
-```js
-socket.on("document:join", ({ documentId, user }) => {
-  socket.join(documentId);
-  socket.data.currentDocument = documentId;
-  socket.data.user = user;
-
-  // Broadcast presence to existing users
-  socket.to(documentId).emit("presence:user_joined", {
-    user: { ...user, socketId: socket.id },
-  });
-
-  // Send current presence to new user
-  socket.emit("presence:sync", {
-    users: getDocumentPresence(documentId),
-  });
-});
-```
+> **Tulis sendiri dulu.** Saat user bergabung ke dokumen: siapa yang diberi tahu, dan apa yang dikirim ke pendatang baru?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 2. Join Document*.
 
 **3. Periodic Presence Update**
 
-```js
-// Client-side: broadcast presence every 5 seconds
-useEffect(() => {
-  const interval = setInterval(() => {
-    socket.emit("presence:update", {
-      cursor: editorState.cursor,
-      selection: editorState.selection,
-      status: "active",
-    });
-  }, 5000);
-
-  return () => clearInterval(interval);
-}, []);
-```
+> **Tulis sendiri dulu.** Bagaimana client mengirim presence berkala dan membereskannya saat komponen dilepas di React?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 3. Periodic Presence Update*.
 
 ### Bagian B — Cursor Broadcasting (15 menit)
 
 **1. Cursor Position Event**
 
-```js
-// Client-side: emit cursor position on change
-socket.on("cursor:move", ({ documentId, position }) => {
-  socket.to(documentId).emit("presence:cursor_update", {
-    socketId: socket.id,
-    username: socket.data.user.name,
-    color: socket.data.user.color,
-    cursor: position,
-  });
-});
-```
+> **Tulis sendiri dulu.** Bagaimana server meneruskan posisi kursor ke peserta lain tanpa mengirim balik ke pengirim?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 1. Cursor Position Event*.
 
 **2. Throttle Cursor Updates**
 
-```js
-// Cursor updates should be throttled (50ms) to avoid flooding
-import { throttle } from "lodash";
-
-const throttledCursorMove = throttle((position) => {
-  socket.emit("cursor:move", { documentId, position });
-}, 50);
-```
+> **Tulis sendiri dulu.** Kursor bisa berubah puluhan kali per detik. Teknik apa untuk membatasi pengiriman?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 2. Throttle Cursor Updates*.
 
 **3. Cursor Component**
 
@@ -158,168 +96,47 @@ const throttledCursorMove = throttle((position) => {
 
 **1. Selection Event**
 
-```js
-socket.on("selection:change", ({ documentId, selection }) => {
-  // Broadcast to all EXCEPT sender
-  socket.to(documentId).emit("presence:selection_update", {
-    socketId: socket.id,
-    username: socket.data.user.name,
-    color: socket.data.user.color,
-    selection,
-  });
-});
-```
+> **Tulis sendiri dulu.** Sama seperti kursor, tapi untuk seleksi teks. Apa yang perlu ikut dikirim agar warna bisa dipakai di UI?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 1. Selection Event*.
 
 **2. Selection Color Generation**
 
-```js
-// Generate consistent color from user ID
-function getUserColor(userId) {
-  const colors = [
-    "#FF5733", "#33FF57", "#3357FF", "#FF33F5",
-    "#33FFF5", "#F5FF33", "#FF8C33", "#8C33FF",
-  ];
-  const hash = userId.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return colors[hash % colors.length];
-}
-```
+> **Tulis sendiri dulu.** Bagaimana memberi warna yang konsisten untuk tiap user dari ID-nya, tanpa menyimpan tabel?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 2. Selection Color Generation*.
 
 **3. Apply Remote Selection**
 
-```js
-// In editor component
-socket.on("presence:selection_update", ({ socketId, color, selection }) => {
-  // Create decoration for remote user's selection
-  const decoration = createSelectionDecoration(selection, color, socketId);
-  decorations.add(socketId, decoration);
-});
-```
+> **Tulis sendiri dulu.** Di sisi editor, bagaimana menampilkan seleksi user lain dan menyimpannya per socket?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 3. Apply Remote Selection*.
 
 ### Bagian D — Conflict Resolution (20 menit)
 
 **1. Last Write Wins (Simple)**
 
-```js
-// Server-side
-const documentState = new Map();  // documentId → { content, version }
-
-socket.on("document:edit", ({ documentId, change, timestamp }) => {
-  const doc = documentState.get(documentId);
-
-  // Last write wins
-  if (!doc || timestamp > doc.lastUpdate) {
-    documentState.set(documentId, {
-      content: applyChange(doc?.content || "", change),
-      lastUpdate: timestamp,
-    });
-  }
-
-  // Broadcast to all clients
-  io.to(documentId).emit("document:update", {
-    content: documentState.get(documentId).content,
-    version: documentState.get(documentId).version,
-  });
-});
-```
+> **Tulis sendiri dulu.** Strategi konflik paling sederhana: "yang terakhir menang". Apa kekurangannya dan data apa yang dibandingkan?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 1. Last Write Wins (Simple)*.
 
 **2. Operational Transformation (Basic)**
 
-```js
-// Transform operation against concurrent operations
-function transformOperation(op1, op2) {
-  // If op1 and op2 operate on different positions, no transform needed
-  if (op1.position< op2.position) return op1;
-  if (op1.position > op2.position) {
-    return { ...op1, position: op1.position + getOpLength(op2) };
-  }
-
-  // Same position — need to transform
-  if (op1.type === "insert" && op2.type === "insert") {
-    return op1; // op2 already applied before op1
-  }
-
-  if (op1.type === "insert" && op2.type === "delete") {
-    return op1; // Delete affects original text, op1 inserts after
-  }
-
-  // ... more cases
-}
-```
+> **Tulis sendiri dulu.** Operational Transform: bagaimana dua operasi di posisi yang sama diurutkan? Mulai dari kasus insert vs insert.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 2. Operational Transformation (Basic)*.
 
 **3. Version Vectors**
 
-```js
-// Simple version tracking
-const documentVersions = new Map();
-
-socket.on("document:sync", ({ documentId, clientVersion }) => {
-  const serverVersion = documentVersions.get(documentId) || 0;
-
-  if (clientVersion < serverVersion) {
-    // Client is behind, send full document
-    socket.emit("document:full_sync", {
-      content: getDocumentContent(documentId),
-      version: serverVersion,
-    });
-  } else if (clientVersion === serverVersion) {
-    // In sync
-    socket.emit("document:synced", { version: serverVersion });
-  } else {
-    // Client is ahead (shouldn't happen with single-server)
-    // Send conflict resolution request
-    socket.emit("document:conflict", {
-      serverVersion,
-      serverContent: getDocumentContent(documentId),
-    });
-  }
-});
-```
+> **Tulis sendiri dulu.** Bagaimana server dan client saling mencocokkan versi dokumen? Tiga kasus: client tertinggal, sama, atau lebih maju.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 3. Version Vectors*.
 
 ### Bagian E — Idle& Away Detection (10 menit)
 
 **1. Idle Detection**
 
-```js
-// Mark as idle after 60 seconds of no activity
-const IDLE_TIMEOUT = 60000;
-
-socket.on("presence:update", ({ documentId, ...presence }) => {
-  updatePresence(documentId, socket.id, {
-    ...presence,
-    status: "active",
-    lastActive: Date.now(),
-  });
-
-  // Reset idle timer
-  resetIdleTimer(socket, documentId);
-});
-
-function resetIdleTimer(socket, documentId) {
-  clearTimeout(socket.idleTimer);
-  socket.idleTimer = setTimeout(() => {
-    updatePresence(documentId, socket.id, { status: "idle" });
-    io.to(documentId).emit("presence:status_change", {
-      socketId: socket.id,
-      status: "idle",
-    });
-  }, IDLE_TIMEOUT);
-}
-```
+> **Tulis sendiri dulu.** Menandai user "idle" setelah tidak aktif beberapa waktu: timer apa yang direset di setiap update?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 1. Idle Detection*.
 
 **2. Away on Disconnect**
 
-```js
-socket.on("disconnect", () => {
-  const { currentDocument, user } = socket.data;
-  if (currentDocument) {
-    removePresence(currentDocument, socket.id);
-    io.to(currentDocument).emit("presence:user_left", {
-      socketId: socket.id,
-      username: user?.name,
-    });
-  }
-});
-```
+> **Tulis sendiri dulu.** Saat socket putus: apa yang dibersihkan dan siapa yang diberi tahu?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-real-time-collaboration — 2. Away on Disconnect*.
 
 ---
 

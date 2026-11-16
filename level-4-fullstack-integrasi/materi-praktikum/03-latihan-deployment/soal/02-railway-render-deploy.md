@@ -93,13 +93,10 @@ Lihat file `code/02-railway-render-deploy.js`. Buat checklist dan konfigurasi:
 // - Development: http://localhost:3001/api
 // - Production: https://my-api.railway.app/api
 // - Gunakan environment variable:
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+// (tulis sendiri: baca VITE_API_URL dari env, beri nilai cadangan untuk lokal)
 
 // TODO 8: CORS whitelist update (di backend)
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://my-app.vercel.app',  // Ganti dengan URL Vercel Anda
-];
+// (tulis sendiri: daftar origin yang boleh memanggil API, lokal + produksi)
 
 module.exports = { /* export config */ };
 ```
@@ -156,3 +153,5 @@ module.exports = { /* export config */ };
 - [ ] CORS whitelist sudah include URL Vercel
 - [ ] Health check endpoint berfungsi
 - [ ] Frontend di Vercel bisa fetch data dari backend di Railway
+
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

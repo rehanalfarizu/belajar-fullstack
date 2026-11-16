@@ -148,16 +148,8 @@ docker compose down
 
 Tambahkan health check untuk PostgreSQL:
 
-```yaml
-postgres:
-  image: postgres:15-alpine
-  healthcheck:
-    test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-    interval: 5s
-    timeout: 5s
-    retries: 5
-    start_period: 10s
-```
+> **Tulis sendiri dulu.** Healthcheck apa yang cocok untuk PostgreSQL? Cari `pg_isready`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 1. Health Checks*.
 
 **2. depends_on dengan condition**
 
@@ -170,15 +162,8 @@ backend:
 
 **3. Backend Health Check**
 
-```yaml
-backend:
-  healthcheck:
-    test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
-    interval: 10s
-    timeout: 5s
-    retries: 3
-    start_period: 15s
-```
+> **Tulis sendiri dulu.** Healthcheck untuk backend: perintah, interval, timeout, retries, dan start_period apa yang masuk akal?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 3. Backend Health Check*.
 
 **4. Verify Startup Order**
 
@@ -216,46 +201,13 @@ API_KEY=real-api-key
 
 Buat `docker-compose.override.yml` untuk development:
 
-```yaml
-# docker-compose.override.yml (auto-loaded)
-
-services:
-  frontend:
-    build:
-      context: ./frontend
-      target: development
-    volumes:
-      - ./frontend/src:/app/src  # Hot reload
-    environment:
-      - CHOKIDAR_USEPOLLING=true  # Watch mode untuk volume mount
-
-  backend:
-    volumes:
-      - ./backend/src:/app/src  # Hot reload
-    environment:
-      - NODE_ENV=development
-      - DEBUG=*
-```
+> **Tulis sendiri dulu.** File override apa yang otomatis dibaca Compose untuk kebutuhan development (hot reload, mode debug)?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 2. Override File*.
 
 **3. Profile untuk Development Tools**
 
-```yaml
-services:
-  adminer:
-    image: adminer:4
-    profiles: [dev]
-    ports:
-      - 8080:8080
-    depends_on:
-      - postgres
-
-  mailhog:
-    image: mailhog/mailhog
-    profiles: [dev]
-    ports:
-      - 8025:8025  # Web UI
-      - 1025:1025  # SMTP server
-```
+> **Tulis sendiri dulu.** Bagaimana membuat service pendukung (misal adminer, mailhog) hanya jalan saat development? Cari `profiles`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 3. Profile untuk Development Tools*.
 
 Start dengan development tools:
 ```bash
@@ -264,23 +216,8 @@ docker compose --profile dev up -d
 
 **4. Production Build**
 
-```yaml
-services:
-  frontend:
-    build:
-      context: ./frontend
-      target: production
-    restart: unless-stopped
- depends_on:
-      - backend
-
- backend:
-    build:
-      context: ./backend
-    restart: unless-stopped
-    environment:
-      - NODE_ENV=production
-```
+> **Tulis sendiri dulu.** Konfigurasi produksi: restart policy dan environment apa yang berbeda dari development?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 4. Production Build*.
 
 ### Bagian D — Nginx Reverse Proxy (15 menit)
 
@@ -309,62 +246,23 @@ curl -I http://localhost:5000/health
 
 **1. Restart Policies**
 
-```yaml
-services:
-  frontend:
-    restart: unless-stopped
-  backend:
-    restart: unless-stopped
-  postgres:
-    restart: unless-stopped
-```
+> **Tulis sendiri dulu.** Apa saja pilihan `restart` di Compose, dan mana yang cocok untuk produksi?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 1. Restart Policies*.
 
 **2. Resource Limits**
 
-```yaml
-services:
-  postgres:
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
-```
+> **Tulis sendiri dulu.** Bagaimana membatasi CPU dan memori sebuah service? Cari `deploy.resources`.
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 2. Resource Limits*.
 
 **3. Logging Configuration**
 
-```yaml
-services:
-  backend:
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-```
+> **Tulis sendiri dulu.** Log container bisa membengkak. Opsi apa yang membatasi ukuran dan jumlah file log?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 3. Logging Configuration*.
 
 **4. Security Hardening**
 
-```yaml
-services:
-  postgres:
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
-      - /run
-
-  backend:
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
-```
+> **Tulis sendiri dulu.** Opsi hardening container apa yang bisa dipasang di Compose (`security_opt`, `read_only`, `tmpfs`)? Apa efek masing-masing?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *04-docker-compose — 4. Security Hardening*.
 
 **5. Complete Production Checklist**
 

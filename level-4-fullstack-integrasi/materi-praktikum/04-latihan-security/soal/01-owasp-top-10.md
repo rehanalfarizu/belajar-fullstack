@@ -96,34 +96,9 @@ const { z } = require('zod');
 // - email: valid email
 // - password: min 1 char (any)
 
-/*
-// Validation function helper
-function validate(schema, data) {
-  try {
-    return { success: true, data: schema.parse(data) };
-  } catch (error) {
-    return { success: false, errors: error.errors };
-  }
-}
-*/
-
-// TODO 4: Create Express middleware untuk validasi
-// function validateBody(schema) {
-//   return (req, res, next) => {
-//     const result = validate(schema, req.body);
-//     if (!result.success) {
-//       return res.status(400).json({ errors: result.errors });
-//     }
-//     req.validatedBody = result.data;
-//     next();
-//   };
-// }
-
-// TODO 5: Apply ke endpoint
-// app.post('/api/auth/register',
-//   validateBody(userSchema),
-//   async (req, res) => { ... }
-// );
+// TODO 4-5: bungkus validasi jadi middleware Express (tulis sendiri).
+// Pikirkan: apa yang dilakukan kalau validasi gagal (status + isi respons)?
+// Hasil yang sudah lolos validasi disimpan di mana supaya handler bisa memakainya?
 
 // TODO 6: Sanitization (bonus)
 // - Trim whitespace dari semua string input
@@ -154,3 +129,4 @@ Jawab pertanyaan berikut:
 - [ ] Validation middleware yang return 400 dengan errors
 - [ ] Applied ke endpoint registration
 - [ ] Memahami OWASP Top 10 categories
+> **Catatan:** contoh jawaban untuk bagian yang bertanda "(tulis sendiri ...)" ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md). Buka setelah punyamu jalan atau benar-benar buntu.

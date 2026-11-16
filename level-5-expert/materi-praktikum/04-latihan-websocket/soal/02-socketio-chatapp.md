@@ -125,219 +125,64 @@ Definisikan event types:
 
 **2. Leave Room**
 
-```js
-socket.on("leave_room", ({ roomId }) => {
-  socket.leave(roomId);
-  socket.to(roomId).emit("user_left", {
-    username: socket.data.username,
-    socketId: socket.id,
-  });
-});
-```
+> **Tulis sendiri dulu.** Kebalikan dari join: apa yang dilakukan saat user keluar room, dan siapa yang perlu diberi tahu?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 2. Leave Room*.
 
 **3. Get Room Users**
 
-```js
-function getRoomUsers(roomId) {
-  const sockets = await io.in(roomId).fetchSockets();
-  return sockets.map((s) => ({
-    socketId: s.id,
-    username: s.data.username,
-  }));
-}
-```
+> **Tulis sendiri dulu.** Bagaimana mengambil daftar socket di sebuah room beserta username-nya? Cari `fetchSockets` (perhatikan fungsinya perlu `async`).
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 3. Get Room Users*.
 
 **4. Room List Endpoint**
 
-```js
-app.get("/api/rooms", async (req, res) => {
-  const rooms = [];
-  for (const [roomId, set] of io.of("/").adapter.rooms) {
-    if (roomId !== "" && typeof roomId === "string") {
-      rooms.push({
-        id: roomId,
-        userCount: set.size,
-      });
-    }
-  }
-  res.json(rooms);
-});
-```
+> **Tulis sendiri dulu.** Bagaimana membaca daftar room dari adapter Socket.IO untuk endpoint REST, dan room mana yang harus dibuang dari hasil?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 4. Room List Endpoint*.
 
 ### Bagian C — Messaging (20 menit)
 
 **1. Chat Message**
 
-```js
-socket.on("chat_message", ({ roomId, content }) => {
-  const message = {
-    id: generateMessageId(),
-    roomId,
-    username: socket.data.username,
-    content,
-    timestamp: Date.now(),
-  };
-
-  // Save to message history (in-memory for now)
-  saveMessage(roomId, message);
-
-  // Broadcast to room (including sender)
-  io.to(roomId).emit("room_message", message);
-});
-```
+> **Tulis sendiri dulu.** Alur pesan chat: bentuk objek pesan, simpan ke riwayat, lalu kirim ke seluruh room. Siapa yang ikut menerima?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 1. Chat Message*.
 
 **2. Message History with Pagination**
 
-```js
-const messageHistory = new Map();  // roomId → [messages]
-
-function getMessages(roomId, page = 1, limit = 50) {
-  const messages = messageHistory.get(roomId) || [];
-  const start = (page - 1) * limit;
-  return messages.slice(start, start + limit);
-}
-
-socket.on("get_history", ({ roomId, page = 1 }, callback) => {
-  const messages = getMessages(roomId, page);
-  const total = (messageHistory.get(roomId) || []).length;
-
-  callback({
-    messages,
-    page,
-    total,
-    hasMore: total > page * 50,
-  });
-});
-```
+> **Tulis sendiri dulu.** Riwayat chat dengan paginasi lewat callback (acknowledgement). Rumus potongan halaman dan `hasMore` seperti apa?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 2. Message History with Pagination*.
 
 **3. Typing Indicators**
 
-```js
-// Timeout untuk stop typing
-const typingTimers = new Map();
-
-socket.on("typing", ({ roomId }) => {
-  socket.to(roomId).emit("typing", {
-    username: socket.data.username,
-  });
-
-  // Auto-clear typing after 3 seconds
-  clearTimeout(typingTimers.get(socket.id));
-  typingTimers.set(
-    socket.id,
-    setTimeout(() => {
-      socket.to(roomId).emit("stop_typing", {
-        username: socket.data.username,
-      });
-    }, 3000)
-  );
-});
-```
+> **Tulis sendiri dulu.** Indikator "sedang mengetik": kirim ke anggota lain, lalu hentikan otomatis setelah jeda. Struktur data apa untuk timer per socket?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 3. Typing Indicators*.
 
 ### Bagian D — Private Messaging (15 menit)
 
 **1. Send Private Message**
 
-```js
-socket.on("private_message", ({ toSocketId, content }) => {
-  const message = {
-    id: generateMessageId(),
-    from: socket.data.username,
-    to: getUsernameBySocketId(toSocketId),
-    content,
-    timestamp: Date.now(),
-    type: "private",
-  };
-
-  // Send to recipient
-  io.to(toSocketId).emit("private_message", message);
-
-  // Send confirmation to sender
-  socket.emit("private_message", {
-    ...message,
-    delivered: true,
-  });
-});
-```
+> **Tulis sendiri dulu.** Pesan privat: siapa penerimanya, dan apa yang dikirim balik ke pengirim sebagai konfirmasi?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 1. Send Private Message*.
 
 **2. Get Online Users**
 
-```js
-socket.on("get_online_users", (callback) => {
-  const users = [];
-  for (const [id, socketData] of onlineUsers) {
-    users.push({
-      socketId: id,
-      username: socketData.username,
-      currentRoom: socketData.roomId,
-    });
-  }
-  callback(users);
-});
-```
+> **Tulis sendiri dulu.** Bagaimana menyusun daftar user online dari data yang kamu simpan, dan mengembalikannya lewat callback?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 2. Get Online Users*.
 
 ### Bagian E — Reconnection Handling (15 menit)
 
 **1. Client Reconnection**
 
-```js
-// Client-side
-socket.on("connect", () => {
-  console.log("Connected:", socket.id);
-
-  // If was in a room, rejoin
-  if (previousRoomId) {
-    socket.emit("join_room", {
-      roomId: previousRoomId,
-      username: previousUsername,
-    });
-  }
-});
-
-socket.on("disconnect", (reason) => {
-  console.log("Disconnected:", reason);
-});
-```
+> **Tulis sendiri dulu.** Saat koneksi putus lalu tersambung lagi, apa yang harus dilakukan client supaya kembali ke room-nya?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 1. Client Reconnection*.
 
 **2. Server-side Reconnection**
 
-```js
-socket.on("reconnect_room", ({ roomId, username }) => {
-  // Verify user exists (could add auth here)
-  socket.join(roomId);
-  socket.data.username = username;
-  socket.data.roomId = roomId;
-
-  // Notify room
-  socket.to(roomId).emit("user_reconnected", {
-    username,
-    socketId: socket.id,
-  });
-});
-```
+> **Tulis sendiri dulu.** Sisi server untuk bergabung kembali: data apa yang dipulihkan, dan siapa yang diberi tahu?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 2. Server-side Reconnection*.
 
 **3. Message Buffering**
 
-```js
-// Buffer messages sent while disconnected
-const messageBuffer = new Map();  // socketId → [messages]
-
-socket.on("chat_message", ({ roomId, content }) => {
-  if (!socket.rooms.has(roomId)) {
-    socket.emit("error", { message: "Not in this room" });
-    return;
-  }
-
-  // Normal message handling...
-});
-
-// On reconnect, send buffered messages
-socket.on("reconnect", () => {
-  const buffered = messageBuffer.get(socket.id) || [];
-  buffered.forEach((msg) => socket.emit("room_message", msg));
-  messageBuffer.delete(socket.id);
-});
-```
+> **Tulis sendiri dulu.** Bagaimana mencegah pengiriman ke room yang bukan milik socket, dan bagaimana menyimpan pesan saat client terputus?
+> Kalau sudah buntu, contoh jawabannya ada di [`solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *02-socketio-chatapp — 3. Message Buffering*.
 
 ---
 
