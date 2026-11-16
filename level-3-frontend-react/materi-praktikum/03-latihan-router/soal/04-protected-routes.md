@@ -23,48 +23,16 @@ Buat `AuthContext` dengan:
 - `login(username, password)`: simulate login
 - `logout()`: clear user
 
-```jsx
-const AuthContext = createContext(null);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-protected-routes Soal 4A — AuthContext").
 
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-
-  const login = (username) => {
-    setUser({ name: username, role: "user" });
-  };
-
-  const logout = () => {
-    setUser(null);
-  };
-
-  return (
-    <AuthContext.Provider value={{
-      user,
-      isAuthenticated: !!user,
-      login,
-      logout,
-    }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
-```
+Petunjuk: nilai apa saja yang perlu dibagikan ke komponen lain, dan state apa yang menjadi sumbernya? `isAuthenticated` perlu jadi state sendiri atau bisa diturunkan dari `user`?
 
 ### Soal 4B — Protected Route Component
 Buat `ProtectedRoute` component:
 
-```jsx
-function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
-  const location = useLocation();
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-protected-routes Soal 4B — ProtectedRoute").
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
-}
-```
+Petunjuk: kalau belum login, ke mana pengguna diarahkan, dan bagaimana halaman asalnya diingat supaya bisa kembali setelah login? Komponen bawaan router mana yang mengarahkan tanpa `useEffect`?
 
 Halaman yang diproteksi:
 - `/dashboard` — hanya untuk authenticated users

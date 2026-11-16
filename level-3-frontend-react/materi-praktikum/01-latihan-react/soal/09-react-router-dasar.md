@@ -20,35 +20,17 @@ React Router adalah library standar untuk routing di React. Dengan React Router,
 ### Soal 9A — Basic Routing Setup
 Setup dasar React Router:
 
-```jsx
-// Install: npm install react-router-dom
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "09-react-router-dasar Soal 9A — App dan rute dasar").
 
-// Struktur aplikasi:
-// / → Home
-// /about → About
-// /contact → Contact
-// /blog → Blog List
-// /blog/:slug → Blog Detail
+Struktur rute yang diminta:
 
-// App.jsx setup:
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
+- `/` menampilkan Home
+- `/about` menampilkan About
+- `/contact` menampilkan Contact
+- `/blog` menampilkan daftar blog
+- `/blog/:slug` menampilkan detail blog
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<BlogList />} />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-```
+Petunjuk: pembungkus apa yang dibutuhkan router? Di mana Navbar ditaruh supaya muncul di semua halaman?
 
 **Fitur:**
 1. Navbar dengan navigasi antar halaman
@@ -84,16 +66,7 @@ function BlogDetail() {
 Route yang butuh authentication:
 
 ```jsx
-// ProtectedRoute component:
-function ProtectedRoute({ children, isAuthenticated }) {
-  const location = useLocation();
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
-}
+// ProtectedRoute menerima { children, isAuthenticated }; kamu yang menulis isinya.
 
 // Usage:
 <Route
@@ -105,6 +78,8 @@ function ProtectedRoute({ children, isAuthenticated }) {
   }
 />
 ```
+
+Belum ketemu? Tulis dulu `ProtectedRoute`-mu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "09-react-router-dasar Soal 9C — ProtectedRoute"). Petunjuk: ke mana pengguna diarahkan kalau belum login, dan bagaimana halaman asalnya dibawa supaya bisa kembali setelah login?
 
 **Fitur:**
 1. Login/Logout toggle untuk demo

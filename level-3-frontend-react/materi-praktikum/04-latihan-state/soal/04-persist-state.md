@@ -21,67 +21,19 @@ Buat `NotesApp` — aplikasi catatan sederhana dengan persist dan undo/redo func
 ```
 
 **Middleware Pattern:**
-```js
-function createPersistMiddleware(key, reducer) {
-  return (state, action) => {
-    const nextState = reducer(state, action);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-persist-state Soal 01 — createPersistMiddleware").
 
-    // Simpan ke localStorage setelah setiap action
-    try {
-      window.localStorage.setItem(key, JSON.stringify(nextState));
-    } catch (err) {
-      console.warn("Persist failed:", err);
-    }
-
-    return nextState;
-  };
-}
-```
+Petunjuk: middleware ini membungkus reducer dan mengembalikan reducer baru. Kapan tepatnya menyimpan: sebelum atau sesudah reducer menghasilkan state baru? Bagaimana kalau `setItem` gagal?
 
 **Undo/Redo Middleware:**
-```js
-function createUndoMiddleware(reducer) {
-  let past = [];
-  let future = [];
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-persist-state Soal 01 — createUndoMiddleware").
 
-  return (state, action) => {
-    if (action.type === "UNDO") {
-      if (past.length === 0) return state;
-      const previous = past[past.length - 1];
-      past = past.slice(0, -1);
-      future = [state, ...future];
-      return previous;
-    }
-
-    if (action.type === "REDO") {
-      if (future.length === 0) return state;
-      const next = future[0];
-      future = future.slice(1);
-      past = [...past, state];
-      return next;
-    }
-
-    const nextState = reducer(state, action);
-    past = [...past, state];
-    future = []; // Reset future saat action baru
-    return nextState;
-  };
-}
-```
+Petunjuk: butuh dua tumpukan (past dan future). Apa yang terjadi pada `future` saat ada aksi baru? Di mana batas 50 entri dipasang?
 
 **Composable Middleware:**
-```js
-function applyMiddleware(reducer, ...middlewares) {
-  return middlewares.reduce((acc, mw) => mw(acc), reducer);
-}
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-persist-state Soal 01 — applyMiddleware").
 
-// Usage:
-const rootReducer = applyMiddleware(
-  notesReducer,
-  (reducer) => createPersistMiddleware("notes_state", reducer),
-  createUndoMiddleware
-);
-```
+Petunjuk: komposisi fungsi dari kiri ke kanan atau kanan ke kiri? Coba tukar urutan undo dan persist lalu amati perbedaannya.
 
 **Action Types:**
 ```js
@@ -105,22 +57,9 @@ HYDRATE: { type: "HYDRATE", payload: { state } } // untuk load dari localStorage
 7. Note editor: modal atau inline editing
 
 **Keyboard Shortcuts:**
-```js
-useEffect(() => {
-  const handleKeyDown = (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "z") {
-      if (e.shiftKey) {
-        dispatch({ type: "REDO" });
-      } else {
-        dispatch({ type: "UNDO" });
-      }
-    }
-  };
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-persist-state Soal 01 — Shortcut keyboard undo/redo").
 
-  window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
-}, []);
-```
+Petunjuk: pasang listener di mana, dan bagaimana membersihkannya? Bedakan Ctrl+Z dan Ctrl+Shift+Z, dan jangan lupa tombol Cmd di Mac.
 
 ### Aturan
 - Middleware harus composed dalam urutan yang benar: undo → persist

@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 04-latihan-state/code/04-persist-middleware.js
+// FILE: 04-latihan-state/code/04-persist-state.jsx
 // MATERI: useReducer Persist Middleware dan Undo/Redo Pattern
 // ============================================================
 

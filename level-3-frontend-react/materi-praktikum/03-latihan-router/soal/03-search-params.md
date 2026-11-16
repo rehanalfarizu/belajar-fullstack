@@ -52,39 +52,9 @@ const books = [
 7. **Shareable URL**: copy URL dan buka di tab baru, state yang sama persist
 
 **Implementation Pattern:**
-```jsx
-function BookCatalog() {
-  const [searchParams, setSearchParams] = useSearchParams();
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-search-params Soal 01 — BookCatalog (filter dan pagination)").
 
-  const query = searchParams.get("q") || "";
-  const category = searchParams.get("category") || "all";
-  const sort = searchParams.get("sort") || "title_asc";
-  const page = parseInt(searchParams.get("page") || "1", 10);
-
-  function updateParam(key, value) {
-    const next = new URLSearchParams(searchParams);
-    if (value === "all" || !value) next.delete(key);
-    else next.set(key, value);
-    next.delete("page"); // reset ke page 1 saat filter berubah
-    setSearchParams(next);
-  }
-
-  // Filter dan sort
-  const filtered = books.filter(b => {
-    const matchQuery = b.title.toLowerCase().includes(query.toLowerCase()) ||
-                       b.author.toLowerCase().includes(query.toLowerCase());
-    const matchCategory = category === "all" || b.category === category;
-    return matchQuery && matchCategory;
-  });
-
-  // Pagination
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(filtered.length / itemsPerPage);
-  const paginated = filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
-  return (/* ... */);
-}
-```
+Petunjuk: sumber kebenaran filter ada di URL, bukan di `useState`. Bagaimana membaca nilainya (dan memberi nilai bawaan)? Kenapa halaman perlu di-reset ke 1 saat filter berubah? Hitung total halaman dari hasil filter, bukan dari seluruh data.
 
 ### Aturan
 - Search params di-parse setiap render — tidak ada local state untuk filter

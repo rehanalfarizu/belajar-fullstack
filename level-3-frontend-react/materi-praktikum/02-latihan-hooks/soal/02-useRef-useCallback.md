@@ -23,13 +23,9 @@ Component `SearchBar`:
 - Saat mount: input auto-focused
 - Gunakan `useRef` untuk mereferensikan DOM element
 
-```jsx
-const inputRef = useRef(null);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-useRef-useCallback Soal 2A — SearchBar auto-focus").
 
-useEffect(() => {
-  inputRef.current.focus();
-}, []);
-```
+Petunjuk: ref mana yang menunjuk ke `<input>`, dan di prop mana ia dipasang? Kapan elemen DOM sudah ada sehingga aman dipanggil `.focus()`?
 
 ### Soal 2B — Stopwatch dengan useRef (Mutable Timer)
 Component `Stopwatch`:

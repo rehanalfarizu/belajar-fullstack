@@ -36,42 +36,9 @@ Buat EventEmitter untuk system notifikasi dan logging.
 
 ## Contoh Code
 
-```javascript
-const { EventEmitter } = require("events");
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "Soal 06 — Contoh Logger berlevel (dari soal)").
 
-class Logger extends EventEmitter {
-  info(msg) {
-    console.log("[INFO]", msg);
-    this.emit("log", { level: "info", msg, time: new Date() });
-  }
-
-  warn(msg) {
-    console.warn("[WARN]", msg);
-    this.emit("log", { level: "warn", msg, time: new Date() });
-  }
-
-  error(msg) {
-    console.error("[ERROR]", msg);
-    this.emit("log", { level: "error", msg, time: new Date() });
-  }
-}
-
-const logger = new Logger();
-
-logger.on("log", entry => {
-  console.log("Handler 1:", entry);
-});
-
-logger.on("log", entry => {
-  if (entry.level === "error") {
-    // Send to monitoring
-    console.log("Monitoring:", entry);
-  }
-});
-
-logger.info("Server started");
-logger.error("Database connection failed");
-```
+Petunjuk: class apa yang perlu di-extend supaya punya `on` dan `emit`? Satu method per level (info, warn, error) mengerjakan dua hal, apa saja? Kenapa listener kedua bisa memfilter hanya level `error`?
 
 ---
 

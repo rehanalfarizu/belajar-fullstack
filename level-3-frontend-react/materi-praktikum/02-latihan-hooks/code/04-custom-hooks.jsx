@@ -1,6 +1,6 @@
 // ============================================================
-// FILE: 02-latihan-hooks/code/05-custom-hook.jsx
-// MATERI: Custom Hooks — useLocalStorage, useDebounce, usePrevious
+// FILE: 02-latihan-hooks/code/04-custom-hooks.jsx
+// MATERI: Custom Hooks — useLocalStorage, useDebounce, usePrevious (soal/04-custom-hooks.md)
 // ============================================================
 import { useState, useEffect, useRef, useMemo } from "react";
 

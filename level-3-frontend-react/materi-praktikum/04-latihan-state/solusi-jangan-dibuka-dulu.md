@@ -662,3 +662,219 @@ function useContextSelector(context, selector) {
   return selected;
 }
 ```
+
+## 01-context-api Soal 01 — ProtectedRoute dengan requiredRole
+
+```jsx
+function ProtectedRoute({ children, requiredRole }) {
+  const { isAuthenticated, isLoading, user } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) {
+    return <div className="loading-screen">Memuat session...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (requiredRole && user?.role !== requiredRole) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+}
+```
+
+## 01-context-api Soal 02 — AuthProvider dengan persistence
+
+```jsx
+const STORAGE_KEY = "auth_state";
+
+export function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(authReducer, {
+    isLoading: true, // initial loading true
+    user: null,
+    isAuthenticated: false,
+    error: null,
+  });
+
+  // Hydrate dari localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.user && parsed.isAuthenticated) {
+          dispatch({ type: "AUTH_SUCCESS", payload: parsed.user });
+        } else {
+          dispatch({ type: "AUTH_END_LOADING" }); // custom action
+        }
+      } else {
+        dispatch({ type: "AUTH_END_LOADING" });
+      }
+    } catch {
+      dispatch({ type: "AUTH_END_LOADING" });
+    }
+  }, []);
+
+  // Persist ke localStorage saat state berubah
+  useEffect(() => {
+    if (!state.isLoading) {
+      if (state.isAuthenticated) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          user: state.user,
+          isAuthenticated: state.isAuthenticated,
+        }));
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, [state.user, state.isAuthenticated, state.isLoading]);
+
+  // ...
+}
+```
+
+## 02-split-context Soal 02 — Implementasi useContextSelector
+
+```jsx
+function useContextSelector(context, selector) {
+  const fullState = useContext(context);
+  const [selected, setSelected] = useState(() => selector(fullState));
+
+  useEffect(() => {
+    const next = selector(fullState);
+    if (next !== selected) {
+      setSelected(next);
+    }
+  }, [fullState, selector, selected]);
+
+  return selected;
+}
+```
+
+## 03-context-selector Soal 01 — Implementasi useContextSelector
+
+```jsx
+function useContextSelector(context, selector) {
+  const fullState = useContext(context);
+  const [selected, setSelected] = useState(() => selector(fullState));
+
+  useEffect(() => {
+    const next = selector(fullState);
+    if (next !== selected) {
+      setSelected(next);
+    }
+  }, [fullState, selector, selected]);
+
+  return selected;
+}
+```
+
+## 04-persist-state Soal 01 — createPersistMiddleware
+
+```js
+function createPersistMiddleware(key, reducer) {
+  return (state, action) => {
+    const nextState = reducer(state, action);
+
+    // Simpan ke localStorage setelah setiap action
+    try {
+      window.localStorage.setItem(key, JSON.stringify(nextState));
+    } catch (err) {
+      console.warn("Persist failed:", err);
+    }
+
+    return nextState;
+  };
+}
+```
+
+## 04-persist-state Soal 01 — createUndoMiddleware
+
+```js
+function createUndoMiddleware(reducer) {
+  let past = [];
+  let future = [];
+
+  return (state, action) => {
+    if (action.type === "UNDO") {
+      if (past.length === 0) return state;
+      const previous = past[past.length - 1];
+      past = past.slice(0, -1);
+      future = [state, ...future];
+      return previous;
+    }
+
+    if (action.type === "REDO") {
+      if (future.length === 0) return state;
+      const next = future[0];
+      future = future.slice(1);
+      past = [...past, state];
+      return next;
+    }
+
+    const nextState = reducer(state, action);
+    past = [...past, state];
+    future = []; // Reset future saat action baru
+    return nextState;
+  };
+}
+```
+
+## 04-persist-state Soal 01 — applyMiddleware
+
+```js
+function applyMiddleware(reducer, ...middlewares) {
+  return middlewares.reduce((acc, mw) => mw(acc), reducer);
+}
+
+// Usage:
+const rootReducer = applyMiddleware(
+  notesReducer,
+  (reducer) => createPersistMiddleware("notes_state", reducer),
+  createUndoMiddleware
+);
+```
+
+## 04-persist-state Soal 01 — Shortcut keyboard undo/redo
+
+```js
+useEffect(() => {
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+      if (e.shiftKey) {
+        dispatch({ type: "REDO" });
+      } else {
+        dispatch({ type: "UNDO" });
+      }
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
+}, []);
+```
+
+## 02-split-context Soal 02 — useContextSelector versi sederhana
+
+```jsx
+function useContextSelector(context, selector) {
+  const state = useContext(context);
+  return selector(state);
+}
+```
+
+Catatan: versi ini hanya membungkus `useContext`, jadi komponen tetap re-render setiap context berubah. Selector yang benar-benar menahan re-render butuh store dengan mekanisme subscribe (mis. `useSyncExternalStore`).
+
+## 03-context-selector Soal 01 — useContextSelector versi sederhana
+
+```jsx
+function useContextSelector(context, selector) {
+  const state = useContext(context);
+  return selector(state);
+}
+```
+
+Catatan: versi ini hanya membungkus `useContext`, jadi komponen tetap re-render setiap context berubah. Selector yang benar-benar menahan re-render butuh store dengan mekanisme subscribe (mis. `useSyncExternalStore`).

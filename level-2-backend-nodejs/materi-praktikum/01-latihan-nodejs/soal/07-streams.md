@@ -39,33 +39,9 @@ Buat program yang membaca file besar dengan stream, pipe data.
 
 ## Contoh Code
 
-```javascript
-const fs = require("fs");
-const { createGzip } = require("zlib");
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "Soal 07 — Contoh copy, gzip, dan hitung kata dengan stream (dari soal)").
 
-// Copy file dengan stream
-const readable = fs.createReadStream("file.txt", "utf-8");
-const writable = fs.createWriteStream("copy.txt");
-
-readable.pipe(writable);
-
-// Compress file dengan gzip
-const input = fs.createReadStream("big-file.txt");
-const output = fs.createWriteStream("big-file.txt.gz");
-const gzip = createGzip();
-
-input.pipe(gzip).pipe(output);
-
-// Count words dengan stream
-let wordCount = 0;
-fs.createReadStream("article.txt", "utf-8")
-  .on("data", chunk => {
-    wordCount += chunk.split(/\s+/).length;
-  })
-  .on("end", () => {
-    console.log("Words:", wordCount);
-  });
-```
+Petunjuk: apa yang mengalir lewat `pipe`, dan siapa yang menjadi sumber dan tujuannya? Untuk gzip, di mana transformasinya diselipkan? Untuk hitung kata, kenapa memakai event `data` dan `end`, bukan membaca seluruh file sekaligus?
 
 ---
 

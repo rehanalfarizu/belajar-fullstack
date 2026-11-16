@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 03-latihan-router/code/02-useParams.jsx
+// FILE: 03-latihan-router/code/02-nested-routes.jsx
 // MATERI: React Router — useParams, Nested Routes, Programmatic Nav
 // ============================================================
 import { Routes, Route, Link, NavLink, Outlet, useParams, useNavigate, useLocation } from "react-router-dom";

@@ -33,40 +33,9 @@ Context untuk theme switching (light/dark):
 ```
 
 **Implementasi:**
-```jsx
-const ThemeContext = createContext(null);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "07-useContext Soal 7A — ThemeContext (implementasi)").
 
-export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "light";
-    return localStorage.getItem("theme") || "light";
-  });
-
-  const toggleTheme = () => {
-    setTheme(prev => {
-      const next = prev === "light" ? "dark" : "light";
-      localStorage.setItem("theme", next);
-      return next;
-    });
-  };
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === "dark" }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) throw new Error("useTheme must be used within ThemeProvider");
-  return context;
-}
-```
+Petunjuk: nilai awal theme dibaca dari mana? Di mana efek ke elemen `<html>` ditaruh? Apa gunanya `useTheme` melempar error bila dipakai di luar Provider?
 
 ### Soal 7B — CartContext dengan useReducer
 Context untuk shopping cart dengan reducer:

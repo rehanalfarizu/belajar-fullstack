@@ -1,6 +1,6 @@
 // ============================================================
-// FILE: 02-latihan-hooks/code/01-useState.jsx
-// MATERI: useState — Counter dengan Functional Update Pattern
+// FILE: 02-latihan-hooks/code/01-useState-useEffect.jsx
+// MATERI: useEffect + useRef — TrafficLight (soal/01-useState-useEffect.md, 1A), plus latihan tambahan
 // ============================================================
 import { useState, useRef, useEffect } from "react";
 

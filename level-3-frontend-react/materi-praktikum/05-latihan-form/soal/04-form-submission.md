@@ -21,36 +21,9 @@ Buat `CommentSection` — sistem komentar dengan optimistic updates.
 ```
 
 **Optimistic Update Pattern:**
-```js
-const handleSubmit = async (e) => {
-  e.preventDefault();
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-form-submission Soal 01 — Optimistic handleSubmit").
 
-  const newComment = {
-    id: `C${Date.now()}`,
-    author: form.author,
-    content: form.content,
-    timestamp: Date.now(),
-    likes: 0,
-    likedByUser: false,
-  };
-
-  // Optimistic: langsung tambahkan ke UI
-  setComments(prev => [newComment, ...prev]);
-  setForm({ author: "", content: "" });
-
-  try {
-    // Submit ke server
-    await simulateApiCall(newComment);
-    setSubmitStatus({ type: "success", message: "Komentar berhasil dikirim" });
-  } catch (err) {
-    // Rollback jika gagal
-    setComments(prev => prev.filter(c => c.id !== newComment.id));
-    setSubmitStatus({ type: "error", message: err.message });
-    // Restore form data
-    setForm({ author: newComment.author, content: newComment.content });
-  }
-};
-```
+Petunjuk: urutan kejadian: (1) UI langsung diperbarui, (2) permintaan dikirim, (3) kalau gagal, apa yang harus dikembalikan, dan data form apa yang perlu dipulihkan? Bagaimana mengenali komentar mana yang di-rollback?
 
 **Fitur:**
 1. **Comment Form**: author name + content textarea + submit button
@@ -62,21 +35,9 @@ const handleSubmit = async (e) => {
 7. **Timestamps**: tampilkan relative time ("2 jam lalu", "Kemarin")
 
 **Relative Time Helper:**
-```js
-function getRelativeTime(timestamp) {
-  const now = Date.now();
-  const diff = now - timestamp;
-  const seconds = Math.floor(diff / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-form-submission Soal 01 — getRelativeTime").
 
-  if (days > 0) return `${days} hari lalu`;
-  if (hours > 0) return `${hours} jam lalu`;
-  if (minutes > 0) return `${minutes} menit lalu`;
-  return "Baru saja";
-}
-```
+Petunjuk: ubah selisih milidetik ke detik, menit, jam, hari, lalu cek dari satuan terbesar ke terkecil. Contoh keluaran: `Baru saja`, `5 menit lalu`, `2 jam lalu`, `3 hari lalu`.
 
 **Simulated API:**
 ```js
@@ -148,41 +109,14 @@ const LOCATION_DATA = {
 ```
 
 **Cascading Logic:**
-```js
-const handleCountryChange = (country) => {
-  setForm(prev => ({
-    ...prev,
-    country,
-    province: "", // Reset dependent fields
-    city: "",
-    district: "",
- }));
-};
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-form-submission Soal 02 — Handler cascading dropdown").
 
-const handleProvinceChange = (province) => {
-  setForm(prev => ({
-    ...prev,
-    province,
-    city: "",      // Reset city dan district
-    district: "",
-  }));
-};
-
-const handleCityChange = (city) => {
-  setForm(prev => ({
-    ...prev,
-    city,
-    district: "", // Reset district
-  }));
-};
-```
+Petunjuk: saat induk berubah, field mana saja di bawahnya yang harus dikosongkan? Apa yang terjadi kalau tidak dikosongkan?
 
 **Computed Options:**
-```js
-const provinceOptions = form.country ? Object.keys(LOCATION_DATA[form.country]) : [];
-const cityOptions = form.province ? LOCATION_DATA[form.country]?.[form.province] || [] : [];
-const districtOptions = form.city ? LOCATION_DATA[form.country]?.[form.province]?.[form.city] || [] : [];
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "04-form-submission Soal 02 — Opsi dropdown turunan").
+
+Petunjuk: opsi tiap dropdown diturunkan dari data dan pilihan induknya, tidak perlu disimpan sebagai state. Waspadai nilai induk yang masih kosong, dan cek bentuk data di tiap level.
 
 **Fitur:**
 1. Semua dropdown di-disable jika parent field belum dipilih

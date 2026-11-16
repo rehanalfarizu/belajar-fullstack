@@ -14,16 +14,9 @@ Buat beberapa HOCs yang umum digunakan dan demonstrate penggunaannya.
    - Jika `isLoading === true`, render spinner + "Memuat..."
    - Jika `isLoading === false`, render component asli dengan props aslinya
    - Props yang diperlukan: `isLoading`, component yang di-wrap
-   ```js
-   function withLoading(WrappedComponent) {
-     return function WithLoading({ isLoading, ...props }) {
-       if (isLoading) {
-         return <div className="loading-spinner">Memuat...</div>;
-       }
-       return <WrappedComponent {...props} />;
-     };
-   }
-   ```
+   Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-component-patterns Soal 01 — withLoading").
+
+   Petunjuk: HOC adalah fungsi yang menerima komponen dan mengembalikan komponen baru. Prop mana yang dikonsumsi HOC dan mana yang diteruskan ke komponen asli?
 
 2. **`withErrorBoundary(Component)`** — menangkap errors dari child component:
    - Gunakan `componentDidCatch` via class component (HOC harus class atau gunakan try-catch di functional)
@@ -76,21 +69,9 @@ Memahami render props pattern sebagai alternatif HOC untuk share logic antar com
 Buat `MouseTracker` component yang share cursor position ke components yang membutuhkannya.
 
 **`MouseTracker` component:**
-```jsx
-function MouseTracker({ render }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-component-patterns Soal 02 — MouseTracker").
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  return render(position);
-}
-```
+Petunjuk: komponen ini hanya menyimpan posisi dan menyerahkan cara menampilkannya ke luar. Apa yang dikembalikan, dan kenapa listener harus dibersihkan?
 
 **Usage:**
 ```jsx

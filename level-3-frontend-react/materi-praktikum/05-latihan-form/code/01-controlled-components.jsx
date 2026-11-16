@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 05-latihan-form/code/01-controlled-form.jsx
+// FILE: 05-latihan-form/code/01-controlled-components.jsx
 // MATERI: Controlled Components, Multiple Inputs, Array Fields
 // ============================================================
 import { useState } from "react";

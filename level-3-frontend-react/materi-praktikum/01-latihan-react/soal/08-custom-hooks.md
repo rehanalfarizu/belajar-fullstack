@@ -41,18 +41,9 @@ Custom hook `useDebounce(value, delay)`:
 - Mengembalikan debounced value — nilai "terlambat" setelah `delay` ms tidak ada perubahan
 - Berguna untuk search input — tidak langsung fetch setiap keystroke
 
-```jsx
-function useDebounce(value, delay = 500) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "08-custom-hooks Soal 8B — useDebounce").
 
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-```
+Petunjuk: apa yang harus terjadi pada timer lama kalau `value` berubah lagi sebelum `delay` habis? Di mana tempat membereskannya?
 
 ### Soal 8C — useFetch
 Custom hook `useFetch(url, options)`:

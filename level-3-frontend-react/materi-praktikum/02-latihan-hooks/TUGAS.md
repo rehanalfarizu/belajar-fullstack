@@ -23,8 +23,8 @@ Setelah selesai, kamu punya:
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | `soal/01-useState-useEffect.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/01-useState-useEffect.jsx` (1A) dan `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/02-useRef-useCallback.jsx` bagian `GitHubUserSearch` (1B) | 90 menit |
-| 02 | `soal/02-useRef-useCallback.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/02-useRef-useCallback.jsx` (sisa TODO) + file baru buatanmu untuk 2A dan 2C | 90 menit |
+| 01 | `soal/01-useState-useEffect.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/01-useState-useEffect.jsx` (1A) dan `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/01b-useEffect-github-fetch.jsx` bagian `GitHubUserSearch` (1B) | 90 menit |
+| 02 | `soal/02-useRef-useCallback.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/02-useRef-useCallback.jsx` (kerangka 2A, 2B, 2C) | 90 menit |
 | 03 | `soal/03-useContext-useReducer.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/03-useContext-useReducer.jsx` (kerangka dengan TODO) | 90–120 menit |
 | 04 | `soal/04-custom-hooks.md` | `level-3-frontend-react/materi-praktikum/02-latihan-hooks/code/04-custom-hooks.jsx` | 90 menit |
 
@@ -32,9 +32,11 @@ Setelah selesai, kamu punya:
 
 - `code/01` berisi TODO `TrafficLight`, `ColorPicker`, `AnimatedCounter`.
   TrafficLight = soal 1A. Dua lainnya bonus.
-- `code/02` justru berisi `GitHubUserSearch` (soal 1B), timer/clock, document
-  title, resize listener, dan fetch API. TODO auto-focus (2A) dan
-  `useCallback` + `React.memo` (2C) **tidak ada** di starter. Buat file sendiri.
+- `code/01b-useEffect-github-fetch.jsx` berisi `GitHubUserSearch` (soal 1B),
+  timer/clock, document title, resize listener, dan fetch API. Ini pelengkap
+  soal 01 (dulu salah bernama `02-useRef-useCallback.jsx`).
+- `code/02-useRef-useCallback.jsx` berisi kerangka `TODO(human)` untuk soal 2A
+  (auto-focus), 2B (stopwatch), dan 2C (`useCallback` + `React.memo`).
 - `code/03-useContext-useReducer.jsx` berupa kerangka dengan `TODO(human)` dan
   kriteria "Selesai kalau". Implementasi lama dipindah ke
   [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Jangan dibuka
@@ -44,8 +46,7 @@ Setelah selesai, kamu punya:
   juga `useFetch` dan `useToggle`, yang tidak ada di starter. Tulis sendiri.
 - Soal 2B: `elapsedTime` tampil di layar, jadi dia state. Yang masuk `useRef`
   adalah interval ID dan waktu mulai (tidak tampil, tidak perlu memicu render).
-  Starter `code/02-useRef-useCallback.jsx` sebenarnya isinya useEffect (soal 01);
-  di akhir file ada kerangka kosong untuk 2B. Coba dulu taruh `elapsedTime` di
+  Kerangka 2B ada di `code/02-useRef-useCallback.jsx`. Coba dulu taruh `elapsedTime` di
   `useRef` dan amati apa yang terjadi pada layar, lalu catat di jurnal.
 
 ---

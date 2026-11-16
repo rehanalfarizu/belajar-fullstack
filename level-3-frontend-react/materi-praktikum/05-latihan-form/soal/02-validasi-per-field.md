@@ -23,78 +23,25 @@ Buat `RegistrationForm` dengan comprehensive validation dan touched state.
 ```
 
 **Validation Rules:**
-```js
-function validateField(name, value, allValues = {}) {
-  switch (name) {
-    case "fullName":
-      if (!value.trim()) return "Nama lengkap wajib diisi";
-      if (value.trim().length < 2) return "Nama minimal 2 karakter";
-      if (!/^[a-zA-Z\s]+$/.test(value)) return "Nama hanya boleh huruf dan spasi";
-      return null;
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-validasi-per-field Soal 01 — validateField").
 
-    case "email":
-      if (!value) return "Email wajib diisi";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Format email tidak valid";
-      return null;
+Aturan yang harus diterapkan (pesan error bebas, tapi harus informatif):
 
-    case "username":
-      if (!value) return "Username wajib diisi";
-      if (value.length < 3) return "Username minimal 3 karakter";
-      if (!/^[a-zA-Z0-9_]+$/.test(value)) return "Username hanya huruf, angka, dan underscore";
-      return null;
+- `fullName`: wajib, minimal 2 karakter, hanya huruf dan spasi.
+- `email`: wajib, format email valid.
+- `username`: wajib, minimal 3 karakter, hanya huruf, angka, underscore.
+- `password`: wajib, minimal 8 karakter, ada huruf besar, huruf kecil, dan angka.
+- `confirmPassword`: wajib, harus sama dengan `password` (butuh nilai field lain).
+- `age`: wajib, angka, 17 sampai 100.
+- `website`: opsional; kalau diisi harus diawali `http://` atau `https://`.
+- `bio`: opsional; maksimal 200 karakter.
 
-    case "password":
-      if (!value) return "Password wajib diisi";
-      if (value.length < 8) return "Password minimal 8 karakter";
-      if (!/(?=.*[A-Z])/.test(value)) return "Minimal1 huruf besar";
-      if (!/(?=.*[a-z])/.test(value)) return "Minimal 1 huruf kecil";
-      if (!/(?=.*\d)/.test(value)) return "Minimal1 angka";
-      return null;
-
-    case "confirmPassword":
-      if (!value) return "Konfirmasi password wajib diisi";
-      if (value !== allValues.password) return "Password tidak cocok";
-      return null;
-
-    case "age":
-      if (!value) return "Umur wajib diisi";
-      const ageNum = parseInt(value, 10);
-      if (isNaN(ageNum)) return "Umur harus angka";
-      if (ageNum < 17) return "Minimal17 tahun";
-      if (ageNum > 100) return "Maksimal 100 tahun";
-      return null;
-
-    case "website":
-      if (value && !/^https?:\/\/.+\..+/.test(value)) return "URL harus diawali http:// atau https://";
-      return null;
-
-    case "bio":
-      if (value && value.length > 200) return "Bio maksimal 200 karakter";
-      return null;
-
-    default:
-      return null;
-  }
-}
-```
+Fungsi mengembalikan teks error atau `null` kalau valid. Pikirkan: kenapa `confirmPassword` butuh parameter ketiga?
 
 **Touched State Pattern:**
-```js
-const [touched, setTouched] = useState({});
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-validasi-per-field Soal 01 — handleBlur dan touched").
 
-const handleBlur = (e) => {
-  const { name, value } = e.target;
-  setTouched(prev => ({ ...prev, [name]: true }));
-
-  const error = validateField(name, value, values);
-  setErrors(prev => {
-    const next = { ...prev };
-    if (error) next[name] = error;
-    else delete next[name];
-    return next;
-  });
-};
-```
+Petunjuk: saat blur ada dua hal yang dicatat. Apa saja? Bagaimana menghapus key error dari object tanpa mengubah state lama?
 
 **Fitur:**
 1. Error hanya tampil JIKA field sudah di-touch (touched[field] === true)
@@ -105,23 +52,9 @@ const handleBlur = (e) => {
 6. Form-level error: "Mohon perbaiki kesalahan di bawah" jika ada error
 
 **Password Strength Display:**
-```js
-function getPasswordStrength(password) {
-  if (!password) return { score: 0, label: "", color: "" };
-  let score = 0;
-  if (password.length >= 8) score++;
-  if (password.length >= 12) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[a-z]/.test(password)) score++;
-  if (/\d/.test(password)) score++;
-  if (/[!@#$%^&*]/.test(password)) score++;
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-validasi-per-field Soal 01 — getPasswordStrength").
 
-  if (score <= 2) return { score, label: "Lemah", color: "#ef4444" };
-  if (score <= 4) return { score, label: "Cukup", color: "#f59e0b" };
-  if (score <= 5) return { score, label: "Kuat", color: "#22c55e" };
-  return { score, label: "Sangat Kuat", color: "#16a34a" };
-}
-```
+Aturan skor: tambah 1 poin untuk tiap kriteria yang terpenuhi (panjang minimal 8, panjang minimal 12, ada huruf besar, ada huruf kecil, ada angka, ada simbol `!@#$%^&*`), maksimal 6. Pemetaan: skor 0 dikosongkan, 1-2 = Lemah (merah), 3-4 = Cukup (oranye), 5 = Kuat (hijau), 6 = Sangat Kuat (hijau tua). Fungsi mengembalikan `{ score, label, color }`.
 
 ### Aturan
 - `handleBlur` wajib memanggil `setTouched` untuk menandai field sebagai touched

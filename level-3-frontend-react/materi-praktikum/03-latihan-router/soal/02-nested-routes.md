@@ -18,29 +18,9 @@ Buat `DashboardApp` dengan nested routes untuk admin panel.
 ```
 
 **DashboardLayout Component:**
-```jsx
-function DashboardLayout() {
-  const location = useLocation();
-  return (
-    <div className="dashboard">
-      <aside className="sidebar">
-        <h2>Admin Panel</h2>
-        <nav>
-          <NavLink to="/dashboard" end>Overview</NavLink>
-          <NavLink to="/dashboard/users">Users</NavLink>
-          <NavLink to="/dashboard/settings">Settings</NavLink>
-          <NavLink to="/dashboard/reports">Reports</NavLink>
-        </nav>
-      </aside>
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-nested-routes Soal 01 — DashboardLayout").
 
-      <main className="dashboard-content">
-        {/* Child route dirender di Outlet */}
-        <Outlet />
-      </main>
-    </div>
-  );
-}
-```
+Petunjuk: komponen layout ini harus menyediakan satu tempat bagi halaman anak. Komponen bawaan React Router mana yang menandai tempat itu? Kenapa link Overview butuh `end`?
 
 **Pages:**
 - `DashboardHome` — overview stats (placeholder cards)
@@ -57,14 +37,9 @@ function DashboardLayout() {
 4. `<Outlet>` di DashboardLayout tempat child routes di-render
 
 **Route Configuration:**
-```jsx
-<Route path="/dashboard" element={<DashboardLayout />}>
-  <Route index element={<DashboardHome />} />
-  <Route path="users" element={<UserManagement />} />
-  <Route path="settings" element={<SettingsPage />} />
-  <Route path="reports" element={<ReportsPage />} />
-</Route>
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-nested-routes Soal 01 — Rute bersarang").
+
+Petunjuk: bagaimana menulis rute anak tanpa mengulang `/dashboard`? Rute mana yang tampil saat alamatnya persis `/dashboard`?
 
 ### Aturan
 - Nested routes harus berada DI DALAM parent route definition

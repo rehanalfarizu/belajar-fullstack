@@ -13,11 +13,7 @@ Implementasikan `useContextSelector` pattern — custom hook yang memungkinkan c
 // Context menyimpan state + dispatch
 const AppContext = createContext(null);
 
-// useContextSelector memungkinkan memilih subset
-function useContextSelector(context, selector) {
-  const state = useContext(context);
-  return selector(state);
-}
+// useContextSelector(context, selector) — hook ini yang kamu tulis sendiri
 
 // Usage: component hanya re-render saat user berubah
 function UserName() {
@@ -33,21 +29,9 @@ function ThemeIcon() {
 ```
 
 **Implementasi useContextSelector:**
-```jsx
-function useContextSelector(context, selector) {
-  const fullState = useContext(context);
-  const [selected, setSelected] = useState(() => selector(fullState));
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-context-selector Soal 01 — Implementasi useContextSelector").
 
-  useEffect(() => {
-    const next = selector(fullState);
-    if (next !== selected) {
-      setSelected(next);
-    }
-  }, [fullState, selector, selected]);
-
-  return selected;
-}
-```
+Petunjuk: apakah `useContext(context)` di dalam hook masih membuat komponen re-render setiap kali context berubah, apa pun yang dipilih selector? Ukur dengan render counter, lalu pikirkan di mana langganan (subscribe) seharusnya terjadi.
 
 **Demo Application:**
 Buat `DashboardApp` dengan single AppContext yang berisi:

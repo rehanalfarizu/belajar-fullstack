@@ -474,3 +474,228 @@ function URLStateApp() {
 }
 ============================================================
 ```
+
+## 01-routing-dasar Soal 01 — App dan daftar rute
+
+```bash
+npm install react-router-dom
+```
+
+## 01-routing-dasar Soal 01 — NavLink dengan kelas aktif
+
+```jsx
+// App.jsx
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        {/* Navigasi dengan Link */}
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+## 01-routing-dasar Soal 02 — DashboardLayout
+
+```jsx
+<NavLink
+  to="/about"
+  className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+>
+  About
+</NavLink>
+```
+
+## 01-routing-dasar Soal 02 — Rute bersarang
+
+```
+/dashboard              → DashboardLayout
+  ├── /dashboard        → DashboardHome (index)
+  ├── /dashboard/users  → UserManagement
+  ├── /dashboard/settings → SettingsPage
+  └── /dashboard/reports → ReportsPage
+```
+
+## 01-routing-dasar Soal 03 — LoginPage dan navigate
+
+```jsx
+function DashboardLayout() {
+  const location = useLocation();
+  return (
+    <div className="dashboard">
+      <aside className="sidebar">
+        <h2>Admin Panel</h2>
+        <nav>
+          <NavLink to="/dashboard" end>Overview</NavLink>
+          <NavLink to="/dashboard/users">Users</NavLink>
+          <NavLink to="/dashboard/settings">Settings</NavLink>
+          <NavLink to="/dashboard/reports">Reports</NavLink>
+        </nav>
+      </aside>
+
+      <main className="dashboard-content">
+        {/* Child route dirender di Outlet */}
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+```
+
+## 01-routing-dasar Soal 03 — Membaca location state
+
+```jsx
+<Route path="/dashboard" element={<DashboardLayout />}>
+  <Route index element={<DashboardHome />} />
+  <Route path="users" element={<UserManagement />} />
+  <Route path="settings" element={<SettingsPage />} />
+  <Route path="reports" element={<ReportsPage />} />
+</Route>
+```
+
+## 01-routing-dasar Soal 03 — ProtectedRoute dengan useEffect
+
+```jsx
+function LoginPage() {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // validate...
+    // jika berhasil:
+    navigate("/dashboard", { replace: true });
+    // atau dengan state:
+    navigate("/dashboard", { state: { from: "/login", message: "Login berhasil!" } });
+  };
+
+  return <form>...</form>;
+}
+```
+
+## 02-nested-routes Soal 01 — DashboardLayout
+
+```jsx
+function DashboardLayout() {
+  const location = useLocation();
+  return (
+    <div className="dashboard">
+      <aside className="sidebar">
+        <h2>Admin Panel</h2>
+        <nav>
+          <NavLink to="/dashboard" end>Overview</NavLink>
+          <NavLink to="/dashboard/users">Users</NavLink>
+          <NavLink to="/dashboard/settings">Settings</NavLink>
+          <NavLink to="/dashboard/reports">Reports</NavLink>
+        </nav>
+      </aside>
+
+      <main className="dashboard-content">
+        {/* Child route dirender di Outlet */}
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+```
+
+## 02-nested-routes Soal 01 — Rute bersarang
+
+```jsx
+<Route path="/dashboard" element={<DashboardLayout />}>
+  <Route index element={<DashboardHome />} />
+  <Route path="users" element={<UserManagement />} />
+  <Route path="settings" element={<SettingsPage />} />
+  <Route path="reports" element={<ReportsPage />} />
+</Route>
+```
+
+## 03-search-params Soal 01 — BookCatalog (filter dan pagination)
+
+```jsx
+function BookCatalog() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get("q") || "";
+  const category = searchParams.get("category") || "all";
+  const sort = searchParams.get("sort") || "title_asc";
+  const page = parseInt(searchParams.get("page") || "1", 10);
+
+  function updateParam(key, value) {
+    const next = new URLSearchParams(searchParams);
+    if (value === "all" || !value) next.delete(key);
+    else next.set(key, value);
+    next.delete("page"); // reset ke page 1 saat filter berubah
+    setSearchParams(next);
+  }
+
+  // Filter dan sort
+  const filtered = books.filter(b => {
+    const matchQuery = b.title.toLowerCase().includes(query.toLowerCase()) ||
+                       b.author.toLowerCase().includes(query.toLowerCase());
+    const matchCategory = category === "all" || b.category === category;
+    return matchQuery && matchCategory;
+  });
+
+  // Pagination
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginated = filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+  return (/* ... */);
+}
+```
+
+## 04-protected-routes Soal 4A — AuthContext
+
+```jsx
+const AuthContext = createContext(null);
+
+function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+
+  const login = (username) => {
+    setUser({ name: username, role: "user" });
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated: !!user,
+      login,
+      logout,
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+```
+
+## 04-protected-routes Soal 4B — ProtectedRoute
+
+```jsx
+function ProtectedRoute({ children }) {
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+```

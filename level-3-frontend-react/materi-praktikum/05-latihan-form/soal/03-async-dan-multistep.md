@@ -12,64 +12,23 @@ Buat `SearchableSignupForm` dengan focus management dan async username availabil
 
 1. **Auto-focus**: form input pertama (fullName) auto-focus saat mount
 2. **Focus on error**: saat submit gagal, focus ke field pertama yang error
-   ```js
-   const firstErrorField = Object.keys(errors)[0];
-   if (firstErrorField) {
-     document.querySelector(`[name="${firstErrorField}"]`)?.focus();
-   }
-   ```
+   Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 01 — Focus ke field error pertama").
+
+   Petunjuk: bagaimana mencari elemen input dari nama field-nya, dan kapan fokus dipindahkan (sebelum atau sesudah error ditampilkan)?
 3. **Clear error on focus**: error message hilang saat user mulai memperbaiki field
 4. **Async username check**: debounced 300ms, check availability via API
 5. **Loading indicator**: tampilkan spinner/skeleton saat checking username
 6. **Availability feedback**: visual feedback (green check / red X) setelah check selesai
 
 **Username Availability Check:**
-```js
-const [usernameStatus, setUsernameStatus] = useState({
-  checking: false,
-  available: null, // null | true | false
-  error: null,
-});
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 01 — Cek ketersediaan username").
 
-const abortRef = useRef(null);
-
-const checkUsername = async (username) => {
-  if (username.length < 3) {
-    setUsernameStatus({ checking: false, available: null, error: null });
-    return;
-  }
-
-  // Cancel previous request
-  if (abortRef.current) abortRef.current.abort();
-  abortRef.current = new AbortController();
-
-  setUsernameStatus({ checking: true, available: null, error: null });
-
-  try {
-    await new Promise(r => setTimeout(r, 500)); // simulate API
-    const taken = ["admin", "root", "test", "demo", "user"];
-    const available = !taken.includes(username.toLowerCase());
-    setUsernameStatus({ checking: false, available, error: null });
-  } catch (err) {
-    if (err.name !== "AbortError") {
-      setUsernameStatus({ checking: false, available: null, error: "Gagal check username" });
-    }
-  }
-};
-```
+Petunjuk: ada empat keadaan status (belum dicek, sedang cek, tersedia, tidak tersedia/gagal). Bagaimana membatalkan permintaan lama sebelum memulai yang baru? Untuk simulasi API, daftar username yang sudah dipakai: `admin`, `root`, `test`, `demo`, `user`.
 
 **Debounced Check:**
-```js
-const debouncedCheck = useRef(
-  debounce((val) => checkUsername(val), 300)
-).current;
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 01 — Debounce cek username").
 
-const handleUsernameChange = (e) => {
-  const val = e.target.value;
-  setForm(prev => ({ ...prev, username: val }));
-  debouncedCheck(val);
-};
-```
+Petunjuk: kenapa fungsi debounce harus dibuat sekali saja dan bukan di tiap render? Apa yang dipakai untuk menyimpan instans yang sama antar render? (Fungsi `debounce` boleh kamu tulis sendiri atau ambil dari library.)
 
 **Form Fields:**
 ```js
@@ -147,51 +106,19 @@ const AVAILABLE_SKILLS = [
 ```
 
 **Multi-Select Skills:**
-```js
-const toggleSkill = (skill) => {
-  setFormData(prev => {
-    const skills = prev.step2.skills.includes(skill)
-      ? prev.step2.skills.filter(s => s !== skill)
-      : [...prev.step2.skills, skill];
-    return { ...prev, step2: { ...prev.step2, skills } };
-  });
-};
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 02 — toggleSkill").
+
+Petunjuk: state-nya bersarang (`step2.skills`). Bagaimana memperbarui satu level dalam tanpa mengubah object lama? Bagaimana menambah atau membuang satu item dari array?
 
 **Step Navigation:**
-```js
-const validateCurrentStep = () => {
-  const stepData = formData[`step${currentStep}`];
-  const stepErrors = validateStep(currentStep, stepData);
-  setErrors(stepErrors);
-  return Object.keys(stepErrors).length === 0;
-};
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 02 — Navigasi antar step").
 
-const handleNext = () => {
-  if (validateCurrentStep()) {
-    setCurrentStep(prev => Math.min(prev + 1, 4));
-  }
-};
-
-const handleBack = () => {
-  setCurrentStep(prev => Math.max(prev - 1, 1));
-};
-```
+Petunjuk: Next harus lolos validasi, Back tidak. Bagaimana menjaga nomor step tidak keluar dari 1 sampai 4? Siapa yang menyimpan fungsi `validateStep`?
 
 **Progress Indicator:**
-```jsx
-<div className="step-indicator">
-  {[1, 2, 3, 4].map(step => (
-    <div
-      key={step}
-      className={`step ${step === currentStep ? "active" : ""} ${step < currentStep ? "completed" : ""}`}
-    >
-      <span className="step-number">{step < currentStep ? "✓" : step}</span>
-      <span className="step-label">{labels[step]}</span>
-    </div>
-  ))}
-</div>
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "03-async-dan-multistep Soal 02 — Step indicator").
+
+Petunjuk: satu elemen punya tiga keadaan (aktif, selesai, belum). Bagaimana menurunkan kelas CSS dan isi lingkaran dari `currentStep` saja?
 
 **Fitur:**
 1. Step indicator dengan visual progress (step aktif, completed, upcoming)

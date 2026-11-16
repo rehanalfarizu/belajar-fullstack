@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 04-latihan-state/code/02-theme-context.jsx
+// FILE: 04-latihan-state/code/02-split-context.jsx
 // MATERI: ThemeContext — Light/Dark Mode dengan localStorage
 // ============================================================
 import { createContext, useContext, useState, useEffect, useMemo } from "react";

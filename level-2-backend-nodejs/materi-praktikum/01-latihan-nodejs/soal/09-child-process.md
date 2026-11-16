@@ -36,30 +36,9 @@ Buat program yang menjalankan command shell dan script lain.
 
 ## Contoh Code
 
-```javascript
-const { exec, spawn } = require("child_process");
-const { fork } = require("child_process");
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "Soal 09 — Contoh exec, spawn, dan fork (dari soal)").
 
-// exec: run shell command
-exec("ls -la", (error, stdout, stderr) => {
-  if (error) {
-    console.error("Error:", error.message);
-    return;
-  }
-  console.log("Output:", stdout);
-});
-
-// spawn: streaming output
-const ls = spawn("ls", ["-la", "/tmp"]);
-ls.stdout.on("data", data => console.log(data.toString()));
-ls.stderr.on("data", data => console.error(data.toString()));
-ls.on("close", code => console.log("Exit:", code));
-
-// fork: Node.js worker
-const worker = fork("./worker.js");
-worker.send({ task: "process", id: 1 });
-worker.on("message", msg => console.log("Worker:", msg));
-```
+Petunjuk: kapan output cukup ditunggu sekaligus dan kapan perlu dibaca bertahap? Siapa yang menerima pesan di proses anak, dan lewat apa pesan dikirim balik? Apa risikonya memasukkan input pengguna ke `exec`?
 
 ---
 

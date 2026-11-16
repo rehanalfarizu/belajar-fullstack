@@ -1,6 +1,8 @@
 // ============================================================
-// FILE: 02-latihan-hooks/code/02-useEffect.jsx
+// FILE: 02-latihan-hooks/code/01b-useEffect-github-fetch.jsx
 // MATERI: useEffect — Data Fetching, Cleanup, dan AbortController
+// DIPAKAI SOAL: soal/01-useState-useEffect.md bagian 1B (GitHubUserSearch).
+// Bagian lain di file ini (Stopwatch, title, resize, posts) adalah latihan tambahan.
 // ============================================================
 import { useState, useEffect, useRef } from "react";
 
@@ -181,31 +183,6 @@ export function PostsList() {
   return (
     <div className="posts-list">
       {/* TODO: Loading / Error / List display */}
-    </div>
-  );
-}
-// ============================================================
-// Soal 2B: Stopwatch dengan useRef (kerangka)
-// ============================================================
-// Pegangan: yang tampil di layar = useState. Yang cuma dipakai di balik
-// layar (interval ID, waktu mulai) = useRef.
-//
-// State  : isRunning, elapsedTime (milidetik)
-// Ref    : intervalRef, startTimeRef
-// Aksi   : Start, Stop, Reset
-// Format : MM:SS:ms
-// Jangan lupa membersihkan interval saat unmount.
-
-export function StopwatchRef() {
-  // TODO(human): state isRunning dan elapsedTime
-  // TODO(human): ref untuk interval ID dan waktu mulai
-  // TODO(human): handleStart, handleStop, handleReset
-  // TODO(human): cleanup interval saat unmount
-
-  return (
-    <div className="stopwatch-ref">
-      {/* TODO(human): tampilan MM:SS:ms */}
-      {/* TODO(human): tombol Start / Stop / Reset */}
     </div>
   );
 }

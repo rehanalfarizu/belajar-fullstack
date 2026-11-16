@@ -146,7 +146,7 @@ useEffect(() => {
 }, [isAuto, currentLight]);
 ```
 
-## 02-useRef-useCallback.jsx (blok jawaban yang tadinya dikomentari di starter)
+## 01b-useEffect-github-fetch.jsx, dulu bernama 02-useRef-useCallback.jsx (blok jawaban yang tadinya dikomentari di starter)
 
 ### Baris 26–57 (sebelum diubah)
 
@@ -246,4 +246,29 @@ useEffect(() => {
     .then(data => { setResults(data); setLoading(false); })
     .catch(() => setLoading(false));
 }, [debouncedQuery]);
+```
+
+## 02-useRef-useCallback Soal 2A — SearchBar auto-focus
+
+```jsx
+const inputRef = useRef(null);
+
+useEffect(() => {
+  inputRef.current.focus();
+}, []);
+```
+
+## 04-custom-hooks Soal 4B — useDebounce
+
+```jsx
+function useDebounce(value, delay = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 ```

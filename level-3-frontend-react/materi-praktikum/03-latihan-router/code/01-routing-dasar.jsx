@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 03-latihan-router/code/01-app-router.jsx
+// FILE: 03-latihan-router/code/01-routing-dasar.jsx
 // MATERI: React Router v6 — Setup, Routes, Link, NavLink
 // ============================================================
 import { BrowserRouter, Routes, Route, Link, NavLink, Outlet } from "react-router-dom";

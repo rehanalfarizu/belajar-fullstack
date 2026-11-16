@@ -9,9 +9,9 @@ Memahami setup React Router v6, perbedaan `<Link>` vs `<a href>`, dan cara mende
 Buat aplikasi `PortfolioSite` — website portfolio sederhana dengan beberapa halaman.
 
 **Setup:**
-```bash
-npm install react-router-dom
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 01 — App dan daftar rute").
+
+Petunjuk: bungkus apa yang dibutuhkan agar `Link` dan `Routes` bekerja? Rute mana yang menangkap semua alamat yang tidak dikenal, dan di urutan mana ia ditaruh?
 
 **Halaman yang diperlukan:**
 
@@ -22,28 +22,9 @@ npm install react-router-dom
 5. `*` — 404 Not Found page
 
 **App Structure:**
-```jsx
-// App.jsx
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 01 — NavLink dengan kelas aktif").
 
-function App() {
-  return (
-    <BrowserRouter>
-      <nav>
-        {/* Navigasi dengan Link */}
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-```
+Petunjuk: baca dokumentasi `NavLink`. Prop `className` menerima apa selain string, dan data apa yang diberikan React Router ke sana?
 
 **Fitur:**
 1. Navigation bar dengan `Link` ke setiap halaman
@@ -53,14 +34,9 @@ function App() {
 5. Footer dengan copyright
 
 **NavLink Styling:**
-```jsx
-<NavLink
-  to="/about"
-  className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
->
-  About
-</NavLink>
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 02 — DashboardLayout").
+
+Petunjuk: komponen layout ini harus menyediakan satu tempat bagi halaman anak. Komponen bawaan React Router mana yang menandai tempat itu? Kenapa link Overview butuh `end`?
 
 **Component yang harus dibuat:**
 - `Navbar` — navigation links
@@ -94,38 +70,14 @@ Memahami nested routes dengan `<Outlet>`, index routes, dan layout reuse.
 Buat `DashboardApp` dengan nested routes untuk admin panel.
 
 **Route Structure:**
-```
-/dashboard              → DashboardLayout
-  ├── /dashboard        → DashboardHome (index)
-  ├── /dashboard/users  → UserManagement
-  ├── /dashboard/settings → SettingsPage
-  └── /dashboard/reports → ReportsPage
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 02 — Rute bersarang").
+
+Petunjuk: bagaimana menulis rute anak tanpa mengulang `/dashboard`? Rute mana yang tampil saat alamatnya persis `/dashboard`?
 
 **DashboardLayout Component:**
-```jsx
-function DashboardLayout() {
-  const location = useLocation();
-  return (
-    <div className="dashboard">
-      <aside className="sidebar">
-        <h2>Admin Panel</h2>
-        <nav>
-          <NavLink to="/dashboard" end>Overview</NavLink>
-          <NavLink to="/dashboard/users">Users</NavLink>
-          <NavLink to="/dashboard/settings">Settings</NavLink>
-          <NavLink to="/dashboard/reports">Reports</NavLink>
-        </nav>
-      </aside>
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 03 — LoginPage dan navigate").
 
-      <main className="dashboard-content">
-        {/* Child route dirender di Outlet */}
-        <Outlet />
-      </main>
-    </div>
-  );
-}
-```
+Petunjuk: apa beda `navigate(..., { replace: true })` dengan tanpa `replace` saat tombol Back ditekan?
 
 **Pages:**
 - `DashboardHome` — overview stats (placeholder cards)
@@ -142,14 +94,9 @@ function DashboardLayout() {
 4. `<Outlet>` di DashboardLayout tempat child routes di-render
 
 **Route Configuration:**
-```jsx
-<Route path="/dashboard" element={<DashboardLayout />}>
-  <Route index element={<DashboardHome />} />
-  <Route path="users" element={<UserManagement />} />
-  <Route path="settings" element={<SettingsPage />} />
-  <Route path="reports" element={<ReportsPage />} />
-</Route>
-```
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 03 — Membaca location state").
+
+Petunjuk: data yang dikirim lewat `state` dibaca dengan hook apa? Apa yang terjadi kalau halaman di-refresh?
 
 ### Aturan
 - Nested routes harus berada DI DALAM parent route definition
@@ -175,22 +122,9 @@ Lanjutkan aplikasi portfolio dengan fitur navigasi imperatif dan data passing.
 **Fitur:**
 
 1. **`LoginPage`** — navigasi ke dashboard setelah login:
-   ```jsx
-   function LoginPage() {
-     const navigate = useNavigate();
+   Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-routing-dasar Soal 03 — ProtectedRoute dengan useEffect").
 
-     const handleLogin = (e) => {
-       e.preventDefault();
-       // validate...
-       // jika berhasil:
-       navigate("/dashboard", { replace: true });
-       // atau dengan state:
-       navigate("/dashboard", { state: { from: "/login", message: "Login berhasil!" } });
-     };
-
-     return <form>...</form>;
-   }
-   ```
+   Petunjuk: kalau cek login dilakukan di dalam `useEffect`, apakah halaman terlindungi sempat tampil sekejap? Adakah cara yang tidak memakai efek? (Bandingkan dengan soal 04-protected-routes.)
 
 2. **`DashboardPage`** — baca location state dari halaman sebelumnya:
    ```jsx

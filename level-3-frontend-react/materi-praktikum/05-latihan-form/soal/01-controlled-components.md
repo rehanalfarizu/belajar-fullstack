@@ -27,15 +27,9 @@ Buat `EmployeeForm` — form untuk menambah/mengedit data karyawan.
 **Fitur:**
 1. Semua input adalah controlled (value dari state)
 2. Satu `handleChange` menggunakan attribute `name`:
-   ```js
-   const handleChange = (e) => {
-     const { name, value, type, checked } = e.target;
-     setForm(prev => ({
-       ...prev,
-       [name]: type === "checkbox" ? checked : value
-     }));
-   };
-   ```
+   Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-controlled-components Soal 01 — handleChange satu untuk semua input").
+
+   Petunjuk: properti `e.target` apa yang dipakai untuk membedakan input teks dan checkbox? Bagaimana key dinamis dipakai pada object spread?
 3. **Dynamic skills**: mulai dengan 1 field skill, tombol "Add Skill" tambah field baru, tombol "Remove" hapus field
 4. **Select dropdown** untuk department dan employment type
 5. **Number input** untuk salary dengan format currency saat blur
@@ -43,42 +37,14 @@ Buat `EmployeeForm` — form untuk menambah/mengedit data karyawan.
 7. Submit: console.log form data + reset form
 
 **Skills Array Handling:**
-```js
-const handleSkillChange = (index, value) => {
-  setForm(prev => {
-    const skills = [...prev.skills];
-    skills[index] = value;
-    return { ...prev, skills };
-  });
-};
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-controlled-components Soal 01 — Array skills dinamis").
 
-const addSkill = () => {
-  setForm(prev => ({
-    ...prev,
-    skills: [...prev.skills, ""]
-  }));
-};
-
-const removeSkill = (index) => {
-  setForm(prev => ({
-    ...prev,
-    skills: prev.skills.filter((_, i) => i !== index)
-  }));
-};
-```
+Petunjuk: jangan mengubah array lama; buat array baru. Kenapa? Bagaimana mencegah menghapus field terakhir?
 
 **Salary Formatting:**
-```js
-const formatCurrency = (value) => {
-  const num = parseInt(value.replace(/\D/g, ""), 10);
-  return isNaN(num) ? "" : num.toLocaleString("id-ID");
-};
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-controlled-components Soal 01 — Format salary").
 
-const handleSalaryBlur = (e) => {
-  const formatted = formatCurrency(e.target.value);
-  setForm(prev => ({ ...prev, salary: formatted }));
-};
-```
+Petunjuk: bagaimana membuang semua karakter selain angka lebih dulu? Kapan format dipasang: saat mengetik atau saat blur, dan kenapa?
 
 ### Aturan
 - `name` attribute pada setiap input HARUS match dengan key di state object

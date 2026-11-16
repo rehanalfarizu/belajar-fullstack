@@ -43,29 +43,9 @@ Buat program yang menampilkan system info dan manipulasi path.
 
 ## Contoh Code
 
-```javascript
-const os = require("os");
-const path = require("path");
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "Soal 10 — Contoh info sistem dan manipulasi path (dari soal)").
 
-// System info
-console.log("Platform:", os.platform());
-console.log("Arch:", os.arch());
-console.log("CPUs:", os.cpus().length);
-console.log("Total RAM:", (os.totalmem() / 1024 / 1024 / 1024).toFixed(2), "GB");
-console.log("Free RAM:", (os.freemem() / 1024 / 1024 / 1024).toFixed(2), "GB");
-console.log("Home:", os.homedir());
-console.log("Temp:", os.tmpdir());
-console.log("Hostname:", os.hostname());
-
-// Path manipulation
-console.log("\nPath demo:");
-console.log("Join:", path.join("a", "b", "c")); // a/b/c
-console.log("Resolve:", path.resolve("a", "b")); // /current/dir/a/b
-console.log("Basename:", path.basename("/path/to/file.txt")); // file.txt
-console.log("Extname:", path.extname("/path/to/file.txt")); // .txt
-console.log("Parse:", path.parse("/path/to/file.txt"));
-// { dir: '/path/to', base: 'file.txt', ext: '.txt', name: 'file' }
-```
+Petunjuk: baca dokumentasi modul `os` dan `path`. Satuan apa yang dikembalikan `totalmem()`? Bedakan `path.join` dan `path.resolve` dengan mencoba keduanya pada path relatif.
 
 ---
 

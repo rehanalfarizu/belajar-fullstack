@@ -1,5 +1,5 @@
 // ============================================================
-// FILE: 04-latihan-state/code/01-auth-context.jsx
+// FILE: 04-latihan-state/code/01-context-api.jsx
 // MATERI: AuthContext — Global Auth State dengan useReducer
 // ============================================================
 import { createContext, useContext, useReducer, useEffect } from "react";

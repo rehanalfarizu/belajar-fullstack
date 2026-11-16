@@ -58,26 +58,9 @@ const DEMO_USERS = [
 - Error message yang informatif: "Email atau password salah"
 
 **ProtectedRoute Component:**
-```jsx
-function ProtectedRoute({ children, requiredRole }) {
-  const { isAuthenticated, isLoading, user } = useAuth();
-  const location = useLocation();
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-context-api Soal 01 — ProtectedRoute dengan requiredRole").
 
-  if (isLoading) {
-    return <div className="loading-screen">Memuat session...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  if (requiredRole && user?.role !== requiredRole) {
-    return <Navigate to="/unauthorized" replace />;
-  }
-
-  return children;
-}
-```
+Petunjuk: ada tiga keadaan yang harus ditangani berurutan: masih memuat, belum login, dan login tapi peran tidak cocok. Urutan pengeceknya penting, kenapa?
 
 **Route Protection:**
 ```jsx
@@ -123,53 +106,9 @@ Lanjutkan implementasi AuthContext dengan persist middleware.
 5. Initial loading state: tampilkan "Memuat..." saat hydrate dari localStorage
 
 **Implementation Pattern:**
-```jsx
-const STORAGE_KEY = "auth_state";
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "01-context-api Soal 02 — AuthProvider dengan persistence").
 
-export function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(authReducer, {
-    isLoading: true, // initial loading true
-    user: null,
-    isAuthenticated: false,
-    error: null,
-  });
-
-  // Hydrate dari localStorage
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.user && parsed.isAuthenticated) {
-          dispatch({ type: "AUTH_SUCCESS", payload: parsed.user });
-        } else {
-          dispatch({ type: "AUTH_END_LOADING" }); // custom action
-        }
-      } else {
-        dispatch({ type: "AUTH_END_LOADING" });
-      }
-    } catch {
-      dispatch({ type: "AUTH_END_LOADING" });
-    }
-  }, []);
-
-  // Persist ke localStorage saat state berubah
-  useEffect(() => {
-    if (!state.isLoading) {
-      if (state.isAuthenticated) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          user: state.user,
-          isAuthenticated: state.isAuthenticated,
-        }));
-      } else {
-        localStorage.removeItem(STORAGE_KEY);
-      }
-    }
-  }, [state.user, state.isAuthenticated, state.isLoading]);
-
-  // ...
-}
-```
+Petunjuk: kapan state dibaca dari localStorage dan kapan ditulis? Apa yang terjadi kalau isinya JSON rusak? Pastikan `isLoading` dan `error` tidak ikut disimpan.
 
 **Fitur Tambahan:**
 1. Token expiration: simulate token expiring setelah 30 menit

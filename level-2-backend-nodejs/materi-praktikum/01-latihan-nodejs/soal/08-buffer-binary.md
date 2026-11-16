@@ -40,30 +40,9 @@ Buat program yang manipulasi binary data: create buffer, convert, slice.
 
 ## Contoh Code
 
-```javascript
-// Create buffer
-const buf = Buffer.alloc(10);
-console.log(buf); // <Buffer 00 00 00 00 00 00 00 00 00 00>
+Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "Soal 08 — Contoh Buffer, hex, dan base64 (dari soal)").
 
-// From string
-const hello = Buffer.from("Hello, 世界!", "utf-8");
-console.log(hello.length); // 16 bytes
-
-// Convert
-const hex = hello.toString("hex");
-console.log(hex); // 48656c6c6f2c20e4b896e7958c21
-
-const back = Buffer.from(hex, "hex").toString("utf-8");
-console.log(back); // Hello, 世界!
-
-// Base64
-const b64 = hello.toString("base64");
-console.log(b64); // SGVsbG8sIOS4nJ+cIQ==
-
-// Decode
-const decoded = Buffer.from(b64, "base64").toString("utf-8");
-console.log(decoded); // Hello, 世界!
-```
+Petunjuk: jumlah byte tidak sama dengan jumlah karakter, coba dengan huruf non-Latin. Coba satu panggilan dulu, misalnya `Buffer.from("hi").toString("hex")`, lalu bolak-balik ke string asal untuk membuktikan hasilnya sama.
 
 ---
 

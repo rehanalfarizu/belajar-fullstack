@@ -392,3 +392,350 @@ function getPasswordStrength(password) {
   return { score, label: "Sangat Kuat", color: "#16a34a" };
 }
 ```
+
+## 01-controlled-components Soal 01 — handleChange satu untuk semua input
+
+```js
+const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+  setForm(prev => ({
+    ...prev,
+    [name]: type === "checkbox" ? checked : value
+  }));
+};
+```
+
+## 01-controlled-components Soal 01 — Array skills dinamis
+
+```js
+const handleSkillChange = (index, value) => {
+  setForm(prev => {
+    const skills = [...prev.skills];
+    skills[index] = value;
+    return { ...prev, skills };
+  });
+};
+
+const addSkill = () => {
+  setForm(prev => ({
+    ...prev,
+    skills: [...prev.skills, ""]
+  }));
+};
+
+const removeSkill = (index) => {
+  setForm(prev => ({
+    ...prev,
+    skills: prev.skills.filter((_, i) => i !== index)
+  }));
+};
+```
+
+## 01-controlled-components Soal 01 — Format salary
+
+```js
+const formatCurrency = (value) => {
+  const num = parseInt(value.replace(/\D/g, ""), 10);
+  return isNaN(num) ? "" : num.toLocaleString("id-ID");
+};
+
+const handleSalaryBlur = (e) => {
+  const formatted = formatCurrency(e.target.value);
+  setForm(prev => ({ ...prev, salary: formatted }));
+};
+```
+
+## 02-validasi-per-field Soal 01 — validateField
+
+```js
+function validateField(name, value, allValues = {}) {
+  switch (name) {
+    case "fullName":
+      if (!value.trim()) return "Nama lengkap wajib diisi";
+      if (value.trim().length < 2) return "Nama minimal 2 karakter";
+      if (!/^[a-zA-Z\s]+$/.test(value)) return "Nama hanya boleh huruf dan spasi";
+      return null;
+
+    case "email":
+      if (!value) return "Email wajib diisi";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Format email tidak valid";
+      return null;
+
+    case "username":
+      if (!value) return "Username wajib diisi";
+      if (value.length < 3) return "Username minimal 3 karakter";
+      if (!/^[a-zA-Z0-9_]+$/.test(value)) return "Username hanya huruf, angka, dan underscore";
+      return null;
+
+    case "password":
+      if (!value) return "Password wajib diisi";
+      if (value.length < 8) return "Password minimal 8 karakter";
+      if (!/(?=.*[A-Z])/.test(value)) return "Minimal1 huruf besar";
+      if (!/(?=.*[a-z])/.test(value)) return "Minimal 1 huruf kecil";
+      if (!/(?=.*\d)/.test(value)) return "Minimal1 angka";
+      return null;
+
+    case "confirmPassword":
+      if (!value) return "Konfirmasi password wajib diisi";
+      if (value !== allValues.password) return "Password tidak cocok";
+      return null;
+
+    case "age":
+      if (!value) return "Umur wajib diisi";
+      const ageNum = parseInt(value, 10);
+      if (isNaN(ageNum)) return "Umur harus angka";
+      if (ageNum < 17) return "Minimal17 tahun";
+      if (ageNum > 100) return "Maksimal 100 tahun";
+      return null;
+
+    case "website":
+      if (value && !/^https?:\/\/.+\..+/.test(value)) return "URL harus diawali http:// atau https://";
+      return null;
+
+    case "bio":
+      if (value && value.length > 200) return "Bio maksimal 200 karakter";
+      return null;
+
+    default:
+      return null;
+  }
+}
+```
+
+## 02-validasi-per-field Soal 01 — handleBlur dan touched
+
+```js
+const [touched, setTouched] = useState({});
+
+const handleBlur = (e) => {
+  const { name, value } = e.target;
+  setTouched(prev => ({ ...prev, [name]: true }));
+
+  const error = validateField(name, value, values);
+  setErrors(prev => {
+    const next = { ...prev };
+    if (error) next[name] = error;
+    else delete next[name];
+    return next;
+  });
+};
+```
+
+## 02-validasi-per-field Soal 01 — getPasswordStrength
+
+```js
+function getPasswordStrength(password) {
+  if (!password) return { score: 0, label: "", color: "" };
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (password.length >= 12) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[a-z]/.test(password)) score++;
+  if (/\d/.test(password)) score++;
+  if (/[!@#$%^&*]/.test(password)) score++;
+
+  if (score <= 2) return { score, label: "Lemah", color: "#ef4444" };
+  if (score <= 4) return { score, label: "Cukup", color: "#f59e0b" };
+  if (score <= 5) return { score, label: "Kuat", color: "#22c55e" };
+  return { score, label: "Sangat Kuat", color: "#16a34a" };
+}
+```
+
+## 03-async-dan-multistep Soal 01 — Focus ke field error pertama
+
+```js
+const firstErrorField = Object.keys(errors)[0];
+if (firstErrorField) {
+  document.querySelector(`[name="${firstErrorField}"]`)?.focus();
+}
+```
+
+## 03-async-dan-multistep Soal 01 — Cek ketersediaan username
+
+```js
+const [usernameStatus, setUsernameStatus] = useState({
+  checking: false,
+  available: null, // null | true | false
+  error: null,
+});
+
+const abortRef = useRef(null);
+
+const checkUsername = async (username) => {
+  if (username.length < 3) {
+    setUsernameStatus({ checking: false, available: null, error: null });
+    return;
+  }
+
+  // Cancel previous request
+  if (abortRef.current) abortRef.current.abort();
+  abortRef.current = new AbortController();
+
+  setUsernameStatus({ checking: true, available: null, error: null });
+
+  try {
+    await new Promise(r => setTimeout(r, 500)); // simulate API
+    const taken = ["admin", "root", "test", "demo", "user"];
+    const available = !taken.includes(username.toLowerCase());
+    setUsernameStatus({ checking: false, available, error: null });
+  } catch (err) {
+    if (err.name !== "AbortError") {
+      setUsernameStatus({ checking: false, available: null, error: "Gagal check username" });
+    }
+  }
+};
+```
+
+## 03-async-dan-multistep Soal 01 — Debounce cek username
+
+```js
+const debouncedCheck = useRef(
+  debounce((val) => checkUsername(val), 300)
+).current;
+
+const handleUsernameChange = (e) => {
+  const val = e.target.value;
+  setForm(prev => ({ ...prev, username: val }));
+  debouncedCheck(val);
+};
+```
+
+## 03-async-dan-multistep Soal 02 — toggleSkill
+
+```js
+const toggleSkill = (skill) => {
+  setFormData(prev => {
+    const skills = prev.step2.skills.includes(skill)
+      ? prev.step2.skills.filter(s => s !== skill)
+      : [...prev.step2.skills, skill];
+    return { ...prev, step2: { ...prev.step2, skills } };
+  });
+};
+```
+
+## 03-async-dan-multistep Soal 02 — Navigasi antar step
+
+```js
+const validateCurrentStep = () => {
+  const stepData = formData[`step${currentStep}`];
+  const stepErrors = validateStep(currentStep, stepData);
+  setErrors(stepErrors);
+  return Object.keys(stepErrors).length === 0;
+};
+
+const handleNext = () => {
+  if (validateCurrentStep()) {
+    setCurrentStep(prev => Math.min(prev + 1, 4));
+  }
+};
+
+const handleBack = () => {
+  setCurrentStep(prev => Math.max(prev - 1, 1));
+};
+```
+
+## 03-async-dan-multistep Soal 02 — Step indicator
+
+```jsx
+<div className="step-indicator">
+  {[1, 2, 3, 4].map(step => (
+    <div
+      key={step}
+      className={`step ${step === currentStep ? "active" : ""} ${step < currentStep ? "completed" : ""}`}
+    >
+      <span className="step-number">{step < currentStep ? "✓" : step}</span>
+      <span className="step-label">{labels[step]}</span>
+    </div>
+  ))}
+</div>
+```
+
+## 04-form-submission Soal 01 — Optimistic handleSubmit
+
+```js
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const newComment = {
+    id: `C${Date.now()}`,
+    author: form.author,
+    content: form.content,
+    timestamp: Date.now(),
+    likes: 0,
+    likedByUser: false,
+  };
+
+  // Optimistic: langsung tambahkan ke UI
+  setComments(prev => [newComment, ...prev]);
+  setForm({ author: "", content: "" });
+
+  try {
+    // Submit ke server
+    await simulateApiCall(newComment);
+    setSubmitStatus({ type: "success", message: "Komentar berhasil dikirim" });
+  } catch (err) {
+    // Rollback jika gagal
+    setComments(prev => prev.filter(c => c.id !== newComment.id));
+    setSubmitStatus({ type: "error", message: err.message });
+    // Restore form data
+    setForm({ author: newComment.author, content: newComment.content });
+  }
+};
+```
+
+## 04-form-submission Soal 01 — getRelativeTime
+
+```js
+function getRelativeTime(timestamp) {
+  const now = Date.now();
+  const diff = now - timestamp;
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) return `${days} hari lalu`;
+  if (hours > 0) return `${hours} jam lalu`;
+  if (minutes > 0) return `${minutes} menit lalu`;
+  return "Baru saja";
+}
+```
+
+## 04-form-submission Soal 02 — Handler cascading dropdown
+
+```js
+const handleCountryChange = (country) => {
+  setForm(prev => ({
+    ...prev,
+    country,
+    province: "", // Reset dependent fields
+    city: "",
+    district: "",
+ }));
+};
+
+const handleProvinceChange = (province) => {
+  setForm(prev => ({
+    ...prev,
+    province,
+    city: "",      // Reset city dan district
+    district: "",
+  }));
+};
+
+const handleCityChange = (city) => {
+  setForm(prev => ({
+    ...prev,
+    city,
+    district: "", // Reset district
+  }));
+};
+```
+
+## 04-form-submission Soal 02 — Opsi dropdown turunan
+
+```js
+const provinceOptions = form.country ? Object.keys(LOCATION_DATA[form.country]) : [];
+const cityOptions = form.province ? LOCATION_DATA[form.country]?.[form.province] || [] : [];
+const districtOptions = form.city ? LOCATION_DATA[form.country]?.[form.province]?.[form.city] || [] : [];
+```

@@ -14,29 +14,16 @@ Buat sistem layout komponen untuk sebuah blog application.
    - Terima props: `title` (string)
    - Terima children (bisa berupa element atau array of elements)
    - Struktur:
-     ```jsx
-     <div className="layout">
-       <header className="layout-header">
-         <h1>{title}</h1>
-       </header>
-       <main className="layout-content">
-         {children}
-       </main>
-       <footer className="layout-footer">
-         <p>&copy; 2024 Belajar React</p>
-       </footer>
-     </div>
-     ```
+     Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-props-dan-state Soal 01 — JSX Layout").
+
+     Petunjuk: Layout punya tiga bagian (header dengan `title`, area isi, footer). Bagian mana yang menerima `children`?
 
 2. **`Section`** — section wrapper dengan heading opsional:
    - Terima props: `heading` (string | null, default null), `children`
    - Struktur:
-     ```jsx
-     <div className="section">
-       {heading && <h2>{heading}</h2>}
-       {children}
-     </div>
-     ```
+     Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di `../solusi-jangan-dibuka-dulu.md` (bagian "02-props-dan-state Soal 01 — JSX Section").
+
+     Petunjuk: bagaimana menampilkan `<h2>` hanya kalau `heading` ada, tanpa ternary?
 
 3. **`Button`** — reusable button component:
    - Terima props: `variant` (`"primary"` | `"secondary"` | `"danger"` | `"ghost"`, default `"primary"`), `onClick`, `children`, `disabled`

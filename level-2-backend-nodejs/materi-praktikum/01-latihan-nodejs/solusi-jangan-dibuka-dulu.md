@@ -265,3 +265,152 @@ function getDataDir() {
 
 Ini baru contoh dua fungsi. Soal minta kamu merancang path builder yang konsisten
 untuk semua OS, jadi pikirkan sendiri kenapa `getDataDir` di atas kurang ideal.
+
+## Soal 06 — Contoh Logger berlevel (dari soal)
+
+```javascript
+const { EventEmitter } = require("events");
+
+class Logger extends EventEmitter {
+  info(msg) {
+    console.log("[INFO]", msg);
+    this.emit("log", { level: "info", msg, time: new Date() });
+  }
+
+  warn(msg) {
+    console.warn("[WARN]", msg);
+    this.emit("log", { level: "warn", msg, time: new Date() });
+  }
+
+  error(msg) {
+    console.error("[ERROR]", msg);
+    this.emit("log", { level: "error", msg, time: new Date() });
+  }
+}
+
+const logger = new Logger();
+
+logger.on("log", entry => {
+  console.log("Handler 1:", entry);
+});
+
+logger.on("log", entry => {
+  if (entry.level === "error") {
+    // Send to monitoring
+    console.log("Monitoring:", entry);
+  }
+});
+
+logger.info("Server started");
+logger.error("Database connection failed");
+```
+
+## Soal 07 — Contoh copy, gzip, dan hitung kata dengan stream (dari soal)
+
+```javascript
+const fs = require("fs");
+const { createGzip } = require("zlib");
+
+// Copy file dengan stream
+const readable = fs.createReadStream("file.txt", "utf-8");
+const writable = fs.createWriteStream("copy.txt");
+
+readable.pipe(writable);
+
+// Compress file dengan gzip
+const input = fs.createReadStream("big-file.txt");
+const output = fs.createWriteStream("big-file.txt.gz");
+const gzip = createGzip();
+
+input.pipe(gzip).pipe(output);
+
+// Count words dengan stream
+let wordCount = 0;
+fs.createReadStream("article.txt", "utf-8")
+  .on("data", chunk => {
+    wordCount += chunk.split(/\s+/).length;
+  })
+  .on("end", () => {
+    console.log("Words:", wordCount);
+  });
+```
+
+## Soal 08 — Contoh Buffer, hex, dan base64 (dari soal)
+
+```javascript
+// Create buffer
+const buf = Buffer.alloc(10);
+console.log(buf); // <Buffer 00 00 00 00 00 00 00 00 00 00>
+
+// From string
+const hello = Buffer.from("Hello, 世界!", "utf-8");
+console.log(hello.length); // 16 bytes
+
+// Convert
+const hex = hello.toString("hex");
+console.log(hex); // 48656c6c6f2c20e4b896e7958c21
+
+const back = Buffer.from(hex, "hex").toString("utf-8");
+console.log(back); // Hello, 世界!
+
+// Base64
+const b64 = hello.toString("base64");
+console.log(b64); // SGVsbG8sIOS4nJ+cIQ==
+
+// Decode
+const decoded = Buffer.from(b64, "base64").toString("utf-8");
+console.log(decoded); // Hello, 世界!
+```
+
+## Soal 09 — Contoh exec, spawn, dan fork (dari soal)
+
+```javascript
+const { exec, spawn } = require("child_process");
+const { fork } = require("child_process");
+
+// exec: run shell command
+exec("ls -la", (error, stdout, stderr) => {
+  if (error) {
+    console.error("Error:", error.message);
+    return;
+  }
+  console.log("Output:", stdout);
+});
+
+// spawn: streaming output
+const ls = spawn("ls", ["-la", "/tmp"]);
+ls.stdout.on("data", data => console.log(data.toString()));
+ls.stderr.on("data", data => console.error(data.toString()));
+ls.on("close", code => console.log("Exit:", code));
+
+// fork: Node.js worker
+const worker = fork("./worker.js");
+worker.send({ task: "process", id: 1 });
+worker.on("message", msg => console.log("Worker:", msg));
+```
+
+## Soal 10 — Contoh info sistem dan manipulasi path (dari soal)
+
+```javascript
+const os = require("os");
+const path = require("path");
+
+// System info
+console.log("Platform:", os.platform());
+console.log("Arch:", os.arch());
+console.log("CPUs:", os.cpus().length);
+console.log("Total RAM:", (os.totalmem() / 1024 / 1024 / 1024).toFixed(2), "GB");
+console.log("Free RAM:", (os.freemem() / 1024 / 1024 / 1024).toFixed(2), "GB");
+console.log("Home:", os.homedir());
+console.log("Temp:", os.tmpdir());
+console.log("Hostname:", os.hostname());
+
+// Path manipulation
+console.log("\nPath demo:");
+console.log("Join:", path.join("a", "b", "c")); // a/b/c
+console.log("Resolve:", path.resolve("a", "b")); // /current/dir/a/b
+console.log("Basename:", path.basename("/path/to/file.txt")); // file.txt
+console.log("Extname:", path.extname("/path/to/file.txt")); // .txt
+console.log("Parse:", path.parse("/path/to/file.txt"));
+// { dir: '/path/to', base: 'file.txt', ext: '.txt', name: 'file' }
+```
