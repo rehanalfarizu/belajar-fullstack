@@ -104,38 +104,43 @@ Mengukur waktu response.
 ## Cara Mencegah SQL Injection
 
 ### 1. Parameterized Queries (WAJIB!)
+
+Idenya: teks perintah SQL dan nilai dari user dikirim **terpisah**. Contoh di
+bawah memakai tabel `buku` supaya tidak sama dengan lab.
+
 ```javascript
-// ✅ Node.js dengan pg (PostgreSQL)
-const result = await pool.query(
-  'SELECT * FROM users WHERE username = $1 AND password = $2',
-  [username, password]
+// ✅ Node.js dengan pg (PostgreSQL): placeholder bernomor
+const hasil = await pool.query(
+  'SELECT * FROM buku WHERE penulis = $1 AND tahun >= $2',
+  [penulis, tahunMulai]
 );
 
-// ✅ Node.js dengan mysql2
-const [rows] = await connection.execute(
-  'SELECT * FROM users WHERE username = ? AND password = ?',
-  [username, password]
+// ✅ Node.js dengan mysql2: placeholder tanda tanya
+const [baris] = await connection.execute(
+  'SELECT * FROM buku WHERE penulis = ? AND tahun >= ?',
+  [penulis, tahunMulai]
 );
 ```
+
+Lab memakai `node:sqlite`. Cari sendiri di dokumentasinya: bagaimana bentuk
+placeholder dan cara mengisi nilainya?
 
 ### 2. Gunakan ORM
 ```javascript
 // ✅ Sequelize
-const user = await User.findOne({
-  where: { username, password }
-});
+const buku = await Buku.findOne({ where: { isbn } });
 
 // ✅ Prisma
-const user = await prisma.user.findFirst({
-  where: { username, password }
-});
+const buku = await prisma.buku.findFirst({ where: { isbn } });
 ```
+
+Pertanyaan: kapan ORM masih bisa kena SQL injection? (Petunjuk: cari "raw query".)
 
 ### 3. Input Validation (Lapisan Tambahan)
 ```javascript
-// Validasi sebelum query
-if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-  throw new Error('Invalid username format');
+// Validasi sebelum query: ISBN hanya angka dan tanda hubung
+if (!/^[0-9-]{10,17}$/.test(isbn)) {
+  throw new Error('Format ISBN tidak valid');
 }
 ```
 

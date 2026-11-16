@@ -6,30 +6,29 @@
 
 ```javascript
 // ❌ JANGAN!
-const dbPassword = 'supersecret123';
-const apiKey = 'sk-abc123xyz';
+const smtpPassword = 'kata-sandi-email-123';
+const mapsToken = 'pk.abc123xyz';
 ```
 
 ### ✅ Gunakan Environment Variables
 
-```javascript
-// ✅ BENAR
-const dbPassword = process.env.DB_PASSWORD;
-const apiKey = process.env.API_KEY;
-```
+Nilai rahasia dibaca dari lingkungan saat program jalan, bukan ditulis di kode.
+Di Node, nilai itu tersedia lewat objek `process.env`. Pertanyaan: bagaimana
+file `.env` bisa dimuat di Node 22+ tanpa library tambahan? (Cari di dokumentasi
+Node.) Dan apa yang sebaiknya terjadi kalau variabel wajib ternyata kosong?
 
 ### File .env
 
 ```bash
 # .env (JANGAN commit!)
-DB_PASSWORD=supersecret123
-API_KEY=sk-abc123xyz
+SMTP_PASSWORD=isi-nilai-aslinya-di-sini
+MAPS_TOKEN=isi-nilai-aslinya-di-sini
 ```
 
 ```bash
 # .env.example (Commit ini, tanpa nilai sebenarnya)
-DB_PASSWORD=
-API_KEY=
+SMTP_PASSWORD=
+MAPS_TOKEN=
 ```
 
 ### .gitignore
@@ -45,27 +44,18 @@ API_KEY=
 
 ## Security Headers
 
-```javascript
-const helmet = require('helmet');
-app.use(helmet()); // Set berbagai security headers
+Beberapa header yang penting dan fungsinya:
 
-// Atau manual:
-app.use((req, res, next) => {
-  // Cegah clickjacking
-  res.setHeader('X-Frame-Options', 'DENY');
-  
-  // Cegah MIME sniffing
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  
-  // XSS protection
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  
-  // Content Security Policy
-  res.setHeader('Content-Security-Policy', "default-src 'self'");
-  
-  next();
-});
-```
+| Header | Untuk apa |
+|--------|-----------|
+| `X-Frame-Options` | Mencegah halamanmu dibungkus iframe situs lain (clickjacking) |
+| `X-Content-Type-Options` | Mencegah browser "menebak" tipe file |
+| `Content-Security-Policy` | Membatasi dari mana script dan resource boleh dimuat |
+| `Strict-Transport-Security` | Memaksa browser memakai HTTPS |
+
+Di Express ada paket `helmet` yang memasang banyak header sekaligus. Baca
+README-nya, lalu bandingkan hasil `curl -i` sebelum dan sesudah. Header apa yang
+muncul, dan header mana yang hilang (misal `X-Powered-By`)?
 
 ---
 
@@ -99,17 +89,12 @@ app.use((err, req, res, next) => {
     query: err.sql  // Bocorkan struktur database!
   });
 });
-
-// ✅ Error generic ke user, detail ke log
-app.use((err, req, res, next) => {
-  console.error(err); // Log full error untuk debugging
-  
-  res.status(500).json({ 
-    error: 'Internal server error',
-    requestId: req.id // Untuk tracking tanpa bocorkan detail
-  });
-});
 ```
+
+Perbaikannya: apa yang harus dicatat di **server** (untuk debugging), dan apa
+yang boleh dilihat **pengguna**? Bagaimana kamu melacak satu kejadian error
+tanpa membocorkan isinya (petunjuk: ID unik per request)? Tulis error handler
+versimu sendiri di lab.
 
 ---
 

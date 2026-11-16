@@ -27,23 +27,19 @@ Kamu punya key card (sudah login), tapi tidak bisa masuk kamar orang lain.
 ## Kesalahan Umum: IDOR (Insecure Direct Object Reference)
 
 ```javascript
-// ❌ RENTAN!
-app.get('/api/orders/:id', async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  res.json(order); // Siapa saja bisa lihat order siapa saja!
-});
-
-// ✅ AMAN: Cek kepemilikan
-app.get('/api/orders/:id', async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  
-  if (order.userId !== req.user.id) {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-  
-  res.json(order);
+// ❌ RENTAN! (contoh: sistem peminjaman perpustakaan)
+app.get('/api/pinjaman/:id', async (req, res) => {
+  const pinjam = await Pinjaman.findById(req.params.id);
+  res.json(pinjam); // Siapa saja bisa lihat pinjaman siapa saja!
 });
 ```
+
+Perbaikannya ada di dua pertanyaan:
+- Data apa di `pinjam` yang bisa dibandingkan dengan identitas pengguna yang sedang login?
+- Identitas itu harus diambil dari mana: dari `req.params`/`req.query`, atau dari sesi di server? Kenapa?
+
+Lalu pikirkan status yang dibalas kalau bukan pemiliknya: 403 atau 404? Apa
+yang bocor lewat masing-masing?
 
 ---
 
@@ -68,24 +64,32 @@ const permissions = {
 ```
 
 ### 2. Attribute-Based Access Control (ABAC)
-```javascript
-// Cek berdasarkan atribut resource
-if (order.userId === currentUser.id || currentUser.role === 'admin') {
-  // Boleh akses
-}
-```
+
+Keputusan diambil dari **atribut** pengguna dan resource. Contoh tiket helpdesk:
+pelapor boleh melihat tiketnya sendiri, dan petugas yang ditugaskan juga boleh.
+Bagaimana kamu menulis aturan itu sebagai satu fungsi `bolehLihatTiket(user, tiket)`
+yang mengembalikan true/false? Fungsi kecil seperti ini bisa dipakai ulang di
+banyak route.
 
 ### 3. Middleware Otorisasi
+
+Middleware bisa dibuat lewat "fungsi pembuat" (factory) yang menerima
+parameter dan mengembalikan middleware. Contoh dengan aturan jam operasional:
+
 ```javascript
-const requireRole = (role) => (req, res, next) => {
-  if (req.user.role !== role) {
-    return res.status(403).json({ error: 'Forbidden' });
+const hanyaJam = (buka, tutup) => (req, res, next) => {
+  const jam = new Date().getHours();
+  if (jam < buka || jam >= tutup) {
+    return res.status(503).json({ error: 'Loket tutup' });
   }
   next();
 };
 
-app.delete('/api/users/:id', requireRole('admin'), deleteUser);
+app.post('/api/parkir/masuk', hanyaJam(6, 22), catatMasuk);
 ```
+
+Bagaimana kamu mengubah pola ini jadi middleware yang memeriksa **peran**
+pengguna? Status HTTP apa yang tepat kalau perannya tidak cocok?
 
 ---
 
