@@ -11,7 +11,8 @@ final class StoreProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // TODO: gunakan policy, bukan return true tanpa pertimbangan.
+        // Sementara (sebelum topik 08): ubah jadi `return true;` supaya kamu bisa menguji validasi.
+        // TODO: setelah policy topik 08 ada, ganti dengan pengecekan policy (bukan true).
         return false;
     }
 

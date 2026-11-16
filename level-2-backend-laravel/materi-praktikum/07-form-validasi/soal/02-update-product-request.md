@@ -182,7 +182,7 @@ php artisan tinker
 
 - ⚠️ **`sometimes` + `required` bukan kontradiksi.** Artinya "boleh tidak dikirim, tapi kalau dikirim jangan kosong".
 - ⚠️ **`$this->route('product')` sudah berupa model** kalau route pakai `{product}` dan controller type-hint `Product $product`.
-- 💡 **Policy `update` sudah ada** dari soal 08/01. Kalau belum, kerjakan dulu atau buat sementara yang mengizinkan admin saja.
+- 💡 **Policy `update` baru dibuat di topik 08.** Kalau belum ada, kembalikan `true` sementara di `authorize()` (untuk menguji validasinya), lalu ganti dengan pengecekan policy setelah topik 08. Cek `403` dan `401` di checklist Otorisasi baru bisa dibuktikan setelah itu.
 - 📚 Teori lengkap: [Materi Teori 07](../../../materi-teori/07-form-validasi/README.md)
 
 ---

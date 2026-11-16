@@ -11,6 +11,8 @@ final class StoreProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
+        // Versi akhir (butuh ProductPolicy dari topik 08). Sebelum topik 08,
+        // pakai `return true;` sementara supaya validasi bisa diuji.
         return $this->user()?->can('create', Product::class) ?? false;
     }
 

@@ -9,6 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+// Catatan: ProductController sudah ada dari topik 03. Gabungkan, jangan timpa:
+// ganti store() lama dengan versi ini dan tambahkan update().
 final class ProductController extends Controller
 {
     public function store(Request $request): JsonResponse

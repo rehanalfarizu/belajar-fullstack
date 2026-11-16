@@ -46,7 +46,7 @@ test saja. Itu cara yang dipakai di dunia kerja juga.
 ### Langkah
 
 1. Baca `soal/01-product-controller.md`.
-2. Buat controller: `php artisan make:controller ProductController`, lalu ganti isinya dengan starter.
+2. Buat controller: `php artisan make:controller ProductController`, lalu ganti isinya dengan starter. (Di topik 06 file ini dipakai lagi: isinya digabung, bukan ditimpa.)
 3. Daftarkan 3 route di `routes/web.php`.
 4. Isi bagian `TODO`.
 5. Buat test: `php artisan make:test ProductControllerTest`.

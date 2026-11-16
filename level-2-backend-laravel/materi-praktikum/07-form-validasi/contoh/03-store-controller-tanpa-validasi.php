@@ -89,7 +89,7 @@ final class LatihanProductController extends Controller
 use App\Models\Category;
 
 beforeEach(function () {
-    $this->category = Category::create(['name' => 'Aksesoris']);
+    $this->category = Category::create(['name' => 'Aksesoris', 'slug' => 'aksesoris']);
 });
 
 function payloadValid(array $ubah = []): array

@@ -31,10 +31,13 @@ final class TentangTokoTest extends TestCase
 
     public function test_tentang_toko_tidak_membocorkan_app_key(): void
     {
-        config(['app.key' => 'base64:kunci-palsu-khusus-test']);
+        // Kunci harus valid (32 byte) supaya enkripsi cookie Laravel tidak error.
+        $kunciPalsu = 'base64:'.base64_encode(str_repeat('k', 32));
+        config(['app.key' => $kunciPalsu]);
 
         $response = $this->getJson('/tentang-toko')->assertOk();
 
-        $this->assertStringNotContainsString('kunci-palsu-khusus-test', $response->getContent());
+        $this->assertStringNotContainsString($kunciPalsu, $response->getContent());
+        $this->assertStringNotContainsString(base64_encode(str_repeat('k', 32)), $response->getContent());
     }
 }

@@ -30,10 +30,19 @@ function periksaProduction(array $environment): array
     return $errors;
 }
 
+// getenv() mengembalikan false kalau variabel tidak ada. Jangan pakai "?: null":
+// nilai "0" (APP_DEBUG=0, artinya false) juga dianggap kosong oleh PHP.
+function ambilEnv(string $nama): ?string
+{
+    $nilai = getenv($nama);
+
+    return $nilai === false ? null : $nilai;
+}
+
 $errors = periksaProduction([
-    'APP_ENV' => getenv('APP_ENV') ?: null,
-    'APP_DEBUG' => getenv('APP_DEBUG') ?: null,
-    'APP_KEY' => getenv('APP_KEY') ?: null,
+    'APP_ENV' => ambilEnv('APP_ENV'),
+    'APP_DEBUG' => ambilEnv('APP_DEBUG'),
+    'APP_KEY' => ambilEnv('APP_KEY'),
 ]);
 
 if ($errors !== []) {

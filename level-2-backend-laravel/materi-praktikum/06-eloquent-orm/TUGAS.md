@@ -6,7 +6,7 @@ Setelah selesai, kamu akan punya:
 
 1. Model `Product` dan `Category` dengan relasi, casts, dan scope (Soal 01)
 2. Controller produk yang kebal mass assignment + test yang membuktikannya (Soal 02)
-3. Endpoint `/katalog` yang aman dari SQL injection dan bebas N+1, dengan angka query sebelum/sesudah (Soal 03)
+3. Endpoint `/produk-cari` yang aman dari SQL injection dan bebas N+1, dengan angka query sebelum/sesudah (Soal 03)
 
 ---
 
@@ -28,13 +28,14 @@ dengan `php nama-file.php`. Kamu butuh proyek `toko-latihan`:
 1. Siapkan proyeknya dulu. Caranya ada di [README praktikum](../README.md).
 2. Pastikan migration dari [topik 05](../05-database-migration/TUGAS.md) sudah jalan (tabel `products` dan `categories`).
 3. Salin starter ke lokasi di tabel. Starter Soal 02 dan 03 sama-sama menyentuh `app/Models/Product.php`: **gabungkan**, jangan saling timpa.
-4. Belum ada sistem login (itu topik 08). Untuk Soal 02, buktikan lewat **feature test** dengan `actingAs()`.
+4. `app/Http/Controllers/ProductController.php` sudah ada dari topik 03 (versi data statis dengan `index`, `show`, `store`). **Gabungkan, jangan timpa**: pertahankan method yang masih kamu pakai, lalu ganti `store` lama dengan versi Soal 02 dan tambahkan `update`. Route `POST /products` dari topik 03 pakai ulang, jangan didaftarkan dua kali.
+5. Belum ada sistem login (itu topik 08). Untuk Soal 02, buktikan lewat **feature test** dengan `actingAs()`.
 
 Perintah yang akan sering kamu pakai:
 
 ```bash
 php artisan make:model Category -f          # model + factory
-php artisan make:factory ProductFactory
+php artisan make:factory ProductFactory     # lalu di Product.php tambahkan `use HasFactory;` (trait) supaya Product::factory() jalan
 php artisan make:test ProductMassAssignmentTest
 php artisan tinker
 php artisan serve                            # http://127.0.0.1:8000
@@ -87,7 +88,7 @@ php artisan serve                            # http://127.0.0.1:8000
 
 1. Siapkan data: minimal 3 kategori, 50 produk, lewat factory + seeder
 2. Salin scope dari starter ke model, dan controller dari komentar FILE 2
-3. Daftarkan `Route::get('/katalog', [KatalogController::class, 'index']);`
+3. Daftarkan `Route::get('/produk-cari', [KatalogController::class, 'index']);`
 4. **Ukur dulu**: hitung query endpoint versi lama di tinker (`DB::enableQueryLog()`)
 5. **Serang dulu**: `Product::search("x' OR '1'='1")->count()`
 6. Perbaiki scope `search`, isi `priceBetween`
@@ -99,7 +100,7 @@ php artisan serve                            # http://127.0.0.1:8000
 
 - [ ] Payload serangan → `0` hasil setelah diperbaiki
 - [ ] Jumlah query tetap kecil walaupun produk ditambah dari 50 ke 200
-- [ ] `/katalog?min=abc` dengan `Accept: application/json` → `422`
+- [ ] `/produk-cari?min=abc` dengan `Accept: application/json` → `422`
 - [ ] Response punya `data`, `current_page`, `per_page`
 
 ---
@@ -141,7 +142,7 @@ php -l app/Http/Controllers/KatalogController.php
 
 # Route terdaftar
 php artisan route:list --path=products
-php artisan route:list --path=katalog
+php artisan route:list --path=produk-cari
 
 # Test otomatis
 php artisan test --filter=MassAssignment
@@ -164,9 +165,9 @@ count(DB::getQueryLog());                               // 2
 Lewat HTTP (`php artisan serve` jalan di terminal lain):
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" -H "Accept: application/json" "http://127.0.0.1:8000/katalog"           # 200
-curl -s -o /dev/null -w "%{http_code}\n" -H "Accept: application/json" "http://127.0.0.1:8000/katalog?min=abc"   # 422
-curl -s -H "Accept: application/json" "http://127.0.0.1:8000/katalog?q=a&min=100000&max=500000" | head -c 300
+curl -s -o /dev/null -w "%{http_code}\n" -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari"           # 200
+curl -s -o /dev/null -w "%{http_code}\n" -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari?min=abc"   # 422
+curl -s -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari?q=a&min=100000&max=500000" | head -c 300
 ```
 
 Untuk `POST /products` lewat curl kamu butuh session login + token CSRF. Itu baru

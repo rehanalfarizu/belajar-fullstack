@@ -84,14 +84,15 @@ public function up(): void
     Schema::table('products', function (Blueprint $table): void {
         $table->unsignedBigInteger('harga_modal')->default(0);
         $table->text('catatan_internal')->nullable();
-        $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+        // user_id sudah dibuat di topik 06 (Soal 02). Cek dulu dengan
+        // Schema::hasColumn('products', 'user_id'). Kalau belum ada, tambahkan:
+        // $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
     });
 }
 
 public function down(): void
 {
     Schema::table('products', function (Blueprint $table): void {
-        $table->dropConstrainedForeignId('user_id');
         $table->dropColumn(['harga_modal', 'catatan_internal']);
     });
 }

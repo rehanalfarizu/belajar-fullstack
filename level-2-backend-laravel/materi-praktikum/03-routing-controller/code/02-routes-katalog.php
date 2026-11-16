@@ -57,4 +57,7 @@ Route::get('/katalog-todo-index', function () use ($katalogProduk) {
 
 // TODO(human): fallback route.
 //   URL yang tidak dikenal → JSON {"message": "Halaman tidak ditemukan."} status 404.
-//   Ingat: fallback harus jadi route PALING TERAKHIR di file.
+//   Ingat: tulis fallback PALING TERAKHIR di file (kebiasaan rapi; Laravel sendiri
+//   selalu mencocokkan fallback paling akhir).
+//   Catatan: fallback di routes/web.php juga menangkap URL /api/... yang tidak dikenal,
+//   jadi balasannya JSON ini, bukan 404 khusus API (topik 09).
