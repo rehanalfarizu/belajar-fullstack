@@ -182,7 +182,7 @@ function SearchGitHubUser({ username }) {
 
   return { user, loading, error };
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 171–186 (sebelum diubah)
@@ -203,7 +203,7 @@ function useWindowSize() {
 
   return size;
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 217–238 (sebelum diubah)
@@ -230,7 +230,7 @@ function usePosts() {
 
   return { posts, loading, error };
 }
-============================================================
+// ============================================================
 ```
 
 ## 04-custom-hooks.jsx (blok jawaban yang tadinya dikomentari di starter)

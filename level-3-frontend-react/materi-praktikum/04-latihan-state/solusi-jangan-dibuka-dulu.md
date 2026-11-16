@@ -37,7 +37,7 @@ function authReducer(state, action) {
       return state;
   }
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 68–103 (sebelum diubah)
@@ -78,7 +78,7 @@ export function useAuth() {
   if (!context) throw new Error("useAuth must be used within AuthProvider");
   return context;
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 117–129 (sebelum diubah)
@@ -123,7 +123,7 @@ function LoginForm() {
     </form>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 191–210 (sebelum diubah)
@@ -148,7 +148,7 @@ function ProtectedRoute({ children, requiredRole }) {
 
   return children;
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 229–246 (sebelum diubah)
@@ -171,7 +171,7 @@ function UserProfile() {
     </div>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ## 02-split-context.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -210,7 +210,7 @@ function useContextSelector(context, selector) {
 Usage:
   const user = useContextSelector(AppContext, state => state.user);
   const isDark = useContextSelector(AppContext, state => state.theme === "dark");
-============================================================
+// ============================================================
 ```
 
 ### Baris 62–96 (sebelum diubah)
@@ -250,7 +250,7 @@ export function AppProvider({ children }) {
     </AppContext.Provider>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 177–212 (sebelum diubah)
@@ -291,7 +291,7 @@ function SelectorDemoApp() {
     </AppProvider>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ## 04-persist-state.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -346,7 +346,7 @@ function createUndoMiddleware(reducer) {
     }
   };
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 125–167 (sebelum diubah)
@@ -394,7 +394,7 @@ function notesReducer(state, action) {
       return state;
   }
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 224–290 (sebelum diubah)
@@ -466,7 +466,7 @@ export function useNotes() {
 
   return { state, ...actions };
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 316–394 (sebelum diubah)
@@ -550,7 +550,7 @@ export function NotesApp() {
     </div>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ## 04-persist-state.jsx — `function createPersistMiddleware` (implementasi yang tadinya ada di starter)
