@@ -2,6 +2,11 @@
 
 Gunakan tabel ini untuk melacak progres belajarmu. Update status setiap minggu.
 
+> **Urutan dan tanggal belajarnya ada di [JADWAL-12-MINGGU.md](JADWAL-12-MINGGU.md).**
+> Putaran 1: Laravel + Vue (sampai awal Februari 2027). Putaran 2: Node + React
+> (Februari – April 2027). Peta konsep yang kamu isi sendiri ada di
+> [PETA-PADANAN.md](PETA-PADANAN.md).
+
 ## Legenda Status
 
 - ⬜ Belum dimulai

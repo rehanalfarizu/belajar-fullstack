@@ -84,3 +84,28 @@ Mulai: 19:30 | Selesai: 21:45 | Total: 135 menit
 
 ---
 
+
+---
+
+## Log Bug (isi setiap kali memecahkan error)
+
+Satu baris per bug. Ini bahan paling jujur untuk wawancara: "pernah menemukan bug
+yang sulit? ceritakan."
+
+| Tanggal | Gejala yang terlihat | Dua hipotesis yang kuuji | Penyebab sebenarnya | Cara menemukannya | Kupecahkan sendiri? (ya/dibantu) |
+|---|---|---|---|---|---|
+| | | | | | |
+
+---
+
+## Ulasan Mingguan (isi setiap Jumat)
+
+```markdown
+## Minggu ke-N (tanggal)
+
+- Soal yang selesai TANPA bantuan AI:
+- Soal yang selesai DENGAN bantuan (dan bantuan apa):
+- Konsep yang masih gagap kujelaskan:
+- Hasil uji tertutup Jumat (lulus / ulangi):
+- Yang akan kuulangi minggu depan:
+```
