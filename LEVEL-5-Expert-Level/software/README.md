@@ -9,11 +9,11 @@ Folder ini berisi panduan install dan setup **software yang dibutuhkan** untuk l
 | # | File | Software | Keterangan |
 |---|------|----------|-------------|
 | 01 | `01-docker-install.md` | Docker & Docker Compose | Container untuk semua services |
-| 02 | `02-jest-testing.md` | Jest | Unit testing dan integration testing |
-| 03 | `03-react-testing-library.md` | React Testing Library | Component testing di React |
-| 04 | `04-playwright-install.md` | Playwright | End-to-end testing |
-| 05 | `05-github-actions.md` | GitHub Actions | CI/CD pipeline |
-| 06 | `06-lighthouse-cli.md` | Lighthouse CI | Performance auditing |
+| 02 | `02-testing-dan-ci-cd.md` | Jest, React Testing Library, Playwright, GitHub Actions | Testing dan CI/CD dalam satu file |
+
+Lighthouse (audit performa) belum punya file sendiri. Pakai tab Lighthouse di
+Chrome DevTools, atau lihat soal di
+[01-latihan-performa](../materi-praktikum/01-latihan-performa/README.md).
 
 ---
 
@@ -29,12 +29,11 @@ Folder ini berisi panduan install dan setup **software yang dibutuhkan** untuk l
 ## Urutan Install yang Disarankan
 
 ```
-STEP 1 → Install Docker (wajib untuk containerisasi)
-STEP 2 → Install Jest (untuk unit testing)
-STEP 3 → Install React Testing Library (untuk component testing)
-STEP 4 → Install Playwright (untuk E2E testing)
-STEP 5 → Setup GitHub Actions (untuk CI/CD)
-STEP 6 → Install Lighthouse CI (untuk performance audit)
+STEP 1 → Install Docker                      (01-docker-install.md)
+STEP 2 → Install Jest + React Testing Library (02-testing-dan-ci-cd.md, bagian 1-2)
+STEP 3 → Install Playwright                  (02-testing-dan-ci-cd.md, bagian 3)
+STEP 4 → Setup GitHub Actions                (02-testing-dan-ci-cd.md, bagian 4)
+STEP 5 → Lighthouse lewat Chrome DevTools    (tanpa file panduan)
 ```
 
 ---
@@ -44,7 +43,7 @@ STEP 6 → Install Lighthouse CI (untuk performance audit)
 ```bash
 # Cek Docker
 docker --version
-docker-compose --version
+docker compose version   # Compose v2, tanpa tanda hubung
 
 # Cek Jest
 npx jest --version
@@ -52,8 +51,8 @@ npx jest --version
 # Cek Playwright
 npx playwright --version
 
-# Cek GitHub Actions (sudah tersedia di GitHub)
-gh run --version
+# GitHub Actions tidak diinstal: cukup file workflow di .github/workflows/
+# (opsional) GitHub CLI untuk melihat run: gh --version
 
 # Cek Lighthouse
 npx lighthouse --version
@@ -74,4 +73,4 @@ Benefits Docker:
 
 ---
 
-**Lanjut ke:** [tutorial/](../tutorial/) untuk panduan advanced
+**Lanjut ke:** [tutorial/](../tutorial/README.md) untuk panduan langkah demi langkah

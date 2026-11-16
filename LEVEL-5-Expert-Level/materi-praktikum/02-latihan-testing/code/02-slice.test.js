@@ -1,19 +1,18 @@
 /**
  * ============================================================
- * SOAL 02 — Integration Testing: Redux Slice
+ * BONUS — Integration Testing: Redux Slice (kerangka)
  * ============================================================
- * Install dependencies:
- *   npm install --save-dev jest @testing-library/jest-dom
- *   npm install @reduxjs/toolkit
+ * Kode yang diuji (reducer, selector, thunk) sudah tersedia di bawah.
+ * KAMU menulis test-nya: ubah `test.todo` jadi test sungguhan.
  *
- * Run:
- *   npm test -- --testPathPattern="slice"
- * ============================================================
- * HASIL BELAJAR:
- * - Test reducer actions (synchronous state changes)
- * - Test selectors (derived state computation)
- * - Test async thunks dengan mocked API
- * - Integration flow: add → update → remove
+ * Install:
+ *   npm install @reduxjs/toolkit
+ *   npm install --save-dev jest
+ *
+ * Jalankan (sesuaikan path):
+ *   npx jest 02-slice.test.js
+ *
+ * Kunci jawaban: ../solusi-jangan-dibuka-dulu.md (jangan dibuka dulu).
  * ============================================================
  */
 
@@ -109,7 +108,7 @@ const selectIsEmpty        = state => state.cart.items.length === 0;
 // Simulates an API call. We mock globalThis.fetch to control behavior.
 // ============================================================
 
-async function fetchCartItemsThunk() {
+function fetchCartItemsThunk() {
   return async (dispatch, getState) => {
     dispatch({ type: 'cart/setStatus', payload: 'loading' });
     dispatch({ type: 'cart/setError', payload: null });
@@ -153,309 +152,57 @@ async function waitForStore(store) {
 }
 
 // ============================================================
-// TESTS: Reducers
+// TESTS (isi sendiri)
 // ============================================================
+// Tips: buat store baru untuk setiap test (createTestStore) supaya test
+// tidak saling bergantung.
 
 describe('cartReducer — addItem', () => {
-  let store;
-
-  beforeEach(() => {
-    store = createTestStore();
-  });
-
-  it('adds a new item to an empty cart', () => {
-    const payload = { id: 'p-1', name: 'Baju Kemeja', price: 150000 };
-    store.dispatch({ type: 'cart/addItem', payload });
-    expect(selectCartItems(store.getState())).toHaveLength(1);
-    expect(selectCartItems(store.getState())[0]).toMatchObject({
-      id: 'p-1',
-      name: 'Baju Kemeja',
-      price: 150000,
-      quantity: 1,
-    });
-  });
-
-  it('increments quantity if item already exists', () => {
-    const payload = { id: 'p-1', name: 'Baju Kemeja', price: 150000 };
-    store.dispatch({ type: 'cart/addItem', payload });
-    store.dispatch({ type: 'cart/addItem', payload });
-    store.dispatch({ type: 'cart/addItem', payload });
-
-    expect(selectCartItems(store.getState())).toHaveLength(1);
-    expect(selectCartItems(store.getState())[0].quantity).toBe(3);
-  });
-
-  it('adds different items without interfering', () => {
-    store.dispatch({ type: 'cart/addItem', payload: { id: 'p-1', name: 'A', price: 100 } });
-    store.dispatch({ type: 'cart/addItem', payload: { id: 'p-2', name: 'B', price: 200 } });
-    expect(selectCartItems(store.getState())).toHaveLength(2);
-  });
+  // TODO(human): Uji menambah item baru dan menambah item yang sudah ada.
+  // Petunjuk: apa yang SEHARUSNYA terjadi pada quantity? Tulis harapanmu
+  //           dulu, baru jalankan.
+  // Selesai kalau: ada test untuk item baru DAN item duplikat.
+  test.todo('item baru masuk dengan quantity 1');
+  test.todo('item yang sama menaikkan quantity');
+  test.todo('state lama tidak dimutasi');
 });
 
-describe('cartReducer — removeItem', () => {
-  it('removes an item by id', () => {
-    const store = createTestStore({
-      cart: {
-        ...initialState,
-        items: [
-          { id: 'p-1', name: 'A', price: 100, quantity: 1 },
-          { id: 'p-2', name: 'B', price: 200, quantity: 1 },
-        ],
-      },
-    });
-    store.dispatch({ type: 'cart/removeItem', payload: 'p-1' });
-    const items = selectCartItems(store.getState());
-    expect(items).toHaveLength(1);
-    expect(items[0].id).toBe('p-2');
-  });
-
-  it('does nothing when removing a non-existent id', () => {
-    const store = createTestStore({
-      cart: {
-        ...initialState,
-        items: [{ id: 'p-1', name: 'A', price: 100, quantity: 1 }],
-      },
-    });
-    store.dispatch({ type: 'cart/removeItem', payload: 'nonexistent' });
-    expect(selectCartItems(store.getState())).toHaveLength(1);
-  });
-});
-
-describe('cartReducer — updateItem', () => {
-  it('updates item properties', () => {
-    const store = createTestStore({
-      cart: {
-        ...initialState,
-        items: [{ id: 'p-1', name: 'A', price: 100, quantity: 1 }],
-      },
-    });
-    store.dispatch({ type: 'cart/updateItem', payload: { id: 'p-1', quantity: 5 } });
-    const item = selectCartItems(store.getState())[0];
-    expect(item.quantity).toBe(5);
-    expect(item.name).toBe('A'); // unchanged
-  });
-
-  it('does nothing for non-existent id', () => {
-    const store = createTestStore({
-      cart: {
-        ...initialState,
-        items: [{ id: 'p-1', name: 'A', price: 100, quantity: 1 }],
-      },
-    });
-    store.dispatch({ type: 'cart/updateItem', payload: { id: 'nonexistent', quantity: 9 } });
-    expect(selectCartItems(store.getState())[0].quantity).toBe(1);
-  });
-});
-
-describe('cartReducer — clearAll', () => {
-  it('empties the cart', () => {
-    const store = createTestStore({
-      cart: {
-        ...initialState,
-        items: [
-          { id: 'p-1', name: 'A', price: 100, quantity: 2 },
-          { id: 'p-2', name: 'B', price: 200, quantity: 1 },
-        ],
-      },
-    });
-    store.dispatch({ type: 'cart/clearAll' });
-    expect(selectCartItems(store.getState())).toHaveLength(0);
-    expect(selectIsEmpty(store.getState())).toBe(true);
-  });
+describe('cartReducer — removeItem / updateItem / clearAll', () => {
+  // TODO(human): Uji tiap aksi, termasuk kasus id yang tidak ada.
+  test.todo('removeItem membuang item yang tepat');
+  test.todo('removeItem dengan id tidak dikenal tidak mengubah apa pun');
+  test.todo('updateItem hanya mengubah item yang dituju');
+  test.todo('clearAll mengosongkan items');
 });
 
 describe('cartReducer — setStatus & setError', () => {
-  it('setStatus changes status field', () => {
-    const store = createTestStore();
-    store.dispatch({ type: 'cart/setStatus', payload: 'loading' });
-    expect(selectCartStatus(store.getState())).toBe('loading');
-
-    store.dispatch({ type: 'cart/setStatus', payload: 'succeeded' });
-    expect(selectCartStatus(store.getState())).toBe('succeeded');
-  });
-
-  it('setError sets error and transitions status to failed', () => {
-    const store = createTestStore();
-    store.dispatch({ type: 'cart/setError', payload: 'Network timeout' });
-    expect(selectCartError(store.getState())).toBe('Network timeout');
-    expect(selectCartStatus(store.getState())).toBe('failed');
-  });
-
-  it('selectItem sets selectedId', () => {
-    const store = createTestStore();
-    store.dispatch({ type: 'cart/selectItem', payload: 'p-42' });
-    expect(selectSelectedId(store.getState())).toBe('p-42');
-  });
-
-  it('selectItem with null clears selection', () => {
-    const store = createTestStore({ cart: { ...initialState, selectedId: 'p-1' } });
-    store.dispatch({ type: 'cart/selectItem', payload: null });
-    expect(selectSelectedId(store.getState())).toBeNull();
-  });
+  // TODO(human): Perhatikan efek samping setError pada status.
+  test.todo('setStatus mengganti status');
+  test.todo('setError menyimpan pesan dan menandai gagal');
 });
 
-// ============================================================
-// TESTS: Selectors
-// ============================================================
-
-describe('cartSlice selectors', () => {
-  const populatedState = {
-    cart: {
-      items: [
-        { id: 'p-1', name: 'Kaos Polos',   price: 75000,  quantity: 2 },
-        { id: 'p-2', name: 'Celana Jeans', price: 250000, quantity: 1 },
-      ],
-      status: 'idle',
-      error: null,
-      selectedId: 'p-1',
-    },
-  };
-
-  it('selectCartItems returns all items', () => {
-    const store = createTestStore(populatedState);
-    expect(selectCartItems(store.getState())).toHaveLength(2);
-  });
-
-  it('selectCartTotal computes correct total (75000*2 + 250000*1)', () => {
-    const store = createTestStore(populatedState);
-    expect(selectCartTotal(store.getState())).toBe(400000);
-  });
-
-  it('selectItemCount returns total quantity', () => {
-    const store = createTestStore(populatedState);
-    expect(selectItemCount(store.getState())).toBe(3);
-  });
-
-  it('selectSelectedItem returns the item matching selectedId', () => {
-    const store = createTestStore(populatedState);
-    expect(selectSelectedItem(store.getState())).toMatchObject({
-      id: 'p-1',
-      name: 'Kaos Polos',
-    });
-  });
-
-  it('selectSelectedItem returns null when no item is selected', () => {
-    const store = createTestStore({
-      cart: { ...populatedState.cart, selectedId: null },
-    });
-    expect(selectSelectedItem(store.getState())).toBeNull();
-  });
-
-  it('selectIsEmpty returns true for empty cart', () => {
-    const store = createTestStore();
-    expect(selectIsEmpty(store.getState())).toBe(true);
-  });
-
-  it('selectIsEmpty returns false for non-empty cart', () => {
-    const store = createTestStore(populatedState);
-    expect(selectIsEmpty(store.getState())).toBe(false);
-  });
+describe('selectors', () => {
+  // TODO(human): Siapkan state berisi beberapa item dan hitung hasil yang
+  //              diharapkan dengan tanganmu (bukan dari output selector).
+  test.todo('selectCartTotal menghitung harga x quantity');
+  test.todo('selectItemCount menjumlah quantity');
+  test.todo('selectSelectedItem mengembalikan null bila tidak ada yang dipilih');
+  test.todo('selectIsEmpty benar untuk keranjang kosong');
 });
 
-// ============================================================
-// TESTS: Async Thunks with Mocked fetch
-// ============================================================
-
-describe('fetchCartItemsThunk — async with mocked fetch', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('dispatches loading then succeeded on successful fetch', async () => {
-    const mockData = [{ id: 'p-1', name: 'Remote Item', price: 500000 }];
-    globalThis.fetch = jest.fn().mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockData),
-    });
-
-    const store = createTestStore();
-    store.dispatch({ type: 'cart/setStatus', payload: 'idle' });
-    await store.dispatch(fetchCartItemsThunk());
-    await waitForStore(store);
-
-    expect(selectCartStatus(store.getState())).toBe('succeeded');
-    expect(selectCartError(store.getState())).toBeNull();
-    globalThis.fetch = undefined; // clean up global
-  });
-
-  it('sets error status on failed fetch', async () => {
-    globalThis.fetch = jest.fn().mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-    });
-
-    const store = createTestStore();
-    await store.dispatch(fetchCartItemsThunk());
-    await waitForStore(store);
-
-    expect(selectCartStatus(store.getState())).toBe('failed');
-    expect(selectCartError(store.getState())).toBe('HTTP 500');
-    globalThis.fetch = undefined;
-  });
-
-  it('throws when fetch throws (network error)', async () => {
-    globalThis.fetch = jest.fn().mockRejectedValueOnce(new Error('ENOENT'));
-
-    const store = createTestStore();
-    await store.dispatch(fetchCartItemsThunk());
-    await waitForStore(store);
-
-    expect(selectCartStatus(store.getState())).toBe('failed');
-    expect(selectCartError(store.getState())).toBe('ENOENT');
-    globalThis.fetch = undefined;
-  });
+describe('fetchCartItemsThunk — async dengan fetch palsu', () => {
+  // TODO(human): Ganti globalThis.fetch dengan jest.fn() agar tidak ada
+  //              permintaan jaringan. Uji jalur sukses dan jalur gagal
+  //              (response.ok = false, dan fetch yang reject).
+  // Petunjuk: pulihkan fetch asli setelah test (afterEach).
+  // Selesai kalau: kedua jalur diuji dan status akhir di store sesuai.
+  test.todo('sukses: status loading lalu succeeded');
+  test.todo('HTTP error: status failed dan pesan error tersimpan');
+  test.todo('jaringan putus: error dilempar ulang');
 });
 
-// ============================================================
-// TESTS: Integration — Full Cart Flow
-// ============================================================
-
-describe('Integration — Full cart flow', () => {
-  it('add multiple items → update quantity → remove one → clear all', () => {
-    const store = createTestStore();
-
-    // Add items
-    store.dispatch({ type: 'cart/addItem', payload: { id: 'p-1', name: 'A', price: 100 } });
-    store.dispatch({ type: 'cart/addItem', payload: { id: 'p-2', name: 'B', price: 200 } });
-    store.dispatch({ type: 'cart/addItem', payload: { id: 'p-3', name: 'C', price: 300 } });
-    expect(selectItemCount(store.getState())).toBe(3);
-
-    // Update quantity
-    store.dispatch({ type: 'cart/updateItem', payload: { id: 'p-1', quantity: 5 } });
-    expect(selectCartTotal(store.getState())).toBe(500 + 200 + 300); // 1000
-
-    // Remove one
-    store.dispatch({ type: 'cart/removeItem', payload: 'p-2' });
-    expect(selectCartItems(store.getState())).toHaveLength(2);
-
-    // Clear all
-    store.dispatch({ type: 'cart/clearAll' });
-    expect(selectIsEmpty(store.getState())).toBe(true);
-    expect(selectCartTotal(store.getState())).toBe(0);
-  });
-
-  it('complete flow with async fetch then local update', async () => {
-    const mockData = [{ id: 'p-99', name: 'Fetched Item', price: 999 }];
-    globalThis.fetch = jest.fn().mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockData),
-    });
-
-    const store = createTestStore();
-    await store.dispatch(fetchCartItemsThunk());
-    await waitForStore(store);
-
-    expect(selectCartStatus(store.getState())).toBe('succeeded');
-
-    // Simulate adding to fetched cart
-    store.dispatch({
-      type: 'cart/addItem',
-      payload: { id: 'local-1', name: 'Local Extra', price: 50 },
-    });
-    expect(selectItemCount(store.getState())).toBeGreaterThan(0);
-
-    globalThis.fetch = undefined;
-  });
+describe('Integration — alur keranjang lengkap', () => {
+  // TODO(human): Satu skenario nyata: tambah, ubah jumlah, hapus, cek total
+  //              di tiap langkah lewat selector.
+  test.todo('tambah -> ubah -> hapus menghasilkan total yang benar');
 });
-
-export {};

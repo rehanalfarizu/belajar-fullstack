@@ -277,7 +277,6 @@ import { format, formatDistance } from "date-fns";
 
 ```jsx
 // src/vitals.js — Core Web Vitals tracking
-import { onCLS, onFID, onLCP, onINP, onFCP, onTTFB } from "web-vitals";
 
 function sendToAnalytics({ name, value, id }) {
   // Kirim ke analytics service
@@ -290,7 +289,6 @@ function sendToAnalytics({ name, value, id }) {
 
 export function reportWebVitals() {
   onCLS(sendToAnalytics);
-  onFID(sendToAnalytics);
   onLCP(sendToAnalytics);
   onINP(sendToAnalytics);
   onFCP(sendToAnalytics);

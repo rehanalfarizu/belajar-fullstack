@@ -10,12 +10,17 @@ Kamu akan belajar menulis test (unit, integration, E2E) dan setup automated CI/C
 ### Install
 
 ```bash
-npm install --save-dev jest @testing-library/react @testing-library/jest-dom
+npm install --save-dev jest jest-environment-jsdom babel-jest @babel/preset-env @babel/preset-react \
+  @testing-library/react @testing-library/jest-dom @testing-library/user-event identity-obj-proxy
 ```
+
+Jest tidak bisa membaca JSX tanpa Babel, dan `jsdom` harus dipasang terpisah.
+Proyek Vite sering memakai **Vitest** sebagai pengganti: sintaksnya hampir sama
+dan tidak butuh Babel. Pilih salah satu, catat alasanmu di jurnal.
 
 ### Setup
 
-`jest.config.js`:
+`jest.config.js` (pakai `module.exports = {...}` kalau proyekmu bukan ESM):
 
 ```javascript
 export default {
@@ -160,10 +165,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci
       - run: npm run lint
@@ -181,14 +186,14 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci
       - run: npm run test:coverage
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage/
@@ -197,14 +202,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint, test]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci
       - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: build
           path: dist/

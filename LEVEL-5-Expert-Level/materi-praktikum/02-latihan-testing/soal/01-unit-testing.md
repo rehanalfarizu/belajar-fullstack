@@ -88,7 +88,7 @@ Buat `jest.config.js`:
 ```js
 // TODO: Konfigurasi jest.config.js
 // lihat code template untuk referensi
-// code/01-math.test.js
+// code/01-unit-testing-jest.test.js
 ```
 
 **3. Add Test Script**

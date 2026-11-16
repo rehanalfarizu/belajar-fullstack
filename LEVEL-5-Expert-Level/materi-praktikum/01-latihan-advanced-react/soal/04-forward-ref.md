@@ -37,26 +37,9 @@ DOM lebih banyak daripada yang diperlukan.
 
 ## Contoh Code
 
-```jsx
-function FancyButton({ ref, children, ...buttonProps }) {
-  return (
-    <button ref={ref} type="button" {...buttonProps}>
-      {children}
-    </button>
-  );
-}
-
-// Usage
-function App() {
-  const buttonRef = useRef(null);
-
-  useEffect(() => {
-    buttonRef.current.focus();
-  }, []);
-
-  return <FancyButton ref={buttonRef}>Click Me</FancyButton>;
-}
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 ---
 

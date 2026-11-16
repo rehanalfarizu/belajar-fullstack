@@ -19,22 +19,23 @@ Cocok untuk chat, notifikasi, dan dokumen kolaboratif.
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | `soal/01-websocket-dasar.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/01-websocket-server.js` (sudah jadi) | 80 menit |
-| 02 | `soal/02-socketio-chatapp.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/02-socketio-server.js` (sudah jadi) dan klien React di file baru | 85 menit |
-| 03 | `soal/03-real-time-collaboration.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/03-presence-tracker.jsx` (TODO) dengan server dari `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/03-rooms-broadcast.js` (sudah jadi) | 80 menit |
-| Bonus | Tidak ada soal | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/04-real-time-chat.jsx` (klien chat, sudah jadi) | 45 menit |
+| 01 | `soal/01-websocket-dasar.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/01-websocket-server.js` (kerangka TODO) | 80 menit |
+| 02 | `soal/02-socketio-chatapp.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/02-socketio-server.js` (kerangka TODO) dan klien React di file baru | 85 menit |
+| 03 | `soal/03-real-time-collaboration.md` | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/03-presence-tracker.jsx` (TODO) dengan server dari soal 02 atau `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/03-rooms-broadcast.js` (kerangka TODO) | 80 menit |
+| Bonus | Tidak ada soal | `LEVEL-5-Expert-Level/materi-praktikum/04-latihan-websocket/code/04-real-time-chat.jsx` (kerangka klien chat, TODO) | 45 menit |
 
 ### Catatan jujur
 
-- Hanya `03-presence-tracker.jsx` yang punya TODO. Empat file lain **sudah
-  lengkap**. Perlakukan seperti `contoh/`: baca bagian Tujuan dan Checklist di
-  soal, tulis versimu dari file kosong, baru bandingkan.
-- Dua file bernomor `03-`: `03-presence-tracker.jsx` (klien, TODO) dan
-  `03-rooms-broadcast.js` (server, jadi). Keduanya pasangan untuk soal 03.
-- README folder hanya mendaftar tiga file kode. File `03-rooms-broadcast.js` dan
-  `04-real-time-chat.jsx` ada tapi tidak dicantumkan.
-- Kerjakan soal 03 butuh server Socket.io. Pakai versi yang kamu tulis di soal 02
-  atau `03-rooms-broadcast.js` setelah kamu paham.
+- Semua file di `code/` kini berupa **kerangka `TODO(human)`**. Tulis versimu
+  sendiri berdasarkan bagian Tujuan dan Checklist di soal.
+- `03-presence-tracker.jsx` (klien) butuh server Socket.IO: pakai server yang
+  kamu tulis di soal 02, atau `03-rooms-broadcast.js` setelah kamu
+  mengisinya.
+- Klien chat `04-real-time-chat.jsx` bicara dengan server soal 02. Samakan nama
+  event di kedua sisi.
+- Kunci jawaban semua file ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka setelah
+  mencoba sendiri.
 
 ---
 

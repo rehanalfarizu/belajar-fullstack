@@ -28,6 +28,9 @@ pengalaman menghadapi kegagalan nyata.
 
 ## Praktikum yang tersedia
 
+Dua folder berawalan `01-`: kerjakan **Advanced React dulu**, baru Performance.
+
+- [Advanced React](materi-praktikum/01-latihan-advanced-react/README.md)
 - [Performance](materi-praktikum/01-latihan-performa/README.md)
 - [Testing](materi-praktikum/02-latihan-testing/README.md)
 - [Docker](materi-praktikum/03-latihan-docker/README.md)
@@ -36,6 +39,8 @@ pengalaman menghadapi kegagalan nyata.
 - [System design](materi-praktikum/06-latihan-system-design/README.md)
 - [Self problem solving](SELF_PROBLEM_SOLVING.md)
 - [Final project](final-project/README.md)
+- [Software yang perlu dipasang](software/README.md)
+- [Tutorial langkah demi langkah](tutorial/README.md)
 
 ## Definition of done
 

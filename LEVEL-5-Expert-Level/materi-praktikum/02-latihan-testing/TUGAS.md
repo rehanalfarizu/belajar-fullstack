@@ -20,25 +20,29 @@ memberi tahu kalau sesuatu rusak. Di sini kamu belajar menulis test yang
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | `soal/01-unit-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/01-unit-testing-jest.test.js` | 100 menit |
-| 02 | `soal/02-react-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/03-react-testing-library.test.jsx` dan `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/03-button.test.jsx` | 100 menit |
+| 01 | `soal/01-unit-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/01-unit-testing-jest.test.js` (kode yang diuji tersedia, test berupa `test.todo`) | 100 menit |
+| 02 | `soal/02-react-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/03-react-testing-library.test.jsx` (komponen tersedia, test berupa `test.todo`) dan `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/03-button.test.jsx` (kerangka `TODO`) | 100 menit |
 | 03 | `soal/03-integration-testing.md` | Tidak ada starter yang cocok. Tulis dari nol (lihat catatan) | 100 menit |
-| 04 | `soal/04-end-to-end-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/04-end-to-end-playwright.spec.js` (sudah jadi, baca sebagai pembanding) | 110 menit |
-| Bonus | Tidak ada soal | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/02-slice.test.js` (test Redux slice, sudah jadi) | 45 menit |
+| 04 | `soal/04-end-to-end-testing.md` | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/04-end-to-end-playwright.spec.js` (kerangka `test.fixme`, isi sendiri) | 110 menit |
+| Bonus | Tidak ada soal | `LEVEL-5-Expert-Level/materi-praktikum/02-latihan-testing/code/02-slice.test.js` (kode slice tersedia, test berupa `test.todo`) | 45 menit |
 
 ### Catatan jujur
 
-- README folder menyebut nama file lama (`01-math.test.js`, `03-button.test.jsx`,
-  `04-playwright.spec.js`). Nama sebenarnya ada di tabel di atas.
+- Nama file di `soal/` dan README sudah diselaraskan dengan tabel di atas.
 - Soal 02 bicara tentang `AddToCartButton`. Starter `03-react-testing-library`
-  melatih `Counter`, `TodoList`, `SearchFilter`, `UserProfile` dan memintamu
-  **membuat komponennya** (TODO). Starter `03-button` melatih `Button` dan
-  cart. Kerjakan keduanya sebagai latihan, lalu tulis test untuk
-  `AddToCartButton` di file baru.
+  menyediakan komponen `Counter`, `TodoList`, `SearchFilter`, `UserProfile`
+  dan **kamu yang menulis test-nya**. Starter `03-button` menyediakan
+  komponen `AddToCartButton` dan cart, dengan kerangka test yang harus
+  kamu isi. Kerjakan keduanya sebagai latihan.
+- Kunci jawaban untuk soal 01 dan 02 ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka hanya
+  setelah kamu mencoba sungguh-sungguh.
+- File `03-button` dan `03-react-testing-library` bukan kembar: yang satu
+  melatih komponen generik, yang lain tombol dan cart. Keduanya dipakai soal 02.
 - Soal 03 membahas Product Listing Page dengan MSW. Tidak ada starter untuk itu.
   `02-slice.test.js` bukan jawabannya (itu test Redux, tanpa TODO).
-- `code/04` dan `code/02` **sudah lengkap**. Anggap seperti `contoh/`: tulis
-  versimu dulu, baru buka.
+- `code/04` dan `code/02` kini kerangka. Kunci jawaban ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md).
 - Soal 04 meminta file workflow `.github/workflows/e2e.yml`. Itu dilatih lagi di
   [05-latihan-cicd](../05-latihan-cicd/TUGAS.md).
 

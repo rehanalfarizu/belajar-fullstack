@@ -19,13 +19,14 @@ jadi membosankan (itu pujian).
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | `soal/01-github-actions-basics.md` | `LEVEL-5-Expert-Level/materi-praktikum/05-latihan-cicd/code/01-ci-workflow.yml` (sudah jadi, tulis versimu dulu) | 90 menit |
+| 01 | `soal/01-github-actions-basics.md` | `LEVEL-5-Expert-Level/materi-praktikum/05-latihan-cicd/code/01-ci-workflow.yml` (kerangka TODO) | 90 menit |
 | 02 | `soal/02-deploy-pipeline.md` | `LEVEL-5-Expert-Level/materi-praktikum/05-latihan-cicd/code/02-deploy-workflow.yml` (TODO) | 85 menit |
 
 ### Catatan jujur
 
-- `01-ci-workflow.yml` sudah lengkap (tanpa TODO). Tulis workflow-mu dari file
-  kosong berdasarkan bagian A–E di soal, baru bandingkan.
+- `01-ci-workflow.yml` kini kerangka `TODO(human)`. Kunci jawabannya ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md); buka setelah
+  mencoba sendiri.
 - `02-deploy-workflow.yml` penuh TODO tapi struktur kerangkanya sudah ada.
 - **Starter di folder ini tidak akan berjalan di sini.** GitHub hanya menjalankan
   workflow yang ada di `.github/workflows/` pada **root** repo. Salinan di

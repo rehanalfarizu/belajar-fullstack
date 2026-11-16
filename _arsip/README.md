@@ -45,3 +45,17 @@ folder `_arsip/`, jadi tautan rusak di sini tidak dianggap error.
 # Contoh restore satu folder
 git mv _arsip/materi-tutorial-kosong/LEVEL-2-Backend-Node-Express-materi-tutorial LEVEL-2-Backend-Node-Express/materi-tutorial
 ```
+
+---
+
+## level-5-file-kembar/
+
+File kembar di Level 5 yang tidak dipakai lagi oleh soal atau TUGAS.md. Isinya
+juga disalin ke `solusi-jangan-dibuka-dulu.md` di folder topiknya.
+
+| Nama lama | Lokasi arsip | Alasan |
+| --- | --- | --- |
+| `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/02-multi-stage-Dockerfile` | `_arsip/level-5-file-kembar/03-latihan-docker/02-multi-stage-Dockerfile` | Versi jadi (jawaban) dari starter `02-Dockerfile`; membuat bingung mana file kerja |
+| `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/03-.dockerignore` | `_arsip/level-5-file-kembar/03-latihan-docker/03-.dockerignore` | Versi jadi (jawaban) dari starter `03-dockerignore` |
+
+Restore: `git mv _arsip/level-5-file-kembar/03-latihan-docker/<file> LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/<file>`

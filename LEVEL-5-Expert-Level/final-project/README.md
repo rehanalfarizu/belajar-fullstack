@@ -2,6 +2,9 @@
 
 ## Overview
 
+Proyek penutup ini dinilai dengan standar Level 5. Sebelum merasa selesai,
+cek daftar "Definition of done" di [README Level 5](../README.md).
+
 Build fullstack e-commerce app dengan: React (Vite) + Express + SQLite + JWT Auth.
 
 ---

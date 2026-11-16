@@ -29,7 +29,7 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 | # | File Template | Deskripsi |
 |---|---------------|-----------|
-| 01 | `code/01-ci-workflow.yml` | CI workflow untuk React + Node.js app |
+| 01 | `code/01-ci-workflow.yml` | Kerangka CI workflow untuk React + Node.js app (TODO) |
 | 02 | `code/02-deploy-workflow.yml` | CD workflow dengan deployment automation |
 
 ---

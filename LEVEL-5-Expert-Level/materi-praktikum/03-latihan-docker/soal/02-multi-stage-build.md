@@ -47,24 +47,9 @@ Single Page Applications (React/Vue/Angular) menggunakan client-side routing. Ar
 - Request ke `/dashboard` → server harus return `index.html`, bukan 404
 - Nginx config harus menggunakan `try_files $uri $uri/ /index.html`
 
-```nginx
-server {
-    listen 80;
-    server_name _;
-    root /usr/share/nginx/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    # Cache static assets
-    location /assets {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-}
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 ---
 

@@ -20,28 +20,23 @@ paket itu dengan **kecil, cepat dibangun, dan aman**.
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | `soal/01-dockerfile-basics.md` | `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/01-Dockerfile` (sudah jadi) dan `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/03-dockerignore` (TODO) | 90 menit |
+| 01 | `soal/01-dockerfile-basics.md` | `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/01-Dockerfile` (kerangka TODO) dan `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/03-dockerignore` (TODO) | 90 menit |
 | 02 | `soal/02-multi-stage-build.md` | `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/02-Dockerfile` (TODO) dan `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/nginx.conf` (referensi) | 80 menit |
-| 03 | `soal/03-volume-networking.md` | Tidak ada starter. Dikerjakan dengan perintah `docker`. Referensi akhir: `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/04-docker-compose.yml` | 95 menit |
-| 04 | `soal/04-docker-compose.md` | `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/04-docker-compose.yml` (sudah jadi, tulis versimu dulu) | 90 menit |
+| 03 | `soal/03-volume-networking.md` | Tidak ada starter. Dikerjakan dengan perintah `docker`. Referensi akhir: tulis `code/04-docker-compose.yml` versimu sendiri | 95 menit |
+| 04 | `soal/04-docker-compose.md` | `LEVEL-5-Expert-Level/materi-praktikum/03-latihan-docker/code/04-docker-compose.yml` (kerangka TODO) | 90 menit |
 
-### Catatan jujur: ada file kembar di `code/`
+### Catatan jujur: file starter dan file kembar
 
-Folder `code/` punya pasangan file yang isinya beda:
-
-| Berkas kerja (TODO, kerjakan ini) | Berkas jadi (jawaban, jangan dibuka dulu) |
-| --- | --- |
-| `02-Dockerfile` | `02-multi-stage-Dockerfile` |
-| `03-dockerignore` | `03-.dockerignore` |
-| (tidak ada) | `01-Dockerfile` dan `04-docker-compose.yml` sudah jadi |
-
-- `01-Dockerfile`, `02-multi-stage-Dockerfile`, `03-.dockerignore`,
-  `04-docker-compose.yml`, `nginx.conf` sudah berisi isi lengkap. Perlakukan
-  seperti `contoh/`.
-- Karena `01-Dockerfile` sudah jadi, soal 01 dikerjakan dengan menulis
-  Dockerfile-mu sendiri dari file kosong.
-- Nama `README` menyebut `03-dockerignore` saja. Berkas `03-.dockerignore`
-  (dengan titik) adalah versi jadinya.
+- `01-Dockerfile`, `02-Dockerfile`, dan `03-dockerignore` sekarang berupa
+  **kerangka `TODO(human)`**. Isi sendiri.
+- `04-docker-compose.yml` dan `nginx.conf` juga kerangka `TODO(human)`.
+- Kunci jawaban Dockerfile, multi-stage, `.dockerignore`, Compose, dan Nginx ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka hanya
+  setelah mencoba sendiri.
+- Dulu ada file kembar `02-multi-stage-Dockerfile` dan `03-.dockerignore`
+  (versi jadi dari `02-Dockerfile` dan `03-dockerignore`). Keduanya dipindah
+  ke `_arsip/level-5-file-kembar/03-latihan-docker/` dan isinya ada di file
+  solusi di atas.
 
 ---
 

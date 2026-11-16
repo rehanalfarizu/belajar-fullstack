@@ -27,22 +27,19 @@ Satu proyek Vite React berisi lima demo yang kamu tulis sendiri:
 
 | No | Soal | Starter | Kamu menulis di | Estimasi |
 | --- | --- | --- | --- | --- |
-| 01 | `soal/01-portal-modal.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/01-portal-modal.jsx` (sudah jadi) | `src/components/Modal.jsx`, `src/App.jsx` | 90 menit |
-| 02 | `soal/02-suspense-code-splitting.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/02-suspense-code-splitting.jsx` (sudah jadi) | `src/pages/Home.jsx`, `About.jsx`, `Dashboard.jsx`, `src/App.jsx` | 75 menit |
-| 03 | `soal/03-error-boundary.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/03-error-boundary.jsx` (sudah jadi) | `src/components/ErrorBoundary.jsx` | 60 menit |
-| 04 | `soal/04-forward-ref.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/04-forward-ref.jsx` (sudah jadi) | `src/components/TextInput.jsx`, `TextInputLegacy.jsx` | 60 menit |
-| 05 | `soal/05-compound-components.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/05-compound-components.jsx` (sudah jadi) | `src/components/Tabs.jsx` | 75 menit |
+| 01 | `soal/01-portal-modal.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/01-portal-modal.jsx` (kerangka TODO) | `src/components/Modal.jsx`, `src/App.jsx` | 90 menit |
+| 02 | `soal/02-suspense-code-splitting.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/02-suspense-code-splitting.jsx` (kerangka TODO) | `src/pages/Home.jsx`, `About.jsx`, `Dashboard.jsx`, `src/App.jsx` | 75 menit |
+| 03 | `soal/03-error-boundary.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/03-error-boundary.jsx` (kerangka TODO) | `src/components/ErrorBoundary.jsx` | 60 menit |
+| 04 | `soal/04-forward-ref.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/04-forward-ref.jsx` (kerangka TODO) | `src/components/TextInput.jsx`, `TextInputLegacy.jsx` | 60 menit |
+| 05 | `soal/05-compound-components.md` | `LEVEL-5-Expert-Level/materi-praktikum/01-latihan-advanced-react/code/05-compound-components.jsx` (kerangka TODO) | `src/components/Tabs.jsx` | 75 menit |
 
 ### Catatan jujur
 
-- Semua file `code/` di sini **sudah berisi implementasi lengkap**, tanpa TODO.
-  Setiap soal juga punya bagian **"Contoh Code"**.
-- Jadi perlakukan `code/` dan "Contoh Code" seperti `contoh/`: **tutup dulu**.
-  Baca bagian Tujuan, Syarat (Checklist), dan Cara Submit di soal saja. Tulis
-  dari file kosong. Setelah punyamu lolos cek di bawah, baru buka dan
-  bandingkan.
-- Folder ini tidak tercantum di daftar praktikum README Level 5, tapi materinya
-  cocok dengan teori `00-react-modern`.
+- File `code/` di sini adalah **kerangka `TODO(human)`**. Tulis komponenmu di
+  proyek latihan (kolom "Kamu menulis di").
+- Blok "Contoh Code" di soal sudah dipindah ke
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka hanya
+  setelah punyamu lolos cek di bawah, lalu bandingkan.
 
 ---
 

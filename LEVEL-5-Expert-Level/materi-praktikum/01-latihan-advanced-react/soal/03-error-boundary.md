@@ -29,66 +29,9 @@ Error boundary component yang catch errors di subtree.
 
 ## Contoh Code
 
-```jsx
-import React, { Component } from "react";
-
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, info) {
-    console.error("Error caught:", error, info);
-  }
-
-  resetError = () => {
-    this.setState({ hasError: false, error: null });
-  };
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div style={{ padding: 20, textAlign: "center" }}>
-          <h2>Terjadi kesalahan</h2>
-          <p style={{ color: "#666" }}>{this.state.error?.message}</p>
-          <button
-            onClick={this.resetError}
-            style={{
-              padding: "10px 20px",
-              background: "#3b82f6",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
-          >
-            Coba Lagi
-          </button>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
-function BuggyComponent() {
-  throw new Error("Error ini sengaja dibuat!");
-}
-
-function App() {
-  return (
-    <ErrorBoundary>
-      <BuggyComponent />
-    </ErrorBoundary>
-  );
-}
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 ---
 

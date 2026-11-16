@@ -9,12 +9,16 @@
 Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 1. Menggunakan **Lighthouse** untuk mengaudit performa aplikasi web secara sistematis
-2. Menganalisis **Core Web Vitals** (LCP, FID/INP, CLS) dan mengidentifikasi bottleneck
+2. Menganalisis **Core Web Vitals** (LCP, INP, CLS) dan mengidentifikasi bottleneck
 3. Mengkonfigurasi **Vite** untuk strategi chunking dan tree-shaking yang optimal
 4. Mengimplementasikan **lazy loading** dan **code splitting** untuk mengurangi bundle size
 5. Mengoptimasi **asset gambar** dengan format modern dan teknik loading yang tepat
 
 ---
+
+> **Urutan:** folder bernomor `01-` ada dua. Kerjakan
+> [01-latihan-advanced-react](../01-latihan-advanced-react/README.md) dulu,
+> baru folder ini.
 
 ## Struktur Soal
 
@@ -23,7 +27,7 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 | 01 | `soal/01-lighthouse-audit.md` | Audit performa dengan Lighthouse |
 | 02 | `soal/02-core-web-vitals.md` | Analisis Core Web Vitals |
 | 03 | `soal/03-bundle-optimization.md` | Strategi optimasi bundle |
-| 04 | `soal/04-bundle-optimization.md` | Optimasi asset gambar |
+| Bonus | (tidak ada file soal) | Optimasi gambar: kerjakan lewat TODO di `code/03-image-component.jsx` dan `code/04-image-optimization.jsx` |
 
 ---
 
@@ -41,7 +45,7 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 ## Tools yang Dibutuhkan
 
 - **Node.js** 24 LTS
-- **Vite** v5+
+- **Vite** (versi terbaru)
 - **Google Chrome** (untuk Lighthouse)
 - **@lhci/cli** atau ekstensi Lighthouse di Chrome DevTools
 

@@ -170,7 +170,6 @@ server {
 Di folder `fullstack-app/` (root), buat file `docker-compose.yml`:
 
 ```yaml
-version: '3.8'
 
 services:
   # Database PostgreSQL

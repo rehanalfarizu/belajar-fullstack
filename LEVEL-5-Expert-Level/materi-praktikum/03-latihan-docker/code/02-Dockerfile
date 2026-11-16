@@ -1,125 +1,61 @@
 # ============================================================
-# Multi-Stage Dockerfile — React Frontend dengan Nginx
+# SOAL 02 — Multi-Stage Dockerfile: React (Vite) + Nginx (kerangka)
 # ============================================================
+# Tujuan:
+#   - Stage build: compile React dengan Node
+#   - Stage produksi: sajikan hasil build dengan Nginx
+#   - Image akhir jauh lebih kecil dari image build
+#   - Refresh di /dashboard tidak 404 (fallback SPA, lihat nginx.conf)
 #
-# TODO: Implementasikan multi-stage Dockerfile untuk React SPA
+# Saat dicoba di proyekmu, salin file ini jadi `Dockerfile`.
 #
-# Goals:
-# - Build stage: Compile React dengan Vite
-# - Production stage: Serve dengan Nginx
-# - Final image < 50MB
-# - SPA routing (fallback ke index.html)
-# - Security headers
-# - Gzip compression
-#
-# Run: docker build -t my-frontend:1.0 .
-# Run: docker run -p 8080:80 my-frontend:1.0
-# ============================================================
-
-# ============================================================
-# STAGE 1: Builder — Compile React App
-# ============================================================
-# TODO: Base image untuk build stage
-# Hint: Butuh Node.js + npm
-# FROM node:24-alpine AS builder
-
-# TODO: Set working directory
-# WORKDIR /app
-
-# TODO: Copy package files
-# COPY package*.json ./
-
-# TODO: Install ALL dependencies (karena perlu build tools)
-# Hint: npm ci (karena ada package-lock.json)
-
-# TODO: Copy source code
-# COPY . .
-
-# TODO: Run build command
-# Hint: Vite build: npm run build
-# Atau untuk Create React App: npm run build
-
-# ============================================================
-# STAGE 2: Production — Nginx
-# ============================================================
-# TODO: Base image untuk production stage
-# Hint:nginx:alpine (~50MB)
-# FROM nginx:alpine AS production
-
-# TODO: Copy built assets dari builder stage
-# COPY --from=builder /app/dist /usr/share/nginx/html
-
-# TODO: Copy nginx configuration
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# TODO: Expose port 80
-# EXPOSE 80
-
-# TODO: Start nginx
-# CMD harus foreground untuk container tidak exit immediately
-# CMD ["nginx", "-g", "daemon off;"]
-
-# ============================================================
-# NGINX CONFIGURATION (nginx.conf)
-# ============================================================
-# TODO: Buat file nginx.conf dengan:
-#
-# server {
-#   listen 80;
-#   server_name _;
-#   root /usr/share/nginx/html;
-#   index index.html;
-#
-#   # SPA routing — PENTING untuk React Router
-#   location / {
-#       try_files $uri $uri/ /index.html;
-#   }
-#
-#   # Cache static assets (CSS, JS, images)
-#   location /assets {
-#       expires 1y;
-#       add_header Cache-Control "public, immutable";
-#   }
-#
-#   # Security headers
-#   add_header X-Frame-Options "SAMEORIGIN" always;
-#   add_header X-Content-Type-Options "nosniff" always;
-#   add_header X-XSS-Protection "1; mode=block" always;
-#
-#   # Gzip compression
-#   gzip on;
-#   gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
-# }
-
-# ============================================================
-# BUILD AND TEST
-# ============================================================
 # Build:
-# docker build -t my-frontend:1.0 --target production .
-#
+#   docker build -t my-frontend:1.0 .
+#   docker build -t frontend-build:1.0 --target <nama-stage-build> .
 # Run:
-# docker run -p 8080:80 my-frontend:1.0
+#   docker run -p 8080:80 my-frontend:1.0
+# Uji SPA routing:
+#   curl -I http://localhost:8080/dashboard    # harus 200, bukan 404
 #
-# Test SPA routing:
-# curl -I http://localhost:8080/
-# curl -I http://localhost:8080/dashboard  (should return 200, bukan 404!)
-# curl -I http://localhost:8080/nonexistent-route (should return 200!)
-
-# ============================================================
-# EXAMPLE SOLUTION (simplified — remove when implementing)
+# Kunci jawaban: ../solusi-jangan-dibuka-dulu.md (jangan dibuka dulu).
 # ============================================================
 
-# # Stage 1: Build
-# FROM node:24-alpine AS builder
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm ci
-# COPY . .
-# RUN npm run build
+# ============================================================
+# STAGE 1 — Build
+# ============================================================
 
-# # Stage 2: Production
-# FROM nginx:alpine AS production
-# COPY --from=builder /app/dist /usr/share/nginx/html
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+# TODO(human): Base image untuk stage build.
+#   Butuh Node dan npm. Beri nama stage supaya bisa dirujuk dari stage lain.
+
+# TODO(human): Working directory, lalu salin file dependency saja.
+#   Kenapa file dependency disalin SEBELUM source code?
+
+# TODO(human): Pasang semua dependency (termasuk devDependencies).
+#   Kenapa stage build butuh devDependencies, padahal produksi tidak?
+#   Pilih perintah install yang cocok dengan adanya lockfile.
+
+# TODO(human): Salin source, lalu jalankan build.
+#   Cari tahu: folder output Vite bernama apa?
+
+# ============================================================
+# STAGE 2 — Produksi
+# ============================================================
+
+# TODO(human): Base image untuk stage produksi (web server ringan).
+
+# TODO(human): Ambil HANYA hasil build dari stage 1.
+#   Lihat opsi --from pada instruksi COPY. Node dan node_modules tidak boleh
+#   ikut terbawa ke image akhir.
+
+# TODO(human): Pasang konfigurasi Nginx (lihat nginx.conf di folder ini).
+#   Ke path mana file konfigurasi default Nginx di dalam image?
+
+# TODO(human): Deklarasikan port, lalu jalankan Nginx di foreground.
+#   Kenapa Nginx harus foreground? Apa yang terjadi pada container kalau
+#   prosesnya jadi daemon?
+
+# Selesai kalau:
+#   [ ] docker images: ukuran my-frontend jauh di bawah frontend-build
+#   [ ] `docker run --rm my-frontend:1.0 ls /usr/share/nginx/html` hanya
+#       berisi file hasil build
+#   [ ] Membuka /dashboard langsung (refresh) tetap menampilkan aplikasi

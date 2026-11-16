@@ -29,9 +29,9 @@ Setiap perubahan harus punya angka sebelum dan sesudah.
 
 ### Catatan
 
-- README folder menyebut `soal/04-bundle-optimization.md` (optimasi gambar).
-  File itu **tidak ada**. Dua starter gambar tidak punya soal, jadi dikerjakan
-  sebagai bonus berdasarkan TODO di dalam file.
+- Soal hanya ada sampai `03-bundle-optimization.md`. Tidak ada `soal/04`.
+  Dua starter gambar (`code/03` dan `code/04`) dikerjakan sebagai bonus
+  berdasarkan TODO di dalam file.
 - Soal 01 dan 02 tidak punya starter. Mereka latihan **mengukur**, bukan menulis
   komponen.
 - Soal 02 menyebut `code/01-vite-config.js` hanya sebagai referensi.

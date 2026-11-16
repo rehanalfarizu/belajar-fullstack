@@ -1,6 +1,6 @@
 # Tutorial — LEVEL 5: Expert Level
 
-Folder ini berisi **panduan langkah demi langkah** untuk topik-topik expert — performance optimization, testing, Docker, WebSocket, dan CI/CD. Tutorial di sini fokus pada praktik langsung, bukan teori.
+Folder ini berisi **panduan langkah demi langkah** untuk topik-topik expert — Docker, CI/CD, dan WebSocket. Tutorial di sini fokus pada praktik langsung, bukan teori.
 
 ---
 
@@ -8,12 +8,15 @@ Folder ini berisi **panduan langkah demi langkah** untuk topik-topik expert — 
 
 | # | File | Project | Topik Utama |
 |---|------|---------|-------------|
-| 01 | `01-docker-containerize.md` | Dockerize App | Dockerfile, docker-compose, multi-stage build |
-| 02 | `02-unit-testing-jest.md` | Unit Testing | Jest, mock, coverage |
-| 03 | `03-react-testing.md` | Component Testing | React Testing Library, user interactions |
-| 04 | `04-e2e-testing-playwright.md` | E2E Testing | Playwright, assertions, CI integration |
-| 05 | `05-github-actions-cicd.md` | CI/CD Pipeline | GitHub Actions, automate testing& deploy |
-| 06 | `06-lighthouse-optimization.md` | Performance | Lighthouse, Core Web Vitals, bundle optimization |
+| 01 | `01-docker-containerisasi.md` | Dockerize app fullstack | Dockerfile, multi-stage build, Compose |
+| 01b | `01-docker-dan-ci-cd.md` | Docker ringkas + CI/CD | Dockerfile dasar, Compose, GitHub Actions |
+| 02 | `02-websocket-real-time-chat.md` | Chat real-time | Socket.IO server dan klien React |
+
+Dua file bernomor `01` itu tidak kembar: yang pertama mendalami Docker, yang
+kedua merangkum Docker lalu masuk ke CI/CD. Untuk topik testing dan Lighthouse
+belum ada tutorial; pakai
+[software/02-testing-dan-ci-cd.md](../software/02-testing-dan-ci-cd.md) dan soal
+di [materi-praktikum](../materi-praktikum/).
 
 ---
 
@@ -22,32 +25,22 @@ Folder ini berisi **panduan langkah demi langkah** untuk topik-topik expert — 
 1. **BACA** tutorial dari awal sampai akhir
 2. **PASTIKAN** project sudah berjalan dengan baik sebelumnya
 3. **KETIK** kode dari 0 — jangan copy-paste
-4. **JALANKAN** test dan lihat hasilnya
-5. **OPTIMASI** berdasarkan hasil audit
-6. **SIMPAN** semua di GitHub dengan CI/CD pipeline
+4. **JALANKAN** hasilnya dan lihat apakah sesuai
+5. **SIMPAN** semua di GitHub dengan CI/CD pipeline
 
 ---
 
 ## Alur Belajar yang Disarankan
 
 ```
-STEP 1 → Tutorial 01: Docker Containerize
-         → Hasil: Aplikasi fullstack dalam Docker container
+STEP 1 → Tutorial 01: Docker (pilih 01-docker-containerisasi.md)
+         → Hasil: aplikasi fullstack dalam Docker container
 
-STEP 2 → Tutorial 02: Unit Testing
-         → Hasil: Unit test untuk semua fungsi kritis
+STEP 2 → Tutorial 01b: Docker dan CI/CD
+         → Hasil: GitHub Actions yang menjalankan build dan test
 
-STEP 3 → Tutorial 03: Component Testing
-         → Hasil: Component test untuk React components
-
-STEP 4 → Tutorial 04: E2E Testing
-         → Hasil: End-to-end test untuk user flows
-
-STEP 5 → Tutorial 05: CI/CD Pipeline
-         → Hasil: GitHub Actions yang otomatis test dan deploy
-
-STEP 6 → Tutorial 06: Performance Optimization
-         → Hasil: Aplikasi dengan Lighthouse score 90+
+STEP 3 → Tutorial 02: WebSocket real-time chat
+         → Hasil: chat real-time dengan Socket.IO
 ```
 
 ---

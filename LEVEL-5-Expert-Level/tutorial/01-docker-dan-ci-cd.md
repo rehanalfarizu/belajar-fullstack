@@ -64,7 +64,6 @@ Buka `http://localhost:3000`.
 Buat `docker-compose.yml` di root project:
 
 ```yaml
-version: "3.9"
 
 services:
   db:
@@ -128,12 +127,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
           cache-dependency-path: blog-api/package-lock.json
 
@@ -155,7 +154,7 @@ jobs:
     needs: ci
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build image
         run: docker build -t blog-api ./blog-api
@@ -170,7 +169,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Deploy to Railway
         uses: railway-deploy-action@v1

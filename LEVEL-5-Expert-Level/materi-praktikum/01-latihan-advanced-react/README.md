@@ -71,7 +71,7 @@ orang**, misalnya library UI atau design system di kantor:
 ├── TUGAS.md
 ├── CHECKLIST.md
 ├── soal/            ← 5 soal
-└── code/            ← 5 file, sudah berisi implementasi (anggap sebagai contoh)
+└── code/            ← 5 file kerangka TODO(human), solusi di solusi-jangan-dibuka-dulu.md
 ```
 
 ## Mulai dari Mana?

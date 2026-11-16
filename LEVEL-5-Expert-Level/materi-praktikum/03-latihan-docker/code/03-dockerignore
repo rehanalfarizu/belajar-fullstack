@@ -1,139 +1,42 @@
 # ============================================================
-# .dockerignore — Exclude Files dari Build Context
+# SOAL 01 (bagian E) — .dockerignore (kerangka)
 # ============================================================
+# Saat dipakai di proyekmu, namai file ini `.dockerignore` (dengan titik) dan
+# taruh di folder konteks build, sejajar dengan Dockerfile.
 #
-# TODO: Buat .dockerignore yang complete
+# Prinsip: jangan kirim ke Docker daemon file yang tidak dibutuhkan image.
+#   - konteks build lebih kecil, build lebih cepat
+#   - secret tidak ikut masuk image
 #
-# Prinsip: Jangan kirim ke Docker daemon file yang tidak perlu
-# - Mengurangi build context size → build lebih cepat
-# - Mengurangi image size (jika COPY setelah .dockerignore)
-# - Menghindari sensitive files masuk ke image
+# Uji: build sebelum dan sesudah, bandingkan baris "Sending build context".
+# Target: di bawah 10MB untuk proyek kecil (tanpa node_modules).
 #
-# Checklist:
-# [ ] node_modules (di-install ulang saat build)
-# [ ] .git dan version control
-# [ ] Environment files
-# [ ] Documentation
-# [ ] Development files
-# [ ] CI/CD files
-# [ ] IDE files
-# [ ] Test files (untuk production image)
-# [ ] Logs dan temporary files
+# Kunci jawaban: ../solusi-jangan-dibuka-dulu.md (jangan dibuka dulu).
 # ============================================================
 
-# ============================================================
-# VERSION CONTROL
-# ============================================================
-# TODO: Exclude .git folder dan version control files
-# .git
-# .gitignore
-# .gitattributes
-# .svn
+# TODO(human): Version control. Apa saja folder/file milik git yang tidak
+#   berguna di dalam image?
 
-# ============================================================
-# NODE_MODULES
-# ============================================================
-# TODO: Exclude node_modules
-# node_modules/
+# TODO(human): Dependency lokal. Kenapa node_modules dari laptopmu TIDAK boleh
+#   ikut (pikirkan beda OS dan arsitektur)?
 
-# ============================================================
-# ENVIRONMENT & SECRETS
-# ============================================================
-# TODO: Exclude environment files
-#.env
-# .env.*
-# !.env.example
-# .env.local
-# .env.production
+# TODO(human): Environment dan secret. Semua varian file .env harus dicegah.
+#   Pikirkan: file contoh (.env.example) perlu dikecualikan dari aturan itu?
+#   Cari cara menulis pengecualian di .dockerignore.
 
-# ============================================================
-# DOCKER FILES (untuk multi-stage build, ini tidak diperlukan)
-# ============================================================
-# Dockerfile
-# docker-compose.yml
-# docker-compose.*.yml
-# .dockerignore
+# TODO(human): Dokumentasi dan file Docker itu sendiri.
 
-# ============================================================
-# DOCUMENTATION
-# ============================================================
-# TODO: Exclude markdown files
-# *.md
-# README*
-# CONTRIBUTING*
-# LICENSE*
+# TODO(human): Test, coverage, dan laporan test.
 
-# ============================================================
-# TEST & DEVELOPMENT FILES
-# ============================================================
-# TODO: Exclude test files dan coverage
-# coverage/
-# .nyc_output
-# test-results/
-# playwright-report/
-# *.test.js
-# *.spec.js
-# __tests__/
-# tests/
+# TODO(human): File IDE/editor dan sampah sistem operasi.
 
-# ============================================================
-# IDE & EDITOR FILES
-# ============================================================
-# TODO: Exclude IDE dan editor files
-# .vscode/
-# .vscode
-# .idea/
-# *.swp
-# *.swo
-# *~
-# .DS_Store
-# Thumbs.db
+# TODO(human): Konfigurasi CI/CD.
 
-# ============================================================
-# CI/CD FILES (tidak diperlukan di production image)
-# ============================================================
-# TODO: Exclude CI/CD configuration
-# .github/
-# .gitlab-ci.yml
-# .travis.yml
-# .circleci/
-# Jenkinsfile
+# TODO(human): Log dan file sementara.
 
-# ============================================================
-# LOGS & TEMPORARY FILES
-# ============================================================
-# TODO: Exclude log files dan temporary files
-# logs/
-# *.log
-# npm-debug.log*
-# yarn-debug.log*
-# yarn-error.log*
-# .tmp/
-# temp/
-# *.tmp
+# TODO(human): Output build dan cache tool (hasil build lama, cache linter).
 
-# ============================================================
-# DEVELOPMENT SPECIFIC
-# ============================================================
-# TODO: Exclude development-specific files
-# .env.development
-# .env.local
-# vite.config.js.timestamp-*
-# tsconfig.tsbuildinfo
-# dist/.vite/
-# .parcel-cache/
-# .next/
-# .nuxt/
-
-# ============================================================
-# CACHING TOOLS
-# ============================================================
-# .eslintcache
-# .prettiercache
-# .sass-cache
-
-# ============================================================
-# VERIFY: Check build context size
-# ============================================================
-# docker build --no-cache -t myapp:check . 2>&1 | grep "Sending build context"
-# Ukuran ideal untuk project kecil: < 10MB (tanpa node_modules)
+# Selesai kalau:
+#   [ ] `docker run --rm <image> ls -a /app` tidak menampilkan .env, .git,
+#       atau node_modules dari laptopmu
+#   [ ] kamu bisa menjelaskan kenapa tiap aturan ada
