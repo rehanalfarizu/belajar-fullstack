@@ -11,6 +11,10 @@ sesuai README modul.
 
 ## Mulai di sini
 
+0. Buka [Peta Belajar](PETA-BELAJAR.md) untuk melihat urutan dan mencatat status
+   tiap topik, lalu pakai [Catatan Harian](CATATAN-HARIAN.md) setiap selesai sesi.
+   Setiap folder latihan punya `TUGAS.md` (apa yang dikerjakan dan di file mana)
+   dan `CHECKLIST.md` (cek jujur "aku sudah bisa...").
 1. Baca [Panduan Belajar](PANDUAN_BELAJAR.md).
 2. Pahami [Peta Kompetensi Bertingkat](KOMPETENSI_BERTINGKAT.md).
 3. Baca README level dan `SELF_PROBLEM_SOLVING.md` yang sedang dikerjakan.
@@ -41,6 +45,12 @@ Gunakan Node.js 24 LTS untuk lingkungan utama. Package ini menerima Node
 | [Level 3 Vue](LEVEL-3-Frontend-Vue/) | Composition API, Router, Pinia, HTTP | alternatif frontend; pilih ini atau React sebagai fokus pertama |
 | [Level 4](LEVEL-4-Fullstack-Integration/) | contract, cookies/CORS, auth, Next.js, deployment, security | aplikasi end-to-end dengan cookie `HttpOnly`, CI, migration, dan rollback |
 | [Level 5](LEVEL-5-Expert-Level/) | performance, testing, Docker, CI/CD, realtime, design, reliability | proyek terukur dengan SLO, observability, load test, runbook, dan threat model |
+
+| [Modul Keamanan Web](modul-keamanan-web/) | OWASP Top 10, validasi, SQL injection, auth, XSS/CSRF, konfigurasi | audit keamanan aplikasi sendiri + laporan temuan dan perbaikan |
+
+Modul keamanan dikerjakan paralel mulai Level 2: modul 01–03 setelah kamu bisa
+membuat endpoint Express pertama, modul 04–07 bersamaan dengan Level 2–4, dan
+modul 08 (audit) untuk proyek portofolio Level 4–5.
 
 Selesaikan satu backend dan satu frontend lebih dahulu. Mempelajari dua framework
 sekaligus sering memberi ilusi kemajuan tetapi mengurangi kedalaman.
