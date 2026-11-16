@@ -325,6 +325,39 @@ app.get("/fetch", async (req, res) => {
 
 ---
 
+## Tambahan — CSRF (Cross-Site Request Forgery)
+
+**Masalahnya:** browser otomatis menyertakan cookie ke sebuah situs, siapa pun
+halaman yang memicu request-nya. Kalau kamu sedang login di `bank.com`, halaman
+jahat di `evil.com` bisa membuat browser-mu mengirim `POST bank.com/transfer`
+lengkap dengan cookie sesimu. Server melihat cookie yang sah dan mengira itu
+kamu.
+
+**Tiga lapis pertahanan (dipakai bersama, bukan salah satu):**
+
+1. **Cookie `SameSite`.** `Lax` atau `Strict` membuat browser tidak mengirim
+   cookie pada request lintas situs. Ini pertahanan pertama dan paling murah,
+   tapi bergantung pada perilaku browser.
+2. **Token CSRF.** Server memberi token yang tidak bisa ditebak, klien
+   mengirimnya balik lewat header kustom (misalnya `X-CSRF-Token`). Situs jahat
+   tidak bisa membaca token itu, jadi tidak bisa memalsukan request. Ada dua
+   pola umum: *synchronizer token* (token disimpan di sesi server) dan *signed
+   double-submit cookie* (token ditandatangani HMAC, tanpa state di server).
+3. **Validasi `Origin`/`Referer` dan header kustom.** API yang hanya menerima
+   JSON dengan header kustom sulit dipalsukan dari form HTML biasa.
+
+**Catatan penting: `csurf` sudah deprecated.** Paket `csurf` diarsipkan dan tidak
+dirawat lagi (ada pesan deprecated di npm), jadi jangan dipakai di proyek baru.
+Alternatif yang masih dirawat saat materi ini ditulis: `csrf-csrf` (signed
+double-submit cookie, versi terbaru 4.x) dan `csrf-sync` (synchronizer token
+untuk aplikasi bersesi). Tugasmu: baca README keduanya, bandingkan trade-off-nya,
+lalu putuskan mana yang cocok untuk arsitektur aplikasimu. Opsi dan nama
+fungsinya berubah antar versi, jadi selalu cek README versi yang kamu install.
+
+Latihannya ada di [04-latihan-security](../../materi-praktikum/04-latihan-security/TUGAS.md).
+
+---
+
 ## Ringkasan
 
 ```

@@ -70,7 +70,11 @@ fs.createReadStream("article.txt", "utf-8")
 ---
 
 ## Cara Submit
-1. Simpan sebagai `07-streams.js`
-2. Buat file teks besar (1MB+)
-3. COBA pipe untuk copy dan compress
-4. COBA stream HTTP request ke file
+
+Starter: `code/07-streams.js` (berisi lima `TODO(human)`).
+
+1. Salin starter ke `latihan-saya/03-backend/minggu-08/07-streams.js` (nama sama).
+2. Buat file teks besar (1 MB atau lebih) dan `source.txt` kecil sebagai bahan uji.
+3. Isi TODO satu per satu, jalankan setelah tiap TODO.
+4. Cek hasil salin dan kompres dengan `cmp` (perintahnya ada di komentar starter dan `TUGAS.md`).
+5. Bonus: stream HTTP response ke file.

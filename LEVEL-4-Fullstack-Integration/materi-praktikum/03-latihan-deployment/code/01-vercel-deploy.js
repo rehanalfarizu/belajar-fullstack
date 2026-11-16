@@ -9,26 +9,23 @@
 // TODO 1: Create vercel.json at project root
 // ============================================================
 /*
+Format terkini (diverifikasi di vercel.com/docs/project-configuration/vercel-json):
+`version`, `builds`, dan `routes` adalah format LAMA. Vercel mendeteksi
+Vite otomatis, jadi cukup `rewrites` (dan field lain hanya kalau perlu).
+
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://your-backend.railway.app/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/:match*", "destination": "https://your-backend.railway.app/api/:match*" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
+
+Catatan: urutan penting (aturan pertama yang cocok dipakai), file statis yang
+ada di hosting didahulukan dari rewrite. Kalau API-mu di domain terpisah dan
+dipanggil langsung dari browser, aturan /api di atas tidak perlu.
+Field opsional yang berguna: buildCommand, outputDirectory, installCommand,
+headers. Cek dokumentasi untuk bentuk persisnya.
 */
 
 // ============================================================
@@ -141,7 +138,7 @@ const troubleshooting = {
     'Check .env is not in build (use Vercel env vars dashboard)',
   ],
   routing404: [
-    'vercel.json must have: { "src": "/(.*)", "dest": "/index.html" }',
+    'vercel.json needs a rewrite: { "source": "/(.*)", "destination": "/index.html" }',
     'This catches all routes and lets React Router handle them',
   ],
   buildFails: [

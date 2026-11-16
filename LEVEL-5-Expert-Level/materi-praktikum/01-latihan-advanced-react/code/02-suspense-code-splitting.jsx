@@ -1,168 +1,32 @@
 // ============================================================
-// SOAL 02 — SUSPENSE & CODE SPLITTING
+// SOAL 02 — Suspense dan Code Splitting (kerangka)
+// ============================================================
+// Tulis komponennya sendiri di proyek latihanmu, mengikuti daftar Syarat
+// di soal/02-suspense-code-splitting.md. File ini hanya kerangka dan petunjuk.
+// Kunci jawaban: ../solusi-jangan-dibuka-dulu.md (jangan dibuka dulu).
 // ============================================================
 
-import React, { Suspense, lazy, useState } from "react";
+import React from "react";
 
-// ============================================================
-// LAZY LOAD — component tidak di-load sampai diakses
-// ============================================================
-const Home = lazy(() => {
-  console.log("Loading: Home");
-  return import("./pages/Home");
-});
+// TODO(human): Halaman (Home, About, Dashboard) dimuat malas dengan React.lazy.
+//   Petunjuk: lazy menerima fungsi yang mengembalikan import() dinamis, dan
+//   modulnya harus punya default export.
 
-const About = lazy(() => {
-  console.log("Loading: About");
-  return import("./pages/About");
-});
+// TODO(human): Komponen Loading sebagai fallback Suspense.
 
-const Dashboard = lazy(() => {
-  console.log("Loading: Dashboard");
-  return import("./pages/Dashboard");
-});
+// TODO(human): Pasang Suspense di sekitar rute. Putuskan sendiri: satu
+//   boundary untuk semua rute, atau satu per rute? Apa bedanya bagi user
+//   saat berpindah halaman?
 
-const Settings = lazy(() => {
-  console.log("Loading: Settings");
-  return import("./pages/Settings");
-});
+// TODO(human): Preload. Muat halaman lebih awal saat user hover/focus pada
+//   tautan menu, supaya klik terasa instan.
+//   Petunjuk: import() yang dipanggil lebih awal sudah menaruh modul di cache.
 
-const NotFound = lazy(() => import("./pages/NotFound"));
+// TODO(human): Buktikan dengan DevTools tab Network: file JS tiap halaman
+//   baru diunduh saat dibutuhkan.
+//   Selesai kalau: build menghasilkan chunk terpisah per halaman
+//   (lihat output `vite build`).
 
-// ============================================================
-// LOADING SPINNER
-// ============================================================
-function Loading({ message = "Memuat..." }) {
-  return (
-    <div style={{
-      padding: "40px", textAlign: "center",
-      display: "flex", flexDirection: "column",
-      alignItems: "center", gap: "16px"
-    }}>
-      <div style={{
-        width: "40px", height: "40px",
-        border: "4px solid #e2e8f0",
-        borderTopColor: "#3b82f6",
-        borderRadius: "50%",
-        animation: "spin 0.8s linear infinite",
-      }} />
-      <p style={{ color: "#64748b", margin: 0 }}>{message}</p>
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-    </div>
-  );
+export default function App() {
+  return <p>Belum dibuat</p>;
 }
-
-// ============================================================
-// PAGE COMPONENTS (fake — akan dibuat sebagai file terpisah)
-// ============================================================
-// Karena ini demo, kita buat pages sebagai inline component
-// Di production: buat file pages/Home.jsx dst
-
-function PageWrapper({ title, children }) {
-  return (
-    <div style={{ padding: "20px" }}>
-      <h2 style={{ borderBottom: "2px solid #3b82f6", paddingBottom: "8px" }}>{title}</h2>
-      {children}
-    </div>
-  );
-}
-
-// ============================================================
-// ROUTER (simple, tanpa react-router untuk demo ini)
-// ============================================================
-function App() {
-  const [page, setPage] = useState("home");
-
-  const pages = {
-    home: <PageWrapper title="Home Page">Selamat datang di aplikasi! Ini adalah halaman utama.</PageWrapper>,
-    about: <PageWrapper title="About Page">Kami adalah tim developer yang passionate.</PageWrapper>,
-    dashboard: <PageWrapper title="Dashboard">Statistik: 150 users, 500 posts, 80% uptime.</PageWrapper>,
-    settings: <PageWrapper title="Settings">Pengaturan aplikasi dan preferensi.</PageWrapper>,
-    notfound: <PageWrapper title="404 - Not Found">Halaman tidak ditemukan.</PageWrapper>,
-  };
-
-  const navItems = [
-    { key: "home", label: "Home" },
-    { key: "about", label: "About" },
-    { key: "dashboard", label: "Dashboard" },
-    { key: "settings", label: "Settings" },
-  ];
-
-  return (
-    <div>
-      {/* Navigation */}
-      <nav style={{
-        display: "flex", gap: "4px", padding: "12px 20px",
-        background: "#1e293b", alignItems: "center"
-      }}>
-        <span style={{ color: "white", fontWeight: "bold", marginRight: "16px" }}>
-          MyApp
-        </span>
-        {navItems.map(item => (
-          <button
-            key={item.key}
-            onClick={() => setPage(item.key)}
-            style={{
-              padding: "8px 16px",
-              background: page === item.key ? "#3b82f6" : "transparent",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontSize: "14px",
-            }}
-          >
-            {item.label}
-          </button>
-        ))}
-      </nav>
-
-      {/* Content — Suspense handles lazy loading */}
-      <Suspense fallback={<Loading message="Memuat halaman..." />}>
-        {pages[page] || pages.notfound}
-      </Suspense>
-
-      {/* Info panel */}
-      <div style={{
-        position: "fixed", bottom: 0, left: 0, right: 0,
-        background: "#1e293b", color: "#94a3b8",
-        padding: "8px 20px", fontSize: "12px",
-        display: "flex", justifyContent: "space-between"
-      }}>
-        <span>💡 Buka DevTools → Network tab untuk lihat chunk loading</span>
-        <span>Current: {page}</span>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-// CONTOH: Real-world file-based lazy loading
-// ============================================================
-/*
-DI PRODUCTION — buat file terpisah:
-
-// pages/Home.jsx
-export default function Home() {
-  return <div>Halaman Home</div>;
-}
-
-// pages/About.jsx
-export default function About() {
-  return <div>Halaman About</div>;
-}
-
-// App.jsx
-import { lazy, Suspense } from "react";
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-
-// Preloading on hover
-const prefetchHome = () => import("./pages/Home");
-
-// Usage
-<button onMouseEnter={prefetchHome}>Home</button>
-<Suspense fallback={<Loading />}><Home /></Suspense>
-*/
-
-export default App;

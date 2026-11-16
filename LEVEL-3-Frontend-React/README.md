@@ -13,19 +13,25 @@ LEVEL-3/
 │   ├── 02-react-hooks/
 │   ├── 03-react-router/
 │   ├── 04-state-management/
-│   └── 05-form-handling/
+│   ├── 05-form-handling/
+│   └── 06-frontend-performance-security/
 ├── materi-praktikum/             → Latihan React
 │   ├── 01-latihan-react/
 │   ├── 02-latihan-hooks/
 │   ├── 03-latihan-router/
 │   ├── 04-latihan-state/
 │   └── 05-latihan-form/
-├── tutorial/                       → Study case & panduan langkah demi langkah
-│   ├── 01-todo-app-react.md
-│   └── 02-blog-dengan-react-router.md
+├── tutorial/                       → Panduan langkah demi langkah
+│   ├── 01-membuat-aplikasi-react-pertama.md
+│   ├── 01-membuat-react-app-pertama.md
+│   ├── 02-react-dengan-api.md
+│   └── README.md
 ├── software/                       → Install & setup tools
-│   ├── 01-vscode-extensions.md
-│   └── 02-react-devtools.md
+│   ├── 01-nodejs-vscode-install.md
+│   ├── 01-react-dan-vite-install.md
+│   ├── 02-tailwindcss-install.md
+│   └── README.md
+├── SELF_PROBLEM_SOLVING.md
 └── README.md
 ```
 
@@ -33,7 +39,7 @@ LEVEL-3/
 
 ## 📖 Materi Teori
 
-Lima modul teori React:
+Enam modul teori React:
 
 1. **Modul 01 — React Fundamental**: JSX, Component, dan Props.
 2. **Modul 02 — Hooks**: useState, useEffect, useRef, useCallback, dan useMemo.

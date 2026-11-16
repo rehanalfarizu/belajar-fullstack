@@ -16,40 +16,6 @@ import { useState, useEffect, useRef } from "react";
 //   1. Langsung tambahkan comment ke UI sebelum server response
 //   2. Jika gagal → rollback (hapus dari list) + restore form
 //   3. Form di-reset setelah submit berhasil
-//
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   const newComment = { id: `C${Date.now()}`, author: form.author, content: form.content, timestamp: Date.now(), likes: 0, likedByUser: false };
-//   setComments(prev => [newComment, ...prev]);
-//   setForm({ author: "", content: "" });
-//   try {
-//     await simulateApiCall();
-//     setSubmitStatus({ type: "success", message: "Komentar berhasil dikirim" });
-//   } catch (err) {
-//     setComments(prev => prev.filter(c => c.id !== newComment.id));
-//     setForm({ author: newComment.author, content: newComment.content });
-//     setSubmitStatus({ type: "error", message: err.message });
-//   }
-// };
-//
-// function simulateApiCall(shouldFail = false) {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       if (shouldFail || Math.random() < 0.1) reject(new Error("Network error"));
-//       else resolve();
-//     }, 800);
-//   });
-// }
-//
-// function getRelativeTime(timestamp) {
-//   const diff = Date.now() - timestamp;
-//   const minutes = Math.floor(diff / 60000);
-//   if (minutes < 1) return "Baru saja";
-//   if (minutes < 60) return `${minutes} menit lalu`;
-//   const hours = Math.floor(minutes / 60);
-//   if (hours < 24) return `${hours} jam lalu`;
-//   return `${Math.floor(hours / 24)} hari lalu`;
-// }
 // ============================================================
 
 function simulateApiCall(shouldFail = false) {
@@ -148,45 +114,13 @@ export function CommentSection() {
 //   - form: { country, province, city, district, postalCode, address }
 //
 // Data structure:
-// const LOCATION_DATA = {
-//   Indonesia: {
-//     "DKI Jakarta": ["Jakarta Selatan", "Jakarta Pusat", "Jakarta Barat", "Jakarta Utara", "Jakarta Timur"],
-//     "Jawa Barat": ["Bandung", "Bekasi", "Bogor", "Depok", "Sleman"],
-//     "Jawa Timur": ["Surabaya", "Malang", "Kediri", "Madiun"],
-//     "Bali": ["Denpasar", "Badung", "Kuta", "Ubud"],
-//   },
-//   Malaysia: {
-//     "Wilayah Persekutuan": ["Kuala Lumpur", "Putrajaya", "Labuan"],
-//     "Selangor": ["Shah Alam", "Petaling Jaya", "Subang Jaya"],
-//     "Penang": ["George Town", "Batu Ferringhi"],
-//   },
-//   Singapore: {
-//     "Singapore": ["Orchard", "Marina Bay", "Sentosa", "Jurong", "Ang Mo Kio"],
-//   },
-// };
 //
 // Cascading Logic:
-//   const handleCountryChange = (country) => {
-//     setForm(prev => ({ ...prev, country, province: "", city: "", district: "" }));
-//   };
-//
-//   const handleProvinceChange = (province) => {
-//     setForm(prev => ({ ...prev, province, city: "", district: "" }));
-//   };
-//
-//   const handleCityChange = (city) => {
-//     setForm(prev => ({ ...prev, city, district: "" }));
-//   };
-//
 // Computed options:
-//   const countryOptions = Object.keys(LOCATION_DATA);
-//   const provinceOptions = form.country ? Object.keys(LOCATION_DATA[form.country]) : [];
-//   const cityOptions = form.province ? LOCATION_DATA[form.country]?.[form.province] || [] : [];
-//   const districtOptions = form.city ? LOCATION_DATA[form.country]?.[form.province]?.[form.city] || [] : [];
 //
 // Postal code auto-fill:
-//   const postalCodes = { Indonesia: { "DKI Jakarta": "10", "Jawa Barat": "40", ... }, ... };
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 const LOCATION_DATA = {
   Indonesia: {

@@ -64,10 +64,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 // ============================================================
 // MAIN
-// TODO(human): async function main()
-// connection test: await sequelize.authenticate()
-// panggil sync, buat data, ambil data
-// finally: await sequelize.close()
+// TODO(human): tulis main() sesuai soal
 
 // main().catch(err => { console.error('Error:', err); process.exit(1); });
 

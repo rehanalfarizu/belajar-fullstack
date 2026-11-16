@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚠️ Lab XSS — Kolom Komentar Rentan</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.5; }
+    .warning { background: #f8d7da; border: 1px solid #dc3545; padding: 12px 16px; border-radius: 6px; }
+    .petunjuk { background: #fff3cd; border: 1px solid #e0b100; padding: 12px 16px; border-radius: 6px; margin-top: 16px; }
+    textarea { width: 100%; min-height: 80px; padding: 8px; box-sizing: border-box; font: inherit; }
+    input { padding: 8px; width: 100%; box-sizing: border-box; font: inherit; margin-bottom: 8px; }
+    button { padding: 8px 16px; margin-top: 8px; cursor: pointer; }
+    .komentar { border-bottom: 1px solid #ddd; padding: 8px 0; }
+    code { background: #eee; padding: 1px 5px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="warning">
+    <strong>⚠️ HALAMAN SENGAJA RENTAN — HANYA UNTUK BELAJAR</strong><br>
+    Halaman ini sengaja memakai <code>innerHTML</code> untuk menampilkan komentar.
+    Buka hanya di browsermu sendiri, jangan di-upload ke hosting mana pun,
+    dan jangan pakai payload apa pun ke website orang lain.
+    Setelah bereksperimen, perbaiki di <code>02-xss-fix.js</code>.
+  </div>
+
+  <h1>Blog Kampus — Komentar</h1>
+
+  <form id="form-komentar">
+    <input id="nama" placeholder="Nama kamu" maxlength="40">
+    <textarea id="isi" placeholder="Tulis komentar..."></textarea>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <h2>Komentar</h2>
+  <div id="daftar-komentar"></div>
+
+  <div class="petunjuk">
+    <strong>Cara bereksperimen:</strong>
+    <ol>
+      <li>Kirim komentar biasa dulu, misal <code>Halo semua!</code>.</li>
+      <li>Kirim komentar berisi HTML biasa, misal <code>&lt;b&gt;tebal&lt;/b&gt;</code>. Apa yang terjadi?</li>
+      <li>Kirim <code>&lt;script&gt;alert('xss')&lt;/script&gt;</code>. Apakah alert muncul? Catat jawabanmu, lalu cari tahu kenapa.</li>
+      <li>Kirim <code>&lt;img src=x onerror="alert('xss')"&gt;</code>. Bandingkan dengan langkah 3.</li>
+      <li>Coba juga kolom <em>Nama</em>. Apakah ikut rentan?</li>
+    </ol>
+    Payload di atas cuma memunculkan <code>alert</code>, tidak merusak apa-apa.
+    Catat semua hasil di <code>catatan.md</code>.
+  </div>
+
+  <script>
+    // Komentar disimpan di memori saja (hilang kalau halaman di-refresh).
+    const komentar = [
+      { nama: 'Rina', isi: 'Artikelnya membantu banget, makasih!' },
+    ];
+
+    function tampilkanKomentar() {
+      const wadah = document.getElementById('daftar-komentar');
+      let html = '';
+      for (const k of komentar) {
+        // ❌ RENTAN: teks dari user langsung dijadikan HTML.
+        // Browser akan "menjalankan" tag apa pun yang ada di dalam teks ini.
+        html += `<div class="komentar"><strong>${k.nama || 'Anonim'}</strong>: ${k.isi}</div>`;
+      }
+      wadah.innerHTML = html;
+    }
+
+    document.getElementById('form-komentar').addEventListener('submit', (event) => {
+      event.preventDefault();
+      komentar.push({
+        nama: document.getElementById('nama').value,
+        isi: document.getElementById('isi').value,
+      });
+      document.getElementById('isi').value = '';
+      tampilkanKomentar();
+    });
+
+    tampilkanKomentar();
+  </script>
+</body>
+</html>

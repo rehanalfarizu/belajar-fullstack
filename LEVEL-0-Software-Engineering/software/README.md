@@ -4,9 +4,28 @@ Folder ini berisi panduan installasi software dasar yang diperlukan untuk memula
 
 ---
 
-## Daftar Software
+## Panduan Per Software (10 File)
 
-Empat software utama yang wajib terinstall:
+Setiap software punya panduan sendiri di folder ini:
+
+- [01 Visual Studio Code](01-visual-studio-code.md)
+- [02 Node.js dan npm](02-nodejs-dan-npm.md)
+- [03 Git Command Line](03-git-command-line.md)
+- [04 Docker](04-docker.md)
+- [05 PostgreSQL dan Database Tools](05-postgresql-dan-database.md)
+- [06 API Testing Tools](06-api-testing-tools.md)
+- [07 GitHub Desktop dan GUI Tools](07-github-desktop-gui.md)
+- [08 Terminal, iTerm2, Oh-My-Zsh](08-terminal-iterm-ohmyzsh.md)
+- [09 MongoDB Atlas dan Compass](09-mongodb-atlas-compass.md)
+- [10 Browser dan DevTools](10-browser-devtools.md)
+
+Docker, PostgreSQL, MongoDB, dan API client boleh ditunda sampai level yang memakainya.
+
+---
+
+## Ringkasan Cara Install
+
+Empat software utama yang wajib terinstall di awal:
 
 1. **Git** — Version control untuk melacak perubahan kode dan kolaborasi tim. Download di https://git-scm.com/download.
 2. **VSCode** — Text editor dan IDE untuk menulis kode sehari-hari. Download di https://code.visualstudio.com.

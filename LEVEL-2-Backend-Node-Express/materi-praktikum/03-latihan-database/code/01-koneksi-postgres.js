@@ -52,12 +52,7 @@ const { Pool } = require('pg');
 
 // ============================================================
 // MAIN EXECUTION
-// TODO(human): async function main()
-//1. await createTable()
-// 2. await insertUsers()
-// 3. const users = await getAllUsers()
-// 4. console.log semua data user
-// 5. await pool.end()
+// TODO(human): tulis main() sesuai soal
 
 // main().catch(err => { console.error('Error:', err); pool.end(); });
 

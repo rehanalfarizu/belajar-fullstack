@@ -18,15 +18,10 @@
 // TODO(human): Buat file calculator.js di direktori yang sama
 // exports fungsi add(a, b) dan subtract(a, b)
 // Contoh isi calculator.js:
-//   function add(a, b) { return a + b; }
-//   function subtract(a, b) { return a - b; }
-//   module.exports = { add, subtract };
 
 // TODO(human): Buat file greeting.js di direktori yang sama
 // exports fungsi greet(name) yang mengembalikan string sapaan
 // Contoh isi greeting.js:
-//   function greet(name) { return `Halo ${name}, selamat datang!`; }
-//   module.exports = { greet };
 
 // TODO(human): Impor kedua modul yang sudah dibuat
 // const calculator = require('./calculator');

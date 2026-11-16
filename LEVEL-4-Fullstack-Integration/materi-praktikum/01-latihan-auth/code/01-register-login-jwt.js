@@ -1,7 +1,13 @@
 // ============================================================
 // SOAL 01 — REGISTER & LOGIN (JWT)
 // ============================================================
-// Install: npm install express bcryptjs jsonwebtoken cors dotenv
+// Starter ini sengaja berisi kerangka + TODO(human). Tulis isinya sendiri.
+// Jawaban lengkap ada di ../solusi-jangan-dibuka-dulu.md (buka SETELAH
+// punyamu jalan, atau benar-benar buntu).
+//
+// Install : npm install express bcryptjs jsonwebtoken cors dotenv
+// Jalankan: node code/01-register-login-jwt.js   (butuh .env berisi JWT_SECRET)
+// ============================================================
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
@@ -17,145 +23,47 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// In-memory user store (ganti dengan database di production)
+// Penyimpanan user in-memory (di aplikasi nyata diganti database)
 const users = [];
 
-// ============================================================
-// TODO 1: Register Endpoint
-// ============================================================
-// app.post("/api/auth/register", async (req, res) => {
-//   // TODO: validasi nama, email, password (min 8 char)
-//   // TODO: cek email sudah ada
-//   // TODO: bcrypt.hash(password, 10)
-//   // TODO: push ke array users
-//   // TODO: return success tanpa password
-// });
+// TODO(human): POST /api/auth/register
+// Petunjuk : Gambar dulu alurnya di kertas: input apa, dicek apa, disimpan apa,
+//            dikembalikan apa. Validasi nama, email, dan password (minimal 8
+//            karakter). Email yang sudah terdaftar itu status code apa? Password
+//            TIDAK boleh disimpan apa adanya dan TIDAK boleh ikut di response.
+//            Cek dokumentasi `bcryptjs` untuk fungsi hash dan arti "salt rounds".
+// Selesai kalau: register valid -> 201 tanpa field password; email yang sama
+//            didaftarkan lagi -> ditolak; `console.log(users)` menunjukkan
+//            password berupa hash (diawali `$2`).
 
+// TODO(human): POST /api/auth/login
+// Petunjuk : Cari user, bandingkan password dengan hash-nya (fungsi compare
+//            bcryptjs itu async, jangan lupa await). Email tidak ada dan
+//            password salah sebaiknya memberi pesan yang SAMA. Kenapa? Isi
+//            token (payload) bisa dibaca siapa saja — apa yang aman ditaruh
+//            di sana? Beri masa berlaku (lihat opsi `expiresIn` di README
+//            jsonwebtoken).
+// Selesai kalau: login benar -> token + info user (tanpa password); login salah
+//            (email atau password) -> pesan identik; token tampil di jwt.io
+//            (token latihan saja!) dengan payload yang kamu harapkan.
 
-// ============================================================
-// TODO 2: Login Endpoint
-// ============================================================
-// app.post("/api/auth/login", async (req, res) => {
-//   // TODO: validasi email + password
-//   // TODO: find user by email
-//   // TODO: bcrypt.compare(password, user.password)
-//   // TODO: jwt.sign({ id, email }, secret, { expiresIn: "7d" })
-//   // TODO: return token + user info
-// });
+// TODO(human): fungsi authMiddleware(req, res, next)
+// Petunjuk : Token datang lewat header `Authorization: Bearer <token>`. Tiga
+//            keadaan berbeda: header tidak ada, token rusak/palsu, token
+//            kedaluwarsa. Tulis dulu versi yang hanya console.log header lalu
+//            next(), baru isi verifikasinya.
+// Selesai kalau: tanpa token -> 401; token diubah satu huruf -> ditolak; token
+//            valid -> handler berikutnya jalan dan `req.user` terisi.
 
+// TODO(human): GET /api/auth/me (dilindungi authMiddleware)
+// Petunjuk : Ambil user dari data token, lalu cari datanya di `users`.
+//            Apa yang terjadi kalau user sudah tidak ada tapi token masih sah?
+// Selesai kalau: dengan token valid mengembalikan data user tanpa password.
 
-// ============================================================
-// Auth Middleware
-// ============================================================
-// function authMiddleware(req, res, next) {
-//   const authHeader = req.headers.authorization;
-//   // TODO: check Bearer token
-//   // TODO: jwt.verify(token, secret)
-//   // TODO: attach req.user = decoded
-//   // TODO: next() atau error response
-// }
-
-
-// ============================================================
-// Protected Route
-// ============================================================
-// app.get("/api/auth/me", authMiddleware, (req, res) => {
-//   res.json({ user: req.user });
-// });
-
-
-// ============================================================
-// Health Check
-// ============================================================
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "Auth server running" });
 });
 
-
-// ============================================================
-// Full Implementation (uncomment untuk test)
-// ============================================================
-
-// Auth Middleware
-function authMiddleware(req, res, next) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Token tidak ditemukan" });
-  }
-  const token = authHeader.split(" ")[1];
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (error) {
-    return res.status(403).json({ error: "Token invalid" });
-  }
-}
-
-// Register
-app.post("/api/auth/register", async (req, res) => {
-  try {
-    const { nama, email, password } = req.body;
-    if (!nama || !email || !password) {
-      return res.status(400).json({ error: "Semua field wajib diisi" });
-    }
-    if (password.length < 8) {
-      return res.status(400).json({ error: "Password min 8 karakter" });
-    }
-    const exist = users.find(u => u.email === email);
-    if (exist) {
-      return res.status(409).json({ error: "Email sudah terdaftar" });
-    }
-    const hashed = await bcrypt.hash(password, 10);
-    const user = { id: Date.now(), nama, email, password: hashed };
-    users.push(user);
-    res.status(201).json({
-      message: "Registrasi berhasil",
-      user: { id: user.id, nama, email }
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Login
-app.post("/api/auth/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email dan password wajib" });
-    }
-    const user = users.find(u => u.email === email);
-    if (!user) {
-      return res.status(401).json({ error: "Email/password salah" });
-    }
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-      return res.status(401).json({ error: "Email/password salah" });
-    }
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
-    res.json({
-      token,
-      user: { id: user.id, nama: user.nama, email: user.email }
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Me
-app.get("/api/auth/me", authMiddleware, (req, res) => {
-  const user = users.find(u => u.id === req.user.id);
-  if (!user) return res.status(404).json({ error: "User tidak ditemukan" });
-  res.json({ user: { id: user.id, nama: user.nama, email: user.email } });
-});
-
-
-// START
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Auth server berjalan di http://localhost:${PORT}`);

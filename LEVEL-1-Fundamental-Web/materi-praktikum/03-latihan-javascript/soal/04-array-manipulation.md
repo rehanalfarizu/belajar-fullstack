@@ -52,9 +52,11 @@ lain dengan lebih percaya diri.
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan** — pahami method-nya dan bedanya dengan method lain
-2. **Ketik dari 0** — buka `code/04-array-manipulation.js`, cari `TODO(human)`,
+2. **Ketik dari 0** — buka salinan starter `04-array-manipulation.js` (lihat catatan di bawah), cari `TODO(human)`,
    lalu ketik sendiri (JANGAN copy-paste)
 3. **Verifikasi** — cek hasilmu dengan panduan verifikasi
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/04-array-manipulation.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`04-array-manipulation.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi**. Tujuannya agar kamu terbiasa **berpikir
 sebelum mengetik** dan **membiasakan diri dengan sintaks JavaScript modern**.
@@ -104,7 +106,7 @@ kalau mau data asli tetap utuh).
 
 ### Cara Mengetik dari 0
 
-1. Buka `code/04-array-manipulation.js` di VS Code
+1. Salin `code/04-array-manipulation.js` ke `latihan-saya/02-javascript/minggu-XX/04-array-manipulation.js`, lalu buka salinannya di VS Code
 2. Cari komentar `TODO A1: data mahasiswa`
 3. Ketik deklarasi array dengan 6 object literal:
    ```javascript
@@ -655,10 +657,10 @@ Sebelum lanjut ke soal 05, cek semua ini:
 
 ## Cara Submit
 
-1. Buka `code/04-array-manipulation.js` di VS Code
+1. Salin `code/04-array-manipulation.js` ke `latihan-saya/02-javascript/minggu-XX/04-array-manipulation.js`, lalu buka salinannya di VS Code
 2. Isi semua `TODO(human)` (Bagian A sampai H) dengan kodemu sendiri
 3. Save (Cmd+S / Ctrl+S)
-4. Jalankan: `node 04-array-manipulation.js`
+4. Jalankan dari folder salinanmu: `node 04-array-manipulation.js`
 5. Cek semua output di terminal — pastikan tidak ada `undefined` yang tidak
    disengaja atau error
 6. Verifikasi dengan checklist di atas

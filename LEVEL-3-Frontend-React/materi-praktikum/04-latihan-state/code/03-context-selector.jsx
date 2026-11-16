@@ -23,77 +23,23 @@ const initialState = {
 // ============================================================
 // TODO: useContextSelector Hook
 // ============================================================
-// function useContextSelector(context, selector) {
-//   const state = useContext(context);
-//   const [selected, setSelected] = useState(() => selector(state));
-//
-//   useEffect(() => {
-//     const next = selector(state);
-//     if (next !== selected) {
-//       setSelected(next);
-//     }
-//   }, [state, selector, selected]);
-//
-//   return selected;
-// }
-//
 // Usage:
-//   const user = useContextSelector(AppContext, state => state.user);
-//   const isDark = useContextSelector(AppContext, state => state.theme === "dark");
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
+// TODO(human): useContextSelector(context, selector)
+// Petunjuk: komponen hanya boleh render ulang saat bagian yang dipilih berubah.
+// Petunjuk: apa yang terjadi kalau context dipakai di luar Provider?
+// Selesai kalau: Render counter UserName tidak naik saat theme berubah.
 function useContextSelector(context, selector) {
-  const state = useContext(context);
-  const [selected, setSelected] = useState(() => selector(state));
-
-  useEffect(() => {
-    const next = selector(state);
-    if (next !== selected) {
-      setSelected(next);
-    }
-  }, [state, selector, selected]);
-
-  return selected;
+  return selector(useContext(context));
 }
 
 // ============================================================
 // TODO: AppProvider dengan combined state
 // ============================================================
-// export function AppProvider({ children }) {
-//   const [state, setState] = useState(initialState);
-//
-//   const actions = {
-//     login: (user) => setState(prev => ({ ...prev, user })),
-//     logout: () => setState(prev => ({ ...prev, user: null })),
-//     toggleTheme: () => setState(prev => ({
-//       ...prev,
-//       theme: prev.theme === "light" ? "dark" : "light",
-//     })),
-//     addNotification: (notif) => setState(prev => ({
-//       ...prev,
-//       notifications: [{ id: `N${Date.now()}`, ...notif }, ...prev.notifications],
-//     })),
-//     markAsRead: (id) => setState(prev => ({
-//       ...prev,
-//       notifications: prev.notifications.map(n => n.id === id ? { ...n, read: true } : n),
-//     })),
-//     setLanguage: (lang) => setState(prev => ({
-//       ...prev,
-//       preferences: { ...prev.preferences, language: lang },
-//     })),
-//     setFontSize: (size) => setState(prev => ({
-//       ...prev,
-//       preferences: { ...prev.preferences, fontSize: size },
-//     })),
-//   };
-//
-//   return (
-//     <AppContext.Provider value={{ state, ...actions }}>
-//       {children}
-//     </AppContext.Provider>
-//   );
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 export function AppProvider({ children }) {
   const [state, setState] = useState(initialState);
@@ -174,42 +120,8 @@ export function FontSizeControl() {
 // ============================================================
 // TODO: Demo App — demonstrate selector pattern
 // ============================================================
-// function SelectorDemoApp() {
-//   return (
-//     <AppProvider>
-//       <div>
-//         <h1>Context Selector Demo</h1>
-//         <p>Buka console — setiap component hanya re-render saat nilai yang di-subscribe berubah</p>
-//         <hr />
-//
-//         <div className="demo-grid">
-//           <div className="demo-section">
-//             <h3>User Section</h3>
-//             <UserName />
-//             <UserAvatar />
-//           </div>
-//
-//           <div className="demo-section">
-//             <h3>Theme Section</h3>
-//             <ThemeToggle />
-//           </div>
-//
-//           <div className="demo-section">
-//             <h3>Notifications Section</h3>
-//             <NotificationBadge />
-//           </div>
-//
-//           <div className="demo-section">
-//             <h3>Preferences Section</h3>
-//             <LanguageSelector />
-//             <FontSizeControl />
-//           </div>
-//         </div>
-//       </div>
-//     </AppProvider>
-//   );
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 export function SelectorDemoApp() {
   return (

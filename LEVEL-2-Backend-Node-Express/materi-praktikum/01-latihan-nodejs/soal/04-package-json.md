@@ -70,8 +70,11 @@ Buat project Node.js dengan package.json yang proper, install dependencies.
 ---
 
 ## Cara Submit
+Starter `code/04-package-json.js` hanya berisi langkah-langkah dan contoh. Project-nya kamu buat sendiri di folder baru, misalnya `latihan-saya/03-backend/minggu-08/projectku/`.
+
 1. `mkdir projectku && cd projectku`
-2. `npm init`
-3. `npm install express nodemon`
-4. Buat folder `src/` dan `index.js`
-5. Jalankan: `npm run dev`
+2. `npm init -y` (jalankan di folder project dulu, supaya dependency tidak masuk ke `package.json` root repo)
+3. `npm install express` dan `npm install --save-dev nodemon`
+4. Buat folder `src/` dan file `src/index.js`
+5. Isi bagian `scripts` di `package.json` (`start` dan `dev`)
+6. Jalankan: `npm run dev`

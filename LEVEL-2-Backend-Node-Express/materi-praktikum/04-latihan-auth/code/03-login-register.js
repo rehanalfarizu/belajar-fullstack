@@ -33,20 +33,16 @@ const SALT_ROUNDS = 10;
 
 // ============================================================
 // MIDDLEWARE
-// TODO(human): app.use(express.json());
+// TODO(human): tulis app.use sesuai soal
 
 // ============================================================
 // CUSTOM ERROR
-// TODO(human): class ValidationError extends Error { constructor(msg) { super(msg); this.name='ValidationError'; this.statusCode=400; } }
+// TODO(human): tulis bagian ini sesuai soal
 // TODO(human): class ConflictError extends Error { constructor(msg) { super(msg); this.name='ConflictError'; this.statusCode=409; } }
 
 // ============================================================
 // VALIDATION HELPER
-// TODO(human): function validateRegister(data) {
-//   if (!data.name || data.name.length < 3) throw new ValidationError('Name minimal 3 karakter');
-//   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) throw new ValidationError('Format email tidak valid');
-//   if (!data.password || data.password.length < 6) throw new ValidationError('Password minimal 6 karakter');
-// }
+// TODO(human): tulis validateRegister(data) sesuai soal
 
 // ============================================================
 // ROUTE: POST /register
@@ -67,10 +63,7 @@ const SALT_ROUNDS = 10;
 
 // ============================================================
 // CENTRALIZED ERROR HANDLER
-// TODO(human): app.use((err, req, res, next) => {
-//   const status = err.statusCode || 500;
-//   res.status(status).json({ error: err.name, message: err.message });
-// });
+// TODO(human): tulis app.use sesuai soal
 
 app.listen(PORT, () => {
   console.log(`Auth API berjalan di http://localhost:${PORT}`);

@@ -1,112 +1,63 @@
 // ============================================================
 // SOAL 07 — STREAMS
 // ============================================================
+// Soal: soal/07-streams.md
 const fs = require("fs");
 const { createGzip } = require("zlib");
 const path = require("path");
 
 // ============================================================
-// TODO 1: Readable Stream — baca file chunk by chunk
+// TODO(human) 1: Readable Stream — baca file chunk by chunk
 // ============================================================
-// const readable = fs.createReadStream(__filename, "utf-8");
-//
-// readable.on("data", chunk => {
-//   console.log("Received chunk:", chunk.length, "bytes");
-// });
-//
-// readable.on("end", () => {
-//   console.log("Selesai membaca file");
-// });
-//
-// readable.on("error", err => {
-//   console.error("Error:", err.message);
-// });
+// Baca file ini sendiri (__filename) dengan fs.createReadStream.
+// Cetak ukuran setiap chunk, cetak "Selesai membaca file" di akhir,
+// dan tangani error stream dengan pesan yang jelas.
+// Petunjuk: stream punya event "data", "end", dan "error".
+// Selesai kalau: ada minimal satu baris ukuran chunk dan satu baris "Selesai".
+// Coba rusak: ganti sumbernya ke file yang tidak ada, pastikan pesan error tampil.
 
 
 // ============================================================
-// TODO 2: Pipe — copy file
+// TODO(human) 2: Pipe — copy file
 // ============================================================
-// const source = fs.createReadStream("source.txt");
-// const dest = fs.createWriteStream("dest.txt");
-//
-// source.pipe(dest);
-//
-// dest.on("finish", () => {
-//   console.log("File berhasil disalin!");
-// });
+// Salin source.txt ke dest.txt memakai stream dan pipe (bukan readFileSync).
+// Buat source.txt sendiri dulu. Cetak "File berhasil disalin!" saat selesai.
+// Petunjuk: event mana di writable stream yang menandakan semua data sudah tertulis?
+// Selesai kalau: `cmp source.txt dest.txt && echo SAMA` mencetak SAMA.
 
 
 // ============================================================
-// TODO 3: Gzip Compression dengan pipe
+// TODO(human) 3: Gzip Compression dengan pipe
 // ============================================================
-// const input = fs.createReadStream("large-file.txt");
-// const output = fs.createWriteStream("large-file.txt.gz");
-// const gzip = createGzip();
-//
-// input.pipe(gzip).pipe(output);
-//
-// output.on("finish", () => {
-//   console.log("Compression selesai!");
-// });
+// Kompres file teks besar (1 MB atau lebih) jadi .gz memakai createGzip()
+// (sudah di-import di atas) lewat rantai pipe.
+// Selesai kalau: `gunzip -c large-file.txt.gz | cmp - large-file.txt && echo SAMA`
+// mencetak SAMA, dan ukuran .gz lebih kecil dari aslinya.
 
 
 // ============================================================
-// TODO 4: Word Count Stream
+// TODO(human) 4: Word Count Stream
 // ============================================================
-let wordCount = 0;
-let charCount = 0;
-let lineCount = 0;
-
-// Buat test file sementara
-const testContent = "Node.js streams are powerful\nfor handling data\nin chunks\n";
-
-// fs.writeFileSync("test-stream.txt", testContent);
-
-const readStream = fs.createReadStream(__filename, "utf-8");
-
-readStream.on("data", chunk => {
-  wordCount += chunk.split(/\s+/).length;
-  charCount += chunk.length;
-  lineCount += (chunk.match(/\n/g) || []).length;
-});
-
-readStream.on("end", () => {
-  console.log("=== Stream Stats ===");
-  console.log("Words:", wordCount);
-  console.log("Chars:", charCount);
-  console.log("Lines:", lineCount);
-});
-
-readStream.on("error", err => {
-  console.error("Error reading:", err.message);
-});
+// Hitung jumlah kata, karakter, dan baris sebuah file memakai stream
+// (jangan baca seluruh file sekaligus). Cetak hasilnya di event "end".
+// Jebakan: data datang per chunk, dan satu kata bisa terpotong di batas chunk.
+// Pikirkan bagaimana kamu menghadapinya, tulis di komentar.
+// Selesai kalau: hasilnya cocok dengan `wc -w -m -l namafile` di terminal
+// (angka kata boleh selisih kecil kalau kamu bisa menjelaskan kenapa).
 
 
 // ============================================================
-// TODO 5: Transform Stream (uppercase)
+// TODO(human) 5: Transform Stream (uppercase) — bonus
 // ============================================================
-// const { Transform } = require("stream");
-//
-// const upperCase = new Transform({
-//   transform(chunk, encoding, callback) {
-//     this.push(chunk.toString().toUpperCase());
-//     callback();
-//   }
-// });
-//
-// process.stdin
-//   .pipe(upperCase)
-//   .pipe(process.stdout);
+// Buat Transform stream (modul "stream") yang mengubah teks jadi huruf besar,
+// lalu hubungkan process.stdin -> transform -> process.stdout.
+// Selesai kalau: mengetik "halo" lalu Enter mencetak "HALO".
 
 
 // ============================================================
-// Backpressure Demo
+// Backpressure — baca dan jelaskan (bonus)
 // ============================================================
-// const write = fs.createWriteStream("output.txt");
-// write._write = (chunk, encoding, next) => {
-//   // Simulasi slow write
-//   setTimeout(() => {
-//     write.write(chunk);
-//     next();
-//   }, 100);
-// };
+// Cari tahu di dokumentasi stream: apa itu backpressure, dan apa yang
+// dikembalikan write() saat buffer penuh? Tulis jawabanmu di sini:
+
+console.log("Kerjakan TODO(human) di atas, lalu jalankan: node 07-streams.js");

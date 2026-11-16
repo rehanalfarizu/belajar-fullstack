@@ -13,7 +13,8 @@ LEVEL-2/
 │   ├── 02-express-rest-api/
 │   ├── 03-database-sql-postgresql/
 │   ├── 04-database-nosql-mongodb/
-│   └── 05-authentication-jwt/
+│   ├── 05-authentication-jwt/
+│   └── 06-backend-performance-security/
 ├── materi-praktikum/               → Latihan backend
 │   ├── 01-latihan-nodejs/
 │   ├── 02-latihan-express/
@@ -26,6 +27,7 @@ LEVEL-2/
 │   ├── 01-nodejs-install.md
 │   ├── 02-postgresql-install.md
 │   └── 03-git-github-untuk-developer.md
+├── SELF_PROBLEM_SOLVING.md
 └── README.md
 ```
 
@@ -46,9 +48,11 @@ LEVEL-2/
 
 ## 🏋️ Praktikum
 
-Setiap folder praktikum memiliki README, `soal/`, starter di `code/`, dan solusi
-referensi di `contoh/`. Jumlah latihan berbeda per modul; gunakan isi folder
-sebagai sumber kebenaran, bukan target angka.
+Setiap folder praktikum memiliki README, `TUGAS.md`, `CHECKLIST.md`, `soal/`, dan starter
+di `code/`. Folder `contoh/` (jawaban referensi) **tidak ada** di Level 2 Node; pembandingmu adalah
+Expected Output di soal. Satu-satunya berkas jawaban adalah
+`01-latihan-nodejs/solusi-jangan-dibuka-dulu.md` (potongan jawaban, baca aturannya dulu). Jumlah
+latihan berbeda per modul; gunakan isi folder sebagai sumber kebenaran, bukan target angka.
 
 Lanjutkan dengan
 [Backend Performance & Security](materi-teori/06-backend-performance-security/README.md)

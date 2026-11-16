@@ -55,8 +55,10 @@ dipakai ulang di tempat lain.
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan & syarat** — pahami logika CRUD dan kenapa pakai method array tertentu
-2. **Ketik dari 0** — buat file `05-todo-list-cli.js`, ketik sendiri bagian per bagian (JANGAN copy-paste utuh)
-3. **Verifikasi** — jalankan dengan `node 05-todo-list-cli.js` dan cek semua menu
+2. **Ketik sendiri** — buka salinan starter `05-todo-list-cli.js` (lihat catatan di bawah), ketik bagian per bagian (JANGAN copy-paste utuh)
+3. **Verifikasi** — jalankan dengan `node 05-todo-list-cli.js` dari folder salinanmu dan cek semua menu
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/05-todo-list-cli.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`05-todo-list-cli.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi utuh**. Akan ada **petunjuk** dan
 **contoh output**, tapi kode utama harus kamu tulis sendiri. Tujuannya agar
@@ -117,7 +119,7 @@ const todos = [
 
 ### Cara Mengetik dari 0
 
-1. Buat file baru `05-todo-list-cli.js`
+1. Buka salinan starter `05-todo-list-cli.js` (bukan bikin file baru; lihat catatan di atas)
 2. Baris pertama: `const readline = require('readline');`
 3. Bikin `rl` dengan `readline.createInterface`
 4. Di bawahnya, deklarasi `const todos` dengan 3 object awal
@@ -520,7 +522,7 @@ Sebelum lanjut ke soal berikutnya, cek semua ini:
 
 ## Cara Submit
 
-1. Simpan file sebagai `05-todo-list-cli.js`
+1. Pastikan kodemu tersimpan di salinan starter `latihan-saya/02-javascript/minggu-XX/05-todo-list-cli.js`
 2. Jalankan dengan `node 05-todo-list-cli.js`
 3. Coba **semua menu** dari 1 sampai 7
 4. Pastikan pilihan 2 (tambah) menerima input yang benar

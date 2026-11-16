@@ -1,94 +1,55 @@
 // ============================================================
 // SOAL 05 — MODULE SYSTEM
 // ============================================================
-
-// ============================================================
-// FILE: math.js (exports)
-// ============================================================
-// const add = (a, b) => a + b;
-// const subtract = (a, b) => a - b;
-// const multiply = (a, b) => a * b;
-// const divide = (a, b) => {
-//   if (b === 0) throw new Error("Tidak bisa bagi dengan 0");
-//   return a / b;
-// };
+// Soal: soal/05-module-system.md
 //
-// module.exports = { add, subtract, multiply, divide };
-// // atau: module.exports.add = add; ...
-
-
-// ============================================================
-// FILE: stringHelper.js (exports)
-// ============================================================
-// const toUpper = str => str.toUpperCase();
-// const toLower = str => str.toLowerCase();
-// const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+// File ini adalah lembar kerja dan catatanmu. Modul-modulnya kamu
+// buat sendiri sebagai file terpisah di folder 05-modules/ (di samping
+// salinan starter ini, di folder latihan-saya/ milikmu):
 //
-// module.exports = { toUpper, toLower, capitalize };
-
-
-// ============================================================
-// FILE: index.js (main)
-// ============================================================
-// const math = require("./math");
-// const str = require("./stringHelper");
+//   05-modules/
+//   ├── math.js       (add, subtract, divide)
+//   ├── utils.js      (capitalize)
+//   └── index.js      (require math dan utils, lalu cetak hasilnya)
 //
-// console.log(math.add(5, 3));       // 8
-// console.log(math.divide(10, 2));  // 5
-// console.log(str.capitalize("andi")); // "Andi"
-
-
 // ============================================================
-// DEMO: ES Modules (jika package.json punya "type": "module")
+// TODO(human): CommonJS — math.js
 // ============================================================
-// math.mjs:
-// export const add = (a, b) => a + b;
-// export default { add };
+// Buat math.js dengan fungsi add, subtract, divide, lalu export.
+// Coba dua gaya export: module.exports = { ... } dan module.exports.nama = ...
+// Selesai kalau: require("./math") dari index.js mengembalikan ketiga fungsi.
 //
-// index.mjs:
-// import { add } from "./math.mjs";
-// import math from "./math.mjs";
-
-
 // ============================================================
-// DEMO: Circular Dependency
+// TODO(human): CommonJS — utils.js dan index.js
 // ============================================================
-// a.js:
-// const { valueB } = require("./b");
-// const valueA = 10;
-// module.exports = { valueA };
+// utils.js: fungsi capitalize("andi") -> "Andi".
+// index.js: require kedua modul (satu pakai destructuring, satu pakai objek utuh).
+// Harapan output:
+//   math.add(5, 3)         -> 8
+//   math.divide(10, 2)     -> 5
+//   utils.capitalize("andi") -> "Andi"
+// Selesai kalau: `node index.js` dari folder 05-modules/ mencetak tiga baris di atas.
 //
-// b.js:
-// const { valueA } = require("./a"); // valueA akan undefined!
-// const valueB = 20;
-// module.exports = { valueB };
+// ============================================================
+// TODO(human): Circular dependency
+// ============================================================
+// Buat a.js dan b.js yang saling require di baris paling atas, lalu jalankan.
+// Amati: nilai apa yang sampai ke salah satu modul, dan kenapa?
+// Tulis penjelasannya dengan kata-katamu sendiri di komentar di bawah,
+// lalu cari cara memperbaikinya tanpa menghapus salah satu require.
+// Petunjuk: kapan tepatnya require() dijalankan, dan kapan module.exports terisi?
 //
-// SOLUSI: lazy loading
-// b.js:
-// let valueA;
-// const getValueA = () => {
-//   if (!valueA) valueA = require("./a").valueA;
-//   return valueA;
-// };
-// module.exports = { valueA: getValueA };
-
-
 // ============================================================
-// TEST
+// TODO(human): ES Modules
 // ============================================================
-console.log("=== Module System Demo ===");
+// Buat math.mjs (export const add + export default) dan index.mjs (import).
+// Jalankan: node index.mjs
+// Selesai kalau: kamu bisa menjelaskan beda `import { add }` dan `import math`.
+//
+// ============================================================
+// CATATAN SAYA
+// ============================================================
+// (tulis penjelasan circular dependency di sini)
 
-// Simulasi module exports
-const math = {
-  add: (a, b) => a + b,
-  subtract: (a, b) => a - b,
-};
-
-const str = {
-  capitalize: s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase(),
-};
-
-console.log("math.add(5,3):", math.add(5, 3));
-console.log("str.capitalize('andi'):", str.capitalize("andi"));
-
-console.log("\nUntuk implementasi penuh, buat file terpisah dan require.");
+console.log("=== Module System ===");
+console.log("Kerjakan TODO(human) di atas, lalu jalankan index.js dari 05-modules/.");

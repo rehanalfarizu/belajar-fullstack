@@ -31,16 +31,17 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 | # | File Template | Deskripsi |
 |---|---------------|-----------|
-| 01 | `code/01-Dockerfile` | Dockerfile dasar untuk Node.js app |
-| 02 | `code/02-Dockerfile` | Multi-stage build untuk React + Nginx |
-| 03 | `code/03-dockerignore` | .dockerignore untuk optimalisasi build context |
-| 04 | `code/04-docker-compose.yml` | Docker Compose untuk fullstack app |
+| 01 | `code/01-Dockerfile` | Kerangka Dockerfile Node.js (isi sendiri) |
+| 02 | `code/02-Dockerfile` | Kerangka multi-stage build React + Nginx |
+| 03 | `code/03-dockerignore` | Kerangka .dockerignore (ganti nama jadi `.dockerignore`) |
+| 04 | `code/04-docker-compose.yml` | Kerangka Docker Compose untuk fullstack app (TODO) |
+| - | `code/nginx.conf` | Kerangka konfigurasi Nginx untuk SPA (TODO) |
 
 ---
 
 ## Tools yang Dibutuhkan
 
-- **Docker Desktop** v24+ (atau Docker Engine + Docker Compose v2)
+- **Docker Desktop** (versi terbaru) (atau Docker Engine + Docker Compose v2)
 - **Node.js** 24 LTS (untuk development lokal)
 - **Git Bash / WSL2** (untuk Windows users)
 
@@ -72,7 +73,7 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 ## Langkah Pengerjaan
 
-1. **Baca** `materi-teori/04-microservices/` untuk dasar containerization
+1. **Baca** `../../materi-teori/03-docker-containerization/` untuk dasar containerization
 2. **Kerjakan** soal 01 sebagai fondasi (Dockerfile dasar)
 3. **Lanjut** ke soal 02–03 untuk meningkatkan efisiensi image
 4. **Selesaikan** soal 04 untuk orchestrasi penuh dengan Docker Compose
@@ -81,3 +82,5 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 ---
 
 **Estimasi Waktu:** 6–8 jam
+
+Kunci jawaban: [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka setelah mencoba sendiri.

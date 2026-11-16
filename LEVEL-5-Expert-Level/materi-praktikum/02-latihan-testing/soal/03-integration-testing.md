@@ -129,33 +129,9 @@ it('shows error when API fails', async () => {
 
 **1. Initial Load Test**
 
-```jsx
-describe('Product Listing Page — Initial Load', () => {
-  it('shows loading state while fetching products', () => {
-    renderWithProviders(<ProductListingPage />);
-    expect(screen.getByRole('progressbar')).toBeInTheDocument();
-  });
-
-  it('displays product grid after data loads', async () => {
-    renderWithProviders(<ProductListingPage />);
-    expect(await screen.findByRole('list', { name: /products/i })).toBeInTheDocument();
-  });
-
-  it('displays product count', async () => {
-    renderWithProviders(<ProductListingPage />);
-    expect(await screen.findByText(/showing \d+ products/i)).toBeInTheDocument();
-  });
-
-  it('shows product cards with correct information', async () => {
-    renderWithProviders(<ProductListingPage />);
-    const firstProduct = await screen.findByRole('article');
-
-    expect(within(firstProduct).getByRole('img', { name: /product image/i })).toBeInTheDocument();
-    expect(within(firstProduct).getByRole('heading')).toHaveTextContent('Produk 1');
-    expect(within(firstProduct).getByText(/Rp 100\.000/)).toBeInTheDocument();
-  });
-});
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 **2. Cart Integration Test**
 
@@ -225,54 +201,9 @@ describe('Product Listing Page — Filtering', () => {
 
 **1. Network Error Handling**
 
-```jsx
-describe('Product Listing Page — Error Handling', () => {
-  it('displays error message when products API fails', async () => {
-    server.use(
-      http.get('/api/products', () => HttpResponse.error())
-    );
-
-    renderWithProviders(<ProductListingPage />);
-    expect(await screen.findByRole('alert')).toHaveTextContent(/failed to load/i);
-  });
-
-  it('shows retry button on error', async () => {
-    server.use(
-      http.get('/api/products', () => HttpResponse.error())
-    );
-
-    const user = userEvent.setup();
-    renderWithProviders(<ProductListingPage />);
-
-    const retryButton = await screen.findByRole('button', { name: /retry/i });
-    expect(retryButton).toBeInTheDocument();
-  });
-
-  it('retry recovers from error state', async () => {
-    // Setup: first call fails, second call succeeds
-    let callCount = 0;
-    server.use(
-      http.get('/api/products', () => {
-        callCount++;
-        if (callCount === 1) return HttpResponse.error();
-        return HttpResponse.json([{ id: 1, name: 'Product 1' }]);
-      })
-    );
-
-    const user = userEvent.setup();
-    renderWithProviders(<ProductListingPage />);
-
-    await screen.findByRole('alert');
-    await user.click(screen.getByRole('button', { name: /retry/i }));
-
-    expect(await screen.findByRole('list')).toBeInTheDocument();
-  });
-
-  it('handles partial failure (some products fail to load)', async () => {
-    // Beberapa image gagal load, tapi produk tetap ditampilkan
-  });
-});
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 **2. Loading States**
 

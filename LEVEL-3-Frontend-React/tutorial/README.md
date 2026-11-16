@@ -8,10 +8,13 @@ Folder ini berisi **panduan langkah demi langkah** untuk membangun frontend apli
 
 | # | File | Project | Topik Utama |
 |---|------|---------|-------------|
-| 01 | `01-buat-react-pertama.md` | React App Pertama | Vite, JSX, Component, Props |
-| 02 | `02-state-dan-hooks.md` | Todo App | useState, useEffect, event handling |
-| 03 | `03-react-router.md` | Multi-page App | React Router, navigasi |
-| 04 | `04-context-dan-state.md` | State Management | Context API, useReducer |
+| 01 | [01-membuat-aplikasi-react-pertama.md](01-membuat-aplikasi-react-pertama.md) | Todo App pertama | Vite, JSX, Component, useState |
+| 01 | [01-membuat-react-app-pertama.md](01-membuat-react-app-pertama.md) | Komponen Card | Vite, struktur folder, Component, styling |
+| 02 | [02-react-dengan-api.md](02-react-dengan-api.md) | React + Express API | useEffect, useState, fetch data |
+
+Topik router dan state belum punya tutorial sendiri. Pakai
+[materi-teori](../materi-teori/03-react-router/README.md) dan
+[latihan state](../materi-praktikum/04-latihan-state/TUGAS.md) untuk itu.
 
 ---
 
@@ -29,17 +32,9 @@ Folder ini berisi **panduan langkah demi langkah** untuk membangun frontend apli
 ## Alur Belajar yang Disarankan
 
 ```
-STEP 1 → Tutorial 01: Buat React app pertama
-         → Hasil: Aplikasi React pertama dengan component
-
-STEP 2 → Tutorial 02: State dan Hooks
-         → Hasil: Todo app yang interaktif
-
-STEP 3 → Tutorial 03: React Router
-         → Hasil: Aplikasi multi-page dengan navigasi
-
-STEP 4 → Tutorial 04: Context dan State Management
-         → Hasil: Aplikasi dengan global state
+STEP 1 → Tutorial 01: Buat React app pertama (pilih salah satu dari dua versi)
+STEP 2 → Tutorial 02: Ambil data dari API dengan useEffect
+STEP 3 → Lanjut ke materi-praktikum untuk router, state, dan form
 ```
 
 ---

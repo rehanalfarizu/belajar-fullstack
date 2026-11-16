@@ -33,14 +33,19 @@ useEffect(() => {
 
 ### Soal 2B — Stopwatch dengan useRef (Mutable Timer)
 Component `Stopwatch`:
-- State: `isRunning` (boolean), `elapsedTime` (number, detik)
-- Gunakan `useRef` untuk menyimpan interval ID
-- Start: increment `elapsedTime` setiap 100ms
-- Stop: clearInterval
-- Reset: set elapsedTime ke 0
+- State: `isRunning` (boolean) dan `elapsedTime` (number, milidetik) — angka ini
+  tampil di layar, jadi harus state supaya layar ikut berubah
+- Gunakan `useRef` untuk nilai yang **tidak** tampil di layar: interval ID dan
+  waktu mulai (`Date.now()` saat Start)
+- Start: update `elapsedTime` setiap 100ms
+- Stop: `clearInterval`
+- Reset: set `elapsedTime` ke 0
 - Display: MM:SS:ms format
 
-**PERHATIAN:** `elapsedTime` disimpan di `useRef` (bukan `useState`) karena tidak perlu trigger re-render setiap100ms. Re-render hanya saat Start/Stop/Reset.
+**Aturan pegangan:** nilai yang ditampilkan butuh `useState`. Nilai yang cuma dipakai
+di balik layar (ID interval, waktu mulai) cocok di `useRef`, karena mengubahnya
+tidak memicu render ulang. Kalau `elapsedTime` ditaruh di `useRef`, angkanya
+berubah tapi layar tidak pernah ikut. Coba buktikan sendiri, lalu tulis temuanmu.
 
 ### Soal 2C — useCallback untuk Prevent Re-render
 Component `Parent` dengan `Child` component:
@@ -55,8 +60,8 @@ Demonstrasi: ketik di input `text` → Child TIDAK re-render (karena `handleClic
 
 ## Syarat (Checklist)
 - [ ] useRef.inputRef.current.focus() dipanggil saat mount
-- [ ] Stopwatch menggunakan useRef untuk interval ID
-- [ ] elapsedTime tidak trigger re-render setiap tick
+- [ ] Stopwatch menyimpan interval ID dan waktu mulai di useRef
+- [ ] elapsedTime (yang tampil) di useState, dan interval dibersihkan saat Stop/unmount
 - [ ] useCallback mencegah function dibuat ulang tidak perlu
 - [ ] React.memo + useCallback bekerja bersama dengan benar
 

@@ -38,9 +38,11 @@ hasil dari 1 sampai `limit`. Konsep yang kamu pelajari di sini (loop + kondisi
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan** — pahami konsep dan kenapa dipakai
-2. **Ketik dari 0** — buka `code/03-fizzbuzz.js`, cari `TODO`, lalu ketik
+2. **Ketik dari 0** — buka salinan starter `03-fizzbuzz.js` (lihat catatan di bawah), cari `TODO`, lalu ketik
    sendiri (JANGAN copy-paste dari contoh mana pun)
 3. **Verifikasi** — cek hasilmu dengan panduan verifikasi
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/03-fizzbuzz.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`03-fizzbuzz.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi**. Tujuannya agar kamu terbiasa **berpikir
 dan mengetik**, bukan menyalin. Ini skill paling penting untuk programmer.
@@ -77,7 +79,7 @@ menjadi 30.
 
 ### Cara Mengetik dari 0
 
-1. Buka `code/03-fizzbuzz.js` di VS Code
+1. Salin `code/03-fizzbuzz.js` ke `latihan-saya/02-javascript/minggu-XX/03-fizzbuzz.js`, lalu buka salinannya di VS Code
 2. Cari bagian yang ditandai `TODO: fizzBuzz(limit = 100)`
 3. Ketik `function fizzBuzz(limit = 100) {`
 4. Tutup dengan `}` di akhir body
@@ -452,10 +454,10 @@ Sebelum lanjut ke soal 04, cek semua ini:
 
 ## Cara Submit
 
-1. Buka `code/03-fizzbuzz.js` di VS Code
+1. Salin `code/03-fizzbuzz.js` ke `latihan-saya/02-javascript/minggu-XX/03-fizzbuzz.js`, lalu buka salinannya di VS Code
 2. Isi semua bagian yang ditandai `TODO` dengan kodemu sendiri
 3. Save (Cmd+S / Ctrl+S)
-4. Jalankan: `node 03-fizzbuzz.js` — cek outputnya
+4. Jalankan dari folder salinanmu: `node 03-fizzbuzz.js` — cek outputnya
 5. Coba `node 03-fizzbuzz.js 20` — cek output 20 elemen
 6. Verifikasi dengan checklist di atas
 7. Kalau PASS, lanjut ke `soal/04-array-manipulation.md`

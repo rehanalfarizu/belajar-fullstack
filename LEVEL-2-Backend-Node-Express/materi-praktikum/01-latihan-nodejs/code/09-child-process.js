@@ -79,30 +79,29 @@ find.on("close", code => {
 
 
 // ============================================================
-// TODO 3: fork — Node.js worker
+// TODO(human) 3: fork — Node.js worker
 // ============================================================
-// worker.js content:
-// process.on("message", msg => {
-//   console.log("Worker received:", msg);
-//   if (msg.task === "double") {
-//     process.send({ result: msg.value * 2 });
-//   }
-// });
+// Buat file worker.js sendiri, di folder yang sama dengan salinan starter ini.
 //
-// const worker = fork("./worker.js");
-// worker.send({ task: "double", value: 21 });
-// worker.on("message", msg => {
-//   console.log("Result:", msg.result);
-//   worker.kill();
-// });
+// worker.js harus:
+// - mendengarkan pesan dari proses induk (process.on("message", ...))
+// - kalau pesannya { task: "double", value: 21 }, balas lewat process.send
+//   dengan { result: <value dikali 2> }
+//
+// Skrip utama (di file ini) harus:
+// - fork worker.js, kirim { task: "double", value: 21 }
+// - mencetak "Result: 42" saat balasan datang, lalu mematikan worker
+//
+// Petunjuk: path untuk fork() dihitung dari folder tempat kamu mengetik `node`.
+// Pakai path.join(__dirname, "worker.js") supaya aman dari mana pun dijalankan
+// (modul `path` sudah di-import di atas).
+//
+// Selesai kalau: pesan dari induk sampai ke worker, balasan tercetak di induk,
+// dan program berhenti sendiri (tidak menggantung) karena worker dimatikan.
+// Bonus: kirim 3 pesan berbeda dan pastikan semua balasannya datang.
 
 
 // ============================================================
 // TEST
 // ============================================================
-// Untuk full implementation:
-// 1. Buat worker.js
-// 2. Uncomment kode fork di atas
-// 3. Jalankan: node 09-child-process.js
-
-console.log("\nLihat kode untuk contoh lengkap child_process!");
+console.log("\nKerjakan TODO(human) 3, lalu jalankan: node 09-child-process.js");

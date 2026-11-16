@@ -175,7 +175,6 @@ docker push myusername/my-app:latest
 
 ```yaml
 # docker-compose.yml
-version: "3.9"
 
 services:
   # Backend API
@@ -279,7 +278,6 @@ docker compose up -d --scale api=3
 
 ```yaml
 # docker-compose.yml (development)
-version: "3.9"
 
 services:
   api:

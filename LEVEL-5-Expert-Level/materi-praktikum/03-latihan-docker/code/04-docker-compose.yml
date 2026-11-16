@@ -1,247 +1,54 @@
 # ============================================================
-# SOAL 04 — Docker Compose: Fullstack App
+# SOAL 04 — docker-compose.yml untuk aplikasi fullstack (kerangka)
 # ============================================================
-# Install:
-#   docker compose version   # Pastikan Docker Compose v2+
+# Gabungkan frontend, backend, dan PostgreSQL (opsional: Nginx, Redis) dalam
+# satu file Compose. Kunci `version:` tidak dipakai di Compose v2.
 #
-# Start semua services:
-#   docker compose -f materi-praktikum/03-latihan-docker/code/04-docker-compose.yml up -d
+# Perintah (dari folder file ini; sesuaikan path):
+#   docker compose up -d --build
+#   docker compose ps
+#   docker compose logs -f backend
+#   docker compose down        # data tetap ada (volume)
+#   docker compose down -v     # hapus volume juga (bersih total)
 #
-# Start dengan development profile (hot reload + dev tools):
-#   docker compose -f materi-praktikum/03-latihan-docker/code/04-docker-compose.yml --profile dev up -d
-#
-# Stop semua services:
-#   docker compose -f materi-praktikum/03-latihan-docker/code/04-docker-compose.yml down
-#
-# Stop + hapus volumes (clean slate):
-#   docker compose -f materi-praktikum/03-latihan-docker/code/04-docker-compose.yml down -v
-#
-# View logs:
-#   docker compose -f materi-praktikum/03-latihan-docker/code/04-docker-compose.yml logs -f
+# Kunci jawaban: ../solusi-jangan-dibuka-dulu.md (jangan dibuka dulu).
 # ============================================================
 
-version: "3.9"
+# TODO(human): volumes
+#   Deklarasikan named volume untuk data PostgreSQL.
+#   Pertanyaan: apa bedanya named volume dan bind mount, dan kenapa database
+#   pakai yang pertama?
 
-# ─── Named Volumes ────────────────────────────────
-volumes:
-  # PostgreSQL data persistence — data survive container restart
-  postgres_data:
-  # Redis data persistence
-  redis_data:
+# TODO(human): networks
+#   Buat network sendiri. Pertanyaan: service saling memanggil lewat apa?
+#   (Petunjuk: DNS internal Docker, bukan IP dan bukan localhost.)
 
-# ─── Networks ───────────────────────────────────
-networks:
-  app-network:
-    driver: bridge
+services: {}
+  # TODO(human): service postgres
+  #   - image dengan tag versi tertentu (bukan latest)
+  #   - environment dari file .env (JANGAN tulis password asli di sini)
+  #   - volume data
+  #   - healthcheck (cari `pg_isready`)
+  #   - port database TIDAK dibuka ke host kecuali perlu untuk development
+  #
+  # TODO(human): service backend
+  #   - build dari folder backend dan Dockerfile milikmu
+  #   - DATABASE_URL memakai NAMA service database sebagai host
+  #   - depends_on dengan kondisi service_healthy
+  #   - healthcheck ke /health
+  #   - restart policy
+  #
+  # TODO(human): service frontend
+  #   - build multi-stage dari soal 02
+  #   - port host ke port 80 container
+  #   - depends_on backend
+  #
+  # TODO(human) (opsional): Nginx reverse proxy sebagai satu-satunya pintu
+  #   masuk, Redis untuk cache, dan `profiles` untuk service khusus development.
 
-# ─── Services ───────────────────────────────────
-services:
-
-  # ── Nginx Reverse Proxy ────────────────────────
-  # Entry point — route traffic ke frontend/backend
-  nginx:
-    image: nginx:alpine
-    container_name: myapp_nginx
-    ports:
-      - "80:80"
-      # - "443:443" # uncomment untuk HTTPS
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      # - ./nginx/certs:/etc/nginx/certs:ro  # uncomment untuk SSL
-    depends_on:
-      frontend:
-        condition: service_started
-      backend:
-        condition: service_healthy
-    networks:
-      - app-network
-    restart: unless-stopped
-    # Security hardening
-    read_only: true
-    tmpfs:
-      - /tmp
-      - /run
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  # ── Frontend (React + Vite) — Production ────────
-  frontend:
-    build:
-      context: ../../frontend
-      dockerfile: ../materi-praktikum/03-latihan-docker/code/02-multi-stage-Dockerfile
-      target: production
-    container_name: myapp_frontend
-    profiles:
-      - prod
-    networks:
-      - app-network
-    restart: unless-stopped
-    read_only: true
-    tmpfs:
-      - /tmp
-      - /app:mode=1777   # Vite hot reload butuh write ke /app
-
-  # ── Frontend Dev (dengan hot reload) ───────────
-  frontend-dev:
-    build:
-      context: ../../frontend
-      dockerfile: ../materi-praktikum/03-latihan-docker/code/02-multi-stage-Dockerfile
-      target: development
-    container_name: myapp_frontend_dev
-    profiles:
-      - dev
-    ports:
-      - "3000:3000"
-    environment:
-      - VITE_API_URL=http://backend:5000
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - ../../frontend/src:/app/src
-    networks:
-      - app-network
-    restart: unless-stopped
-
- # ── Backend (Express.js API) ───────────────────
-  backend:
-    build:
-      context: ../../backend
-      dockerfile: ../materi-praktikum/03-latihan-docker/code/01-Dockerfile
-    container_name: myapp_backend
-    ports:
-      - "5000:5000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-myapp}
-      - REDIS_URL=redis://redis:6379
-      - PORT=5000
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_started
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    read_only: true
-    tmpfs:
-      - /tmp
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  # ── Backend Dev ────────────────────────────────
-  backend-dev:
-    image: node:24-alpine
-    container_name: myapp_backend_dev
-    profiles:
-      - dev
-    ports:
-      - "5000:5000"
-    working_dir: /app
-    environment:
-      - NODE_ENV=development
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-myapp}
-      - REDIS_URL=redis://redis:6379
-    volumes:
-      - ../../backend:/app
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - app-network
-    command: sh -c "npm install && npm run dev"
-    restart: unless-stopped
-
-  # ── PostgreSQL Database ────────────────────────
-  postgres:
-    image: postgres:15-alpine
-    container_name: myapp_postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-admin}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
-      POSTGRES_DB: ${POSTGRES_DB:-myapp}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin} -d ${POSTGRES_DB:-myapp}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1G
-        reservations:
-          cpus: "0.25"
-          memory: 256M
-    security_opt:
-      - no-new-privileges:true
-
-  # ── Redis Cache ───────────────────────────────
-  redis:
-    image: redis:7-alpine
-    container_name: myapp_redis
-    command: redis-server --appendonly yes
-    volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
-
-  # ── Adminer — DB GUI (Development Only) ────────
-  adminer:
-    image: adminer:4
-    container_name: myapp_adminer
-    profiles:
-      - dev
-    ports:
-      - "8080:8080"
-    depends_on:
-      postgres:
-        condition: service_started
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  # ── Mailhog — Email Testing (Development Only) ─
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: myapp_mailhog
-    profiles:
-      - dev
-    ports:
-      - "1025:1025"   # SMTP server
-      - "8025:8025"   # Web UI
-    networks:
-      - app-network
-    restart: unless-stopped
+# Selesai kalau:
+#   [ ] `docker compose up -d --build` membuat semua service sehat
+#   [ ] backend baru start setelah database benar-benar siap
+#   [ ] setelah `down` lalu `up`, data database masih ada
+#   [ ] tidak ada password asli di file ini (pakai .env yang di-gitignore)
+#   [ ] backend memanggil database lewat nama service

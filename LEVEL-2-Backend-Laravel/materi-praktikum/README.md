@@ -57,7 +57,7 @@
 
 ```
 belajar-laravel/
-├── php --version           # PHP 8.5 untuk Laravel 13
+├── php --version           # PHP 8.3+ (Laravel 13 dan 12)
 ├── composer --version      # Composer 2+
 ├── laravel --version       # Laravel installer (global)
 └── mysql --version         # atau MariaDB via XAMPP/Laragon
@@ -105,3 +105,68 @@ Artinya:
 ---
 
 **Target: 10/10 soal dikerjakan dari 0 → fondasi Laravel SOLID!**
+
+---
+
+## Menyiapkan Proyek Latihan toko-latihan
+
+Hampir semua starter di folder `code/` adalah **potongan** class, route, atau
+migration Laravel. Potongan itu tidak bisa dijalankan sendirian. Kamu perlu satu
+project Laravel latihan, dibuat **di luar repo ini** supaya repo tetap bersih.
+
+```bash
+cd ~
+mkdir -p latihan-laravel && cd latihan-laravel
+composer create-project laravel/laravel toko-latihan
+cd toko-latihan
+php artisan serve        # http://127.0.0.1:8000
+```
+
+Project baru memakai SQLite, jadi tidak perlu install database. Satu project
+dipakai untuk semua topik 02–10, sehingga hasil topik sebelumnya terbawa ke
+topik berikutnya.
+
+Alur kerja tiap soal:
+
+1. Baca `soal/NN-*.md`.
+2. Salin starter dari `code/` ke lokasi yang tertulis di `TUGAS.md` topik itu.
+3. Isi bagian `TODO(human)` dengan ketikanmu sendiri.
+4. Cek hasilnya dengan perintah di bagian "Cara Mengecek Hasil Sendiri".
+5. Baru setelah punya jawaban yang jalan, bandingkan dengan `contoh/`.
+
+Pengecualian: topik 01 (PHP biasa, jalankan dengan `php file.php`) dan sebagian
+topik 10 (script pemeriksa) tidak butuh Laravel.
+
+Yang bisa dicek langsung dari repo ini tanpa Laravel hanyalah sintaks:
+
+```bash
+php -l LEVEL-2-Backend-Laravel/materi-praktikum/01-php-dasar/code/02-keranjang-belanja.php
+```
+
+Untuk topik 09 jalankan sekali `php artisan install:api` di `toko-latihan`.
+
+---
+
+## Indeks Semua Topik dan Soal
+
+Setiap topik punya `README.md` (konsep singkat dan glosarium), `TUGAS.md`
+(langkah kerja dan petunjuk bertingkat), dan `CHECKLIST.md` (cek pemahaman).
+Teori lengkap ada di [materi-teori](../materi-teori/README.md).
+
+| Topik | Teori | Soal 01 | Soal 02 | Soal 03 | Keamanan |
+|---|---|---|---|---|---|
+| [01 PHP Dasar](01-php-dasar/README.md) | [teori](../materi-teori/01-php-dasar/README.md) | [Rekap Nilai](01-php-dasar/soal/01-katalog-nilai.md) | [Keranjang Belanja](01-php-dasar/soal/02-keranjang-belanja.md) | [Class Produk](01-php-dasar/soal/03-class-produk.md) | — |
+| [02 Setup Laravel](02-setup-laravel/README.md) | [teori](../materi-teori/02-setup-laravel/README.md) | [Health Check](02-setup-laravel/soal/01-health-check.md) | [Config dan Env](02-setup-laravel/soal/02-config-dan-env.md) | [Command Cek Env](02-setup-laravel/soal/03-artisan-command-cek-env.md) | [07 Konfigurasi Aman](../../modul-keamanan-web/07-konfigurasi-aman/README.md) |
+| [03 Routing dan Controller](03-routing-controller/README.md) | [teori](../materi-teori/03-routing-controller/README.md) | [Product Controller](03-routing-controller/soal/01-product-controller.md) | [Route Group dan Nama](03-routing-controller/soal/02-route-group-dan-nama.md) | [Middleware Jam Buka](03-routing-controller/soal/03-middleware-jam-buka.md) | — |
+| [04 Blade Template](04-blade-template/README.md) | [teori](../materi-teori/04-blade-template/README.md) | [Products View](04-blade-template/soal/01-products-view.md) | [Layout dan Komponen](04-blade-template/soal/02-layout-dan-component.md) | [XSS dan Escape](04-blade-template/soal/03-xss-dan-escape.md) | [06 XSS dan CSRF](../../modul-keamanan-web/06-xss-dan-csrf/README.md) |
+| [05 Database Migration](05-database-migration/README.md) | [teori](../materi-teori/05-database-migration/README.md) | [Products Migration](05-database-migration/soal/01-products-migration.md) | [Categories dan Foreign Key](05-database-migration/soal/02-categories-dan-foreign-key.md) | [Query Builder dan SQL Injection](05-database-migration/soal/03-query-builder-dan-sql-injection.md) | [03 SQL Injection](../../modul-keamanan-web/03-sql-injection/README.md) |
+| [06 Eloquent ORM](06-eloquent-orm/README.md) | [teori](../materi-teori/06-eloquent-orm/README.md) | [Product Model](06-eloquent-orm/soal/01-product-model.md) | [Mass Assignment](06-eloquent-orm/soal/02-mass-assignment.md) | [Scope dan N+1](06-eloquent-orm/soal/03-scope-pencarian-dan-n-plus-1.md) | [02 Validasi](../../modul-keamanan-web/02-validasi-input/README.md), [03 SQL Injection](../../modul-keamanan-web/03-sql-injection/README.md) |
+| [07 Form dan Validasi](07-form-validasi/README.md) | [teori](../materi-teori/07-form-validasi/README.md) | [Store Request](07-form-validasi/soal/01-store-product-request.md) | [Update Request](07-form-validasi/soal/02-update-product-request.md) | [Validasi Server Wajib](07-form-validasi/soal/03-validasi-server-wajib.md) | [02 Validasi Input](../../modul-keamanan-web/02-validasi-input/README.md) |
+| [08 Autentikasi](08-autentikasi/README.md) | [teori](../materi-teori/08-autentikasi/README.md) | [Auth dan Policy](08-autentikasi/soal/01-auth-authorization.md) | [Login Manual dan Hash](08-autentikasi/soal/02-login-manual-dan-hash.md) | [IDOR dan Policy](08-autentikasi/soal/03-idor-dan-policy-kepemilikan.md) | [04 Autentikasi](../../modul-keamanan-web/04-autentikasi-dan-password/README.md), [05 Otorisasi](../../modul-keamanan-web/05-otorisasi-dan-akses/README.md) |
+| [09 REST API](09-rest-api/README.md) | [teori](../materi-teori/09-rest-api/README.md) | [Product API](09-rest-api/soal/01-product-api.md) | [API Resource Tanpa Bocor](09-rest-api/soal/02-api-resource-tanpa-bocor.md) | [Rate Limit dan Token](09-rest-api/soal/03-rate-limit-dan-token.md) | [05 Otorisasi](../../modul-keamanan-web/05-otorisasi-dan-akses/README.md), [04 Autentikasi](../../modul-keamanan-web/04-autentikasi-dan-password/README.md) |
+| [10 Deploy dan Hosting](10-deploy-hosting/README.md) | [teori](../materi-teori/10-deploy-hosting/README.md) | [Production Readiness](10-deploy-hosting/soal/01-production-readiness.md) | [Env dan Rahasia](10-deploy-hosting/soal/02-env-dan-rahasia.md) | [APP_DEBUG dan Deploy Script](10-deploy-hosting/soal/03-app-debug-dan-deploy-script.md) | [07 Konfigurasi Aman](../../modul-keamanan-web/07-konfigurasi-aman/README.md) |
+
+Tingkat kesulitan naik di tiap topik: soal 01 dasar, soal 02 menengah, soal 03
+lanjut. Catatan: tabel "Daftar Latihan" di atas adalah ringkasan awal. Kalau ada
+perbedaan, indeks ini yang terbaru. Setelah semua topik, lanjut ke
+[tutorial end-to-end](../tutorial/README.md).

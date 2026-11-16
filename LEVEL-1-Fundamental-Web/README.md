@@ -8,24 +8,27 @@
 
 ```
 LEVEL-1/
-├── materi-teori/                  → Konsep fundamental
-│   ├── 01-html/
-│   ├── 02-css/
+├── materi-teori/                          → Konsep fundamental
+│   ├── 01-html-fundamental/
+│   ├── 02-css-fundamental/
+│   ├── 03-git-github-fundamental/         → materi Git historis (urutan utama ada di Level 0)
 │   ├── 03-javascript-fundamental/
-│   └── 04-typescript-fundamental/
-├── materi-praktikum/             → Latihan fundamental
-│   ├── 01-latihan-html/          → 10 soal HTML
-│   ├── 02-latihan-css/           → 10 soal CSS
-│   ├── 03-latihan-javascript/    → 10 soal JS
-│   └── 04-latihan-typescript/    → latihan contract dan narrowing
-├── tutorial/                       → Study case & panduan langkah demi langkah
-│   └── tutorial bertahap dari workspace sampai portfolio
-├── software/                       → Install & setup tools
-│   ├── 01-vscode-install.md
-│   ├── 02-chrome-devtools.md
-│   └── 03-git-install.md
+│   ├── 04-typescript-fundamental/
+│   └── 05-web-quality-performance-security/
+├── materi-praktikum/                      → Latihan fundamental
+│   ├── 01-latihan-html/                   → 10 soal HTML (punya folder contoh/)
+│   ├── 02-latihan-css/                    → 10 soal CSS
+│   ├── 03-latihan-javascript/             → 10 soal JS
+│   └── 04-latihan-typescript/             → latihan contract dan narrowing (punya folder contoh/)
+├── tutorial/                              → 12 file tutorial (lihat tutorial/README.md)
+├── software/                              → Install & setup tools
+│   ├── 02-git-github.md
+│   └── 02-git-install.md
 └── README.md
 ```
+
+Panduan install VS Code, Node.js, dan Chrome DevTools ada di
+[LEVEL-0 software](../LEVEL-0-Software-Engineering/software/README.md).
 
 ---
 
@@ -33,8 +36,8 @@ LEVEL-1/
 
 Modul disusun dari markup sampai type safety:
 
-1. **Modul 01 — HTML**: Element, semantic HTML, dan form.
-2. **Modul 02 — CSS**: Selector, box model, flexbox, dan responsive design.
+1. **Modul 01 — HTML** (`01-html-fundamental`): Element, semantic HTML, dan form.
+2. **Modul 02 — CSS** (`02-css-fundamental`): Selector, box model, flexbox, dan responsive design.
 3. **Modul 03 — JavaScript**: Variable, function, DOM, dan event.
 4. **Modul 04 — TypeScript**: union, generic, narrowing, dan runtime boundary.
 5. **Modul 05 — Web quality**: accessibility, browser performance, XSS, URL,
@@ -67,29 +70,29 @@ Materi optimasi/security ada di
 
 ### CSS (02-latihan-css)
 
-1. **Selector & Properti Dasar** — Class, ID, dan property warna/typography.
-2. **Box Model** — Margin, border, padding, dan box-sizing.
-3. **Layout Sederhana** — Float, clear, dan positioning.
-4. **Flexbox Intro** — Container, item, dan alignment.
-5. **Flexbox Lanjutan** — Grow, shrink, basis, dan wrapping.
+1. **Layout Dasar** — CSS reset, selector dasar, box model, dan centering.
+2. **Selector & Box Model** — Selector, margin, border, padding, dan `box-sizing`.
+3. **Flexbox** — Container, item, alignment, grow, shrink, dan wrapping.
+4. **Card Component** — Profile, product, stat, dan feature card dengan badge dan avatar.
+5. **Grid System** — Grid container, area, dan responsive grid.
 6. **Responsive Design** — Media query, breakpoint, dan mobile-first.
-7. **CSS Variables** — Custom property dan tema.
-8. **Transition & Animation** — Hover effect, keyframes, dan timing function.
-9. **Pseudo-class & Pseudo-element** — `:hover`, `:focus`, `::before`, dan `::after`.
-10. **CSS Grid** — Grid container, area, dan responsive grid.
+7. **Typography & Warna** — Font, ukuran, warna, dan CSS variables.
+8. **Form Styling** — Mendesain input, label, dan state form.
+9. **Animasi & Transisi** — Hover effect, `transition`, dan `@keyframes`.
+10. **Positioning & Navbar** — `position`, z-index, dan navbar.
 
 ### JavaScript (03-latihan-javascript)
 
-1. **Variable & Tipe Data** — `let`, `const`, string, number, dan boolean.
-2. **Function & Scope** — Declaration, expression, arrow function, dan scope.
-3. **Array & Method** — `map`, `filter`, `reduce`, dan `find`.
-4. **Object & Destructuring** — Property access, spread, dan destructuring.
-5. **Conditional & Loop** — `if/else`, `switch`, `for`, dan `while`.
-6. **DOM Selection** — `querySelector`, `getElementById`, dan traversal.
-7. **DOM Manipulation** — `textContent`, `innerHTML`, dan classList.
-8. **Event Handling** — `addEventListener`, event object, dan delegation.
-9. **Form Validation** — Client-side validation dan feedback UI.
-10. **Async & Fetch** — Promise, `async/await`, dan Fetch API.
+1. **Kalkulator Sederhana** — Variabel, operator, `parseFloat`, dan `if/else`.
+2. **Cek Bilangan** — `if/else`, `switch`, operator perbandingan, dan modulus.
+3. **FizzBuzz** — Loop `for`, kondisi bertingkat, dan array `push`.
+4. **Array Manipulation** — `map`, `filter`, `reduce`, `find`, dan `sort`.
+5. **Todo List CLI** — CRUD dengan array, fungsi, dan `readline`.
+6. **Object & Destructuring** — Object literal, destructuring, dan spread.
+7. **Callback & Higher-Order Function** — Callback, closure, dan fungsi sebagai nilai.
+8. **Async/Await & Fetch** — Promise, `fetch`, `async/await`, dan `try/catch`.
+9. **Class & OOP** — Class, inheritance, dan enkapsulasi.
+10. **Error Handling** — `try/catch`, error kustom, dan validasi.
 
 ### TypeScript (04-latihan-typescript)
 
@@ -100,11 +103,13 @@ discriminated union, dan exhaustive checking. Jalankan `npm run validate:types`.
 
 ## 🛠️ Software & Tools
 
-Tiga panduan instalasi dan setup tools pendukung:
+Folder `software/` di level ini berisi dua panduan Git:
 
-1. **VSCode Install** — Editor utama untuk menulis kode.
-2. **Chrome DevTools** — Inspect element, console, dan network tab.
-3. **Git Install** — Version control system.
+1. **Git & GitHub** (`software/02-git-github.md`).
+2. **Install Git** (`software/02-git-install.md`).
+
+Editor (VS Code), Node.js, dan Chrome DevTools dibahas di
+[LEVEL-0 software](../LEVEL-0-Software-Engineering/software/README.md).
 
 ---
 

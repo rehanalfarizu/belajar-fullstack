@@ -119,34 +119,9 @@ Definisikan event types:
 
 **1. Join Room**
 
-```js
-socket.on("join_room", ({ roomId, username }) => {
-  // Leave all current rooms
-  for (const room of socket.rooms) {
-    if (room !== socket.id) {
-      socket.leave(room);
-    }
-  }
-
-  // Join new room
-  socket.join(roomId);
-  socket.data.username = username;
-  socket.data.roomId = roomId;
-
-  // Notify room
-  socket.to(roomId).emit("user_joined", {
-    username,
-    socketId: socket.id,
-  });
-
-  // Send confirmation to joiner
-  socket.emit("room_joined", {
-    roomId,
-    username,
-    users: getRoomUsers(roomId),
-  });
-});
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 **2. Leave Room**
 

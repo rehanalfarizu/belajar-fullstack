@@ -26,37 +26,15 @@ const bcrypt = require('bcryptjs');
 
 // ============================================================
 // FUNGSI: Hash Password
-// TODO(human): async function hashPassword(password) {
-//   return await bcrypt.hash(password, SALT_ROUNDS);
-// }
+// TODO(human): tulis hashPassword(password) sesuai soal
 
 // ============================================================
 // FUNGSI: Verifikasi Password
-// TODO(human): async function verifyPassword(password, hash) {
-//   return await bcrypt.compare(password, hash);
-// }
+// TODO(human): tulis verifyPassword(password, hash) sesuai soal
 
 // ============================================================
 // MAIN
-// TODO(human): async function main() {
-//   console.log(`Password asli: "${passwords[0]}"`);
-//
-//   // Hash semua password
-//   const hashes = await Promise.all(passwords.map(hashPassword));
-//   console.log(`Hash: ${hashes[0].substring(0, 20)}... (salt + hash)`);
-//   console.log('Hash berhasil dibuat.\n');
-//
-//   // Verifikasi
-//   console.log('Verifikasi:');
-//   const match1 = await verifyPassword('rahasia123', hashes[0]);
-//   console.log(`"rahasia123" vs hash -> ${match1} (${match1 ? 'PASSWORD COCOK' : 'PASSWORD TIDAK COCOK'})`);
-//
-//   const match2 = await verifyPassword('rahasia999', hashes[0]);
-//   console.log(`"rahasia999" vs hash -> ${match2} (${match2 ? 'PASSWORD COCOK' : 'PASSWORD TIDAK COCOK'})`);
-//
-//   const match3 = await verifyPassword(passwords[1], hashes[1]);
-//   console.log(`"${passwords[1]}" vs hash[1] -> ${match3} (${match3 ? 'PASSWORD COCOK' : 'PASSWORD TIDAK COCOK'})`);
-// }
+// TODO(human): tulis main() sesuai soal
 
 // main().catch(err => { console.error('Error:', err); });
 

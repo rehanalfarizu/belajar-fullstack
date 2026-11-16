@@ -70,7 +70,11 @@ console.log("Parse:", path.parse("/path/to/file.txt"));
 ---
 
 ## Cara Submit
-1. Simpan sebagai `10-os-path.js`
-2. Jalankan — lihat system info
-3. BUAT path builder utility yang cross-platform
-4. BUAT system info reporter JSON
+
+Starter: `code/10-os-path.js`. Bagian atas starter sudah berisi demo yang jalan. **Tugas aslimu ada di dua `TODO(human)` di bagian bawah.**
+
+1. Salin starter ke `latihan-saya/03-backend/minggu-08/10-os-path.js` (nama sama).
+2. Jalankan dulu dan baca outputnya.
+3. Tulis path builder lintas OS (`getConfigPath`, `getDataDir`) di salinan starter itu.
+4. Buat file terpisah `system-report.js` yang hanya mencetak satu objek JSON berisi info sistem. Harus terpisah, karena starter mencetak banyak teks demo yang akan merusak JSON.
+5. Cek: `node system-report.js > info.json`, lalu `node -e "JSON.parse(require('fs').readFileSync('info.json','utf8'))"` harus jalan tanpa error.

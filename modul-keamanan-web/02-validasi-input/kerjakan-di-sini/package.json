@@ -1,0 +1,14 @@
+{
+  "name": "validasi-input-lab",
+  "version": "1.0.0",
+  "description": "Lab untuk belajar validasi input",
+  "main": "02-server-validasi.js",
+  "scripts": {
+    "start": "node 02-server-validasi.js",
+    "test-schema": "node 03-zod-schema.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "zod": "^3.22.4"
+  }
+}

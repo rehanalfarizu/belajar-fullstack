@@ -6,46 +6,23 @@ Kumpulan tutorial praktis untuk tool dan software yang digunakan dalam developme
 
 ## Daftar Tutorial
 
-### Tool Setup & Installation
+Ada tiga tutorial di folder ini, masing-masing satu file:
 
-Delapan tutorial untuk setup dan instalasi tool:
+1. [Dev Environment Setup](01-dev-environment-setup.md) — setup VS Code, Node.js, Git, dan akun GitHub (Windows dan macOS).
+2. [Git Collaboration Workflow](02-git-collaboration-workflow.md) — kerja tim dengan branch dan Pull Request.
+3. [Command Line Mastery](03-command-line-mastery.md) — terminal, pipe, grep, find, dan alias.
 
-1. **Setup VS Code** — install, konfigurasi, dan extension penting.
-2. **Install Node.js** — install via nvm, verifikasi, dan update PATH.
-3. **Install Git** — install via Homebrew dan konfigurasi user identity.
-4. **Setup macOS Terminal** — iTerm2, zsh, oh-my-zsh, dan theme.
-5. **Install Docker** — install Docker Desktop, verifikasi, dan container pertama.
-6. **Install Postman** — API testing tool dan setup collections.
-7. **Setup Python** — install via pyenv dan virtual environment.
-8. **Setup Database Clients** — TablePlus, DBeaver, dan pgAdmin.
-
-### Platform & Service
-
-Enam tutorial untuk setup akun di platform dan service:
-
-9. **Buat Akun GitHub** — sign up, SSH key, dan 2FA.
-10. **Buat Akun Vercel** — deploy frontend gratis.
-11. **Buat Akun Railway** — deploy backend dan database.
-12. **Buat Akun Supabase** — PostgreSQL, Auth, dan Storage.
-13. **Buat Akun MongoDB Atlas** — cloud database setup.
-14. **Buat Akun Render** — alternative deployment platform.
+Ada juga [materi-tutorial/](../materi-tutorial/README.md) yang berisi satu tutorial setup dev environment.
+Untuk setup tool yang tidak punya tutorial sendiri (Docker, database, dan sebagainya), lihat
+[software/](../software/README.md).
 
 ---
 
 ## Cara Menggunakan
 
-Struktur setiap tutorial:
-
-- `README.md` — panduan langkah demi langkah.
-- `screenshots/` — gambar bukti (opsional).
-- `cheatsheet.md` — ringkasan command atau keyboard shortcut.
-
-Cara membaca tutorial:
-
-1. Buka folder tutorial yang kamu butuhkan.
-2. Baca README.md langkah demi langkah.
-3. Kerjakan sesuai urutan.
-4. Verifikasi di akhir dengan checklist.
+1. Buka file tutorial yang kamu butuhkan.
+2. Kerjakan langkahnya berurutan.
+3. Verifikasi di akhir dengan perintah pengecekan yang ada di tutorial.
 
 ---
 
@@ -62,11 +39,10 @@ Empat tips untuk memaksimalkan tutorial:
 
 ## Target
 
-Tujuh target akhir setelah menyelesaikan tutorial:
+Setelah menyelesaikan tutorial:
 
 - VS Code dan extension penting terinstall.
-- Node.js terinstall dengan benar.
-- Git terinstall dan terkonfigurasi.
+- Node.js dan Git terinstall dengan benar dan terkonfigurasi.
 - Akun GitHub aktif dengan SSH key.
-- Terminal sudah dikustomisasi.
-- Docker terinstall (jika perlu).
+- Kamu bisa membuat Pull Request dari branch.
+- Kamu nyaman memakai terminal untuk pekerjaan sehari-hari.

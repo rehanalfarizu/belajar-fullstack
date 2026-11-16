@@ -17,6 +17,16 @@ Folder ini berisi panduan **tutorial step-by-step** untuk belajar HTML, CSS, dan
 | 07 | [Git & GitHub Fundamental](./02-git-github-fundamental.md) | Version control dengan Git & GitHub |
 | 08 | Deploy Website ke GitHub Pages *(materi lanjutan; belum tersedia)* | Hosting website statis |
 
+### Tutorial tambahan di folder ini
+
+Selain tabel di atas, folder ini punya lima tutorial lain (penomoran awalnya tumpang tindih, jadi urutkan sendiri sesuai kebutuhanmu):
+
+- [Memulai Perjalanan Web Development](./01-memulai-perjalanan.md)
+- [Command Line Fundamental](./01-command-line-fundamental.md)
+- [Membuat Website Pertama dari 0](./01-membuat-website-pertama.md)
+- [CSS: Memberi Warna dan Gaya](./02-belajar-css-dasar.md)
+- [JavaScript untuk Pemula](./03-javascript-untuk-pemula.md)
+
 ---
 
 ## Cara Pakai Tutorial
@@ -47,7 +57,7 @@ tutorial/
 ## Tips Sebelum Memulai
 
 ```
-1. Pastikan VSCode sudah terinstall (baca software/README.md)
+1. Pastikan VSCode sudah terinstall (baca [software/README.md](../software/README.md) atau panduan di Level 0)
 2. Buat folder kerja: ~/belajar-web/
 3. Buat subfolder: ~/belajar-web/level-1/
 4. Ikuti setiap tutorial dari awal, jangan skip

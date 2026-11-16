@@ -14,18 +14,22 @@ LEVEL-4/
 │   ├── 03-auth-fullstack/
 │   ├── 04-ssr-ssg-nextjs/
 │   ├── 05-deployment/
-│   └── 06-security/
-├── materi-praktikum/             → Latihan Fullstack
-│   ├── 01-latihan-fullstack/
-│   ├── 01-latihan-auth/
+│   ├── 06-security/
+│   └── 07-production-optimization/
+├── materi-praktikum/             → Latihan Fullstack (kerjakan urut)
+│   ├── 01-latihan-fullstack/       ← kerjakan DULU (REST, fetch/axios, middleware)
+│   ├── 01-latihan-auth/            ← lalu ini (auth backend; sengaja bernomor 01 juga)
 │   ├── 02-latihan-auth-fullstack/
 │   ├── 03-latihan-deployment/
 │   └── 04-latihan-security/
 ├── tutorial/                       → Study case & panduan langkah demi langkah
-│   ├── 01-deploy-vercel-express.md
-│   └── 02-ci-cd-github-actions.md
+│   ├── 01-fullstack-blog-app.md
+│   ├── 01-membuat-fullstack-app-pertama.md
+│   └── 02-auth-dan-deployment.md
 ├── software/                       → Install & setup tools
-│   └── 01-insomnia-postman.md
+│   ├── 01-vercel-render-deploy.md
+│   └── 02-postgresql-dan-mongodb-install.md
+├── SELF_PROBLEM_SOLVING.md
 └── README.md
 ```
 
@@ -33,7 +37,7 @@ LEVEL-4/
 
 ## 📖 Materi Teori
 
-Enam modul teori fullstack:
+Tujuh modul teori fullstack:
 
 1. **REST API design**: contract, status, pagination, idempotency.
 2. **CORS & cookies**: origin policy, credentials, SameSite, dan CSRF.
@@ -49,8 +53,10 @@ Enam modul teori fullstack:
 ## 🏋️ Praktikum
 
 Kerjakan README/soal di setiap folder: integrasi CRUD, backend auth, client auth,
-deployment, dan security. Starter berada di `code/`; beberapa modul menyediakan
-`contoh/` sebagai referensi setelah usaha mandiri.
+deployment, dan security. Starter berada di `code/` berisi kerangka dan
+`TODO(human)`. Jawaban lengkap ada di `solusi-jangan-dibuka-dulu.md` pada folder
+latihan yang punya file itu; buka hanya setelah usaha mandiri. Folder
+`01-latihan-fullstack` dikerjakan lebih dulu, baru `01-latihan-auth`.
 
 Gunakan cookie `HttpOnly` untuk sesi browser pada latihan fullstack. Bearer token
 masih relevan untuk API client tertentu, tetapi jangan mengajarkan penyimpanan

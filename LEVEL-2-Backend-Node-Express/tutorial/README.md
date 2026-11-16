@@ -8,10 +8,14 @@ Folder ini berisi **panduan langkah demi langkah** untuk membangun backend serve
 
 | # | File | Project | Topik Utama |
 |---|------|---------|-------------|
-| 01 | `01-buat-rest-api-pertama.md` | REST API Pertama | Express server, routing, JSON response |
-| 02 | `02-crud-dengan-express.md` | CRUD API | Create, Read, Update, Delete data |
-| 03 | `03-koneksi-postgresql.md` | Database PostgreSQL | Koneksi, query, Sequelize ORM |
-| 04 | `04-authentication-jwt.md` | Auth API | Register, login, JWT token |
+| 01 | [01-membuat-server-express-pertama.md](01-membuat-server-express-pertama.md) | Server Express pertama | Express server, routing, JSON response |
+| 02 | [02-blog-api-dengan-express.md](02-blog-api-dengan-express.md) | Blog API | CRUD dengan Express |
+
+Tutorial untuk koneksi PostgreSQL dan autentikasi JWT belum ada. Pelajari lewat
+[materi teori 03](../materi-teori/03-database-sql-postgresql/README.md) dan
+[materi teori 05](../materi-teori/05-authentication-jwt/README.md), lalu latihan di
+[praktikum database](../materi-praktikum/03-latihan-database/README.md) dan
+[praktikum auth](../materi-praktikum/04-latihan-auth/README.md).
 
 ---
 
@@ -28,22 +32,21 @@ Folder ini berisi **panduan langkah demi langkah** untuk membangun backend serve
 ## Alur Belajar yang Disarankan
 
 ```
-STEP 1 → Tutorial 01: Buat REST API pertama
+STEP 1 → Tutorial 01: Server Express pertama
          → Hasil: Express server yang bisa terima request
 
-STEP 2 → Tutorial 02: CRUD dengan Express
-         → Hasil: API lengkap (GET, POST, PUT, DELETE)
+STEP 2 → Tutorial 02: Blog API dengan Express
+         → Hasil: API dengan operasi CRUD (GET, POST, PUT, DELETE)
 
-STEP 3 → Tutorial 03: Koneksi PostgreSQL
-         → Hasil: API yang menyimpan data ke database
-
-STEP 4 → Tutorial 04: Authentication JWT
-         → Hasil: API dengan login dan proteksi route
+STEP 3 → Praktikum database dan auth (lihat tautan di atas)
+         → Hasil: data tersimpan di database dan route terlindungi login
 ```
 
 ---
 
-## Struktur Project yang Akan Kamu Bangun
+## Contoh Struktur Project Backend
+
+Ini gambaran besar saat proyekmu sudah tumbuh. Tutorial 01 dan 02 cukup dengan beberapa file saja.
 
 ```
 backend-api/

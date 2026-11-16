@@ -159,13 +159,6 @@ export function useCart() {
 // ============================================================
 // SOAL 10D — ThemedApp (Gabungkan semua context)
 // Wrapper hierarchy:
-// <ThemeProvider>
-//   <AuthProvider>
-//     <CartProvider>
-//       <App />
-//     </CartProvider>
-//   </AuthProvider>
-// </ThemeProvider>
 //
 // Komponen:
 // - ThemeToggle: tombol toggle theme dengan useTheme()
@@ -174,6 +167,7 @@ export function useCart() {
 // - CartDrawer: slide-out cart dengan useCart()
 // - Dashboard: user info + admin panel (jika role === "admin")
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function ThemeToggle() {
   const { isDark, toggleTheme, colors } = useTheme();

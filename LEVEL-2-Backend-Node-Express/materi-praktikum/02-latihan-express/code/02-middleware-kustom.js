@@ -27,7 +27,6 @@ const PORT = 3000;
 // Format log: [YYYY-MM-DD HH:mm:ss] METHOD /url
 // Contoh: [2026-05-31 10:00:00] GET /api/data
 // function logger(req, res, next) { ... }
-// app.use(logger);
 
 // ============================================================
 // MIDDLEWARE 2: Validate Header

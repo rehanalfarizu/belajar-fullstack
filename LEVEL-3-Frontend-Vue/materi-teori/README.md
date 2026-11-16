@@ -70,8 +70,8 @@ Props adalah input read-only milik child:
 ```vue
 <script setup>
 const props = defineProps({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
+  title: { type: String, required: true },
+  durationSec: { type: Number, default: 0 },
 });
 </script>
 ```
@@ -173,13 +173,11 @@ Pisahkan jenis state:
   jangan otomatis dipindahkan ke store global.
 
 ```js
-export const useCartStore = defineStore('cart', () => {
-  const items = ref([]);
-  const totalItems = computed(() =>
-    items.value.reduce((sum, item) => sum + item.quantity, 0)
-  );
+export const usePlaylistStore = defineStore('playlist', () => {
+  const songs = ref([]);
+  const likedCount = computed(() => songs.value.filter((s) => s.liked).length);
 
-  return { items, totalItems };
+  return { songs, likedCount };
 });
 ```
 
@@ -195,18 +193,20 @@ idle → loading → success
 ```
 
 ```js
-async function loadProducts() {
-  loading.value = true;
-  error.value = null;
+const status = ref('idle'); // 'idle' | 'loading' | 'success' | 'error'
 
+async function loadSchedule() {
+  status.value = 'loading';
   try {
-    const response = await fetch('/api/products');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    products.value = await response.json();
-  } catch (cause) {
-    error.value = cause instanceof Error ? cause.message : 'Unknown error';
-  } finally {
-    loading.value = false;
+    const res = await fetch('/api/schedule');
+    if (res.ok) {
+      classes.value = await res.json();
+      status.value = 'success';
+    } else {
+      status.value = 'error';
+    }
+  } catch {
+    status.value = 'error'; // jaringan putus, server mati, dsb.
   }
 }
 ```
@@ -225,3 +225,17 @@ Hindari menguji internal ref atau nama function. Uji perilaku: apa yang dilihat
 dan dapat dilakukan user.
 
 Lanjut ke [praktikum](../materi-praktikum/README.md).
+
+## Materi Per Topik
+
+Ringkasan di atas sengaja padat. Kalau mau penjelasan lengkap dengan
+analogi, kesalahan umum, latihan berpikir, dan glosarium, baca per topik:
+
+1. [01 — Vue dan Template Syntax](01-vue-dan-template-syntax/README.md)
+2. [02 — Reactivity: ref, reactive, computed, watch](02-reactivity-ref-reactive-computed/README.md)
+3. [03 — Component, Props, Emit, Slot](03-component-props-emit-slot/README.md)
+4. [04 — Lifecycle dan Composable](04-lifecycle-dan-composable/README.md)
+5. [05 — Vue Router](05-vue-router/README.md)
+6. [06 — Pinia dan HTTP](06-pinia-dan-http/README.md)
+
+Setelah keenamnya, lanjut ke [Vue Performance dan Security](02-performance-security.md).

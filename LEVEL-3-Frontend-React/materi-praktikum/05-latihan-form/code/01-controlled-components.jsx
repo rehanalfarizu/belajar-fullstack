@@ -22,33 +22,6 @@ import { useState } from "react";
 //      - e.target.type === "checkbox" ? checked : value
 //   3. Dynamic skills: array of strings dengan add/remove
 //   4. Salary formatting: number input → formatted display
-//
-// const handleChange = (e) => {
-//   const { name, value, type, checked } = e.target;
-//   setForm(prev => ({
-//     ...prev,
-//     [name]: type === "checkbox" ? checked : value
-//   }));
-// };
-//
-// const handleSkillChange = (index, value) => {
-//   setForm(prev => {
-//     const skills = [...prev.skills];
-//     skills[index] = value;
-//     return { ...prev, skills };
-//   });
-// };
-//
-// const addSkill = () => {
-//   setForm(prev => ({ ...prev, skills: [...prev.skills, ""] }));
-// };
-//
-// const removeSkill = (index) => {
-//   setForm(prev => ({
-//     ...prev,
-//     skills: prev.skills.filter((_, i) => i !== index)
-//   }));
-// };
 // ============================================================
 
 const DEPARTMENTS = ["engineering", "marketing", "sales", "hr", "finance"];
@@ -75,13 +48,6 @@ export function EmployeeForm() {
   const [submitted, setSubmitted] = useState(null);
 
   // TODO: handleChange — satu handler untuk semua input
-  // const handleChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
-  //   setForm(prev => ({
-  //     ...prev,
-  //     [name]: type === "checkbox" ? checked : value
-  //   }));
-  // };
 
   // TODO: handleSkillChange(index, value)
 
@@ -90,10 +56,6 @@ export function EmployeeForm() {
   // TODO: removeSkill(index) — hapus skill di index
 
   // TODO: formatCurrency — format salary untuk display
-  // const formatCurrency = (value) => {
-  //   const num = parseInt(value.replace(/\D/g, ""), 10);
-  //   return isNaN(num) ? "" : num.toLocaleString("id-ID");
-  // };
 
   // TODO: handleSalaryBlur — format saat input blur
 

@@ -1,3 +1,7 @@
+// ============================================================
+// FILE: 03-latihan-router/code/04-protected-routes.jsx
+// MATERI: Protected Routes (soal/04-protected-routes.md)
+// ============================================================
 import { createContext, useContext, useState } from "react";
 import {
   Navigate,
@@ -8,94 +12,47 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-const AuthContext = createContext(null);
+// ============================================================
+// Soal 4A — AuthContext
+// ============================================================
+// Nilai: user, isAuthenticated (turunan dari user), login, logout
+//
+// TODO(human): buat AuthContext, AuthProvider, dan hook useAuth.
+// Petunjuk: isAuthenticated tidak perlu jadi state terpisah.
+// Petunjuk: apa yang terjadi kalau useAuth dipakai di luar Provider?
+//
+// Selesai kalau: komponen mana pun bisa membaca user dan memanggil
+// login/logout, dan pemakaian di luar Provider memberi pesan error jelas.
 
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+// ============================================================
+// Soal 4B — Penjaga route
+// ============================================================
+// TODO(human): buat komponen penjaga untuk route yang butuh login.
+// Petunjuk: simpan lokasi tujuan awal supaya bisa kembali setelah login.
+// Petunjuk: pelajari <Outlet /> untuk membungkus banyak route sekaligus.
+//
+// Selesai kalau: membuka /dashboard saat belum login mengalihkan ke /login.
 
-  async function login(credentials) {
-    // TODO: ganti simulasi ini dengan API dan HttpOnly session cookie.
-    setUser({ id: 1, email: credentials.email, role: "user" });
-  }
+// ============================================================
+// Soal 4C — LoginPage
+// ============================================================
+// TODO(human): form login yang setelah berhasil menuju lokasi asal
+// (atau /dashboard kalau tidak ada).
+//
+// Selesai kalau: login dari /dashboard langsung kembali ke /dashboard.
 
-  async function logout() {
-    // TODO: panggil endpoint logout agar session server ikut dihapus.
-    setUser(null);
-  }
-
-  return <AuthContext value={{ user, login, logout }}>{children}</AuthContext>;
-}
-
-function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === null) {
-    throw new Error("useAuth harus digunakan di dalam AuthProvider.");
-  }
-  return context;
-}
-
-function RequireAuth() {
-  const { user } = useAuth();
-  const location = useLocation();
-
-  if (!user) {
-    return (
-      <Navigate
-        to="/login"
-        replace
-        state={{ from: location.pathname + location.search }}
-      />
-    );
-  }
-
-  return <Outlet />;
-}
-
-function RequireRole({ role }) {
-  const { user } = useAuth();
-  if (user?.role !== role) return <Navigate to="/forbidden" replace />;
-  return <Outlet />;
-}
-
-function LoginPage() {
-  const { login } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const destination = location.state?.from || "/dashboard";
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    await login({ email: data.get("email") });
-    navigate(destination, { replace: true });
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input name="email" type="email" autoComplete="email" required />
-      </label>
-      <button type="submit">Login</button>
-    </form>
-  );
-}
+// ============================================================
+// Soal 4D dan 4E — Navbar dan PublicRoute
+// ============================================================
+// TODO(human): Navbar yang berbeda untuk user login/tidak, dan PublicRoute
+// yang mengalihkan user yang sudah login keluar dari /login.
+// Bonus: penjaga berdasarkan role (mis. /admin hanya untuk role "admin").
+//
+// Selesai kalau: tidak ada redirect berputar (infinite loop) di skenario apa pun.
 
 export default function ProtectedRoutesExample() {
-  return (
-    <AuthProvider>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
-          <Route element={<RequireRole role="admin" />}>
-            <Route path="/admin" element={<h1>Admin</h1>} />
-          </Route>
-        </Route>
-        <Route path="/forbidden" element={<h1>403 — Forbidden</h1>} />
-      </Routes>
-    </AuthProvider>
-  );
+  // TODO(human): bungkus <Routes> dengan AuthProvider dan pasang rute-rutenya.
+  return <Routes>{/* TODO(human): Route /login, /dashboard, /profile, 404 */}</Routes>;
 }
 
 // Route guard hanya membantu navigasi/UX. Backend tetap wajib memeriksa

@@ -8,11 +8,13 @@ Folder ini berisi **panduan langkah demi langkah** untuk mengintegrasikan fronte
 
 | # | File | Project | Topik Utama |
 |---|------|---------|-------------|
-| 01 | `01-deploy-frontend-vercel.md` | Deploy ke Vercel | CI/CD, custom domain |
-| 02 | `02-deploy-backend-railway.md` | Deploy ke Railway | Node.js production, logs |
-| 03 | `03-database-production.md` | Setup Database Production | PostgreSQL di cloud |
-| 04 | `04-environment-vars.md` | Environment Variables | .env, secrets management |
-| 05 | `05-security-best-practices.md` | Security Checklist | HTTPS, CORS, rate limiting |
+| 01a | [01-fullstack-blog-app.md](01-fullstack-blog-app.md) | Blog app (React + API) | Service API, Context, halaman Home |
+| 01b | [01-membuat-fullstack-app-pertama.md](01-membuat-fullstack-app-pertama.md) | React + Express + PostgreSQL | Backend, database, frontend, test |
+| 02 | [02-auth-dan-deployment.md](02-auth-dan-deployment.md) | Auth aman + deployment | Cookie HttpOnly, CSRF, deploy ke Railway |
+
+Dua tutorial bernomor 01 adalah jalur berbeda: 01a lebih ringkas (fokus
+frontend), 01b membangun lengkap dengan database. Pilih salah satu, lalu lanjut
+ke 02.
 
 ---
 
@@ -29,20 +31,10 @@ Folder ini berisi **panduan langkah demi langkah** untuk mengintegrasikan fronte
 ## Alur Belajar yang Disarankan
 
 ```
-STEP 1 → Tutorial 01: Deploy Frontend ke Vercel
-         → Hasil: Website React yang bisa diakses online
-
-STEP 2 → Tutorial 02: Deploy Backend ke Railway
-         → Hasil: API yang bisa diakses online
-
-STEP 3 → Tutorial 03: Setup Database Production
-         → Hasil: Database yang terhubung ke API production
-
-STEP 4 → Tutorial 04: Environment Variables
-         → Hasil: API yang pakai secrets dengan aman
-
-STEP 5 → Tutorial 05: Security Best Practices
-         → Hasil: API yang aman dan terlindungi
+STEP 1 → Tutorial 01a atau 01b: bangun aplikasi fullstack pertama
+STEP 2 → Tutorial 02: auth aman + deployment
+STEP 3 → Panduan software/01: deploy ke Vercel dan Render
+STEP 4 → Latihan di materi-praktikum/03-latihan-deployment dan 04-latihan-security
 ```
 
 ---
@@ -54,7 +46,7 @@ fullstack-app/
 ├── frontend/               → React app
 │   ├── src/
 │   ├── package.json
-│   └── vercel.json
+│   └── vercel.json            → opsional; format terkini memakai "rewrites"
 ├── backend/               → Express API
 │   ├── src/
 │   ├── package.json

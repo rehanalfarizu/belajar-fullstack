@@ -76,7 +76,10 @@ logger.error("Database connection failed");
 ---
 
 ## Cara Submit
-1. Simpan sebagai `06-event-emitter.js`
-2. Jalankan — setiap emit trigger semua handlers
-3. COBA `once()` — hanya trigger sekali
-4. BUAT class `FileWatcher` yang emit event saat file berubah
+
+Starter: `code/06-event-emitter.js`. Demo `once` dan `off` di starter sudah jalan; tugas utamamu ada di `TODO(human)` (class `Logger`, lalu `FileWatcher` sebagai bonus).
+
+1. Salin starter ke `latihan-saya/03-backend/minggu-08/06-event-emitter.js` (nama sama).
+2. Jalankan dulu dan baca outputnya, lalu kerjakan `TODO(human)`.
+3. Pastikan setiap emit memicu semua listener, dan cek dengan `listenerCount()`.
+4. Bonus: `FileWatcher` yang emit event saat file berubah.

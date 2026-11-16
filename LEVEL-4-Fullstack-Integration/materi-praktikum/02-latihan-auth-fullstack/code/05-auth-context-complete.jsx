@@ -1,136 +1,44 @@
 // ============================================================
-// 05 — AUTH CONTEXT LENGKAP DENGAN HTTPONLY COOKIE
+// TUGAS 5 — AuthContext yang matang (setelah versi dasarmu jalan)
 // ============================================================
-// Dependency: React 19 dan client dari 01-axios-client.js.
+// Daftar tugas (TODO(human)). Tulis di client/src/context/AuthContext.jsx
+// Jawaban lengkap ada di ../solusi-jangan-dibuka-dulu.md (buka SETELAH
+// punyamu jalan, atau benar-benar buntu).
+//
+// Dependency: React dan client dari tugas 1.
+// Kerjakan SETELAH AuthContext dasar (tugas 3) jalan. Di sini kamu
+// mengerasinya.
+// ============================================================
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { authAPI, normalizeApiError } from "./01-axios-client.js";
+// TODO(human): status sesi yang lengkap: loading | authenticated | guest | error.
+// Petunjuk : Bedakan "server bilang belum login (401)" dari "gagal memeriksa
+//            (jaringan/500)". Keduanya bukan hal yang sama; UI-nya pun beda.
+// Selesai kalau: mematikan server membuat status error (bukan guest), dan 401
+//            membuat guest.
 
-const AuthContext = createContext(null);
+// TODO(human): dengarkan event 401 dari client axios (tugas 1).
+// Petunjuk : Pasang listener di useEffect dan jangan lupa membersihkannya.
+//            Saat sesi dicabut server di tengah pemakaian, state harus ikut
+//            reset tanpa reload.
+// Selesai kalau: menghapus cookie manual lalu memanggil API apa pun membuat UI
+//            kembali ke guest.
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [status, setStatus] = useState("loading");
+// TODO(human): login, register, logout yang aman.
+// Petunjuk : Error dari server dinormalkan (normalizeApiError) sebelum
+//            dilempar ke form. Pada logout, reset state lokal walaupun request
+//            ke server gagal — kenapa? Bagaimana mencegah nilai konteks
+//            berubah identitas di tiap render (cari useMemo/useCallback)?
+// Selesai kalau: logout selalu membuat UI jadi guest, dan komponen konsumen
+//            tidak re-render tanpa alasan.
 
-  const checkSession = useCallback(async () => {
-    setStatus("loading");
+// TODO(human): hook useAuth + komponen kecil AuthStatus.
+// Petunjuk : useAuth harus melempar error jelas bila dipakai di luar provider.
+//            AuthStatus menampilkan empat keadaan dengan semantik yang benar
+//            (role="status" untuk loading, role="alert" untuk error).
+// Selesai kalau: keempat keadaan terlihat berbeda dan bisa dibaca screen reader.
 
-    try {
-      const response = await authAPI.getMe();
-      setUser(response.data.user);
-      setStatus("authenticated");
-    } catch (error) {
-      if (error.response?.status === 401) {
-        setUser(null);
-        setStatus("guest");
-        return;
-      }
-
-      setStatus("error");
-      throw error;
-    }
-  }, []);
-
-  useEffect(() => {
-    checkSession().catch(() => {
-      // Error detail dapat dikirim ke observability layer.
-    });
-  }, [checkSession]);
-
-  useEffect(() => {
-    function handleUnauthorized() {
-      setUser(null);
-      setStatus("guest");
-    }
-
-    window.addEventListener("auth:unauthorized", handleUnauthorized);
-    return () =>
-      window.removeEventListener("auth:unauthorized", handleUnauthorized);
-  }, []);
-
-  const login = useCallback(async (credentials) => {
-    try {
-      const response = await authAPI.login(credentials);
-      setUser(response.data.user);
-      setStatus("authenticated");
-      return response.data.user;
-    } catch (error) {
-      throw normalizeApiError(error);
-    }
-  }, []);
-
-  const register = useCallback(async (input) => {
-    try {
-      const response = await authAPI.register(input);
-      return response.data;
-    } catch (error) {
-      throw normalizeApiError(error);
-    }
-  }, []);
-
-  const logout = useCallback(async () => {
-    try {
-      await authAPI.logout();
-    } finally {
-      // Reset local state sekalipun server sedang gagal. Server harus memiliki
-      // expiry/revocation sehingga cookie tidak hidup selamanya.
-      setUser(null);
-      setStatus("guest");
-    }
-  }, []);
-
-  const value = useMemo(
-    () => ({
-      user,
-      status,
-      isAuthenticated: status === "authenticated",
-      checkSession,
-      login,
-      register,
-      logout,
-    }),
-    [user, status, checkSession, login, register, logout],
-  );
-
-  return <AuthContext value={value}>{children}</AuthContext>;
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === null) {
-    throw new Error("useAuth harus digunakan di dalam AuthProvider.");
-  }
-  return context;
-}
-
-export function AuthStatus() {
-  const { user, status, logout } = useAuth();
-
-  if (status === "loading") return <p role="status">Memeriksa sesi…</p>;
-  if (status === "error") {
-    return <p role="alert">Sesi tidak dapat diperiksa. Coba lagi.</p>;
-  }
-  if (status === "guest") return <a href="/login">Login</a>;
-
-  return (
-    <div>
-      <span>Halo, {user.name}</span>
-      <button type="button" onClick={logout}>
-        Logout
-      </button>
-    </div>
-  );
-}
-
-// Backend contract:
-// - POST /auth/login mengatur cookie HttpOnly dan return profil user.
-// - GET /auth/me membaca cookie dan return profil user.
-// - POST /auth/logout mencabut session/refresh token dan menghapus cookie.
-// - Cookie auth memerlukan CSRF defense, CORS origin eksplisit, dan HTTPS.
+// Kontrak backend yang kamu andalkan:
+// - POST /auth/login mengatur cookie HttpOnly dan mengembalikan profil user.
+// - GET /auth/me membaca cookie dan mengembalikan profil user.
+// - POST /auth/logout mencabut sesi/refresh token dan menghapus cookie.
+// - Cookie auth butuh pertahanan CSRF, CORS origin eksplisit, dan HTTPS.

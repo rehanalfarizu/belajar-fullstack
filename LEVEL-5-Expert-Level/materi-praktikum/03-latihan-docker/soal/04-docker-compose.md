@@ -42,7 +42,7 @@ Docker Compose setup harus mendukung:
 ### docker-compose.yml Structure
 
 ```yaml
-version: "3.9"  # Docker Compose file format version
+# (Compose v2: kunci `version:` sudah usang, tidak perlu ditulis)
 
 services:
   service_name: # Container identifier (hostname)
@@ -218,7 +218,6 @@ Buat `docker-compose.override.yml` untuk development:
 
 ```yaml
 # docker-compose.override.yml (auto-loaded)
-version: "3.9"
 
 services:
   frontend:
@@ -287,46 +286,9 @@ services:
 
 **1. Nginx Configuration**
 
-```nginx
-# nginx.conf
-upstream frontend {
-    server frontend:3000;
-}
-
-upstream backend {
-    server backend:5000;
-}
-
-server {
-    listen 80;
-    server_name _;
-
-    # Frontend
-    location / {
-        proxy_pass http://frontend;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    # Backend API
-    location /api {
-        proxy_pass http://backend;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    # Health check endpoint
-    location /health {
-        proxy_pass http://backend;
-        access_log off;
-    }
-}
-```
+> Contoh kode lengkap untuk bagian ini dipindahkan ke
+> [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
+> Tulis versimu sendiri dulu berdasarkan deskripsi di atas, baru bandingkan.
 
 **2. Verify Proxy Routing**
 

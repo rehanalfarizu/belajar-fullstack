@@ -18,15 +18,8 @@ import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from "reac
 // - Route path: "/" → Home, "/about" → About, "/contact" → Contact
 //
 // Di App.jsx:
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// <BrowserRouter>
-//   <Routes>
-//     <Route path="/" element={<Home />} />
-//     <Route path="/about" element={<About />} />
-//     <Route path="/contact" element={<Contact />} />
-//   </Routes>
-// </BrowserRouter>
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 // TODO(human): Buat 3 komponen: Home, About, Contact
 // - Home: menampilkan "Selamat datang di Beranda"
@@ -64,15 +57,10 @@ function Contact() {
 // Style: horizontal menu dengan border bottom
 //
 // Contoh:
-// <nav style={{ display: "flex", gap: "16px", borderBottom: "1px solid #e2e8f0", padding: "16px" }}>
-//   <Link to="/">Home</Link>
-//   <Link to="/about">About</Link>
-//   <Link to="/contact">Contact</Link>
-// </nav>
 //
 // Bonus: NavLink dengan active class
-// <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function Navbar() {
   return (

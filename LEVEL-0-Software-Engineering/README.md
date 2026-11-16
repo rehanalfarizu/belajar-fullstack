@@ -7,10 +7,13 @@ engineering, Git, terminal, dan environment sebelum masuk ke web.
 
 ```
 LEVEL-0 STRUKTUR:
-├── materi-teori/ → CS fundamental, Git, dan software engineering
-├── software/   → Cara install & setup setiap software
-├── tutorial/   → Panduan step-by-step untuk workflow tertentu
-└── README.md   → (kamu di sini)
+├── materi-teori/      → CS fundamental, Git, software engineering, kode rapi
+├── materi-praktikum/  → latihan membaca dokumen (ERD, PRD, API) dan refactor kode rapi
+├── materi-git-github/ → modul Git & GitHub lengkap (teori + 3 praktikum)
+├── software/          → 10 panduan install & setup software
+├── tutorial/          → 3 tutorial: dev environment, kolaborasi Git, command line
+├── materi-tutorial/   → 1 tutorial setup dev environment (versi lain)
+└── README.md          → (kamu di sini)
 ```
 
 ---
@@ -21,9 +24,12 @@ LEVEL-0 STRUKTUR:
 2. [Git & GitHub](materi-teori/02-git-github-fundamental.md).
 3. [Software engineering & problem solving](materi-teori/03-software-engineering-principles.md).
 4. [Mindset security & performa](materi-teori/04-security-performance-mindset.md).
-5. [Self problem solving](SELF_PROBLEM_SOLVING.md) — kerjakan tanpa solusi.
-6. **Install tools dan verifikasi** — jangan install semuanya tanpa kebutuhan.
-7. **Git collaboration dan command line** — kuasai workflow yang dapat dipulihkan.
+5. [Membaca dokumen teknis: ERD, PRD, API](materi-teori/05-membaca-dokumen-teknis.md)
+   dengan [latihannya](materi-praktikum/01-latihan-membaca-dokumen/README.md).
+   Dikerjakan nanti saat sudah belajar database (lihat README latihan).
+6. [Self problem solving](SELF_PROBLEM_SOLVING.md) — kerjakan tanpa solusi.
+7. **Install tools dan verifikasi** — jangan install semuanya tanpa kebutuhan.
+8. **Git collaboration dan command line** — kuasai workflow yang dapat dipulihkan.
 
 Setelah itu, lanjut ke **LEVEL 1: Mulai Coding (HTML, CSS, JavaScript)**.
 
@@ -48,11 +54,11 @@ Sepuluh software esensial yang membentuk toolset seorang fullstack developer:
 
 ## 📚 Tutorial (3 File)
 
-Tiga tutorial praktis untuk mengintegrasikan semua software:
+Tiga tutorial praktis di folder `tutorial/` untuk mengintegrasikan semua software:
 
-1. **Dev Environment Setup** — output: semua tools berjalan dan terkonfigurasi.
-2. **Git Collaboration Workflow** — output: bisa berkolaborasi via GitHub PR.
-3. **Command Line Mastery** — output: 50+ command baru dikuasai.
+1. **Dev Environment Setup** (`tutorial/01-dev-environment-setup.md`) — output: semua tools berjalan dan terkonfigurasi.
+2. **Git Collaboration Workflow** (`tutorial/02-git-collaboration-workflow.md`) — output: bisa berkolaborasi via GitHub PR.
+3. **Command Line Mastery** (`tutorial/03-command-line-mastery.md`) — output: 50+ command baru dikuasai.
 
 ---
 

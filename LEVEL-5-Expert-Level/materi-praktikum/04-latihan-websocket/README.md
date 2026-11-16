@@ -30,9 +30,11 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 | # | File Template | Deskripsi |
 |---|---------------|-----------|
-| 01 | `code/01-websocket-server.js` | WebSocket server dasar dengan `ws` library |
-| 02 | `code/02-socketio-server.js` | Socket.io server dengan room dan event |
-| 03 | `code/03-presence-tracker.jsx` | Komponen React untuk presence tracking |
+| 01 | `code/01-websocket-server.js` | Kerangka server WebSocket dengan `ws` |
+| 02 | `code/02-socketio-server.js` | Kerangka server Socket.io (room, event) |
+| 03 | `code/03-presence-tracker.jsx` | Komponen React untuk presence tracking (kerangka TODO) |
+| 03 | `code/03-rooms-broadcast.js` | Kerangka server rooms dan broadcast (TODO) |
+| Bonus | `code/04-real-time-chat.jsx` | Kerangka klien chat (TODO) |
 
 ---
 

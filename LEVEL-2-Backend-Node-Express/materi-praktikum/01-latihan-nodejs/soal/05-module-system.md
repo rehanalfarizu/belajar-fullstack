@@ -62,7 +62,12 @@ import math from "./math.mjs";
 ---
 
 ## Cara Submit
-1. Buat folder `05-modules/`
-2. Buat `utils.js`, `math.js`, `index.js`
-3. `index.js` require yang lain
-4. Jalankan: `node index.js`
+
+Starter `code/05-module-system.js` adalah lembar kerja berisi `TODO(human)` dan catatan. Folder `05-modules/` **belum ada di repo**, kamu yang membuatnya sendiri di folder kerjamu.
+
+1. Salin `code/05-module-system.js` ke `latihan-saya/03-backend/minggu-08/05-module-system.js` (nama sama).
+2. Di folder yang sama, buat folder `05-modules/` berisi `math.js`, `utils.js`, dan `index.js`.
+3. `index.js` me-`require` dua file lainnya.
+4. Jalankan dari dalam `05-modules/`: `node index.js`
+5. Buat juga versi ES Modules (`math.mjs`, `index.mjs`) dan jalankan `node index.mjs`.
+6. Tulis penjelasan circular dependency di bagian "CATATAN SAYA" pada lembar kerjamu.

@@ -8,7 +8,7 @@
 
 Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
-1. MenjConfigurer **Jest** untuk proyek React/Vite dengan benar
+1. Menyiapkan **Jest** untuk proyek React/Vite dengan benar
 2. Menulis **unit test** untuk pure functions dan Redux slices
 3. Menulis **integration test** untuk komponen React dengan React Testing Library
 4. Melakukan **end-to-end testing** dengan Playwright
@@ -31,27 +31,27 @@ Setelah menyelesaikan semua soal di modul ini, mahasiswa diharapkan mampu:
 
 | # | File Template | Deskripsi |
 |---|---------------|-----------|
-| 01 | `code/01-math.test.js` | Unit test untuk pure functions |
+| 01 | `code/01-unit-testing-jest.test.js` | Unit test untuk pure functions |
 | 02 | `code/02-slice.test.js` | Unit test untuk Redux slice |
-| 03 | `code/03-button.test.jsx` | React Testing Library untuk komponen |
-| 04 | `code/04-playwright.spec.js` | E2E test dengan Playwright |
+| 03 | `code/03-react-testing-library.test.jsx` dan `code/03-button.test.jsx` | React Testing Library untuk komponen |
+| 04 | `code/04-end-to-end-playwright.spec.js` | E2E test dengan Playwright |
 
 ---
 
 ## Tools yang Dibutuhkan
 
 - **Node.js** 24 LTS
-- **Jest** v29+
+- **Jest** v29+ (atau Vitest, sintaksnya hampir sama)
 - **@testing-library/react**
 - **@testing-library/jest-dom**
-- **Playwright** v1.40+
+- **Playwright** (`@playwright/test`, versi terbaru)
 
 ---
 
 ## Prasyarat
 
 - Penguasaan React (LEVEL-3)
-- Penguasaan Redux Toolkit (LEVEL-5, modul 02 — Redux)
+- Dasar Redux Toolkit (hanya untuk bonus `02-slice.test.js`)
 - Pemahaman dasar tentang konsep testing: arrange-act-assert
 
 ---
@@ -75,7 +75,7 @@ Dokumentasikan setiap test case dengan format:
 
 ## Langkah Pengerjaan
 
-1. **Baca** `materi-teori/03-testing/` untuk dasar teori
+1. **Baca** `../../materi-teori/02-testing/` untuk dasar teori
 2. **Kerjakan** soal01–03 secara berurutan (unit → integration)
 3. **Kerjakan** soal 04 sebagai penutup (E2E)
 4. **Jalankan** `npm test` dan pastikan semua test pass
@@ -83,3 +83,6 @@ Dokumentasikan setiap test case dengan format:
 ---
 
 **Estimasi Waktu:** 8–10 jam
+
+
+Kunci jawaban soal 01 dan 02: [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka setelah mencoba sendiri.

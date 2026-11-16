@@ -8,18 +8,20 @@ Folder ini berisi panduan instalasi dan setup software/alat yang dibutuhkan untu
 
 ### LEVEL 1 — Fundamental Web
 
-Empat software esensial untuk LEVEL 1:
+Dua panduan Git ada di folder ini:
 
-1. **Visual Studio Code** (`01-visual-studio-code.md`) — code editor utama untuk development.
-2. **Google Chrome / Browser DevTools** (`02-browser-dan-devtools.md`) — browser plus tools untuk debugging.
-3. **Node.js & npm** (`03-nodejs-dan-npm.md`) — runtime JavaScript (untuk latihan JS).
-4. **Git & GitHub Desktop** (`04-git-github-desktop.md`) — version control.
+1. **Git & GitHub** ([02-git-github.md](02-git-github.md)) — konsep dan perintah dasar.
+2. **Install Git** ([02-git-install.md](02-git-install.md)) — langkah instalasi dan konfigurasi.
+
+Untuk software lain yang dipakai di Level 1, buka panduan di
+[LEVEL-0 software](../../LEVEL-0-Software-Engineering/software/README.md):
+Visual Studio Code, Node.js dan npm, serta Browser DevTools.
 
 ---
 
 ## Cara Pakai
 
-Empat langkah untuk setiap software:
+Empat langkah untuk setiap panduan:
 
 1. Klik link software yang ingin diinstal.
 2. Ikuti langkah-langkah instalasi.
@@ -31,5 +33,5 @@ Empat langkah untuk setiap software:
 **Catatan:**
 
 - Semua software di folder ini **gratis**.
-- Prioritas install: VS Code → Browser DevTools → Node.js → Git.
+- Prioritas install: VS Code → Browser DevTools → Node.js → Git (lihat Level 0 untuk tiga yang pertama).
 - Untuk Mac M1 atau M2, pastikan download versi ARM64 jika tersedia.

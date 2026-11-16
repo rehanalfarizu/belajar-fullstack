@@ -37,8 +37,10 @@ Buat program kalkulator yang meminta user memasukkan 2 angka dan 1 operator, lal
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan & syarat** — pahami logika kalkulator dan edge cases yang harus ditangani
-2. **Ketik dari 0** — buat file `01-kalkulator-sederhana.js`, ketik sendiri (JANGAN copy-paste)
-3. **Verifikasi** — jalankan dengan `node 01-kalkulator-sederhana.js` dan cek semua output
+2. **Ketik sendiri** — buka salinan starter `01-kalkulator-sederhana.js` (lihat catatan di bawah), isi `TODO(human)` dengan kodemu (JANGAN copy-paste)
+3. **Verifikasi** — jalankan dengan `node 01-kalkulator-sederhana.js` dari folder salinanmu dan cek semua output
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/01-kalkulator-sederhana.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`01-kalkulator-sederhana.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi**. Tujuannya agar kamu terbiasa **berpikir dan mengetik**, bukan menyalin. Ini skill paling penting untuk programmer.
 
@@ -157,8 +159,8 @@ Sebelum lanjut ke soal 02, cek semua ini:
 
 ## Cara Submit
 
-1. Simpan sebagai `01-kalkulator-sederhana.js`
-2. Jalankan dengan `node 01-kalkulator-sederhana.js` (Node.js) atau buka di browser
+1. Pastikan kodemu ada di salinan starter `latihan-saya/02-javascript/minggu-XX/01-kalkulator-sederhana.js`
+2. Jalankan dengan `node 01-kalkulator-sederhana.js` dari folder itu
 3. Coba semua operator: `+`, `-`, `*`, `/`, `%`
 4. Coba bagi dengan 0
 5. Coba masukkan operator tidak valid

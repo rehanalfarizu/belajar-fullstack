@@ -1,0 +1,7 @@
+# Tambahan untuk .env.example (BUKAN .env asli).
+# Di toko-latihan, tempel baris di bawah ke file .env.example DAN .env.
+# Di .env.example nilainya contoh/placeholder. Nilai asli hanya di .env yang tidak di-commit.
+
+TOKO_NAMA="Toko Latihan"
+TOKO_KONTAK_EMAIL=isi-email-toko@contoh.test
+TOKO_MAKS_ITEM_KERANJANG=20

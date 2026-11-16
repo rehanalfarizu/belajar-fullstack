@@ -68,12 +68,12 @@ jobs:
     environment: staging
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
@@ -188,7 +188,7 @@ jobs:
     needs: deploy-staging
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run smoke tests
         run: |
@@ -288,7 +288,7 @@ jobs:
 
 ```yaml
 - name: Login to Container Registry
-  uses: docker/login-action@v3
+  uses: docker/login-action@v4
   with:
     registry: ${{ secrets.REGISTRY }}
     username: ${{ secrets.REGISTRY_USER }}
@@ -299,7 +299,7 @@ jobs:
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v5
+  uses: docker/build-push-action@v7
   with:
     context: .
     push: true

@@ -42,17 +42,17 @@ on:
     branches: [main]
 
 env: # Global environment variables
-  NODE_VERSION: '20'
+  NODE_VERSION: '24'
 
 jobs:
   build:
     runs-on: ubuntu-latest                 # Runner (VM)
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -142,12 +142,12 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [22, 24]
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
 ```
@@ -159,7 +159,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [22, 24]
       fail-fast: true  # Stop all jobs if one fails
 ```
 
@@ -177,9 +177,9 @@ concurrency:
 
 ```yaml
 - name: Setup Node.js
-  uses: actions/setup-node@v4
+  uses: actions/setup-node@v7
   with:
-    node-version: '20'
+    node-version: '24'
     cache: 'npm'
 ```
 
@@ -187,7 +187,7 @@ concurrency:
 
 ```yaml
 - name: Cache build artifacts
-  uses: actions/cache@v4
+  uses: actions/cache@v6
   with:
     path: |
       node_modules
@@ -234,7 +234,7 @@ Dokumentasikan sebelum/setelah caching:
 
 ```yaml
 - name: Upload test results
-  uses: actions/upload-artifact@v4
+  uses: actions/upload-artifact@v7
   if: always()  # Upload even if tests fail
   with:
     name: test-results-${{ matrix.node-version }}
@@ -294,7 +294,7 @@ GitHub sudah otomatis scan secrets, tapi tambahkan pre-commit check:
   run: npm run build
 
 - name: Upload build artifacts
-  uses: actions/upload-artifact@v4
+  uses: actions/upload-artifact@v7
   with:
     name: dist-${{ github.sha }}
     path: dist/

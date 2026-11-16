@@ -29,3 +29,11 @@ Untuk setiap modul:
 
 Semua starter code sengaja memiliki TODO, tetapi tetap harus valid secara
 sintaks. Solusi adalah salah satu implementasi, bukan satu-satunya jawaban.
+
+## Dokumen Pendukung
+
+- [TUGAS.md](TUGAS.md) — daftar soal, cara menjalankan starter di project Vite,
+  menyiapkan API, dan petunjuk kalau macet.
+- [CHECKLIST.md](CHECKLIST.md) — cek pemahaman mandiri setelah semua soal.
+- [Soal lengkap](soal/README.md) — 10 soal inti + soal 11 (render aman tanpa `v-html`).
+- [Contoh solusi](contoh/README.md) — jangan dibuka sebelum jawabanmu jalan.

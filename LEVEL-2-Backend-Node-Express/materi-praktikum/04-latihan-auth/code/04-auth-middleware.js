@@ -9,7 +9,7 @@
  * Requirements:
  * - Middleware authenticateToken -> ekstrak Bearer token dari header
  * - Verifikasi token dengan jwt.verify()
- * - Jika token invalid/tdk ada -> 401/403
+ * - Jika token tidak ada/invalid/kedaluwarsa -> 401 (role tidak cukup baru 403)
  * - Jika valid -> req.user = decoded, next()
  * - Route GET /protected -> pakai middleware
  * - Route GET /public    -> tidak pakai middleware
@@ -34,50 +34,23 @@ app.use(express.json());
 
 // ============================================================
 // MIDDLEWARE: Authenticate Token
-// TODO(human): async function authenticateToken(req, res, next) {
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
-//
-//   if (!token) {
-//     return res.status(401).json({ error: 'Unauthorized', message: 'Token diperlukan' });
-//   }
-//
-//   try {
-//     const decoded = jwt.verify(token, SECRET_KEY);
-//     req.user = decoded;
-//     next();
-//   } catch (err) {
-//     return res.status(403).json({ error: 'Forbidden', message: 'Token tidak valid' });
-//   }
-// }
+// TODO(human): tulis authenticateToken(req, res, next) sesuai soal
 
 // ============================================================
 // ROUTE: POST /login (untuk dapat token)
-// TODO(human): app.post('/login', async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = users.find(u => u.email === email);
-//   if (!user) return res.status(401).json({ error: 'Unauthorized', message: 'Email tidak ditemukan' });
-//   const token = jwt.sign({ userId: user.id, email: user.email }, SECRET_KEY, { expiresIn: '24h' });
-//   res.json({ message: 'Login berhasil', token });
-// });
+// TODO(human): tulis app.post '/login' sesuai soal
 
 // ============================================================
 // ROUTE: GET /public (tanpa proteksi)
-// TODO(human): app.get('/public', (req, res) => {
-//   res.json({ message: 'Halaman publik - semua orang bisa akses' });
-// });
+// TODO(human): tulis app.get '/public' sesuai soal
 
 // ============================================================
 // ROUTE: GET /protected (dengan proteksi)
-// TODO(human): app.get('/protected', authenticateToken, (req, res) => {
-//   res.json({ message: 'Selamat datang di area terproteksi!', user: req.user });
-// });
+// TODO(human): tulis app.get '/protected' sesuai soal
 
 // ============================================================
 // ROUTE: GET /profile (dengan proteksi)
-// TODO(human): app.get('/profile', authenticateToken, (req, res) => {
-//   res.json({ message: 'Profil kamu', user: req.user });
-// });
+// TODO(human): tulis app.get '/profile' sesuai soal
 
 app.listen(PORT, () => {
   console.log(`Auth Server berjalan di http://localhost:${PORT}`);
@@ -95,5 +68,5 @@ app.listen(PORT, () => {
 // GET /public (tanpa token) -> 200: { "message": "Halaman publik - semua orang bisa akses" }
 // GET /protected (tanpa token) -> 401: { "error": "Unauthorized", "message": "Token diperlukan" }
 // GET /protected (token valid) -> 200: { "message": "Selamat datang di area terproteksi!", "user": { "userId": 1, "email": "..." } }
-// GET /protected (token invalid) -> 403: { "error": "Forbidden", "message": "Token tidak valid" }
+// GET /protected (token invalid) -> 401: { "error": "Unauthorized", "message": "Token tidak valid" }
 // ============================================================

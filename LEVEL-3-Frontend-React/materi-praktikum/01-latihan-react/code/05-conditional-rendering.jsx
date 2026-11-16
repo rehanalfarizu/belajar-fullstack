@@ -24,6 +24,7 @@ import React, { useState } from "react";
 // 3. Logical AND: user.role === "admin" && <AdminPanel />
 // 4. Logical OR: displayName || "Guest User"
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function AuthApp() {
   const [isLoading, setIsLoading] = useState(true);
