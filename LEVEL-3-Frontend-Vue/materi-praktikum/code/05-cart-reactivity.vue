@@ -8,29 +8,34 @@ const items = ref([
 ]);
 
 const totalItems = computed(() => {
-  // TODO
+  // TODO(human): jumlahkan quantity semua item (bukan jumlah baris array).
   return 0;
 });
 
 const subtotal = computed(() => {
-  // TODO
+  // TODO(human): jumlahkan harga x quantity untuk setiap item.
   return 0;
 });
 
 const tax = computed(() => {
-  // TODO
+  // TODO(human): hitung pajak dari subtotal memakai taxRate.
+  // Rupiah tidak punya sen — putuskan cara membulatkannya.
   return 0;
 });
 
 const total = computed(() => {
-  // TODO
+  // TODO(human): total = subtotal + pajak. Pakai computed lain, jangan hitung ulang dari nol.
   return 0;
 });
+
+// TODO(human): buat helper untuk memformat angka ke Rupiah.
+// Jangan simpan total sebagai ref terpisah — semuanya harus turunan dari items.
 </script>
 
 <template>
   <section>
     <h1>Cart</h1>
-    <!-- TODO: render items dan semua computed total. -->
+    <!-- TODO(human): render setiap item (nama dan quantity) dengan :key stabil. -->
+    <!-- TODO(human): render jumlah item, subtotal, pajak, dan total (format Rupiah). -->
   </section>
 </template>

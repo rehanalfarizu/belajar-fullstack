@@ -10,12 +10,15 @@ const products = ref([
 ]);
 
 const filteredProducts = computed(() => {
-  // TODO: search case-insensitive dan filter active.
+  // TODO(human): kembalikan array BARU berisi produk yang lolos dua syarat:
+  // 1. nama produk mengandung teks pencarian (huruf besar/kecil dianggap sama);
+  // 2. kalau onlyActive dicentang, hanya produk yang active.
+  // Jangan mengubah products.value di sini — computed hanya membaca.
   return products.value;
 });
 
 function resetFilters() {
-  // TODO
+  // TODO(human): kembalikan search dan onlyActive ke nilai awalnya.
 }
 </script>
 
@@ -32,6 +35,9 @@ function resetFilters() {
     </label>
     <button type="button" @click="resetFilters">Reset</button>
 
-    <!-- TODO: list dengan key stabil dan empty state. -->
+    <!-- TODO(human): render filteredProducts sebagai list.
+         - Setiap item wajib punya :key yang stabil (BUKAN index).
+         - Tampilkan nama dan status aktif/nonaktif.
+         - Kalau hasil filter kosong, tampilkan pesan "empty state" sebagai gantinya. -->
   </main>
 </template>

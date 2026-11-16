@@ -7,7 +7,10 @@ const props = defineProps({
 
 const emit = defineEmits({
   add: (payload) => {
-    // TODO: validasi productId dan quantity integer positif.
+    // TODO(human): validator event "add".
+    // Kembalikan true hanya kalau payload punya productId DAN quantity
+    // yang keduanya integer positif. Selain itu kembalikan false
+    // (Vue akan memberi warning di console saat development).
     return Boolean(payload);
   },
 });
@@ -15,7 +18,9 @@ const emit = defineEmits({
 const quantity = ref(1);
 
 function submit() {
-  // TODO: emit event add.
+  // TODO(human): cegah submit kalau quantity bukan integer positif.
+  // TODO(human): kirim event "add" ke parent dengan payload berbentuk
+  // object berisi productId (dari props) dan quantity (dari state lokal).
 }
 </script>
 
@@ -23,6 +28,7 @@ function submit() {
   <form @submit.prevent="submit">
     <label>
       Jumlah
+      <!-- TODO(human): pertimbangkan atribut agar browser hanya menerima bilangan bulat. -->
       <input v-model.number="quantity" type="number" min="1">
     </label>
     <button type="submit">Tambah</button>

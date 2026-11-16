@@ -9,10 +9,18 @@ const error = ref(null);
 let controller;
 
 async function loadProducts() {
-  // TODO: abort request lama.
-  // TODO: buat URLSearchParams dari page dan search.
-  // TODO: fetch dan tangani loading/error/success.
+  // TODO(human): Batalkan request lama sebelum mulai request baru
+  //   (ingat soal 06, polanya sama).
+  // TODO(human): Susun query string dari page dan search pakai URLSearchParams,
+  //   JANGAN merangkai string manual (kenapa? coba cari "Kaos & Celana").
+  // TODO(human): Ambil '/api/products?<query>', tangani loading, error, dan
+  //   sukses. Simpan daftar produk dari response (perhatikan bentuk datanya).
 }
+
+// TODO(human): Bonus — kalau search berubah, page seharusnya kembali ke 1.
+//   Di mana tempat paling masuk akal untuk aturan itu?
+// TODO(human): Bonus — tunda request saat user masih mengetik (debounce),
+//   supaya tidak ada satu request per huruf.
 
 watch([page, search], loadProducts, { immediate: true });
 onUnmounted(() => controller?.abort());
@@ -25,6 +33,10 @@ onUnmounted(() => controller?.abort());
       Cari produk
       <input v-model.trim="search" type="search">
     </label>
-    <!-- TODO: loading, error/retry, empty, list, dan pagination. -->
+    <!-- TODO(human): Tampilkan satu dari keadaan: loading, error + tombol coba lagi,
+         kosong, atau list produk (key stabil). -->
+    <!-- TODO(human): Navigasi halaman: tombol Sebelumnya (mati di halaman 1),
+         teks "Halaman N", dan tombol Berikutnya. Bungkus dengan <nav> yang punya
+         aria-label. -->
   </main>
 </template>

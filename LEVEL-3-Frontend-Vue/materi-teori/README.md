@@ -225,3 +225,17 @@ Hindari menguji internal ref atau nama function. Uji perilaku: apa yang dilihat
 dan dapat dilakukan user.
 
 Lanjut ke [praktikum](../materi-praktikum/README.md).
+
+## Materi Per Topik
+
+Ringkasan di atas sengaja padat. Kalau mau penjelasan lengkap dengan
+analogi, kesalahan umum, latihan berpikir, dan glosarium, baca per topik:
+
+1. [01 — Vue dan Template Syntax](01-vue-dan-template-syntax/README.md)
+2. [02 — Reactivity: ref, reactive, computed, watch](02-reactivity-ref-reactive-computed/README.md)
+3. [03 — Component, Props, Emit, Slot](03-component-props-emit-slot/README.md)
+4. [04 — Lifecycle dan Composable](04-lifecycle-dan-composable/README.md)
+5. [05 — Vue Router](05-vue-router/README.md)
+6. [06 — Pinia dan HTTP](06-pinia-dan-http/README.md)
+
+Setelah keenamnya, lanjut ke [Vue Performance dan Security](02-performance-security.md).
