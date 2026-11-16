@@ -13,6 +13,8 @@ const ignoredDirectories = new Set([
   "build",
   "coverage",
   "vendor",
+  // Arsip berisi materi lama yang tidak dipakai; tautannya boleh rusak.
+  "_arsip",
 ]);
 const sourceExtensions = new Set([".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"]);
 const vueExtensions = new Set([".vue"]);
