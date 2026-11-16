@@ -60,6 +60,10 @@ Nama filenya cocok, tapi isinya kadang beda. Jadi kamu tahu dari awal:
 
 ---
 
+### Soal buntu?
+
+Blok jawaban yang dulu ada di starter dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Coba dulu minimal 30 menit dan catat apa yang sudah kamu coba, baru buka untuk membandingkan.
+
 ## Cara Menjalankan Starter
 
 File di `code/` bukan aplikasi utuh. Isinya potongan komponen. Butuh proyek Vite

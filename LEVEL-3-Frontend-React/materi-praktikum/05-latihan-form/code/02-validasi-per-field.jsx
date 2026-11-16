@@ -7,130 +7,30 @@ import { useState } from "react";
 // ============================================================
 // TODO: Validation Functions
 // ============================================================
-// function validateField(name, value, allValues = {}) {
-//   switch (name) {
-//     case "fullName":
-//       if (!value.trim()) return "Nama lengkap wajib diisi";
-//       if (value.trim().length < 2) return "Nama minimal 2 karakter";
-//       if (!/^[a-zA-Z\s]+$/.test(value)) return "Nama hanya boleh huruf dan spasi";
-//       return null;
-//
-//     case "email":
-//       if (!value) return "Email wajib diisi";
-//       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Format email tidak valid";
-//       return null;
-//
-//     case "username":
-//       if (!value) return "Username wajib diisi";
-//       if (value.length < 3) return "Username minimal 3 karakter";
-//       if (!/^[a-zA-Z0-9_]+$/.test(value)) return "Username hanya huruf, angka, dan underscore";
-//       return null;
-//
-//     case "password":
-//       if (!value) return "Password wajib diisi";
-//       if (value.length < 8) return "Password minimal 8 karakter";
-//       if (!/(?=.*[A-Z])/.test(value)) return "Minimal 1 huruf besar";
-//       if (!/(?=.*[a-z])/.test(value)) return "Minimal 1 huruf kecil";
-//       if (!/(?=.*\d)/.test(value)) return "Minimal 1 angka";
-//       return null;
-//
-//     case "confirmPassword":
-//       if (!value) return "Konfirmasi password wajib diisi";
-//       if (value !== allValues.password) return "Password tidak cocok";
-//       return null;
-//
-//     case "age":
-//       if (!value) return "Umur wajib diisi";
-//       const ageNum = parseInt(value, 10);
-//       if (isNaN(ageNum)) return "Umur harus angka";
-//       if (ageNum < 17) return "Minimal 17 tahun";
-//       if (ageNum > 100) return "Maksimal 100 tahun";
-//       return null;
-//
-//     default:
-//       return null;
-//   }
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
+// TODO(human): validateField(name, value, allValues)
+// Mengembalikan pesan error (string) atau null kalau valid.
+// Aturan: tulis dulu di tabel (field, aturan, pesan) sebelum membuat kodenya, lalu ikuti soal.
+// Petunjuk: confirmPassword perlu membandingkan dengan nilai field lain (allValues).
+// Selesai kalau: tiap field punya satu input valid dan satu input tidak valid yang kamu uji.
 function validateField(name, value, allValues = {}) {
-  switch (name) {
-    case "fullName":
-      if (!value.trim()) return "Nama lengkap wajib diisi";
-      if (value.trim().length < 2) return "Nama minimal 2 karakter";
-      return null;
-
-    case "email":
-      if (!value) return "Email wajib diisi";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Format email tidak valid";
-      return null;
-
-    case "username":
-      if (!value) return "Username wajib diisi";
-      if (value.length < 3) return "Username minimal 3 karakter";
-      if (!/^[a-zA-Z0-9_]+$/.test(value)) return "Username hanya huruf, angka, dan underscore";
-      return null;
-
-    case "password":
-      if (!value) return "Password wajib diisi";
-      if (value.length < 8) return "Password minimal 8 karakter";
-      if (!/(?=.*[A-Z])/.test(value)) return "Minimal 1 huruf besar";
-      if (!/(?=.*[a-z])/.test(value)) return "Minimal 1 huruf kecil";
-      if (!/(?=.*\d)/.test(value)) return "Minimal 1 angka";
-      return null;
-
-    case "confirmPassword":
-      if (!value) return "Konfirmasi password wajib diisi";
-      if (value !== allValues.password) return "Password tidak cocok";
-      return null;
-
-    case "age":
-      if (!value) return "Umur wajib diisi";
-      const ageNum = parseInt(value, 10);
-      if (isNaN(ageNum)) return "Umur harus angka";
-      if (ageNum < 17) return "Minimal 17 tahun";
-      if (ageNum > 100) return "Maksimal 100 tahun";
-      return null;
-
-    default:
-      return null;
-  }
+  return null;
 }
 
 // ============================================================
 // TODO: Password Strength Meter
 // ============================================================
-// function getPasswordStrength(password) {
-//   if (!password) return { score: 0, label: "", color: "" };
-//   let score = 0;
-//   if (password.length >= 8) score++;
-//   if (password.length >= 12) score++;
-//   if (/[A-Z]/.test(password)) score++;
-//   if (/[a-z]/.test(password)) score++;
-//   if (/\d/.test(password)) score++;
-//   if (/[!@#$%^&*]/.test(password)) score++;
 //
-//   if (score <= 2) return { score, label: "Lemah", color: "#ef4444" };
-//   if (score <= 4) return { score, label: "Cukup", color: "#f59e0b" };
-//   if (score <= 5) return { score, label: "Kuat", color: "#22c55e" };
-//   return { score, label: "Sangat Kuat", color: "#16a34a" };
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
+// TODO(human): getPasswordStrength(password) -> { score, label, color }
+// Petunjuk: tentukan sendiri kriteria skor (panjang, huruf besar/kecil, angka, simbol).
+// Selesai kalau: password kosong, lemah, dan kuat memberi label berbeda.
 function getPasswordStrength(password) {
-  if (!password) return { score: 0, label: "", color: "" };
-  let score = 0;
-  if (password.length >= 8) score++;
-  if (password.length >= 12) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[a-z]/.test(password)) score++;
-  if (/\d/.test(password)) score++;
-  if (/[!@#$%^&*]/.test(password)) score++;
-
-  if (score <= 2) return { score, label: "Lemah", color: "#ef4444" };
-  if (score <= 4) return { score, label: "Cukup", color: "#f59e0b" };
-  if (score <= 5) return { score, label: "Kuat", color: "#22c55e" };
-  return { score, label: "Sangat Kuat", color: "#16a34a" };
+  return { score: 0, label: "", color: "" };
 }
 
 // ============================================================
@@ -143,23 +43,12 @@ function getPasswordStrength(password) {
 //   - submitted: boolean
 //
 // Touched State Pattern:
-//   const handleBlur = (e) => {
-//     const { name, value } = e.target;
-//     setTouched(prev => ({ ...prev, [name]: true }));
-//     const error = validateField(name, value, form);
-//     setErrors(prev => error ? { ...prev, [name]: error } : { ...prev, [name]: undefined });
-//   };
 //
 // Error Display:
-//   {touched.email && errors.email && <span className="error">{errors.email}</span>}
 //
 // Fitur:
-//   1. Error hanya tampil JIKA field sudah di-touch
-//   2. Error hilang saat user mulai mengetik di field tersebut
-//   3. Password strength meter visual (bar)
-//   4. Bio character counter: "X / 200 karakter"
-//   5. Submit attempt: semua field ditandai touched
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 export function RegistrationForm() {
   const [form, setForm] = useState({
@@ -274,21 +163,8 @@ export function LoginForm() {
 //
 // Cross-field validation: postalCode format depends on country
 //
-// function validateAddress(form) {
-//   const errors = {};
-//   if (!form.country) errors.country = "Pilih negara";
-//   if (!form.city) errors.city = "Kota wajib diisi";
-//   if (!form.address) errors.address = "Alamat wajib diisi";
-//   if (form.postalCode) {
-//     const formats = { Indonesia: /^\d{5}$/, Singapore: /^\d{6}$/, Malaysia: /^\d{5}$/ };
-//     const regex = formats[form.country];
-//     if (regex && !regex.test(form.postalCode)) {
-//       errors.postalCode = `Kode pos untuk ${form.country} harus ${form.country === "Singapore" ? "6" : "5"} digit`;
-//     }
-//   }
-//   return errors;
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 const COUNTRIES = ["Indonesia", "Singapore", "Malaysia"];
 

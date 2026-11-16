@@ -38,15 +38,8 @@ function useToggle(initialValue = false) {
 // 3. Handle error (JSON parse error, quota exceeded)
 //
 // Lazy initialization:
-// const [value, setValue] = useState(() => {
-//   try {
-//     const item = window.localStorage.getItem(key);
-//     return item ? JSON.parse(item) : initialValue;
-//   } catch {
-//     return initialValue;
-//   }
-// });
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function useLocalStorage(key, initialValue) {
   // TODO(human): Implementasikan useLocalStorage

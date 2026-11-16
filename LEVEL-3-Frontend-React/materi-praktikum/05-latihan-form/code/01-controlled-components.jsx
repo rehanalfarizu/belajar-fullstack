@@ -22,10 +22,6 @@ import { useState } from "react";
 //      - e.target.type === "checkbox" ? checked : value
 //   3. Dynamic skills: array of strings dengan add/remove
 //   4. Salary formatting: number input → formatted display
-//
-//
-//
-//
 // ============================================================
 
 const DEPARTMENTS = ["engineering", "marketing", "sales", "hr", "finance"];

@@ -24,7 +24,7 @@ Setelah selesai, kamu punya:
 | 01 | `soal/01-routing-dasar.md` (3 bagian: router dasar, nested, programmatic nav) | `LEVEL-3-Frontend-React/materi-praktikum/03-latihan-router/code/01-routing-dasar.jsx` | 90–120 menit |
 | 02 | `soal/02-nested-routes.md` | `LEVEL-3-Frontend-React/materi-praktikum/03-latihan-router/code/02-nested-routes.jsx` | 90 menit |
 | 03 | `soal/03-search-params.md` | `LEVEL-3-Frontend-React/materi-praktikum/03-latihan-router/code/03-search-params.jsx` | 90 menit |
-| 04 | `soal/04-protected-routes.md` | Tulis dari nol di file baru `src/04-protected.jsx` (lihat catatan) | 75 menit |
+| 04 | `soal/04-protected-routes.md` | `LEVEL-3-Frontend-React/materi-praktikum/03-latihan-router/code/04-protected-routes.jsx` (kerangka dengan TODO) | 75 menit |
 
 ### Catatan
 
@@ -33,14 +33,18 @@ Setelah selesai, kamu punya:
   latihan ulang.
 - `code/02-nested-routes.jsx` juga punya TODO `Protected Route` dan login flow.
   Kerjakan bagian itu bersama soal 04.
-- `code/04-protected-routes.jsx` **sudah hampir jadi**. Dua TODO yang tersisa
-  hanya soal mengganti simulasi dengan API sungguhan (itu materi Level 4).
-  Anggap file ini seperti `contoh/`. Tulis versimu dulu, baru bandingkan.
-- Starter `code/04` memakai sintaks React 19 `<AuthContext value={...}>`,
-  sedangkan soal memakai `<AuthContext.Provider value={...}>`. Keduanya jalan di
-  React 19. Pilih satu dan konsisten.
+- `code/04-protected-routes.jsx` berupa kerangka dengan `TODO(human)`.
+  Implementasi lama dipindah ke
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Tulis versimu
+  dulu, baru bandingkan.
+- Soal memakai `<AuthContext.Provider value={...}>`. Di React 19 `<AuthContext value={...}>`
+  juga jalan. Pilih satu dan konsisten.
 
 ---
+
+### Soal buntu?
+
+Blok jawaban yang dulu ada di starter dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Coba dulu minimal 30 menit dan catat apa yang sudah kamu coba, baru buka untuk membandingkan.
 
 ## Cara Menjalankan Starter
 

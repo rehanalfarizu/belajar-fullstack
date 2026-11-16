@@ -16,9 +16,6 @@ import { useState, useEffect, useRef } from "react";
 //   1. Langsung tambahkan comment ke UI sebelum server response
 //   2. Jika gagal → rollback (hapus dari list) + restore form
 //   3. Form di-reset setelah submit berhasil
-//
-//
-//
 // ============================================================
 
 function simulateApiCall(shouldFail = false) {
@@ -117,36 +114,13 @@ export function CommentSection() {
 //   - form: { country, province, city, district, postalCode, address }
 //
 // Data structure:
-// const LOCATION_DATA = {
-//   Indonesia: {
-//     "DKI Jakarta": ["Jakarta Selatan", "Jakarta Pusat", "Jakarta Barat", "Jakarta Utara", "Jakarta Timur"],
-//     "Jawa Barat": ["Bandung", "Bekasi", "Bogor", "Depok", "Sleman"],
-//     "Jawa Timur": ["Surabaya", "Malang", "Kediri", "Madiun"],
-//     "Bali": ["Denpasar", "Badung", "Kuta", "Ubud"],
-//   },
-//   Malaysia: {
-//     "Wilayah Persekutuan": ["Kuala Lumpur", "Putrajaya", "Labuan"],
-//     "Selangor": ["Shah Alam", "Petaling Jaya", "Subang Jaya"],
-//     "Penang": ["George Town", "Batu Ferringhi"],
-//   },
-//   Singapore: {
-//     "Singapore": ["Orchard", "Marina Bay", "Sentosa", "Jurong", "Ang Mo Kio"],
-//   },
-// };
 //
 // Cascading Logic:
-//
-//
-//
 // Computed options:
-//   const countryOptions = Object.keys(LOCATION_DATA);
-//   const provinceOptions = form.country ? Object.keys(LOCATION_DATA[form.country]) : [];
-//   const cityOptions = form.province ? LOCATION_DATA[form.country]?.[form.province] || [] : [];
-//   const districtOptions = form.city ? LOCATION_DATA[form.country]?.[form.province]?.[form.city] || [] : [];
 //
 // Postal code auto-fill:
-//   const postalCodes = { Indonesia: { "DKI Jakarta": "10", "Jawa Barat": "40", ... }, ... };
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 const LOCATION_DATA = {
   Indonesia: {

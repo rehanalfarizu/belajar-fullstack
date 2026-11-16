@@ -22,39 +22,8 @@ import { useState, useEffect, useRef } from "react";
 //   6. Search baru → cancel request lama
 //
 // API: https://api.github.com/users/{username}
-//
-// function SearchGitHubUser({ username }) {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   const abortRef = useRef(null);
-//
-//   useEffect(() => {
-//     if (!username) { setUser(null); return; }
-//
-//     // Cancel previous request
-//     if (abortRef.current) abortRef.current.abort();
-//     abortRef.current = new AbortController();
-//
-//     setLoading(true);
-//     setError(null);
-//
-//     fetch(`https://api.github.com/users/${username}`, { signal: abortRef.current.signal })
-//       .then(res => {
-//         if (!res.ok) throw new Error(res.status === 404 ? "User tidak ditemukan" : "Request gagal");
-//         return res.json();
-//       })
-//       .then(data => { setUser(data); setLoading(false); })
-//       .catch(err => {
-//         if (err.name !== "AbortError") { setError(err.message); setLoading(false); }
-//       });
-//
-//     return () => abortRef.current?.abort();
-//   }, [username]);
-//
-//   return { user, loading, error };
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function useGitHubUser(username) {
   // TODO: Implementasikan seperti di atas
@@ -167,23 +136,8 @@ export function DocumentTitleUpdater() {
 //   2. Update setiap resize
 //   3. Cleanup: remove event listener saat unmount
 //   4. SSR-safe: initial values
-//
-// function useWindowSize() {
-//   const [size, setSize] = useState({ width: 0, height: 0 });
-//
-//   useEffect(() => {
-//     function handleResize() {
-//       setSize({ width: window.innerWidth, height: window.innerHeight });
-//     }
-//
-//     handleResize(); // initial size
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-//
-//   return size;
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function useWindowSize() {
   // TODO: Implementasikan useWindowSize hook
@@ -213,29 +167,8 @@ export function WindowSizeDisplay() {
 //   3. Error state jika fetch gagal
 //   4. Display: list 10 post pertama dengan title dan excerpt
 //   5. AbortController untuk cleanup
-//
-// function usePosts() {
-//   const [posts, setPosts] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//
-//   useEffect(() => {
-//     const controller = new AbortController();
-//
-//     setLoading(true);
-//     fetch("https://jsonplaceholder.typicode.com/posts?_limit=10", { signal: controller.signal })
-//       .then(res => { if (!res.ok) throw new Error("Fetch failed"); return res.json(); })
-//       .then(data => { setPosts(data); setLoading(false); })
-//       .catch(err => {
-//         if (err.name !== "AbortError") { setError(err.message); setLoading(false); }
-//       });
-//
-//     return () => controller.abort();
-//   }, []);
-//
-//   return { posts, loading, error };
-// }
 // ============================================================
+// TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
 function usePosts() {
   // TODO: Implementasikan usePosts hook
@@ -248,6 +181,31 @@ export function PostsList() {
   return (
     <div className="posts-list">
       {/* TODO: Loading / Error / List display */}
+    </div>
+  );
+}
+// ============================================================
+// Soal 2B: Stopwatch dengan useRef (kerangka)
+// ============================================================
+// Pegangan: yang tampil di layar = useState. Yang cuma dipakai di balik
+// layar (interval ID, waktu mulai) = useRef.
+//
+// State  : isRunning, elapsedTime (milidetik)
+// Ref    : intervalRef, startTimeRef
+// Aksi   : Start, Stop, Reset
+// Format : MM:SS:ms
+// Jangan lupa membersihkan interval saat unmount.
+
+export function StopwatchRef() {
+  // TODO(human): state isRunning dan elapsedTime
+  // TODO(human): ref untuk interval ID dan waktu mulai
+  // TODO(human): handleStart, handleStop, handleReset
+  // TODO(human): cleanup interval saat unmount
+
+  return (
+    <div className="stopwatch-ref">
+      {/* TODO(human): tampilan MM:SS:ms */}
+      {/* TODO(human): tombol Start / Stop / Reset */}
     </div>
   );
 }

@@ -100,14 +100,7 @@ export function DebouncedSearch() {
   // const debouncedQuery = useDebounce(query, 300);
 
   // TODO: useEffect untuk fetch saat debouncedQuery berubah
-  // useEffect(() => {
-  //   if (!debouncedQuery) { setResults([]); return; }
-  //   setLoading(true);
-  //   fetch(`https://jsonplaceholder.typicode.com/posts?q=${debouncedQuery}&_limit=5`)
-  //     .then(res => res.json())
-  //     .then(data => { setResults(data); setLoading(false); })
-  //     .catch(() => setLoading(false));
-  // }, [debouncedQuery]);
+  // TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
   return (
     <div className="debounced-search">

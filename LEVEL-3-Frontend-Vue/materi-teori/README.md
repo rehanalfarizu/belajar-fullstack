@@ -70,8 +70,8 @@ Props adalah input read-only milik child:
 ```vue
 <script setup>
 const props = defineProps({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
+  title: { type: String, required: true },
+  durationSec: { type: Number, default: 0 },
 });
 </script>
 ```
@@ -173,13 +173,11 @@ Pisahkan jenis state:
   jangan otomatis dipindahkan ke store global.
 
 ```js
-export const useCartStore = defineStore('cart', () => {
-  const items = ref([]);
-  const totalItems = computed(() =>
-    items.value.reduce((sum, item) => sum + item.quantity, 0)
-  );
+export const usePlaylistStore = defineStore('playlist', () => {
+  const songs = ref([]);
+  const likedCount = computed(() => songs.value.filter((s) => s.liked).length);
 
-  return { items, totalItems };
+  return { songs, likedCount };
 });
 ```
 
@@ -195,18 +193,20 @@ idle → loading → success
 ```
 
 ```js
-async function loadProducts() {
-  loading.value = true;
-  error.value = null;
+const status = ref('idle'); // 'idle' | 'loading' | 'success' | 'error'
 
+async function loadSchedule() {
+  status.value = 'loading';
   try {
-    const response = await fetch('/api/products');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    products.value = await response.json();
-  } catch (cause) {
-    error.value = cause instanceof Error ? cause.message : 'Unknown error';
-  } finally {
-    loading.value = false;
+    const res = await fetch('/api/schedule');
+    if (res.ok) {
+      classes.value = await res.json();
+      status.value = 'success';
+    } else {
+      status.value = 'error';
+    }
+  } catch {
+    status.value = 'error'; // jaringan putus, server mati, dsb.
   }
 }
 ```

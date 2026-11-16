@@ -5,9 +5,9 @@
 Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 1. Memahami Context API untuk global state management
-2. Menggunakan Zustand untuk state management yang lebih simpel
-3. Menggunakan TanStack Query untuk server state management
-4. Mengimplementasikan state persistence dengan localStorage
+2. Memecah context dan memakai pola selector supaya render ulang berkurang
+3. Mengimplementasikan state persistence dengan localStorage, termasuk undo/redo
+4. (Opsional, setelah semua soal) Mengenal Zustand dan TanStack Query sebagai pembanding
 
 ---
 
@@ -15,11 +15,8 @@ Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 - Sudah memahami React hooks (`useState`, `useEffect`, `useContext`)
 - Sudah membuat project React dengan Vite
-- Install dependencies:
-
-```bash
-npm install zustand @tanstack/react-query
-```
+- Soal-soal di folder ini hanya butuh React (tanpa library tambahan). Zustand dan
+  TanStack Query opsional, dipakai setelah soal selesai untuk membandingkan.
 
 ---
 
@@ -42,7 +39,7 @@ const ThemeContext = createContext();
 </ThemeContext.Provider>
 ```
 
-### Global State (Zustand)
+### Global State (Zustand) — opsional, tidak dipakai di soal
 Untuk aplikasi yang lebih besar, dengan API yang lebih simpel daripada Context + useReducer.
 
 ```jsx
@@ -57,7 +54,7 @@ const useStore = create((set) => ({
 const count = useStore((state) => state.count);
 ```
 
-### Server State (TanStack Query)
+### Server State (TanStack Query) — opsional, tidak dipakai di soal
 Untuk data yang berasal dari server — caching, refetching, loading, error states.
 
 ```jsx
@@ -94,7 +91,7 @@ useEffect(() => {
 npm create vite@latest latihan-state -- --template react
 cd latihan-state
 npm install
-npm install zustand @tanstack/react-query
+# opsional, setelah soal selesai: npm install zustand @tanstack/react-query
 
 # Salin file soal ke src/
 # Jalankan
@@ -106,8 +103,8 @@ npm run dev
 ## Checklist Penyelesaian
 
 - [ ] Context API membagi state ke multiple components
-- [ ] Zustand store memiliki minimal3 state dan 2 action
-- [ ] TanStack Query fetching dengan loading dan error state
+- [ ] Context dipecah (user, theme, notif) dan render ulang terbukti berkurang
+- [ ] Hook `useContextSelector` buatanmu bekerja
 - [ ] State bertahan setelah page refresh (localStorage)
 - [ ] Tidak ada prop drilling
 

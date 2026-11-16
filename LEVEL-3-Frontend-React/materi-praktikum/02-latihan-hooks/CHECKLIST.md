@@ -24,6 +24,7 @@ Centang dengan jujur. Kalau cuma "kayaknya bisa", jangan centang dulu.
 
 - [ ] Aku bisa membuat timer dengan `setInterval` + cleanup yang benar
 - [ ] Aku bisa membuat input yang auto-focus dengan `useRef`
+- [ ] Aku bisa memilah mana yang state (tampil di layar) dan mana yang ref (interval ID, waktu mulai) di Stopwatch
 - [ ] Aku bisa membuat debounce untuk input pencarian
 - [ ] Aku bisa membatalkan request lama dengan `AbortController`
 - [ ] Aku bisa menulis reducer murni dan mengetesnya tanpa React

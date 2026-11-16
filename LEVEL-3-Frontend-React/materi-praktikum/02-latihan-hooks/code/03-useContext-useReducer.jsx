@@ -1,107 +1,60 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useReducer,
-} from "react";
+// ============================================================
+// FILE: 02-latihan-hooks/code/03-useContext-useReducer.jsx
+// MATERI: useReducer + Context — Shopping Cart (soal/03-useContext-useReducer.md)
+// ============================================================
+import { createContext, useContext, useReducer } from "react";
 
-const CartStateContext = createContext(null);
-const CartDispatchContext = createContext(null);
+// ============================================================
+// Soal 3A — Reducer
+// ============================================================
+// State awal: { items: [], discount: 0, shippingCost: 0 }
+// Action    : ADD_ITEM, REMOVE_ITEM, UPDATE_QUANTITY, APPLY_DISCOUNT, RESET_CART
+//
+// TODO(human): tulis `initialState`.
+// Petunjuk: ADD_ITEM untuk id yang sudah ada = tambah quantity, bukan baris baru.
+// Petunjuk: UPDATE_QUANTITY dengan hasil <= 0 berarti item dihapus.
+// Petunjuk: reducer harus murni. Jangan mengubah `state` langsung.
+// Petunjuk: tulis dulu sebagai fungsi biasa dan tes dengan console.log
+//           sebelum disambungkan ke React.
+//
+// Selesai kalau: reducer(state, action) untuk kelima action memberi state baru
+// yang benar, dan action tidak dikenal tidak diam-diam diabaikan.
 
-const initialState = { items: [] };
+// TODO(human): export function cartReducer(state, action) { ... }
 
-export function cartReducer(state, action) {
-  switch (action.type) {
-    case "item/added": {
-      const existing = state.items.find(
-        (item) => item.id === action.payload.id,
-      );
+// ============================================================
+// Soal 3B — Context dan Provider
+// ============================================================
+// Value yang disediakan: { state, dispatch }
+// Hook konsumsi: useCart()
+//
+// Petunjuk: nilai turunan (subtotal, diskon, total) dihitung dari state,
+//           jangan disimpan sebagai state terpisah.
+// Petunjuk: apa yang terjadi kalau useCart() dipanggil di luar Provider?
+//
+// Selesai kalau: komponen mana pun di dalam CartProvider bisa membaca
+// state dan mengirim dispatch, dan pemakaian di luar Provider memberi pesan jelas.
 
-      if (existing) {
-        return {
-          ...state,
-          items: state.items.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-          ),
-        };
-      }
+const CartContext = createContext(null);
 
-      return {
-        ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }],
-      };
-    }
+// TODO(human): export function CartProvider({ children }) { ... }
+// TODO(human): export function useCart() { ... }
+// TODO(human): selectTotal(state) dan selectItemCount(state)
 
-    case "item/quantityChanged": {
-      const { id, quantity } = action.payload;
-      if (!Number.isInteger(quantity) || quantity < 1) return state;
+// ============================================================
+// Soal 3C — UI
+// ============================================================
+// Komponen: CartItem, CartSummary, AddItemForm, DiscountInput, CartApp
+//
+// Selesai kalau: semua perubahan state lewat dispatch (tidak ada setState
+// langsung di komponen) dan total di layar cocok dengan hitungan manualmu.
 
-      return {
-        ...state,
-        items: state.items.map((item) =>
-          item.id === id ? { ...item, quantity } : item,
-        ),
-      };
-    }
-
-    case "item/removed":
-      return {
-        ...state,
-        items: state.items.filter((item) => item.id !== action.payload.id),
-      };
-
-    case "cart/cleared":
-      return initialState;
-
-    default:
-      throw new Error(`Action tidak dikenal: ${action.type}`);
-  }
-}
-
-export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
-
-  const value = useMemo(() => {
-    const totalItems = state.items.reduce(
-      (sum, item) => sum + item.quantity,
-      0,
-    );
-    const subtotal = state.items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0,
-    );
-
-    return { ...state, totalItems, subtotal };
-  }, [state]);
-
-  return (
-    <CartStateContext value={value}>
-      <CartDispatchContext value={dispatch}>
-        {children}
-      </CartDispatchContext>
-    </CartStateContext>
-  );
-}
-
-export function useCartState() {
-  const context = useContext(CartStateContext);
-  if (context === null) {
-    throw new Error("useCartState harus digunakan di dalam CartProvider.");
-  }
-  return context;
-}
-
-export function useCartDispatch() {
-  const context = useContext(CartDispatchContext);
-  if (context === null) {
-    throw new Error("useCartDispatch harus digunakan di dalam CartProvider.");
-  }
-  return context;
+export function CartApp() {
+  // TODO(human): gabungkan semua komponen di atas di dalam CartProvider
+  return null;
 }
 
 // Latihan lanjutan:
 // 1. Tulis unit test reducer untuk setiap action dan action tidak dikenal.
 // 2. Tambahkan batas maksimum quantity.
-// 3. Ukur render consumer state dan dispatch menggunakan React DevTools.
+// 3. Ukur render dengan React DevTools Profiler.

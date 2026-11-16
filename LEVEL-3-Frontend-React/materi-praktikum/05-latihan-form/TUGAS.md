@@ -23,22 +23,26 @@ Setelah selesai, kamu punya:
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
 | 01 | `soal/01-controlled-components.md` | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/01-controlled-components.jsx` | 90 menit |
-| 02 | `soal/02-react-hook-form.md` (isinya: touched state + validasi per field) | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/02-react-hook-form.jsx` | 120 menit |
-| 03 | `soal/03-zod-validation.md` (2 bagian: async validation + multi-step form) | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/03-zod-validation.jsx` + file baru untuk multi-step | 120–150 menit |
+| 02 | `soal/02-validasi-per-field.md` (isinya: touched state + validasi per field) | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/02-validasi-per-field.jsx` | 120 menit |
+| 03 | `soal/03-async-dan-multistep.md` (2 bagian: async validation + multi-step form) | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/03-async-dan-multistep.jsx` + file baru untuk multi-step | 120–150 menit |
 | 04 | `soal/04-form-submission.md` (2 bagian: optimistic update + cascading dropdown) | `LEVEL-3-Frontend-React/materi-praktikum/05-latihan-form/code/04-form-submission.jsx` | 120 menit |
 
 ### Catatan
 
-- Seperti di `04-latihan-state`, nama file tidak mencerminkan isinya.
-  `02-react-hook-form` tidak memakai React Hook Form, dan `03-zod-validation`
-  tidak memakai Zod. Semua latihan di sini memakai `useState` biasa. Ini justru
-  bagus: kamu paham dulu apa yang dikerjakan library itu di balik layar.
+- Semua latihan di sini memakai `useState` biasa, tanpa React Hook Form atau Zod.
+  Ini disengaja: kamu paham dulu apa yang dikerjakan library itu di balik layar.
+  Nama file lama (`02-react-hook-form`, `03-zod-validation`) sudah diganti supaya
+  sesuai isi.
 - Starter `03` tidak punya bagian multi-step form (soal bagian 2). Buat file
   sendiri, misalnya `src/03b-multi-step.jsx`.
 - Starter `01` punya bonus `ContactForm` dan `SurveyForm`. Starter `02` punya
   bonus `LoginForm` dan `AddressForm`. Starter `04` punya bonus `ShoppingCart`.
 
 ---
+
+### Soal buntu?
+
+Blok jawaban yang dulu ada di starter dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Coba dulu minimal 30 menit dan catat apa yang sudah kamu coba, baru buka untuk membandingkan.
 
 ## Cara Menjalankan Starter
 

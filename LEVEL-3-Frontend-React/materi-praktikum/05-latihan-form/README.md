@@ -5,8 +5,8 @@
 Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 1. Memahami controlled components — input yang valuenya dikontrol oleh React state
-2. Menggunakan React Hook Form untuk form handling yang lebih efisien
-3. Mengintegrasikan Zod untuk schema validation
+2. Membuat validasi per field (touched state), validasi async, dan form multi-langkah dengan `useState`
+3. (Opsional, setelah semua soal) Membandingkan hasilmu dengan React Hook Form dan Zod
 4. Mengimplementasikan form submission dengan handling loading dan error states
 
 ---
@@ -15,11 +15,8 @@ Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 - Sudah memahami React hooks (`useState`, `useEffect`)
 - Sudah membuat project React dengan Vite
-- Install dependencies:
-
-```bash
-npm install react-hook-form zod @hookform/resolvers
-```
+- Soal-soal di folder ini hanya butuh React. React Hook Form dan Zod opsional,
+  dipakai setelah soal selesai untuk membandingkan.
 
 ---
 
@@ -50,7 +47,7 @@ const inputRef = useRef(null);
 
 ---
 
-## React Hook Form
+## React Hook Form (opsional, tidak dipakai di soal)
 
 ```jsx
 import { useForm } from "react-hook-form";
@@ -78,7 +75,7 @@ function LoginForm() {
 
 ---
 
-## Zod Validation
+## Zod Validation (opsional, tidak dipakai di soal)
 
 ```jsx
 import { z } from "zod";
@@ -106,7 +103,7 @@ function LoginForm() {
 npm create vite@latest latihan-form -- --template react
 cd latihan-form
 npm install
-npm install react-hook-form zod @hookform/resolvers
+# opsional, setelah soal selesai: npm install react-hook-form zod @hookform/resolvers
 
 # Salin file soal ke src/
 # Jalankan
@@ -118,8 +115,8 @@ npm run dev
 ## Checklist Penyelesaian
 
 - [ ] Controlled component dengan onChange handler
-- [ ] React Hook Form dengan register dan handleSubmit
-- [ ] Zod schema validation dengan error messages
+- [ ] Validasi per field dengan touched state dan pesan error
+- [ ] Validasi async dan form multi-langkah
 - [ ] Form submission dengan loading state
 - [ ] Reset form setelah submit berhasil
 

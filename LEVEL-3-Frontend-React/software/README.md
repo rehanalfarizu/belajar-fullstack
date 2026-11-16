@@ -8,10 +8,9 @@ Folder ini berisi panduan install dan setup **software yang dibutuhkan** untuk b
 
 | # | File | Software | Keterangan |
 |---|------|----------|-------------|
-| 01 | `01-nodejs-install.md` | Node.js & npm | Wajib — untuk menjalankan React |
-| 02 | `02-vscode-extensions.md` | VS Code Extensions | ESLint, Prettier, React snippets |
-| 03 | `03-vite-install.md` | Vite | Build tool modern untuk React |
-| 04 | `04-react-devtools.md` | React DevTools | Browser extension untuk debug React |
+| 01 | [01-nodejs-vscode-install.md](01-nodejs-vscode-install.md) | Node.js, VS Code, DevTools, tools tambahan | Wajib — untuk menjalankan React |
+| 01 | [01-react-dan-vite-install.md](01-react-dan-vite-install.md) | React dan Vite | Membuat project React |
+| 02 | [02-tailwindcss-install.md](02-tailwindcss-install.md) | Tailwind CSS | Opsional — styling |
 
 ---
 
@@ -19,7 +18,7 @@ Folder ini berisi panduan install dan setup **software yang dibutuhkan** untuk b
 
 1. **Install software** sesuai urutan dari atas ke bawah
 2. **Cek versi** setelah install untuk memastikan berhasil
-3. **Install VS Code extensions** yang direkomendasikan
+3. **Install VS Code extensions** yang direkomendasikan (tabel di bawah)
 4. **Ikuti instruksi** di setiap file dengan teliti
 
 ---
@@ -27,10 +26,9 @@ Folder ini berisi panduan install dan setup **software yang dibutuhkan** untuk b
 ## Urutan Install yang Disarankan
 
 ```
-STEP 1 → Install Node.js (wajib)
-STEP 2 → Install VS Code Extensions (sangat direkomendasikan)
-STEP 3 → Install Vite untuk setup project React
-STEP 4 → Install React DevTools di browser
+STEP 1 → Install Node.js dan VS Code (01-nodejs-vscode-install.md)
+STEP 2 → Buat project React dengan Vite (01-react-dan-vite-install.md)
+STEP 3 → Tambah Tailwind CSS kalau perlu (02-tailwindcss-install.md)
 ```
 
 ---
@@ -65,4 +63,4 @@ npm run dev
 
 ---
 
-**Lanjut ke:** [tutorial/](../tutorial/) untuk panduan setup project
+**Lanjut ke:** [tutorial/](../tutorial/README.md) untuk panduan setup project

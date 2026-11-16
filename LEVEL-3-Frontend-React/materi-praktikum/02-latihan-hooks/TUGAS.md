@@ -25,7 +25,7 @@ Setelah selesai, kamu punya:
 | --- | --- | --- | --- |
 | 01 | `soal/01-useState-useEffect.md` | `LEVEL-3-Frontend-React/materi-praktikum/02-latihan-hooks/code/01-useState-useEffect.jsx` (1A) dan `LEVEL-3-Frontend-React/materi-praktikum/02-latihan-hooks/code/02-useRef-useCallback.jsx` bagian `GitHubUserSearch` (1B) | 90 menit |
 | 02 | `soal/02-useRef-useCallback.md` | `LEVEL-3-Frontend-React/materi-praktikum/02-latihan-hooks/code/02-useRef-useCallback.jsx` (sisa TODO) + file baru buatanmu untuk 2A dan 2C | 90 menit |
-| 03 | `soal/03-useContext-useReducer.md` | Tidak ada starter kosong. Tulis dari nol di file baru `src/03-cart.jsx` | 90–120 menit |
+| 03 | `soal/03-useContext-useReducer.md` | `LEVEL-3-Frontend-React/materi-praktikum/02-latihan-hooks/code/03-useContext-useReducer.jsx` (kerangka dengan TODO) | 90–120 menit |
 | 04 | `soal/04-custom-hooks.md` | `LEVEL-3-Frontend-React/materi-praktikum/02-latihan-hooks/code/04-custom-hooks.jsx` | 90 menit |
 
 ### Catatan: starter tidak pas 1:1 dengan soal
@@ -35,18 +35,24 @@ Setelah selesai, kamu punya:
 - `code/02` justru berisi `GitHubUserSearch` (soal 1B), timer/clock, document
   title, resize listener, dan fetch API. TODO auto-focus (2A) dan
   `useCallback` + `React.memo` (2C) **tidak ada** di starter. Buat file sendiri.
-- `code/03-useContext-useReducer.jsx` **sudah berisi implementasi jadi**
-  (tanpa TODO). Anggap itu seperti `contoh/`: jangan dibuka sebelum versimu
-  jalan. Nama action-nya juga beda dengan soal (`item/added` vs `ADD_ITEM`).
-  Ikuti soal.
+- `code/03-useContext-useReducer.jsx` berupa kerangka dengan `TODO(human)` dan
+  kriteria "Selesai kalau". Implementasi lama dipindah ke
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Jangan dibuka
+  sebelum versimu jalan. Nama action-nya beda dengan soal; ikuti soal.
 - `code/04` berisi `useLocalStorage`, `useDebounce`, `usePrevious`,
   `useIntersectionObserver`, `useMediaQuery`, `useOnClickOutside`. Soal minta
   juga `useFetch` dan `useToggle`, yang tidak ada di starter. Tulis sendiri.
-- Soal 2B agak bertentangan: `elapsedTime` disebut state, lalu disebut harus di
-  `useRef`. Pikirkan sendiri: kalau angkanya tidak pernah memicu render, apa yang
-  terjadi pada tampilan? Tulis keputusanmu dan alasannya di jurnal.
+- Soal 2B: `elapsedTime` tampil di layar, jadi dia state. Yang masuk `useRef`
+  adalah interval ID dan waktu mulai (tidak tampil, tidak perlu memicu render).
+  Starter `code/02-useRef-useCallback.jsx` sebenarnya isinya useEffect (soal 01);
+  di akhir file ada kerangka kosong untuk 2B. Coba dulu taruh `elapsedTime` di
+  `useRef` dan amati apa yang terjadi pada layar, lalu catat di jurnal.
 
 ---
+
+### Soal buntu?
+
+Blok jawaban yang dulu ada di starter dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Coba dulu minimal 30 menit dan catat apa yang sudah kamu coba, baru buka untuk membandingkan.
 
 ## Cara Menjalankan Starter
 
@@ -154,5 +160,5 @@ Teori: [React Hooks](../../materi-teori/02-react-hooks/README.md) dan
 ## Setelah Selesai
 
 Isi [CHECKLIST.md](CHECKLIST.md). Bandingkan keranjangmu dengan
-`code/03-useContext-useReducer.jsx` **setelah** punyamu jalan. Tulis di jurnal:
+[solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md) **setelah** punyamu jalan. Tulis di jurnal:
 keputusan apa yang beda, dan mana yang menurutmu lebih jelas.

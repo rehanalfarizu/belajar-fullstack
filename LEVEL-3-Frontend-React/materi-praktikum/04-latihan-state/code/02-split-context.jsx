@@ -30,12 +30,7 @@ import { createContext, useContext, useState, useEffect, useMemo } from "react";
 export function ThemeProvider({ children }) {
   // TODO: useState dengan lazy initialization
   // - function getInitialTheme() {
-  //     try {
-  //       const stored = localStorage.getItem("app-theme");
-  //       return stored || "light";
-  //     } catch { return "light"; }
-  //   }
-  // const [theme, setTheme] = useState(getInitialTheme);
+  // TODO(human): tulis sendiri. Baca deskripsi di folder soal/ dan petunjuk di atas.
 
   // TODO: toggleTheme function
   // const toggleTheme = () => setTheme(prev => prev === "light" ? "dark" : "light");

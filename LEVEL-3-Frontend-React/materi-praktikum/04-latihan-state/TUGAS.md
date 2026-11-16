@@ -24,23 +24,25 @@ Setelah selesai, kamu punya:
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
 | 01 | `soal/01-context-api.md` (2 bagian: AuthContext + persistence) | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/01-context-api.jsx` | 120 menit |
-| 02 | `soal/02-zustand.md` (isinya: split context + context selector) | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/02-zustand.jsx` (ThemeContext, salah satu potongan split context) + file baru untuk User/Notif context | 120 menit |
-| 03 | `soal/03-tanstack-query.md` (isinya: context selector + memoization) | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/03-context-selector.jsx` | 90 menit |
+| 02 | `soal/02-split-context.md` (split context + context selector) | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/02-split-context.jsx` (ThemeContext, salah satu potongan split context) + file baru untuk User/Notif context | 120 menit |
+| 03 | `soal/03-context-selector.md` (context selector + memoization) | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/03-context-selector.jsx` | 90 menit |
 | 04 | `soal/04-persist-state.md` | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/04-persist-state.jsx` | 120 menit |
-| Bonus | Tidak ada soal | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/03-tanstack-query.jsx` (isinya CartContext + reducer) | 60 menit |
+| Bonus | Tidak ada soal | `LEVEL-3-Frontend-React/materi-praktikum/04-latihan-state/code/05-cart-context.jsx` (CartContext + reducer) | 60 menit |
 
-### Catatan: nama file menyesatkan
+### Catatan
 
-- `02-zustand.md` dan `02-zustand.jsx` **tidak** memakai Zustand. Isinya Context.
-- `03-tanstack-query.md` **tidak** memakai TanStack Query. Isinya context
-  selector. Starter yang cocok justru `03-context-selector.jsx`.
-- `03-tanstack-query.jsx` isinya CartContext. Tidak ada soal untuk file ini,
-  jadi anggap latihan tambahan.
-- README folder ini menyuruh install `zustand` dan `@tanstack/react-query`. Untuk
-  soal yang ada sekarang, keduanya belum dipakai. Kalau penasaran, coba setelah
-  semua soal selesai: tulis ulang satu fitur memakai Zustand, lalu bandingkan.
+- Semua soal di sini memakai Context dan `useReducer` buatan sendiri, tanpa
+  library. Nama file lama (`02-zustand`, `03-tanstack-query`) sudah diganti supaya
+  sesuai isi.
+- `05-cart-context.jsx` tidak punya soal, jadi anggap latihan tambahan.
+- Kalau penasaran dengan Zustand atau TanStack Query, coba setelah semua soal
+  selesai: tulis ulang satu fitur memakai library itu, lalu bandingkan.
 
 ---
+
+### Soal buntu?
+
+Blok jawaban yang dulu ada di starter dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Coba dulu minimal 30 menit dan catat apa yang sudah kamu coba, baru buka untuk membandingkan.
 
 ## Cara Menjalankan Starter
 
