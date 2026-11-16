@@ -122,17 +122,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```html
-<nav aria-label="Navigasi Utama">
-  <ul>
-    <li><a href="#hero">Beranda</a></li>
-    <li><a href="#tentang">Tentang</a></li>
-    <li><a href="#layanan">Layanan</a></li>
-    <li><a href="#galeri">Galeri</a></li>
-    <li><a href="#kontak">Kontak</a></li>
-  </ul>
-</nav>
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Navigasi & Beragam Jenis Link — Bagian B: `<nav>` dengan Anchor Links ke Section".
+>
+> Pertanyaan pemandu: struktur apa yang cocok untuk daftar link menu (bukan `<div>` atau `<button>`), dan bagaimana tiap `href` bisa "menemukan" section tujuannya?
 
 ### Yang Terjadi di Browser
 

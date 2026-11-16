@@ -88,7 +88,7 @@ Untuk setiap bagian di bawah, alurnya:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio — Nama Kamu</title>
-  <meta name="description content="Portfolio pribadi dengan karya, video, dan podcast.">
+  <meta name="description" content="Portfolio pribadi dengan karya, video, dan podcast.">
 </head>
 <body>
   <!-- header + nav + section multimedia -->

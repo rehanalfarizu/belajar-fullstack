@@ -32,17 +32,11 @@ Buka https://github.com, buat akun (kalau belum punya).
 
 Di terminal, buat folder baru dan inisialisasi Git:
 
-```bash
-# 1. Buat folder baru
-mkdir ~/latihan-git-pertama
-cd ~/latihan-git-pertama
+Di terminal: buat folder baru bernama `latihan-git-pertama` di home directory, masuk ke dalamnya, jadikan folder itu repository Git, lalu cek statusnya.
 
-# 2. Inisialisasi Git repository
-git init
-
-# 3. Cek status
-git status
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Git Dasar — SOAL 1: Inisialisasi Repository".
+>
+> Pertanyaan pemandu: perintah apa yang membuat folder `.git`, dan perintah apa yang memberi tahu kamu kondisi repo saat ini?
 
 **Expected output:**
 ```
@@ -58,17 +52,11 @@ nothing to commit (create/copy files and use "git add" to track)
 
 ### SOAL 2: Buat File dan Cek Status
 
-```bash
-# 1. Buat file README.md
-cat > README.md << 'EOF'
-# Latihan Git Pertama
+Buat file `README.md` berisi judul "Latihan Git Pertama" dan satu kalimat penjelasan, lalu cek status lagi.
 
-Repository ini adalah latihan untuk memahami dasar-dasar Git.
-EOF
-
-# 2. Cek status lagi
-git status
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Git Dasar — SOAL 2: Buat File dan Cek Status".
+>
+> Pertanyaan pemandu: kenapa file baru muncul sebagai "Untracked", dan apa artinya buat Git?
 
 **Expected output:**
 ```
@@ -87,13 +75,11 @@ Untracked files:
 
 ### SOAL 3: Add ke Staging Area
 
-```bash
-# 1. Add file ke staging
-git add README.md
+Masukkan `README.md` ke staging area, lalu cek status.
 
-# 2. Cek status
-git status
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Git Dasar — SOAL 3: Add ke Staging Area".
+>
+> Pertanyaan pemandu: apa bedanya working directory, staging area, dan repository, dan perintah mana yang memindahkan file antar ketiganya?
 
 **Expected output:**
 ```
@@ -112,14 +98,11 @@ Changes to be committed:
 
 ### SOAL 4: Commit (Simpan Perubahan)
 
-```bash
-# 1. Commit dengan pesan yang jelas
-git commit -m "feat: file README pertama"
+Simpan perubahan dengan commit berpesan jelas ("feat: file README pertama"), lalu cek status dan riwayat commit dalam satu baris per commit.
 
-# 2. Cek status dan log
-git status
-git log --oneline
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Git Dasar — SOAL 4: Commit".
+>
+> Pertanyaan pemandu: bagaimana cara menulis pesan commit lewat satu perintah, dan perintah apa yang menampilkan riwayat ringkas?
 
 **Expected output:**
 ```
@@ -132,18 +115,11 @@ git log --oneline
 
 ### SOAL 5: Push ke GitHub
 
-```bash
-# 1. Hubungkan folder lokal ke GitHub repository
-git remote add origin https://github.com/USERNAME/latihan-git-pertama.git
+Hubungkan folder lokal ke repository GitHub `latihan-git-pertama` milikmu dengan nama remote `origin`, lalu push branch `main`. Setelah itu buka GitHub dan pastikan `README.md` muncul.
 
-# Ganti USERNAME dengan username GitHub kamu!
-
-# 2. Push ke GitHub
-git push -u origin main
-
-# 3. Buka https://github.com/USERNAME/latihan-git-pertama
-#    → File README.md sudah muncul!
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Git Dasar — SOAL 5: Push ke GitHub".
+>
+> Pertanyaan pemandu: apa yang dilakukan remote `origin`, dan kenapa push pertama butuh opsi untuk mengatur upstream?
 
 ---
 

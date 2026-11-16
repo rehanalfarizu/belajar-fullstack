@@ -146,11 +146,15 @@ const now = () => Date.now();
 
 1. Buka `07-callback-higher-order.js`
 2. Tulis section komentar `// === BAGIAN A: ARROW FUNCTIONS ===`
-3. Tulis satu function declaration biasa, misal `function kuadrat(n) { return n * n; }`
-4. Di bawahnya, tulis versi arrow-nya: `const kuadratArrow = n => n * n;`
-5. Tambah arrow function multi-param: `const tambah = (a, b) => a + b;`
+3. Tulis satu function declaration biasa yang menghitung kuadrat sebuah angka
+4. Di bawahnya, tulis versi arrow-nya dengan implicit return
+5. Tambah arrow function dengan dua parameter (misal penjumlahan)
 6. Tambah arrow function multi-line dengan `console.log` di dalamnya sebelum `return`
 7. Test dengan `console.log` semua varian
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 07 — Bagian A: Arrow Functions".
+>
+> Pertanyaan pemandu: apa yang berubah dari function biasa ke arrow, dan kapan kurung kurawal mewajibkan `return` eksplisit?
 
 ### Verifikasi
 
@@ -214,12 +218,16 @@ Callback bisa **named** (ada nama, misal `tambah`), **anonymous** (function tanp
 ### Cara Mengetik dari 0
 
 1. Tulis section `// === BAGIAN B: CALLBACK FUNDAMENTALS ===`
-2. Tulis `function prosesData(data, callback) { ... }`. Di dalam, tambah `console.log("Memproses...")`, lalu panggil `callback(data)`
+2. Tulis `prosesData` yang menerima `data` dan `callback`. Di dalam, cetak "Memproses...", lalu panggil callback dengan `data`
 3. Panggil `prosesData` dengan data array dan callback yang print
-4. Tulis `function hitung(a, b, operasi) { return operasi(a, b); }`
+4. Tulis `hitung` yang menerima dua angka dan sebuah function `operasi`, lalu mengembalikan hasil `operasi` atas kedua angka itu
 5. Definisikan 2 callback named: `tambah` dan `kali` sebagai arrow function
-6. Panggil `hitung(5, 3, tambah)` dan `hitung(5, 3, kali)`
-7. Panggil `hitung(5, 3, (x, y) => x ** y)` — inline arrow callback untuk pangkat
+6. Panggil `hitung` dengan 5 dan 3 memakai masing-masing callback named
+7. Panggil `hitung` sekali lagi dengan arrow function inline untuk pangkat
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 07 — Bagian B: Callback Fundamentals".
+>
+> Pertanyaan pemandu: function apa yang dikirim sebagai argumen, dan siapa yang memanggilnya?
 
 ### Verifikasi
 
@@ -352,9 +360,13 @@ Contoh chain dengan `sort` + `slice`:
 
 1. Tulis section `// === BAGIAN D: METHOD CHAINING ===`
 2. Mulai dari yang paling simpel: `filter().map().join(', ')`. Tulis per-baris, jangan satu baris panjang
-3. Untuk chain `map().filter()`: pertama `map(m => m.nama)`, hasilnya array string. Lalu `.filter(nama => nama.length > 4)`
+3. Untuk chain `map().filter()`: `map` dulu untuk mengambil nama (hasilnya array string), lalu `filter` berdasarkan panjang nama (lebih dari 4 huruf). Setelah `map`, parameter callback `filter` mewakili apa?
 4. Untuk `sort().slice()`: **perhatikan mutasi**. Pakai `[...mahasiswas]` atau `mahasiswas.slice()` untuk clone
 5. Sebelum chain, `console.log(mahasiswas[0].nama)` untuk catat nilai awal. Setelah chain, `console.log` lagi — harus sama
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 07 — Bagian D: chain `map` lalu `filter`".
+>
+> Pertanyaan pemandu: setelah `map`, array apa yang diterima `filter`, dan parameter callback-nya mewakili apa?
 
 ### Verifikasi
 
@@ -413,12 +425,16 @@ Contoh kedua: **function factory** yang bikin fungsi pengali khusus.
 ### Cara Mengetik dari 0
 
 1. Tulis section `// === BAGIAN E: CLOSURES ===`
-2. Tulis `function buatCounter() { let count = 0; return function() { ... } }`. Di dalam, tambah `count++` lalu `return count`
-3. Buat `const counterA = buatCounter()` lalu panggil 3× dengan `console.log`
-4. Buat `const counterB = buatCounter()` lalu panggil 2×, bandingkan dengan counterA (mereka independen)
-5. Tulis `function kaliX(x) { return (n) => n * x; }`
-6. Buat `const kali5 = kaliX(5)`, `const kali10 = kaliX(10)`, panggil beberapa kali dan cetak
+2. Tulis `buatCounter`: variabel `count` di dalam function luar, dan function dalam yang menaikkan `count` lalu mengembalikannya
+3. Buat `counterA` dari `buatCounter` lalu panggil 3× dengan `console.log`
+4. Buat `counterB` dari `buatCounter` lalu panggil 2×, bandingkan dengan counterA (mereka independen)
+5. Tulis `kaliX(x)` yang mengembalikan function yang mengalikan angka dengan `x`
+6. Buat `kali5` dan `kali10` dari `kaliX`, panggil beberapa kali dan cetak
 7. Tambah komentar untuk setiap `x` di `kaliX` agar jelas scope-nya
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 07 — Bagian E: Closures (`buatCounter` dan `kaliX`)".
+>
+> Pertanyaan pemandu: kenapa `count` tidak ikut di-reset tiap function dalam dipanggil, dan kenapa `counterA` dan `counterB` tidak saling mengganggu?
 
 ### Verifikasi
 
@@ -539,11 +555,15 @@ Pakai `.sort((a, b) => a.nama.localeCompare(b.nama))`. **Hati-hati mutasi**: pak
 ### Cara Mengetik dari 0
 
 1. Tulis section `// === BAGIAN G: LATIHAN KASUS ===`
-2. **Kasus 1**: `mahasiswas.reduce((acc, m) => acc + m.nilai, 0)`. Print dengan template literal
-3. **Kasus 2**: `mahasiswas.reduce((terbesar, m) => m.nilai > terbesar.nilai ? m : terbesar)`. Print nama + nilai
-4. **Kasus 3**: Tulis fungsi `groupByGrade` (boleh di luar atau inline). Di dalamnya, `reduce` dengan initial value `{ A: [], B: [], C: [], D: [] }`. Logika grade: `>= 90 ? 'A' : >= 80 ? 'B' : >= 70 ? 'C' : 'D'`
-5. **Kasus 4**: `[...mahasiswas].sort((a, b) => a.nama.localeCompare(b.nama)).map(m => m.nama)`. Print dengan `.join(", ")`
-6. Bukti non-mutasi: `console.log("Array asli utuh:", mahasiswas[0].nama === "Andi")`
+2. **Kasus 1**: total nilai semua mahasiswa dengan `reduce` (nilai awal 0). Print dengan template literal
+3. **Kasus 2**: mahasiswa nilai tertinggi dengan `reduce` tanpa nilai awal. Print nama + nilai
+4. **Kasus 3**: Tulis fungsi `groupByGrade` (boleh di luar atau inline). Di dalamnya, `reduce` dengan initial value object berisi empat array kosong (A, B, C, D). Batas grade: 90, 80, 70, sisanya D
+5. **Kasus 4**: nama semua mahasiswa terurut A-Z, tanpa mengubah array asli (clone dulu). Print dengan `.join(", ")`
+6. Bukti non-mutasi: cetak apakah `mahasiswas[0].nama` masih "Andi"
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 07 — Bagian G: Latihan Kasus (Studi Data Mahasiswa)".
+>
+> Pertanyaan pemandu: di tiap kasus, apa isi akumulator di langkah pertama, dan apa yang dikembalikan callback `reduce`?
 
 ### Verifikasi
 

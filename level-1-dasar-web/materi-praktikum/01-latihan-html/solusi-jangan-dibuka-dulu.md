@@ -698,6 +698,21 @@ Tiap bagian diberi judul sesuai nama soal dan bagiannya, jadi gampang dicari dar
 ```
 
 
+## 07 Navigasi & Beragam Jenis Link — Bagian B: `<nav>` dengan Anchor Links ke Section
+
+```html
+<nav aria-label="Navigasi Utama">
+  <ul>
+    <li><a href="#hero">Beranda</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+</nav>
+```
+
+
 ## 07 Navigasi & Beragam Jenis Link — Bagian C: Section dengan `id` sebagai Target Anchor
 
 ```html
