@@ -278,24 +278,9 @@ Sebelum nulis konten, kita butuh **kerangka** (boilerplate). Yang perlu kamu pah
 
 ### Pola Kode
 
-```html
-<main>
-  <article>
-    <h2>Judul Artikel</h2>
-    <p>Pendahuluan...</p>
-
-    <section>
-      <h3>Sub-Bagian 1</h3>
-      <p>Isi sub-bagian...</p>
-    </section>
-
-    <section>
-      <h3>Sub-Bagian 2</h3>
-      <p>Isi sub-bagian...</p>
-    </section>
-  </article>
-</main>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Artikel Blog dengan Semantic HTML — Bagian D: `<article>` vs `<section>` (BAGIAN PALING PENTING)".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser (TANPA CSS)
 
@@ -383,18 +368,9 @@ Sebelum nulis konten, kita butuh **kerangka** (boilerplate). Yang perlu kamu pah
 
 ### Pola Kode
 
-```html
-<!-- Kutipan pendek -->
-<blockquote>
-  <p>Konten adalah raja.</p>
-</blockquote>
-
-<!-- Kutipan dengan sumber -->
-<blockquote cite="https://bill-gates.com/quotes">
-  <p>Konten adalah raja.</p>
-  <cite>— Bill Gates</cite>
-</blockquote>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Artikel Blog dengan Semantic HTML — Bagian F: `<blockquote>` untuk Kutipan".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 

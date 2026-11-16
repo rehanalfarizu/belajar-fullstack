@@ -170,33 +170,9 @@ Tiap section yang dituju link harus punya `id` **unik**. `id` adalah **identifie
 
 ### Pola Kode
 
-```html
-<section id="hero">
-  <h1>Selamat Datang di Portfolio Saya</h1>
-  <p>Web developer & designer yang passionate dalam membuat produk digital.</p>
-  <a href="#kontak">Hubungi Saya</a>
-</section>
-
-<section id="tentang">
-  <h2>Tentang Saya</h2>
-  <!-- ... -->
-</section>
-
-<section id="layanan">
-  <h2>Layanan</h2>
-  <!-- ... -->
-</section>
-
-<section id="galeri">
-  <h2>Galeri</h2>
-  <!-- ... -->
-</section>
-
-<section id="kontak">
-  <h2>Hubungi Saya</h2>
-  <!-- ... -->
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Navigasi & Beragam Jenis Link — Bagian C: Section dengan `id` sebagai Target Anchor".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -259,25 +235,9 @@ Hero section = **bagian pertama** yang dilihat user. Berisi judul besar, tagline
 
 ### Pola Kode
 
-```html
-<section id="tentang">
-  <h2>Tentang Saya</h2>
-
-  <dl>
-    <dt>Nama</dt>
-    <dd>Budi Santoso</dd>
-
-    <dt>Lokasi</dt>
-    <dd>Yogyakarta, Indonesia</dd>
-
-    <dt>Spesialisasi</dt>
-    <dd>Web Development & UI/UX Design</dd>
-
-    <dt>Pengalaman</dt>
-    <dd>5 tahun di industri teknologi</dd>
-  </dl>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Navigasi & Beragam Jenis Link — Bagian E: `<dl>`, `<dt>`, `<dd>` untuk Info Terstruktur".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 
@@ -482,21 +442,9 @@ Saat link ke **website lain** (GitHub, LinkedIn, Twitter), buka di **tab baru** 
 
 ### Pola Kode
 
-```html
-<section id="kontak">
-  <h2>Hubungi Saya</h2>
-
-  <address>
-    <strong>Kantor:</strong><br>
-    Jl. Contoh Alamat No. 123<br>
-    Yogyakarta, Indonesia 55281
-  </address>
-
-  <p>Email: <a href="mailto:halo@nama.com">halo@nama.com</a></p>
-  <p>WhatsApp: <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">+62 812-3456-7890</a></p>
-  <p>Telepon: <a href="tel:+6281234567890">+62 812-3456-7890</a></p>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Navigasi & Beragam Jenis Link — Bagian J: `<address>` untuk Info Kontak".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 

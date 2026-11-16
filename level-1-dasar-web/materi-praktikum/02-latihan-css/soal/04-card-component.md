@@ -134,21 +134,9 @@ Untuk menampilkan **beberapa card** dalam 1 halaman, kamu butuh container Flexbo
 </div>
 ```
 
-```css
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 16px;
-  background: #f0f0f0; /* background halaman agar card terlihat */
-}
-
-.card {
-  flex: 1;
-  min-width: 250px;
-  /* base style dari Bagian A */
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian B: Layout Container dengan Flexbox".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -199,49 +187,9 @@ Profile card adalah pola paling umum di web: avatar + identitas + bio + social l
 </div>
 ```
 
-```css
-.profile-card {
-  text-align: center;
-}
-
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;  /* ← ini yang bikin bulat */
-  object-fit: cover;
-  margin: 0 auto 16px; /* center horizontal */
-  display: block;
-}
-
-.name {
-  font-size: 1.25rem;
-  margin-bottom: 4px;
-}
-
-.role {
-  color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-}
-
-.bio {
-  color: #475569;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-
-.social-links a {
-  color: #3b82f6;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian C: Profile Card (Avatar Circle)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -302,72 +250,9 @@ Product card adalah pola di e-commerce. Punya **gambar, harga, tombol, dan serin
 </div>
 ```
 
-```css
-.product-card {
-  position: relative; /* anchor untuk badge */
-}
-
-.product-image {
-  position: relative; /* anchor untuk badge */
-}
-
-.product-image img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-
-.badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #ef4444;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  z-index: 1; /* di atas gambar */
-}
-
-.product-info h3 {
-  margin-bottom: 8px;
-}
-
-.price {
-  margin-bottom: 12px;
-}
-
-.original {
-  color: #94a3b8;
-  text-decoration: line-through; /* coret harga asli */
-  margin-right: 8px;
-}
-
-.discount {
-  color: #ef4444;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.btn-beli {
-  width: 100%;
-  padding: 12px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-beli:hover {
-  background: #2563eb;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian D: Product Card dengan Badge Absolute".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -428,33 +313,9 @@ Product card adalah pola di e-commerce. Punya **gambar, harga, tombol, dan serin
 </div>
 ```
 
-```css
-.stat-card {
-  background: linear-gradient(135deg, #667eea, #764ba2); /* biru ke ungu */
-  color: white;
-  text-align: center;
-  padding: 32px 24px;
-}
-
-.stat-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-}
-
-.stat-number {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  opacity: 0.9; /* sedikit transparan */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian E: Stat Card dengan Gradient".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -507,44 +368,9 @@ Feature card menampilkan **1 fitur/icon + judul + deskripsi**. Sering di landing
 </div>
 ```
 
-```css
-.feature-card {
-  text-align: center;
-  padding: 32px 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* ↑ transition di element ASAL, bukan di :hover */
-}
-
-.feature-card:hover {
-  transform: translateY(-8px); /* card terangkat */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  /* shadow lebih dalam */
-}
-
-.feature-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-  width: 60px;
-  height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  background: #eff6ff;
-  border-radius: 50%; /* icon circle */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.feature-card h3 {
-  margin-bottom: 12px;
-  color: #1e293b;
-}
-
-.feature-card p {
-  color: #64748b;
-  font-size: 0.9rem;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian F: Feature Card dengan Hover Scale".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 

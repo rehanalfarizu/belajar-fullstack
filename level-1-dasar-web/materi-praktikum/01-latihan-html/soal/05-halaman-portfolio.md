@@ -111,19 +111,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```html
-<header>
-  <h1>Nama Kamu</h1>
-  <p>Web Developer & Designer</p>
-  <nav aria-label="Navigasi Portfolio">
-    <a href="#tentang">Tentang</a>
-    <a href="#proyek">Proyek</a>
-    <a href="#video">Video</a>
-    <a href="#audio">Audio</a>
-    <a href="#kontak">Kontak</a>
-  </nav>
-</header>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Halaman Portfolio dengan Multimedia — Bagian B: `<header>` + `<nav>` dengan Anchor Links".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 
@@ -211,38 +201,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```html
-<section id="proyek">
-  <h2>Proyek Saya</h2>
-
-  <figure>
-    <img src="https://picsum.photos/400/300?random=1"
-         alt="Tampilan depan aplikasi e-commerce"
-         width="400" height="300"
-         loading="lazy"
-         style="max-width: 100%;">
-    <figcaption>Proyek 1: Aplikasi E-Commerce</figcaption>
-  </figure>
-
-  <figure>
-    <img src="https://picsum.photos/400/300?random=2"
-         alt="Desain UI aplikasi mobile kesehatan"
-         width="400" height="300"
-         loading="lazy"
-         style="max-width: 100%;">
-    <figcaption>Proyek 2: Aplikasi Mobile Kesehatan</figcaption>
-  </figure>
-
-  <figure>
-    <img src="https://picsum.photos/400/300?random=3"
-         alt="Dashboard sistem manajemen konten"
-         width="400" height="300"
-         loading="lazy"
-         style="max-width: 100%;">
-    <figcaption>Proyek 3: Sistem Manajemen Konten</figcaption>
-  </figure>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Halaman Portfolio dengan Multimedia — Bagian D: Galeri `<figure>` + `<figcaption>` + `loading="lazy"`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -270,18 +231,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```html
-<img
-  src="gambar-medium.jpg"
-  srcset="gambar-kecil.jpg 480w,
-          gambar-medium.jpg 1024w,
-          gambar-besar.jpg 1920w"
-  sizes="(max-width: 600px) 480px,
-         (max-width: 1200px) 1024px,
-         1920px"
-  alt="Foto pemandangan gunung"
-  width="1920" height="1080">
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Halaman Portfolio dengan Multimedia — Bagian E: Responsive Image dengan `srcset`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 **Penjelasan:**
 - `src` = fallback kalau browser tidak support `srcset`
@@ -500,297 +452,17 @@ Untuk setiap bagian di bawah, alurnya:
 
 ## Contoh Kode Lengkap dengan Penjelasan (Referensi)
 
-> **Tujuan section ini**: Memberikan kamu **kode jadi utuh** yang setiap barisnya punya **comment inline** menjelaskan **kenapa** keputusan itu diambil. Baca comment-nya — itu yang paling valuable.
+> **Tujuan section ini**: Halaman portfolio jadi lengkap dengan **comment inline** yang menjelaskan **kenapa** tiap keputusan diambil, dan itu ada di file solusi. Jangan dibuka dulu.
 >
 > **Cara pakai**:
-> 1. **Jangan copy-paste** kode ini ke `code/05-halaman-portfolio.html` — itu pelanggaran aturan "ketik dari 0"
-> 2. **Baca** sebagai referensi: pahami kenapa setiap tag/atribut dipilih
-> 3. Setelah paham, **tutup file ini** dan ketik versi kamu sendiri dari memori
-> 4. Bandingkan dengan versi kamu di akhir — apa yang sama, apa yang beda?
+> 1. Kerjakan dulu `code/05-halaman-portfolio.html` dengan versimu sendiri sampai checklist di atas centang semua
+> 2. Kalau benar-benar buntu, buka [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Halaman Portfolio dengan Multimedia — Contoh Kode Lengkap dengan Penjelasan (Referensi)"
+> 3. **Jangan copy-paste** ke `code/`; baca comment-nya, tutup file, lalu ketik ulang dari memori
+> 4. Bandingkan dengan versimu: apa yang sama, apa yang beda?
+>
+> Pertanyaan pemandu sebelum buka: untuk tiap elemen di halamanmu, kenapa tag dan atribut itu yang kamu pilih, bukan yang lain?
 
-```html
-<!--
-  ============================================================================
-  CONTOH KODE JADI — Halaman Portfolio Multimedia
-  ============================================================================
-  File ini bukan untuk di-copy ke code/. Tujuannya: referensi baca.
-
-  Setiap baris kode di bawah punya comment (<!-- ... -->) yang menjelaskan
-  KEPUTUSAN TEKNIS: kenapa tag ini, kenapa atribut ini, trade-off-nya apa.
-  Baca comment-nya, bukan cuma kodenya.
-
-  Format comment:
-  - KEPUTUSAN: ...     → kenapa pilihan ini diambil
-  - PERHATIAN: ...     → jebakan / hal yang sering keliru
-  - TRADE-OFF: ...     → ada alternatif, ini kelebihan & kekurangan
-  ============================================================================
--->
-
-<!DOCTYPE html>
-<!-- KEPUTUSAN: <!DOCTYPE html> WAJIB baris pertama. Tanpa ini, browser
-     masuk "quirks mode" (render pakai aturan IE lama) — styling bisa kacau. -->
-<html lang="id">
-<!-- KEPUTUSAN: lang="id" = bahasa Indonesia. Screen reader pakai ini
-     untuk pilih suara & pelafalan yang sesuai. Wajib untuk aksesibilitas. -->
-<head>
-  <meta charset="UTF-8">
-  <!-- PERHATIAN: charset HARUS di 102 karakter pertama, idealnya baris
-       pertama <head>. Tanpa UTF-8, karakter seperti "é", "ñ", dan "ç" bisa
-       tampil jadi karakter aneh (mojibake). -->
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- KEPUTUSAN: viewport meta = fondasi RESPONSIVE design.
-       width=device-width = lebar halaman = lebar layar device (bukan 980px default)
-       initial-scale=1.0 = zoom 100% saat pertama load.
-       TANPA ini, halaman di HP akan di-zoom out 3x dan user harus pinch-zoom. -->
-
-  <title>Portfolio — Muhammad Raihan Alfarizi | Web Developer</title>
-  <!-- TRADE-OFF title:
-       - Terlalu panjang (>60 char) → kepotong di Google search result
-       - Terlalu pendek ("Portfolio") → tidak deskriptif
-       Yang ideal: Nama + Profesi, max ~50-60 karakter. -->
-
-  <meta name="description" content="Portfolio Muhammad Raihan Alfarizi, web developer. Proyek e-commerce, aplikasi mobile, dan sistem CMS.">
-  <!-- KEPUTUSAN: description muncul di bawah judul di Google search.
-       Max ~160 karakter. Wajib ada untuk SEO. -->
-
-  <style>
-    /* CSS minimal — fokus ke HTML dulu, CSS di LEVEL 2 */
-    body { font-family: -apple-system, sans-serif; max-width: 1100px; margin: 0 auto; padding: 1.5rem; line-height: 1.6; }
-    nav a { margin-right: 1rem; }
-    figure { margin-bottom: 1.5rem; }
-    img { max-width: 100%; height: auto; }  /* Responsive: gambar tidak overflow */
-    iframe, video, audio { max-width: 100%; }
-  </style>
-</head>
-<body>
-
-  <!-- ============================================================================
-       HEADER + NAVIGASI
-       ============================================================================ -->
-  <header>
-    <!-- KEPUTUSAN: <header> di sini = header HALAMAN (bukan header artikel).
-         Wadah untuk: judul situs + tagline + navigasi utama. -->
-
-    <h1>Muhammad Raihan Alfarizi</h1>
-    <p>Web Developer & Computer Science Student</p>
-    <!-- PERHATIAN: Hanya SATU <h1> per halaman. Ini judul UTAMA.
-         <h2>/<h3> di bawah = sub-bagian, BUKAN judul baru halaman. -->
-
-    <nav aria-label="Navigasi utama portfolio">
-      <!-- KEPUTUSAN: aria-label="..." = label untuk screen reader.
-           Karena <nav> bisa lebih dari satu (misal: nav utama + nav footer),
-           aria-label bedain: "Navigasi utama" vs "Navigasi footer". -->
-
-      <a href="#tentang">Tentang</a>
-      <a href="#proyek">Proyek</a>
-      <a href="#video">Video</a>
-      <a href="#audio">Audio</a>
-      <a href="#kontak">Kontak</a>
-      <!-- KEPUTUSAN: href="#id-section" = ANCHOR LINK, loncat ke section
-           dengan id yang cocok. Tidak perlu JavaScript. -->
-    </nav>
-  </header>
-
-  <main>
-    <!-- KEPUTUSAN: <main> = konten UTAMA halaman. Hanya SATU per halaman.
-         Bedanya dengan <body>: body = semua, main = yang utama saja. -->
-
-    <!-- ============================================================================
-         SECTION TENTANG + FOTO PROFIL
-         ============================================================================ -->
-    <section id="tentang">
-      <h2>Tentang Saya</h2>
-      <!-- PERHATIAN: id="tentang" HARUS cocok dengan href="#tentang" di nav.
-           Salah ketik satu huruf = link tidak jalan (tidak loncat ke mana-mana). -->
-
-      <img
-        src="https://i.pravatar.cc/300?img=12"
-        alt="Foto profil Muhammad Raihan Alfarizi, seorang web developer"
-        width="300"
-        height="300"
-        loading="eager">
-      <!-- KEPUTUSAN tiap atribut <img>:
-           - src: URL gambar (https://i.pravatar.cc = avatar acaran untuk testing)
-           - alt: HARUS DESKRIPTIF — sebutkan SIAPA + APA. "Foto profil X, seorang Y"
-           - width/height: 300x300 = ukuran ASLI. Browser pakai ini untuk
-             reservasi tempat SEBELUM gambar load = tidak ada layout shift.
-           - loading="eager": DEFAULT, tapi ditulis eksplisit untuk foto PROFIL
-             (yang di atas fold, harus langsung muncul, BUKAN lazy).
-        -->
-
-      <p>Saya adalah mahasiswa Computer Science semester 5 dengan passion di web development. Saya berpengalaman membangun aplikasi web menggunakan HTML, CSS, dan JavaScript.</p>
-      <!-- KEPUTUSAN: paragraf bio. <p> otomatis punya margin atas/bawah dari browser. -->
-    </section>
-
-    <!-- ============================================================================
-         GALERI PROYEK
-         ============================================================================ -->
-    <section id="proyek">
-      <h2>Proyek Saya</h2>
-
-      <figure>
-        <img
-          src="https://picsum.photos/400/300?random=1"
-          alt="Tampilan depan aplikasi e-commerce dengan katalog produk"
-          width="400"
-          height="300"
-          loading="lazy">
-        <!-- KEPUTUSAN: loading="lazy" untuk gambar di BAWAH fold.
-             Foto profil di atas = eager (langsung load).
-             Gambar proyek di sini = lazy (load saat scroll mendekat).
-             Hasil: halaman load 2-3x lebih cepat. -->
-
-        <figcaption>Proyek 1: Aplikasi E-Commerce</figcaption>
-        <!-- KEPUTUSAN: <figcaption> HARUS di dalam <figure>, bukan di luar.
-             Wadah figure = gambar + caption yang "satu paket". -->
-      </figure>
-
-      <figure>
-        <img
-          src="https://picsum.photos/400/300?random=2"
-          alt="Desain UI aplikasi mobile kesehatan dengan dashboard"
-          width="400"
-          height="300"
-          loading="lazy">
-
-        <figcaption>Proyek 2: Aplikasi Mobile Kesehatan</figcaption>
-      </figure>
-
-      <figure>
-        <img
-          src="https://picsum.photos/400/300?random=3"
-          alt="Dashboard admin untuk sistem manajemen konten"
-          width="400"
-          height="300"
-          loading="lazy">
-
-        <figcaption>Proyek 3: Sistem Manajemen Konten</figcaption>
-      </figure>
-
-      <figure>
-        <!-- CONTOH srcset untuk responsive image.
-             Browser pilih otomatis: kecil (480w), sedang (800w), atau besar (1200w)
-             berdasarkan ukuran layar + devicePixelRatio. -->
-        <img
-          src="https://picsum.photos/800/600?random=4"
-          srcset="https://picsum.photos/480/360?random=4 480w,
-                  https://picsum.photos/800/600?random=4 800w,
-                  https://picsum.photos/1200/900?random=4 1200w"
-          sizes="(max-width: 600px) 480px,
-                 (max-width: 1200px) 800px,
-                 1200px"
-          alt="Hero image website travel dengan responsive sizing"
-          width="1200"
-          height="900"
-          loading="lazy">
-        <!-- PENJELASAN srcset + sizes:
-             - srcset: daftar gambar + lebarnya. Browser download yang paling cocok.
-             - sizes: "pada layout selebar ini, gambar akan tampil selebar ini"
-             - TRADE-OFF: srcset butuh 3+ ukuran gambar = 3x storage di server.
-               Untuk produksi, generate pakai tools (misal ImageMagick, sharp.js). -->
-
-        <figcaption>Proyek 4: Website Travel (Responsive Image Demo)</figcaption>
-      </figure>
-    </section>
-
-    <!-- ============================================================================
-         VIDEO — YOUTUBE EMBED + VIDEO LOKAL
-         ============================================================================ -->
-    <section id="video">
-      <h2>Video</h2>
-
-      <h3>Presentasi Portfolio (YouTube)</h3>
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="Video presentasi portfolio Muhammad Raihan Alfarizi"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <!-- KEPUTUSAN tiap atribut <iframe>:
-           - src: HARUS URL /embed/, BUKAN /watch?v=
-             Watch URL: https://www.youtube.com/watch?v=VIDEO_ID  → TIDAK jalan di iframe
-             Embed URL: https://www.youtube.com/embed/VIDEO_ID   → jalan
-           - title: WAJIB untuk a11y. Screen reader membacakan title ke tunanetra.
-             Tanpa title = screen reader skip = user tidak tahu itu video apa.
-           - allow="...": izin browser untuk fitur (autoplay, fullscreen, dll)
-           - allowfullscreen: tombol fullscreen muncul di player YouTube
-        -->
-
-      <h3>Demo Project (Video Lokal)</h3>
-      <video controls width="640" height="360">
-        <!-- KEPUTUSAN: controls WAJIB. Tanpa controls, user tidak bisa play/pause
-             (kecuali autoplay + muted, tapi ini UX buruk). -->
-
-        <source src="demo-project.mp4" type="video/mp4">
-        <source src="demo-project.webm" type="video/webm">
-        <!-- KEPUTUSAN: 2 format untuk kompatibilitas.
-             MP4 (H.264) = universal, semua browser support
-             WebM = open source, lebih kecil, tapi Firefox/Edge only
-             Browser akan coba MP4 dulu, fallback ke WebM. -->
-
-        Browser Anda tidak mendukung tag video.
-        <!-- Fallback text — muncul kalau browser tidak support video.
-             Jarang terjadi di 2026, tapi best practice. -->
-      </video>
-    </section>
-
-    <!-- ============================================================================
-         AUDIO — PODCAST
-         ============================================================================ -->
-    <section id="audio">
-      <h2>Audio</h2>
-
-      <h3>Podcast: Perjalanan Belajar Web Development</h3>
-      <audio controls>
-        <!-- KEPUTUSAN: <audio> = pemutar audio tanpa visual.
-             Mirip <video> tapi tanpa width/height (player biasanya compact). -->
-
-        <source src="podcast.mp3" type="audio/mpeg">
-        <source src="podcast.ogg" type="audio/ogg">
-        <!-- KEPUTUSAN: MP3 paling universal, OGG untuk Firefox lawas. -->
-
-        Browser tidak mendukung audio.
-      </audio>
-      <!-- PERHATIAN: Audio dengan autoplay = BAD UX. Selalu pakai controls
-           atau set autoplay + muted + playsinline (untuk video di iOS). -->
-    </section>
-
-    <!-- ============================================================================
-         KONTAK
-         ============================================================================ -->
-    <section id="kontak">
-      <h2>Kontak</h2>
-      <p>Email: <a href="mailto:muhammadraihanalfarizi@gmail.com">muhammadraihanalfarizi@gmail.com</a></p>
-      <!-- KEPUTUSAN: mailto: = buka email client user (Outlook, Gmail, dst)
-           dengan field "To" sudah terisi. -->
-
-      <p>
-        <a href="https://github.com/username" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <!-- KEPUTUSAN: target="_blank" = buka di TAB BARU.
-             rel="noopener noreferrer" = WAJIB untuk keamanan.
-             Tanpa "noopener": halaman baru bisa akses window.opener (security hole).
-             Tanpa "noreferrer": referrer header terkirim (privacy concern). -->
-
-        <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Muhammad Raihan Alfarizi. Dibuat untuk latihan HTML.</p>
-    <!-- KEPUTUSAN: &copy; = simbol © (entity HTML).
-         Alternatif: tulis langsung © — tapi &copy; lebih aman untuk encoding lama. -->
-  </footer>
-
-</body>
-</html>
-```
-
-### Apa yang Bisa Dipelajari dari Comment di Atas?
+### Apa yang Bisa Dipelajari dari Comment di Solusi?
 
 | Tag/Atribut | Keputusan Kunci yang Dipelajari |
 |---|---|
@@ -808,8 +480,6 @@ Untuk setiap bagian di bawah, alurnya:
 | `target="_blank" rel="noopener noreferrer"` | Keamanan, bukan opsional |
 
 ---
-
-
 
 1. Buka `code/05-halaman-portfolio.html` di VS Code
 2. Isi semua `TODO(human)` dengan kodemu sendiri

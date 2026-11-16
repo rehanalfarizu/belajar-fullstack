@@ -221,18 +221,9 @@ Sebelum lanjut ke bagian selanjutnya, **pastikan kamu paham**:
 
 ### Pola Kode
 
-```html
-<section>
-  <h2>Demo: Inline Elements</h2>
-  <p>Inline elements sebaris dan hanya sepanjang isinya:</p>
-
-  <p>
-    <span style="border: 2px solid blue; padding: 5px;">Inline 1</span>
-    <span style="border: 2px solid blue; padding: 5px;">Inline 2</span>
-    <span style="border: 2px solid blue; padding: 5px;">Inline 3</span>
-  </p>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian D: Demo Inline Elements dengan `<span>`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -256,21 +247,9 @@ Di dalam `<p>` (block), kita bisa pakai **berbagai inline** untuk formatting. Ti
 
 ### Pola Kode
 
-```html
-<section>
-  <h2>Demo: Mixed Content dalam Paragraf</h2>
-
-  <p>
-    Ini teks biasa dalam paragraf.
-    <strong>Teks bold (penting)</strong> dan
-    <em>teks miring (penekanan)</em> dan
-    <a href="#">hyperlink</a> dan
-    <mark>highlight (perhatian)</mark> dan
-    <code>code tag</code> semuanya
-    <small>sebaris dalam paragraf yang sama</small>.
-  </p>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian E: Demo Mixed Content dalam `<p>`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -299,18 +278,9 @@ Header adalah **block container** di paling atas. Isinya: logo (`<span>` inline)
 
 ### Pola Kode
 
-```html
-<header style="border: 2px solid green; padding: 10px; margin: 5px;">
-  <h1>TokoOnline</h1>
-
-  <form>
-    <input type="search" placeholder="Cari produk..." name="q">
-    <button type="submit">Cari</button>
-  </form>
-
-  <a href="#">Cart (0)</a>
-</header>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian F: Header E-Commerce (Block Layout)".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser (Tanpa CSS Layout)
 
@@ -358,58 +328,9 @@ Tiap produk = **1 `<article>`** (block). Di dalam article, ada `<img>`, `<h3>`, 
 
 ### Pola Kode
 
-```html
-<main id="products">
-  <h2>Produk Unggulan</h2>
-
-  <article style="border: 2px solid purple; padding: 10px; margin: 5px;">
-    <img src="https://picsum.photos/300/200?random=1"
-         alt="Laptop untuk kerja dan gaming"
-         width="300" height="200"
-         style="max-width: 100%;">
-    <h3>Laptop Pro 14"</h3>
-    <p>Harga: <strong>Rp 15.000.000</strong></p>
-    <p>Laptop ringan dengan performa tinggi, cocok untuk profesional.</p>
-    <mark>Sale</mark>
-    <button>Beli Sekarang</button>
-  </article>
-
-  <article style="border: 2px solid purple; padding: 10px; margin: 5px;">
-    <img src="https://picsum.photos/300/200?random=2"
-         alt="Headphone wireless dengan noise cancelling"
-         width="300" height="200"
-         style="max-width: 100%;">
-    <h3>Headphone Wireless</h3>
-    <p>Harga: <strong>Rp 2.500.000</strong></p>
-    <p>Headphone bluetooth dengan active noise cancelling.</p>
-    <mark>New</mark>
-    <button>Beli Sekarang</button>
-  </article>
-
-  <article style="border: 2px solid purple; padding: 10px; margin: 5px;">
-    <img src="https://picsum.photos/300/200?random=3"
-         alt="Smartphone flagship dengan kamera 108MP"
-         width="300" height="200"
-         style="max-width: 100%;">
-    <h3>Smartphone Flagship</h3>
-    <p>Harga: <strong>Rp 12.000.000</strong></p>
-    <p>Smartphone dengan kamera 108MP dan baterai tahan seharian.</p>
-    <button>Beli Sekarang</button>
-  </article>
-
-  <article style="border: 2px solid purple; padding: 10px; margin: 5px;">
-    <img src="https://picsum.photos/300/200?random=4"
-         alt="Smartwatch dengan fitur kesehatan lengkap"
-         width="300" height="200"
-         style="max-width: 100%;">
-    <h3>Smartwatch Sport</h3>
-    <p>Harga: <strong>Rp 4.500.000</strong></p>
-    <p>Smartwatch dengan heart rate monitor dan GPS.</p>
-    <mark>Sale</mark>
-    <button>Beli Sekarang</button>
-  </article>
-</main>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian H: Product Listing dengan `<article>` (Block)".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -437,39 +358,9 @@ Tiap produk = **1 `<article>`** (block). Di dalam article, ada `<img>`, `<h3>`, 
 
 ### Pola Kode
 
-```html
-<aside style="border: 2px solid teal; padding: 10px; margin: 5px;">
-  <h3>Filter Kategori</h3>
-  <ul>
-    <li>
-      <label>
-        <input type="checkbox" name="kategori" value="elektronik">
-        Elektronik
-      </label>
-    </li>
-    <li>
-      <label>
-        <input type="checkbox" name="kategori" value="fashion">
-        Fashion
-      </label>
-    </li>
-    <li>
-      <label>
-        <input type="checkbox" name="kategori" value="makanan">
-        Makanan
-      </label>
-    </li>
-  </ul>
-
-  <h3>Keranjang Belanja</h3>
-  <ul>
-    <li>Laptop Pro 14" - Rp 15.000.000</li>
-    <li>Headphone Wireless - Rp 2.500.000</li>
-  </ul>
-  <p>Total: <strong>Rp 17.500.000</strong></p>
-  <a href="#">Checkout</a>
-</aside>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian I: Aside — Filter & Keranjang (Block di dalam Block)".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Catatan tentang `<label>` Membungkus `<input>`
 
@@ -492,27 +383,9 @@ Footer = block di akhir. 3 "kolom" info, tapi **tanpa CSS** semuanya vertikal (a
 
 ### Pola Kode
 
-```html
-<footer style="border: 2px solid brown; padding: 10px; margin: 5px;">
-  <h3>Tentang Kami</h3>
-  <p>TokoOnline adalah marketplace terpercaya untuk produk elektronik, fashion, dan makanan.</p>
-
-  <h3>Link Cepat</h3>
-  <ul>
-    <li><a href="#">Beranda</a></li>
-    <li><a href="#">Produk</a></li>
-    <li><a href="#">Bantuan</a></li>
-  </ul>
-
-  <h3>Kontak</h3>
-  <address>
-    Jl. Contoh Alamat No. 123<br>
-    Yogyakarta, Indonesia 55281
-  </address>
-
-  <p>&copy; 2026 TokoOnline. All rights reserved.</p>
-</footer>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Document Flow: Block vs Inline Elements — Bagian J: Footer (Block)".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 

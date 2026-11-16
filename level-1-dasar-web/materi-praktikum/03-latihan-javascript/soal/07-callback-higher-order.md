@@ -325,20 +325,9 @@ Karena `map`, `filter`, dan `find` me-return array atau nilai baru, kita bisa **
 
 Contoh:
 
-```javascript
-// Tanpa chain (5 baris, banyak variabel)
-const lulus = mahasiswas.filter(m => m.nilai >= 75);
-const namaLulus = lulus.map(m => m.nama);
-const stringAkhir = namaLulus.join(', ');
-console.log(stringAkhir);
-
-// Dengan chain (1 baris logika)
-const hasil = mahasiswas
-  .filter(m => m.nilai >= 75)   // → array 6 mahasiswa
-  .map(m => m.nama)              // → array 6 string nama
-  .join(', ');                   // → string "Andi, Budi, ..."
-console.log(hasil);
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian D: Method Chaining".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Hasilnya **sama persis**, tapi chain lebih mudah dibaca. Aturan penting:
 
@@ -349,13 +338,7 @@ Hasilnya **sama persis**, tapi chain lebih mudah dibaca. Aturan penting:
 
 Contoh chain dengan `sort` + `slice`:
 
-```javascript
-// Ambil 3 nilai tertinggi, urutkan descending, cetak nama
-const top3 = [...mahasiswas]              // clone supaya array asli tidak ke-sort
-  .sort((a, b) => b.nilai - a.nilai)      // urutkan descending
-  .slice(0, 3)                            // ambil 3 pertama
-  .map(m => m.nama);
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian D: Method Chaining" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Wajib Ada di Kode Kamu
 
@@ -412,19 +395,9 @@ Kenapa ini bekerja? Saat `buatCounter()` dipanggil, JavaScript bikin `count = 0`
 
 Contoh kedua: **function factory** yang bikin fungsi pengali khusus.
 
-```javascript
-function kaliX(x) {
-  return function(n) {
-    return n * x;
-  };
-}
-
-const kali5 = kaliX(5);
-const kali10 = kaliX(10);
-
-kali5(3);  // 15
-kali10(3); // 30
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian E: Closures".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 `kali5` dan `kali10` **masing-masing ingat `x` yang berbeda** (5 dan 10). Itulah kekuatan closure: bikin fungsi "spesialis" dari fungsi "generic".
 
@@ -467,53 +440,21 @@ Untuk benar-benar paham `map`, `filter`, dan `reduce`, kita tulis ulang versinya
 
 Skeleton untuk `myMap`:
 
-```javascript
-function myMap(array, callback) {
-  const result = [];
-  for (let i = 0; i < array.length; i++) {
-    result.push(callback(array[i], i, array));
-  }
-  return result;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian F: Custom Higher-Order Function (myMap, myFilter, myReduce)".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Callback di sini menerima **3 argumen**: elemen saat ini, index, dan array asli — sama persis seperti `Array.prototype.map` asli. (Untuk soal ini, kamu cukup pakai 1 atau 2 argumen pertama.)
 
 Skeleton untuk `myFilter`:
 
-```javascript
-function myFilter(array, callback) {
-  const result = [];
-  for (let i = 0; i < array.length; i++) {
-    if (callback(array[i], i, array)) {
-      result.push(array[i]);
-    }
-  }
-  return result;
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian F: Custom Higher-Order Function (myMap, myFilter, myReduce)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 Bedanya dengan `myMap`: `myFilter` **push elemen asli** (kalau callback return `true`), bukan hasil callback. Jadi callback `myFilter` selalu return boolean.
 
 Skeleton untuk `myReduce` (paling kompleks, ada 2 signature: dengan dan tanpa `initialValue`):
 
-```javascript
-function myReduce(array, callback, initialValue) {
-  let acc = initialValue;
-  let startIndex = 0;
-
-  // Kalau nggak ada initialValue, pakai elemen pertama sebagai acc
-  if (acc === undefined) {
-    acc = array[0];
-    startIndex = 1;
-  }
-
-  for (let i = startIndex; i < array.length; i++) {
-    acc = callback(acc, array[i], i, array);
-  }
-  return acc;
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Callback & Higher-Order Functions — Bagian F: Custom Higher-Order Function (myMap, myFilter, myReduce)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 > **Tantangan kecil**: cek `=== undefined`, BUKAN `!== undefined`. Bedanya: `myReduce([1,2,3], (a,b) => a+b, 0)` punya `initialValue = 0`, bukan `undefined`, jadi loop mulai dari index 0. Tapi `myReduce([1,2,3], (a,b) => a+b)` tanpa initialValue harus mulai dari index 1.
 

@@ -103,20 +103,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```html
-<header>
-  <h1>TechBlog</h1>
-  <p>Artikel tentang web development dan teknologi</p>
-  <nav aria-label="Navigasi Utama">
-    <ul>
-      <li><a href="#">Beranda</a></li>
-      <li><a href="#">Artikel</a></li>
-      <li><a href="#">Tentang</a></li>
-      <li><a href="#">Kontak</a></li>
-    </ul>
-  </nav>
-</header>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Layout Artikel dengan Semantic HTML (2 Kolom) — Bagian B: Page-Level `<header>` + `<nav>`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -190,33 +179,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode — Article dengan Header, Section, Footer
 
-```html
-<article>
-  <header>
-    <h2>Judul Artikel</h2>
-    <p>Oleh: <strong>Nama Penulis</strong> | <time datetime="2026-05-15">15 Mei 2026</time></p>
-  </header>
-
-  <section>
-    <h3>Pendahuluan</h3>
-    <p>Lead paragraph yang lebih besar...</p>
-  </section>
-
-  <section>
-    <h3>Pembahasan</h3>
-    <p>Isi pembahasan...</p>
-  </section>
-
-  <section>
-    <h3>Penutup</h3>
-    <p>Kesimpulan...</p>
-  </section>
-
-  <footer>
-    <p>Tag: <a href="#">#web</a> <a href="#">#html</a></p>
-  </footer>
-</article>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Layout Artikel dengan Semantic HTML (2 Kolom) — Bagian D: `<article>` — Unit Konten Independen".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -251,31 +216,9 @@ Di dalam section, kita bisa pakai elemen lain untuk konten yang kaya:
 
 ### Pola Kode
 
-```html
-<section>
-  <h3>Pembahasan</h3>
-  <p>Isi pembahasan...</p>
-
-  <blockquote>
-    <p>"Konten adalah raja. Pastikan artikelmu memberikan nilai tambah."</p>
-    <cite>— John Doe, Pakar Konten Digital</cite>
-  </blockquote>
-
-  <figure>
-    <img src="https://picsum.photos/800/400"
-         alt="Ilustrasi pembahasan artikel"
-         width="800" height="400"
-         style="max-width: 100%;">
-    <figcaption>Gambar 1: Ilustrasi konsep layout</figcaption>
-  </figure>
-
-  <ol>
-    <li>Langkah pertama dalam membuat layout...</li>
-    <li>Langkah kedua...</li>
-    <li>Langkah ketiga...</li>
-  </ol>
-</section>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Layout Artikel dengan Semantic HTML (2 Kolom) — Bagian E: Elemen-elemen Pendukung di dalam `<article>`".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 
@@ -307,29 +250,9 @@ Di dalam section, kita bisa pakai elemen lain untuk konten yang kaya:
 
 ### Pola Kode
 
-```html
-<aside>
-  <h3>Tentang Penulis</h3>
-  <img src="https://i.pravatar.cc/100?img=1"
-       alt="Foto penulis Budi Santoso"
-       width="100" height="100">
-  <p>Budi Santoso adalah web developer dengan 5 tahun pengalaman...</p>
-
-  <h3>Artikel Terkait</h3>
-  <ul>
-    <li><a href="#">Cara Membuat Layout Responsif</a></li>
-    <li><a href="#">Memahami Semantic HTML</a></li>
-    <li><a href="#">Tips SEO untuk Pemula</a></li>
-  </ul>
-
-  <h3>Kategori</h3>
-  <p>
-    <a href="#">#web</a>
-    <a href="#">#html</a>
-    <a href="#">#css</a>
-  </p>
-</aside>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Layout Artikel dengan Semantic HTML (2 Kolom) — Bagian F: `<aside>` untuk Sidebar".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 

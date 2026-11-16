@@ -298,25 +298,9 @@ Validation attributes = **aturan validasi** yang kita tulis di HTML. Browser **o
 
 ### Pola Kode
 
-```html
-<!-- required -->
-<input type="text" name="nama" required>
-
-<!-- minlength (untuk text) -->
-<input type="password" name="password" minlength="8">
-
-<!-- min/max (untuk number) -->
-<input type="number" name="usia" min="1" max="100" step="1">
-
-<!-- min/max (untuk date) -->
-<input type="date" name="tanggal_event" min="2026-01-01" max="2026-12-31">
-
-<!-- pattern (regex) -->
-<input type="tel" name="telepon" pattern="08[0-9]{8,11}" title="Nomor HP Indonesia">
-
-<!-- min/max (untuk time) -->
-<input type="time" name="jam_kerja" min="08:00" max="17:00">
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Form Lanjutan: HTML5 Input Types & Validasi Browser — Bagian E: Validation Attributes".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 

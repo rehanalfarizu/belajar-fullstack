@@ -145,19 +145,9 @@ Tanpa `<thead>`/`<tbody>`/`<tfoot>`:
 
 ### Pola Kode
 
-```html
-<table>
-  <thead>
-    <tr>
-      <th>Hari</th>
-      <th>Jam</th>
-      <th>Mata Kuliah</th>
-      <th>Ruang</th>
-      <th>Dosen</th>
-    </tr>
-  </thead>
-</table>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Tabel Jadwal dengan HTML Table Semantik — Bagian B: `<table>` sebagai Wadah + `<thead>` untuk Header".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser (TANPA CSS)
 
@@ -202,30 +192,9 @@ Tanpa `<thead>`/`<tbody>`/`<tfoot>`:
 
 ### Pola Kode
 
-```html
-<table>
-  <thead>
-    <tr>
-      <th>Hari</th>
-      <th>Jam</th>
-      <th>Mata Kuliah</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Senin</td>
-      <td>08:00</td>
-      <td>Algoritma</td>
-    </tr>
-    <tr>
-      <td>Selasa</td>
-      <td>10:00</td>
-      <td>Basis Data</td>
-    </tr>
-    <!-- Tambah baris lain di sini -->
-  </tbody>
-</table>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Tabel Jadwal dengan HTML Table Semantik — Bagian C: `<tbody>` + `<tr>` + `<td>` untuk Data".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -266,34 +235,9 @@ Tanpa `<thead>`/`<tbody>`/`<tfoot>`:
 
 ### Pola Kode
 
-```html
-<table>
-  <thead>
-    <tr>
-      <th>Hari</th>
-      <th>Jam</th>
-      <th>Mata Kuliah</th>
-      <th>Ruang</th>
-      <th>Dosen</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Senin</td>
-      <td>08:00</td>
-      <td>Algoritma</td>
-      <td>301</td>
-      <td>Dr. Andi</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <!-- 1 sel ini mencakup 5 kolom -->
-      <td colspan="5">Total: 1 mata kuliah (contoh minimal)</td>
-    </tr>
-  </tfoot>
-</table>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Tabel Jadwal dengan HTML Table Semantik — Bagian D: `colspan` untuk Merge Kolom Horizontal".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -343,33 +287,9 @@ Tapi kalau baris X pakai `colspan="3"` dan baris Y (di atas/bawahnya) tanpa `col
 
 ### Pola Kode
 
-```html
-<table>
-  <thead>
-    <tr>
-      <th>Hari</th>
-      <th>Jam</th>
-      <th>Mata Kuliah</th>
-      <th>Ruang</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Baris 1-2: Praktikum (rowspan=2) -->
-    <tr>
-      <td rowspan="2">Senin</td>
-      <td>08:00</td>
-      <td>Praktikum Algoritma</td>
-      <td>Lab 1</td>
-    </tr>
-    <tr>
-      <!-- Kolom "Hari" sudah di-cover rowspan di atas -->
-      <td>10:00</td>
-      <td>Praktikum Basis Data</td>
-      <td>Lab 2</td>
-    </tr>
-  </tbody>
-</table>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Tabel Jadwal dengan HTML Table Semantik — Bagian E: `rowspan` untuk Merge Baris Vertikal".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -414,19 +334,9 @@ Kalau kamu ketik 4 `<td>` di baris 2, browser bakal "geser" dan tabel jadi aneh.
 
 ### Pola Kode
 
-```html
-<table>
-  <thead>...</thead>
-  <tbody>
-    <!-- baris-baris data -->
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="4">Total: 10 mata kuliah, 18 SKS</td>
-    </tr>
-  </tfoot>
-</table>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Tabel Jadwal dengan HTML Table Semantik — Bagian F: `<tfoot>` untuk Rekapitulasi".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Verifikasi
 

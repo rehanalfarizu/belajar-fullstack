@@ -82,40 +82,9 @@ Untuk setiap bagian di bawah, alurnya:
 
 ### Pola Kode
 
-```css
-/* Button */
-.btn {
-  background: var(--color-primary);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  /* transition HARUS di element asal */
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.btn:hover {
-  background: var(--color-primary-dark);
-  transform: translateY(-1px);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-/* Card */
-.card {
-  background: var(--color-surface);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian A: Transition Dasar (Hover State)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -189,33 +158,9 @@ Untuk setiap bagian di bawah, alurnya:
 </div>
 ```
 
-```css
-.timing-demo {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 32px;
-}
-
-.timing-box {
-  width: 100px;
-  height: 50px;
-  background: var(--color-primary);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  /* durasi sama untuk semua, agar fair comparison */
-  transition: transform 0.6s;
-}
-
-.timing-box:hover {
-  transform: translateX(300px);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian B: Timing Function (Kurva Gerakan)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -293,86 +238,9 @@ Buka [easings.net](https://easings.net/) — visual cheat sheet untuk timing fun
 
 ### Pola Kode
 
-```css
-/* Fade in: opacity 0 ke 1 */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-/* Slide in: dari kiri */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.slide-in {
-  animation: slideInLeft 0.6s ease-out forwards;
-}
-
-/* Bounce: vertical bounce */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-20px); }
-}
-
-.bounce {
-  animation: bounce 1s ease-in-out infinite;
-}
-
-/* Spin: rotate 360deg */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.spinner {
-  animation: spin 0.8s linear infinite;
-}
-
-/* Pulse: scale + opacity */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%      { transform: scale(1.05); opacity: 0.8; }
-}
-
-.pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* Shake: horizontal shake */
-@keyframes shake {
-  0%, 100%       { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-  20%, 40%, 60%, 80%      { transform: translateX(8px); }
-}
-
-.shake {
-  animation: shake 0.6s ease-in-out;
-}
-
-/* Color cycle: background berubah */
-@keyframes colorCycle {
-  0%   { background: #ef4444; }
-  33%  { background: #f59e0b; }
-  66%  { background: #22c55e; }
-  100% { background: #ef4444; }
-}
-
-.color-cycle {
-  animation: colorCycle 3s linear infinite;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian C: @keyframes (Animasi Multi-Step)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -430,20 +298,9 @@ Loading spinner adalah penggunaan `@keyframes` paling umum. Cara paling simple: 
 <div class="spinner"></div>
 ```
 
-```css
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e2e8f0;
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian D: Loading Spinner (Praktis)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 **Spinner Dots (3 titik):**
 
@@ -455,28 +312,7 @@ Loading spinner adalah penggunaan `@keyframes` paling umum. Cara paling simple: 
 </div>
 ```
 
-```css
-.dots {
-  display: flex;
-  gap: 8px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  animation: bounce 1.4s ease-in-out infinite;
-}
-
-.dot:nth-child(2) { animation-delay: 0.2s; }
-.dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-  40%           { transform: scale(1); opacity: 1; }
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian D: Loading Spinner (Praktis)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 **Progress Bar (Indeterminate):**
 
@@ -486,28 +322,7 @@ Loading spinner adalah penggunaan `@keyframes` paling umum. Cara paling simple: 
 </div>
 ```
 
-```css
-.progress {
-  width: 100%;
-  height: 4px;
-  background: #e2e8f0;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  width: 30%;
-  height: 100%;
-  background: var(--color-primary);
-  border-radius: 2px;
-  animation: progress 1.5s ease-in-out infinite;
-}
-
-@keyframes progress {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(400%); }
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian D: Loading Spinner (Praktis)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Yang Terjadi di Browser
 
@@ -547,65 +362,9 @@ Hover animation yang baik = **responsif dan natural**. Duration terlalu lama (0.
 
 ### Pola Kode
 
-```css
-/* Card lift */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Button press */
-.btn-press {
-  transition: transform 0.1s ease;
-}
-
-.btn-press:active {
-  transform: scale(0.97);
-}
-
-/* Image zoom (butuh wrapper) */
-.image-zoom {
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.image-zoom img {
-  transition: transform 0.4s ease-out;
-  display: block;
-  width: 100%;
-}
-
-.image-zoom:hover img {
-  transform: scale(1.05);
-}
-
-/* Icon rotate */
-.icon-rotate {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.icon-rotate:hover {
-  transform: rotate(15deg);
-}
-
-/* Background slide (gradient slide) */
-.bg-slide {
-  background: linear-gradient(90deg, var(--color-primary) 50%, var(--color-primary-dark) 50%);
-  background-size: 200% 100%;
-  background-position: 100% 0;
-  color: white;
-  transition: background-position 0.4s ease;
-}
-
-.bg-slide:hover {
-  background-position: 0 0;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian E: Hover Animations (Lift, Press, Zoom, Rotate)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -656,29 +415,9 @@ Tanpa `overflow: hidden` di wrapper, gambar akan **keluar dari container** saat 
 
 ### Pola Kode (Cara 1: nth-child)
 
-```css
-.list-item {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-.list-item:nth-child(1) { animation-delay: 0.0s; }
-.list-item:nth-child(2) { animation-delay: 0.1s; }
-.list-item:nth-child(3) { animation-delay: 0.2s; }
-.list-item:nth-child(4) { animation-delay: 0.3s; }
-.list-item:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian F: Stagger Animation (Item Satu Per Satu)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Pola Kode (Cara 2: Custom Property `--i`)
 
@@ -694,25 +433,7 @@ Lebih elegan, scalable:
 </ul>
 ```
 
-```css
-.stagger-list li {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease-out forwards;
-  /* delay = i * 0.1s */
-  animation-delay: calc(var(--i) * 0.1s);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian F: Stagger Animation (Item Satu Per Satu)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Yang Terjadi di Browser
 
@@ -763,40 +484,9 @@ Lebih elegan, scalable:
 </body>
 ```
 
-```css
-.hero {
-  opacity: 0;
-  animation: fadeInDown 0.8s ease-out 0.2s forwards;
-}
-
-.section-anim {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: calc(0.5s + var(--i) * 0.15s);
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Animasi & Transisi — Bagian G: Page Load Animation".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 

@@ -132,21 +132,9 @@ Property penting untuk form card:
 
 ### Pola Kode
 
-```css
-.form-group label {
-  display: block;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-}
-
-.form-hint {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  margin-top: 4px;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian B: Label & Hint Text".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -190,19 +178,9 @@ Input adalah element yang **paling sering diinteraksi** user di form. Styling-ny
 
 ### Pola Kode
 
-```css
-.form-input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: inherit;
-  color: #1e293b;
-  background: white;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian C: Text & Email Input (Default State)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -241,26 +219,9 @@ Tanpa `font-family: inherit`, browser akan pakai **font default OS** untuk input
 
 ### Pola Kode
 
-```css
-/* Focus: border biru + glow */
-.form-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-/* Error: background merah muda */
-.form-input.error {
-  border-color: #ef4444;
-  background: #fef2f2;
-}
-
-/* Success: border hijau + background hijau muda (sudah ada) */
-.form-input.success {
-  border-color: #10b981;
-  background: #f0fdf4;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian D: Input States (Focus, Error, Success)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -357,18 +318,9 @@ textarea.form-input {
 
 ### Pola Kode
 
-```css
-.form-select {
-  /* property lain sudah ada */
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian F: Select Styling (Custom Arrow)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -417,62 +369,17 @@ Default checkbox/radio **terlihat berbeda di tiap OS** (Mac, Windows, Linux). Un
 
 ### Pola Kode
 
-```css
-.custom-checkbox,
-.custom-radio {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.custom-checkbox input,
-.custom-radio input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian G: Custom Checkbox & Radio".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 **Checkbox checkmark (sudah ada di kode):**
 
-```css
-.custom-checkbox input:checked + .checkmark {
-  background: #3b82f6;
-  border-color: #3b82f6;
-}
-
-.custom-checkbox input:checked + .checkmark::after {
-  content: "";
-  width: 6px;
-  height: 10px;
-  border: 2px solid white;
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg) translate(-1px, -1px);
-  display: block;
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian G: Custom Checkbox & Radio" (Blok berikutnya). Coba tulis sendiri dulu.
 
 **Radio inner dot (sudah ada di kode):**
 
-```css
-.custom-radio input:checked + .radiomark {
-  border-color: #3b82f6;
-}
-
-.custom-radio input:checked + .radiomark::after {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background: #3b82f6;
-  border-radius: 50%;
-  display: block;
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian G: Custom Checkbox & Radio" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Yang Terjadi di Browser
 
@@ -533,42 +440,9 @@ Button harus punya **multiple state** supaya user tahu apa yang terjadi:
 
 ### Pola Kode
 
-```css
-.btn {
-  display: inline-block;
-  padding: 12px 32px;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-}
-
-.btn-primary {
-  background: #3b82f6;
-  color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-.btn-primary:hover {
-  background: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-}
-
-.btn-primary:active {
-  background: #1d4ed8;
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-}
-
-.btn-primary:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian H: Button Primary (Default, Hover, Active, Focus)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -632,18 +506,9 @@ Ini mensimulasikan **fisika tombol fisik**: angkat saat disentuh, tekan saat dik
 
 **Button ghost (sudah ada di kode):**
 
-```css
-.btn-ghost {
-  background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-}
-
-.btn-ghost:hover {
-  background: #eff6ff;
-  transform: translateY(-2px);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 Form Styling — Bagian I: Button Secondary, Ghost, & Full Width".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 **Button full width (sudah ada di kode):**
 

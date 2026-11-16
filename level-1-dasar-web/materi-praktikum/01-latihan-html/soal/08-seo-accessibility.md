@@ -138,18 +138,9 @@ SEO meta tags di `<head>` = **kartu nama halaman** ke search engine. Tanpa ini, 
 
 ### Pola Kode
 
-```html
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Belajar Web Development dari Nol | Tutorial Gratis 2026</title>
-  <meta name="description" content="Tutorial web development dari dasar. Belajar HTML, CSS, JavaScript, dan Node.js gratis untuk pemula dengan contoh praktis.">
-  <meta name="keywords" content="web development, html, css, javascript, react, nodejs, tutorial">
-  <meta name="author" content="Nama Penulis">
-  <meta name="robots" content="index, follow">
-</head>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 SEO Meta Tags & Accessibility (A11y) — Bagian B: Meta Tags SEO Standar".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Kapan Pakai
 
@@ -310,40 +301,13 @@ Skip link = **link pertama** di body, **tersembunyi** (off-screen), **muncul saa
 
 ### Pola Kode
 
-```html
-<body>
-  <!-- Skip link: pertama di body, tersembunyi sampai fokus -->
-  <a href="#main-content" class="skip-link">Langsung ke Konten Utama</a>
-
-  <header>
-    <nav>...</nav>
-  </header>
-
-  <main id="main-content">
-    <!-- konten -->
-  </main>
-</body>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 SEO Meta Tags & Accessibility (A11y) — Bagian F: Skip-to-Content Link".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 **CSS untuk hide/show:**
-```html
-<!-- Pakai inline style untuk contoh ini, di LEVEL 2 akan dipisah ke file CSS -->
-<style>
-  .skip-link {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-  .skip-link:focus {
-    top: 10px;
-    left: 10px;
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    z-index: 100;
-  }
-</style>
-```
+
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 SEO Meta Tags & Accessibility (A11y) — Bagian F: Skip-to-Content Link" (Blok berikutnya). Coba tulis sendiri dulu.
 
 **Atau pakai JavaScript sederhana (alternatif):**
 ```html
@@ -456,26 +420,9 @@ A11y adalah **bukan tambahan** — itu **bagian wajib** dari HTML. Tanpa A11y, *
 
 ### Pola Kode
 
-```html
-<!-- Nav dengan aria-label (kalau > 1 nav) -->
-<nav aria-label="Navigasi Utama">
-  <ul>
-    <li><a href="#tentang">Tentang</a></li>
-    <li><a href="#kontak">Kontak</a></li>
-  </ul>
-</nav>
-
-<!-- Input dengan label + aria-describedby -->
-<label for="email">Email</label>
-<input type="email" id="email" name="email"
-       placeholder="nama@email.com"
-       aria-describedby="email-hint" required>
-<small id="email-hint">Kami tidak akan spam email kamu.</small>
-
-<!-- Link deskriptif, BUKAN "klik di sini" -->
-<a href="#artikel-lengkap">Baca artikel lengkap tentang CSS Grid</a>
-<!-- ❌ BUKAN: <a href="#">klik di sini</a> -->
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "08 SEO Meta Tags & Accessibility (A11y) — Bagian H: Accessibility (A11y) — `aria-label`, `aria-describedby`, Semantic HTML".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Kapan Pakai
 

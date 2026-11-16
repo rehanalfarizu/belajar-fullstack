@@ -179,13 +179,9 @@ Di constructor subclass:
 
 ### Pola Kode: Hitung Rata-rata dengan `reduce`
 
-```javascript
-getRataNilai() {
-  if (this.nilai.length === 0) return 0;
-  const total = this.nilai.reduce((acc, n) => acc + n, 0);
-  return total / this.nilai.length;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Class & OOP — Bagian B: Class `Student` extends `Person`".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 - `reduce((acc, n) => acc + n, 0)` &mdash; jumlahkan semua elemen, mulai dari
   `0`
@@ -306,13 +302,9 @@ bukan "is-a" seperti inheritance).
 
 ### Pola Kode: Filter Array of Objects
 
-```javascript
-// Hapus mahasiswa dengan NIM tertentu
-this.mahasiswa = this.mahasiswa.filter(m => m.nim !== nim);
-
-// Ambil yang lulus
-return this.mahasiswa.filter(m => m.getRataNilai() >= 60);
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Class & OOP — Bagian D: Class `Course`".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Filter **return array baru** &mdash; tidak mengubah array asli. Untuk
 `hapusMahasiswa`, kamu harus **re-assign** `this.mahasiswa` ke hasil filter.

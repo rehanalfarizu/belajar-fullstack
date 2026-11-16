@@ -148,27 +148,9 @@ Flexbox punya **2 peran**:
 </nav>
 ```
 
-```css
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  background: #1e293b;
-  color: white;
-}
-
-.menu {
-  display: flex;
-  gap: 16px;
-  list-style: none;
-}
-
-.menu a {
-  color: white;
-  text-decoration: none;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Flexbox Dasar — Bagian B: Navbar Horizontal dengan `justify-content: space-between`".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -221,23 +203,9 @@ Salah satu **paling sulit** di CSS tradisional (perlu banyak trick), tapi **pali
 </div>
 ```
 
-```css
-.fullscreen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* penuh setinggi layar */
-  background: #f0f0f0;
-}
-
-.box {
-  padding: 40px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Flexbox Dasar — Bagian C: Centering Sempurna (Vertikal + Horizontal)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -289,19 +257,9 @@ Salah satu **paling sulit** di CSS tradisional (perlu banyak trick), tapi **pali
 </div>
 ```
 
-```css
-.row {
-  display: flex;
-  align-items: center; /* semua item rata tengah vertikal */
-  gap: 16px;
-  padding: 16px;
-  background: #f0f0f0;
-}
-
-.small  { height: 40px; }
-.medium { height: 60px; }
-.large  { height: 80px; }
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Flexbox Dasar — Bagian D: `align-items` (Cross Axis)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -351,23 +309,9 @@ Secara default, Flexbox **membuat item sebaris** (tidak ada baris baru). Tapi ka
 </div>
 ```
 
-```css
-.card-container {
-  display: flex;
-  flex-wrap: wrap; /* ←izinkan turun baris */
-  gap: 16px;
-  padding: 16px;
-}
-
-.card {
-  flex: 1; /* isi ruang tersisa */
-  min-width: 250px; /* jangan lebih kecil dari 250px */
-  padding: 20px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Flexbox Dasar — Bagian E: Responsive Card Row dengan `flex-wrap`".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -430,21 +374,9 @@ Secara default, Flexbox **membuat item sebaris** (tidak ada baris baru). Tapi ka
 </div>
 ```
 
-```css
-.container {
-  display: flex;
-  gap: 16px;
-}
-
-.card {
-  background: lightblue;
-  padding: 20px;
-  text-align: center;
-}
-
-.flex-1 { flex: 1; }
-.flex-2 { flex: 2; }
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03 Flexbox Dasar — Bagian F: `flex: 1` dan Item Properties".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 

@@ -84,19 +84,9 @@ Sama seperti Flexbox, Grid juga punya **2 peran**:
 </div>
 ```
 
-```css
-.grid-container {
-  display: grid; /* ← ini yang mengaktifkan Grid */
-  grid-template-columns: 1fr 1fr; /* 2 kolom sama lebar */
-  gap: 16px; /* jarak antar item */
-}
-
-.item {
-  background: lightblue;
-  padding: 20px;
-  text-align: center;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 CSS Grid System — Bagian A: Konsep Dasar Grid (Container vs Item)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -196,23 +186,9 @@ Sama seperti Flexbox, Grid juga punya **2 peran**:
 
 ### Pola Kode
 
-```css
-.page-layout {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: 60px 1fr 50px;
-  grid-template-areas:
-    "header  header"   /* baris 1: header full-width */
-    "sidebar main"     /* baris 2: sidebar 250px, main 1fr */
-    "footer  footer";  /* baris 3: footer full-width */
-  min-height: 100vh;
-}
-
-.header  { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.main    { grid-area: main; }
-.footer  { grid-area: footer; }
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 CSS Grid System — Bagian C: `grid-template-areas` (Named Regions)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -288,26 +264,9 @@ Salah satu **fitur paling powerful** Grid: **grid responsif TANPA media query** 
 </div>
 ```
 
-```css
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 16px;
-}
-
-.item {
-  aspect-ratio: 1; /* kotak (1:1) */
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 CSS Grid System — Bagian D: Responsive Grid dengan `auto-fill` & `minmax`".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -388,84 +347,9 @@ Pricing table adalah pola umum: **3 paket** (Basic, Pro, Enterprise) dengan **pa
 </div>
 ```
 
-```css
-.pricing-table {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 kolom sama rata */
-  gap: 24px;
-  padding: 32px;
-  align-items: center; /* card tengan bisa lebih besar, tetap center */
-}
-
-.pricing-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 32px 24px;
-  text-align: center;
-  position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.pricing-card.recommended {
-  border-color: #3b82f6;
-  border-width: 2px;
-  transform: scale(1.05); /* sedikit lebih besar */
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-  z-index: 1;
-}
-
-.pricing-card .badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #3b82f6;
-  color: white;
-  padding: 4px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.pricing-card h3 {
-  margin-bottom: 16px;
-}
-
-.pricing-card .price {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 24px;
-  color: #1e293b;
-}
-
-.pricing-card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 24px;
-}
-
-.pricing-card li {
-  padding: 8px 0;
-  border-bottom: 1px solid #e2e8f0;
-  color: #64748b;
-}
-
-.pricing-card button {
-  width: 100%;
-  padding: 12px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.pricing-card.recommended button {
-  background: #1e40af;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 CSS Grid System — Bagian E: Pricing Table dengan `grid-column: span N`".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -515,28 +399,9 @@ Walau Grid sudah punya `auto-fill` yang responsif, ada kasus di mana **jumlah ko
 
 ### Pola Kode
 
-```css
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr; /* mobile: 1 kolom */
-  gap: 16px;
-  padding: 16px;
-}
-
-/* Tablet: 2 kolom */
-@media (min-width: 640px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop: 4 kolom */
-@media (min-width: 1024px) {
-  .gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 CSS Grid System — Bagian F: Responsive dengan Media Query".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 

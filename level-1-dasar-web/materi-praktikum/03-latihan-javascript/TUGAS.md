@@ -129,3 +129,7 @@ node scripts/validate-curriculum.mjs
 
 Folder ini tidak punya `contoh/`. Pembandingmu adalah expected output di soal dan input aneh yang kamu
 coba sendiri. Kalau semua cocok dan tidak ada yang crash, berarti kamu sudah selesai.
+
+## Tentang `solusi-jangan-dibuka-dulu.md`
+
+Implementasi fungsi yang diminta soal (misalnya `myMap`, `validasiRegistrasi`, `fetchUser`) dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Contoh sintaks pendek dan expected output tetap di soal. Buka solusi hanya setelah punyamu jalan atau benar-benar buntu.

@@ -116,3 +116,7 @@ Error di sini biasanya typo nama property atau nilai yang tidak dikenal (yang di
 
 Folder ini tidak punya `contoh/`. Pembandingmu adalah deskripsi hasil akhir dan checklist verifikasi
 di setiap soal. Itu justru bagus: kamu belajar menilai hasil sendiri.
+
+## Tentang `solusi-jangan-dibuka-dulu.md`
+
+Stylesheet lengkap yang dulu ada di `soal/` dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). HTML kerangka tetap di soal. Tulis dulu CSS-mu sendiri, cek di DevTools, baru buka solusi kalau benar-benar buntu.

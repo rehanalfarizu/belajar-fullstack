@@ -131,3 +131,7 @@ masuk akal, dan skip link harus bisa dipakai.
 
 Folder `contoh/` berisi solusi referensi. Buka hanya setelah versimu sendiri jalan dan lolos validator.
 Jawabanmu boleh berbeda, selama kamu bisa menjelaskan kenapa tag yang kamu pilih tepat.
+
+## Tentang `solusi-jangan-dibuka-dulu.md`
+
+Blok kode jawaban yang dulu ada di `soal/` (HTML halaman jadi, potongan tabel, form, dan sebagainya) dipindah ke [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Di soal, tiap blok diganti penunjuk ke bagian yang sesuai. Coba dulu, catat apa yang sudah kamu coba, baru buka setelah punyamu jalan atau benar-benar buntu.

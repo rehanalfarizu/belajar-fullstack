@@ -188,19 +188,9 @@ Standar sama seperti soal 01–03. Bedanya: di soal ini kita akan mulai dengan *
 
 ### Pola Kode
 
-```html
-<form action="#" method="POST">
-  <fieldset>
-    <legend>Data Pribadi</legend>
-    <!-- field nama, email, dll -->
-  </fieldset>
-
-  <fieldset>
-    <legend>Informasi Tambahan</legend>
-    <!-- field alamat, foto, dll -->
-  </fieldset>
-</form>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Form Pendaftaran dengan Input Standar — Bagian C: `<fieldset>` + `<legend>` untuk Mengelompokkan Field".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -313,34 +303,9 @@ Standar sama seperti soal 01–03. Bedanya: di soal ini kita akan mulai dengan *
 
 ### Pola Kode
 
-```html
-<label for="nama">Nama Lengkap:</label>
-<input type="text" id="nama" name="nama" required minlength="3">
-
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required placeholder="nama@email.com">
-
-<label for="password">Password:</label>
-<input type="password" id="password" name="password" minlength="8">
-
-<label for="umur">Umur:</label>
-<input type="number" id="umur" name="umur" min="17" max="65">
-
-<label for="tgl_lahir">Tanggal Lahir:</label>
-<input type="date" id="tgl_lahir" name="tgl_lahir">
-
-<label for="telepon">Nomor Telepon:</label>
-<input type="tel" id="telepon" name="telepon" placeholder="08xxxxxxxxxx">
-
-<label for="website">Website/Portfolio:</label>
-<input type="url" id="website" name="website" placeholder="https://...">
-
-<label for="foto">Upload Foto:</label>
-<input type="file" id="foto" name="foto" accept="image/*">
-
-<label for="form_id">Form ID (tersembunyi):</label>
-<input type="hidden" id="form_id" name="form_id" value="workshop-2026">
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Form Pendaftaran dengan Input Standar — Bagian E: Input Types Standar".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 
@@ -480,25 +445,9 @@ Standar sama seperti soal 01–03. Bedanya: di soal ini kita akan mulai dengan *
 
 ### Pola Kode
 
-```html
-<!-- RADIO: pilih 1 dari 3 -->
-<p>Jenis Kelamin:</p>
-<input type="radio" id="jk_l" name="jenis_kelamin" value="L" required>
-<label for="jk_l">Laki-laki</label>
-<input type="radio" id="jk_p" name="jenis_kelamin" value="P">
-<label for="jk_p">Perempuan</label>
-
-<!-- CHECKBOX: pilih banyak dari 4 -->
-<p>Hobi:</p>
-<input type="checkbox" id="hobi_coding" name="hobi[]" value="coding">
-<label for="hobi_coding">Coding</label>
-<input type="checkbox" id="hobi_gaming" name="hobi[]" value="gaming">
-<label for="hobi_gaming">Gaming</label>
-<input type="checkbox" id="hobi_membaca" name="hobi[]" value="membaca">
-<label for="hobi_membaca">Membaca</label>
-<input type="checkbox" id="hobi_olahraga" name="hobi[]" value="olahraga">
-<label for="hobi_olahraga">Olahraga</label>
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Form Pendaftaran dengan Input Standar — Bagian H: `radio` vs `checkbox` — Pilih 1 vs Pilih Banyak".
+>
+> Pertanyaan pemandu: elemen semantik mana yang paling pas untuk tiap bagian, dan atribut apa yang wajib ada? Cek di MDN, lalu bandingkan dengan hasil Inspect Element di browser.
 
 ### Yang Terjadi di Browser
 

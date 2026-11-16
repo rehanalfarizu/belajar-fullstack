@@ -162,56 +162,9 @@ Untuk **font-weight**, nilai yang umum:
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Body baseline */
-body {
-  font-size: 1rem;       /* 16px */
-  line-height: 1.6;
-  color: #475569;
-}
-
-/* Heading hierarchy: makin ke dalam, makin kecil */
-h1 {
-  font-size: 2.5rem;     /* 40px */
-  font-weight: 800;      /* extra bold untuk hero */
-  line-height: 1.2;
-  color: #1e293b;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  font-size: 2rem;       /* 32px */
-  font-weight: 700;
-  line-height: 1.3;
-  color: #334155;
-  margin-bottom: 16px;
-}
-
-h3 {
-  font-size: 1.5rem;     /* 24px */
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 12px;
-}
-
-h4 {
-  font-size: 1.125rem;   /* 18px */
-  font-weight: 600;
-  color: #64748b;
-}
-
-p {
-  font-size: 1rem;       /* 16px */
-  line-height: 1.7;
-  color: #475569;
-  margin-bottom: 16px;
-}
-
-small {
-  font-size: 0.875rem;   /* 14px */
-  color: #94a3b8;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian B: Font Size, Weight, dan Heading Hierarchy".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -267,25 +220,9 @@ Selain line-height, **jarak antar paragraf** (`margin-top` atau `margin-bottom`)
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Lead: paragraf pembuka yang lebih besar */
-.lead {
-  font-size: 1.25rem;   /* 20px */
-  line-height: 1.6;
-  color: #475569;
-}
-
-/* Spacing antar paragraf */
-p + p {
-  margin-top: 12px;
-}
-
-/* Line height utilities */
-.tight   { line-height: 1.2; }  /* untuk heading/display */
-.normal  { line-height: 1.6; }  /* default body */
-.relaxed { line-height: 1.8; }  /* untuk artikel panjang */
-.loose   { line-height: 2.0; }  /* untuk dokumen formal */
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian C: Line Height dan Paragraph Spacing".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -340,27 +277,9 @@ p + p {
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Text alignment utilities */
-.text-center  { text-align: center; }
-.text-right   { text-align: right; }
-.text-justify { text-align: justify; }
-
-/* Uppercase + letter-spacing untuk badge/label */
-.text-uppercase {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.875rem;
-}
-
-/* Bonus: text dengan gradient background */
-.text-gradient {
-  background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian D: Text Alignment dan Text Transform".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -416,54 +335,9 @@ p + p {
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Background color utilities */
-.bg-primary   { background: #3b82f6; color: white; }
-.bg-secondary { background: #8b5cf6; color: white; }
-.bg-success   { background: #10b981; color: white; }
-.bg-warning   { background: #f59e0b; color: white; }
-.bg-danger    { background: #ef4444; color: white; }
-.bg-dark      { background: #1e293b; color: white; }
-.bg-light     { background: #f1f5f9; color: #1e293b; }
-
-/* Text color utilities */
-.text-primary   { color: #3b82f6; }
-.text-secondary { color: #8b5cf6; }
-.text-success   { color: #10b981; }
-.text-warning   { color: #f59e0b; }
-.text-danger    { color: #ef4444; }
-.text-dark      { color: #1e293b; }
-.text-muted     { color: #94a3b8; }
-
-/* Badge base */
-.badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Badge variants (background + text color yang harmonis) */
-.badge-primary {
-  background: #dbeafe;   /* primary muda */
-  color: #1e40af;        /* primary tua */
-}
-.badge-success {
-  background: #dcfce7;
-  color: #166534;
-}
-.badge-warning {
-  background: #fef3c7;
-  color: #92400e;
-}
-.badge-danger {
-  background: #fee2e2;
-  color: #991b1b;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian E: Color System (Palette)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -516,22 +390,9 @@ Prinsip UX link yang baik:
 
 ### Pola Kode HTML/CSS
 
-```css
-a {
-  color: #3b82f6;            /* primary */
-  text-decoration: none;     /* hilangkan underline default */
-  transition: color 0.2s;    /* transisi halus saat hover */
-}
-
-a:hover {
-  color: #1d4ed8;            /* primary lebih gelap */
-  text-decoration: underline;/* underline muncul saat hover */
-}
-
-a:visited {
-  color: #7c3aed;            /* ungu untuk link yang sudah dikunjungi */
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian F: Link Styles (Default, Hover, Visited)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -591,45 +452,9 @@ Pada soal ini kita pakai **pola modern** — umum di website kontemporer.
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Standard divider */
-hr {
-  border: none;
-  border-top: 2px solid #e2e8f0;  /* garis tipis abu-abu */
-  margin: 32px 0;                  /* jarak atas-bawah */
-}
-
-/* Gradient divider — lebih menarik */
-.hr-gradient {
-  border: none;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-  border-radius: 2px;
-  margin: 40px 0;
-}
-
-/* Hero gradient — untuk section atas/judul besar */
-.hero-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 80px 0;
-  text-align: center;
-}
-
-/* Card gradient — untuk highlight card */
-.card-gradient {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  border-radius: 16px;
-  padding: 32px;
-  color: white;
-}
-
-/* Section warm — zona kuning/amber */
-.section-warm {
-  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
-  padding: 48px 0;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian G: Divider, HR, dan Gradient Backgrounds".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -708,29 +533,9 @@ Tiga properti ini bekerja bersama:
 
 ### Pola Kode HTML/CSS
 
-```css
-/* Single-line truncation: potong jadi 1 baris + "..." */
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Multi-line clamp: potong jadi N baris + "..." */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "07 Typography dan Warna — Bagian H: Text Overflow dan Truncation".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 

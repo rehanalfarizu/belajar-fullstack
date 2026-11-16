@@ -117,14 +117,9 @@ agar gampang dibedakan.
 
 Caranya: buat **class** yang **extends** (turunan dari) `Error`. Ini OOP dasar:
 
-```javascript
-class ValidationError extends Error {
-  constructor(message) {
-    super(message);            // panggil constructor parent
-    this.name = "ValidationError"; // set nama error
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian B: Custom Error Classes".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 - `extends Error` artinya class ini mewarisi semua property/method dari `Error`
 - `super(message)` memanggil constructor `Error` untuk set `message`
@@ -269,16 +264,9 @@ Tiga blok:
 1. Di `TEST` section, **jangan uncomment** baris `validasiUsia(200);` dulu
 2. Tulis kode uji cobamu sendiri di bawah, contoh:
 
-```javascript
-try {
-  validasiUsia(200);
-  console.log("Sukses");
-} catch (err) {
-  console.error(`Gagal: ${err.name} - ${err.message}`);
-} finally {
-  console.log("Validasi selesai.");
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian D: try / catch / finally".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 3. Run file, lihat output: harusnya `Gagal: ValidationError - Usia tidak valid: 200`
    lalu `Validasi selesai.`
@@ -313,18 +301,9 @@ saja. Setelah benerin email, dia submit lagi, baru tahu password juga salah.
 Solusinya: kumpulkan semua error, **throw sekali** dengan pesan yang
 mencantumkan semua masalah.
 
-```javascript
-function validasiRegistrasi(data) {
-  const errors = [];
-  try { validasiUsia(data.usia); } catch (e) { errors.push(e.message); }
-  try { validasiEmail(data.email); } catch (e) { errors.push(e.message); }
-  try { validasiPassword(data.password); } catch (e) { errors.push(e.message); }
-  if (errors.length > 0) {
-    throw new ValidationError(errors.join("; "));
-  }
-  return true;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian E: Fungsi `validasiRegistrasi`".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Pola: **try kecil di tiap field → kumpulkan pesan → throw satu error besar**.
 
@@ -371,24 +350,9 @@ Pattern async error handling **hampir sama** dengan sync — tetap pakai
 `try/catch`. Bedanya, `await` "membuka" Promise jadi nilai biasa, dan kalau
 Promise itu **reject**, `await` melempar error.
 
-```javascript
-async function fetchUser(id) {
-  try {
-    const response = await fetch(`https://api.example.com/users/${id}`);
-    if (!response.ok) {
-      throw new NotFoundError(`User id ${id}`);
-    }
-    return await response.json();
-  } catch (error) {
-    if (error instanceof NotFoundError) {
-      console.error(`404: ${error.message}`);
-    } else {
-      console.error(`Error umum: ${error.message}`);
-    }
-    throw error; // re-throw biar caller juga tahu
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian F: Async Error Handling — `fetchUser`".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Konsep kunci:
 
@@ -432,20 +396,9 @@ Pola `finally` juga jalan di fungsi `async`. Ini berguna banget untuk hal-hal
 yang **harus dilakukan** apapun yang terjadi — misal: tulis log, stop loading
 spinner, tutup koneksi database.
 
-```javascript
-async function processWithLogging(fn) {
-  console.log("Memulai proses...");
-  try {
-    const result = await fn();
-    console.log("Berhasil!");
-    return result;
-  } catch (error) {
-    console.error(`Gagal: ${error.message}`);
-  } finally {
-    console.log("Proses selesai."); // SELALU jalan
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian G: try / catch / finally di Async — `processWithLogging`".
+>
+> Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
 Pola ini sering dipakai untuk:
 - **Logging** (catat awal/akhir proses)

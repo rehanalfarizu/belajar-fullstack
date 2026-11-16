@@ -102,18 +102,9 @@ Sebelum lanjut, pastikan kamu sudah nyaman dengan 5 selector dari soal 01. Revie
 </nav>
 ```
 
-```css
-/* Semua li di dalam .menu, termasuk yang bersarang */
-.menu li {
-  border-bottom: 1px solid #ddd;
-}
-
-/* Hanya li LANGSUNG anak .menu, bukan yang di dalam ul bersarang */
-.menu > li {
-  font-size: 18px;
-  font-weight: bold;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Selector & Box Model (Lanjutan) — Bagian B: Child Selector (`>`) vs Descendant".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -322,24 +313,9 @@ Pseudo-class yang sering dipakai:
 </table>
 ```
 
-```css
-button:hover {
-  background: darkblue;
-}
-
-li:first-child {
-  font-weight: bold;
-  color: navy;
-}
-
-li:last-child {
-  border-bottom: none; /* hilangkan border di item terakhir */
-}
-
-tr:nth-child(even) {
-  background: #f0f0f0;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Selector & Box Model (Lanjutan) — Bagian E: Pseudo-Class untuk State & Posisi".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -399,23 +375,9 @@ Ini sumber **kebingungan #1** pemula CSS. `box-sizing` menentukan **apa yang dih
 <div class="box-border">border-box (lebar total 200px)</div>
 ```
 
-```css
-.box-content {
-  width: 200px;
-  padding: 20px;
-  border: 5px solid red;
-  background: lightyellow;
-  box-sizing: content-box; /* default — tidak perlu ditulis */
-}
-
-.box-border {
-  width: 200px;
-  padding: 20px;
-  border: 5px solid blue;
-  background: lightgreen;
-  box-sizing: border-box; /* HARUS ditulis manual */
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Selector & Box Model (Lanjutan) — Bagian F: `box-sizing: content-box` vs `border-box` (Visualisasi)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -464,27 +426,9 @@ Box model punya **4 lapis** (dari dalam ke luar): content, padding, border, marg
 
 ### Pola Kode
 
-```css
-.box-demo {
-  width: 200px;
-  height: 100px;
-
-  /* Content area (background) */
-  background: lightblue;
-
-  /* Padding (jarak dalam) */
-  padding: 20px;
-  /* Padding area = background yang melebar sampai padding */
-  /* Trik: background-color menutupi content + padding */
-
-  /* Border (garis tepi) */
-  border: 5px solid orange;
-
-  /* Margin (jarak luar) */
-  margin: 30px;
-  /* Margin area = transparan (tidak ada warna, hanya ruang) */
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "02 Selector & Box Model (Lanjutan) — Bagian G: Visualisasi 4 Lapis Box Model dengan Warna".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 **Cara Inspect:**
 

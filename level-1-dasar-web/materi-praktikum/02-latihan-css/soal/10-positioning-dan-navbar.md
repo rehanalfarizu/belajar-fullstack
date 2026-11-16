@@ -165,65 +165,9 @@ Untuk layering, navbar pakai **`z-index` tinggi** (mis. `1000`) supaya selalu di
 <div style="height:64px;"></div>
 ```
 
-```css
-.navbar-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: #1e293b;
-  padding: 0 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
-
-.navbar-fixed .logo {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  flex-shrink: 0; /* jangan menyusut saat menu panjang */
-}
-
-.navbar-fixed .nav-links {
-  display: flex;
-  gap: 8px;
-}
-
-.navbar-fixed .nav-links a {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  /* transition HARUS di element asal, bukan di :hover */
-  transition: background 0.2s, color 0.2s;
-}
-
-.navbar-fixed .nav-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.navbar-fixed .nav-links a.active {
-  background: #3b82f6;
-  color: white;
-}
-
-.navbar-fixed .hamburger {
-  display: none; /* tampilkan di mobile dengan media query */
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian B: Fixed Navbar".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -296,23 +240,9 @@ Cocok untuk: section header yang nempel saat scroll konten section itu, sidebar 
 </div>
 ```
 
-```css
-.sticky-header {
-  position: sticky;
-  top: 64px; /* = tinggi navbar fixed */
-  z-index: 100;
-  background: #3b82f6;
-  color: white;
-  padding: 16px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sticky-header h2 {
-  color: white;
-  font-size: 1.25rem;
-  margin: 0;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian C: Sticky Header (dalam Section)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -386,85 +316,9 @@ Dropdown defaultnya **tersembunyi** (`opacity: 0; pointer-events: none`) dan **m
 </div>
 ```
 
-```css
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-  margin: 40px;
-}
-
-.dropdown-trigger {
-  background: #1e293b;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s;
-}
-
-.dropdown-trigger:hover { background: #334155; }
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 8px;
-  min-width: 180px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  z-index: 999;
-
-  /* default: tersembunyi */
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-8px);
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-/* Tampilkan saat container di-hover */
-.dropdown-container:hover .dropdown-menu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 12px 20px;
-  color: #475569;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background 0.15s;
-}
-
-.dropdown-menu a:hover {
-  background: #f1f5f9;
-  color: #1e293b;
-}
-
-.dropdown-menu a:first-child { border-radius: 12px 12px 0 0; }
-.dropdown-menu a:last-child  { border-radius: 0 0 12px 12px; }
-
-.dropdown-divider {
-  height: 1px;
-  background: #e2e8f0;
-  margin: 4px 0;
-}
-
-.dropdown-badge {
-  background: #ef4444;
-  color: white;
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-  float: right;
-  margin-top: 2px;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian D: Dropdown Menu (Absolute dalam Relative)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -565,70 +419,9 @@ Varian posisi badge:
 </div>
 ```
 
-```css
-.card-relative {
-  position: relative;          /* anchor untuk badge & overlay */
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;            /* gambar tidak bocor keluar */
-  max-width: 280px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.card-relative img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
-
-.card-relative-body { padding: 20px; }
-.card-relative-body h3 { margin-bottom: 8px; color: #1e293b; }
-.card-relative-body p  { color: #64748b; font-size: 0.875rem; }
-
-/* Badge pojok kanan atas */
-.card-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #ef4444;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.card-badge.new      { background: #10b981; }
-.card-badge.hot      { background: #f59e0b; }
-.card-badge.trending { background: #8b5cf6; }
-
-/* Category tag pojok kiri bawah */
-.card-category {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-}
-
-/* Price overlay gradient di bawah gambar */
-.card-price-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  padding: 24px 16px 12px;
-  color: white;
-}
-
-.card-price-overlay .price     { font-size: 1.25rem; font-weight: bold; }
-.card-price-overlay .original  { text-decoration: line-through; opacity: 0.7; font-size: 0.875rem; margin-left: 8px; }
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian E: Card dengan Absolute Badge & Overlays".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -707,45 +500,9 @@ Varian posisi badge:
 </div>
 ```
 
-```css
-.float-label-group {
-  position: relative;   /* anchor untuk label */
-  margin: 40px;
-  max-width: 320px;
-}
-
-.float-label-input {
-  width: 100%;
-  padding: 16px 16px 8px;  /* ruang di atas untuk label */
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.float-label-input:focus { border-color: #3b82f6; }
-
-.float-label-label {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: top 0.2s, font-size 0.2s, color 0.2s;
-}
-
-/* Label naik ke atas saat input focus ATAU sudah berisi value */
-.float-label-input:focus + .float-label-label,
-.float-label-input:not(:placeholder-shown) + .float-label-label {
-  top: 8px;
-  transform: translateY(0);
-  font-size: 0.7rem;
-  color: #3b82f6;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian F: Float Label Input".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -807,33 +564,9 @@ Plus pattern animasi: tombol tersembunyi default (`opacity: 0; transform: transl
 </button>
 ```
 
-```css
-.back-to-top {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 48px;
-  height: 48px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.25rem;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-  z-index: 999;
-
-  /* Di demo ini, selalu terlihat */
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s, transform 0.3s, background 0.2s;
-}
-
-.back-to-top:hover {
-  background: #2563eb;
-  transform: translateY(-4px);
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian G: Back-to-Top Button (Fixed + Hover)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -858,20 +591,7 @@ window.addEventListener('scroll', () => {
 });
 ```
 
-```css
-.back-to-top {
-  /* default: hidden & turun sedikit */
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-}
-
-.back-to-top.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 CSS Position & Navbar — Bagian G: Back-to-Top Button (Fixed + Hover)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Kapan Pakai
 

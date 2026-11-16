@@ -82,30 +82,9 @@ Ada 2 pendekatan responsive design:
 
 ### Pola Kode
 
-```css
-/* DEFAULT = MOBILE */
-.card {
-  width: 100%;        /* penuh di mobile */
-  padding: 16px;
-  font-size: 14px;
-}
-
-/* TABLET */
-@media (min-width: 640px) {
-  .card {
-    width: calc(50% - 8px); /* 2 kolom */
-    font-size: 16px;
-  }
-}
-
-/* DESKTOP */
-@media (min-width: 1024px) {
-  .card {
-    width: calc(33.33% - 12px); /* 3 kolom */
-    font-size: 18px;
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian A: Mobile-First Approach".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -199,25 +178,9 @@ Tag `<meta name="viewport" content="width=device-width, initial-scale=1.0">` ada
 
 ### Pola Kode
 
-```css
-/* Default: mobile (<640px) */
-.container { padding: 16px; }
-
-/* sm: tablet ke atas (≥640px) */
-@media (min-width: 640px) {
-  .container { padding: 24px; }
-}
-
-/* lg: laptop ke atas (≥1024px) */
-@media (min-width: 1024px) {
-  .container { padding: 32px; }
-}
-
-/* xl: desktop besar (≥1280px) */
-@media (min-width: 1280px) {
-  .container { padding: 48px; max-width: 1200px; margin: 0 auto; }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian C: Breakpoint Standar".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Verifikasi
 
@@ -258,40 +221,9 @@ Pattern paling umum responsive: **card grid** yang berubah jumlah kolom sesuai l
 </div>
 ```
 
-```css
-.card-container {
-  display: flex;
-  flex-direction: column; /* mobile: 1 kolom */
-  gap: 16px;
-  padding: 16px;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%; /* mobile: full-width */
-}
-
-/* Tablet: 2 kolom */
-@media (min-width: 640px) {
-  .card-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .card {
-    width: calc(50% - 8px); /* 50% - setengah gap */
-  }
-}
-
-/* Desktop: 3 kolom */
-@media (min-width: 1024px) {
-  .card {
-    width: calc(33.33% - 12px); /* 33% - sebagian gap */
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian D: Responsive Card Grid (1 → 2 → 3 kolom)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -354,53 +286,9 @@ Di latihan ini kita **tidak pakai JavaScript** (nanti di level JavaScript). Kita
 </nav>
 ```
 
-```css
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: #1e293b;
-  color: white;
-}
-
-.logo {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.nav-menu {
-  display: none; /* mobile: sembunyikan */
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 24px;
-}
-
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-}
-
-.hamburger {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: block; /* mobile: tampilkan */
-}
-
-/* Tablet ke atas: tampilkan menu, sembunyikan hamburger */
-@media (min-width: 640px) {
-  .nav-menu {
-    display: flex;
-  }
-  .hamburger {
-    display: none;
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian E: Responsive Navbar (Hamburger Menu)".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -412,20 +300,7 @@ Di latihan ini kita **tidak pakai JavaScript** (nanti di level JavaScript). Kita
 
 Kalau mau menu tetap terlihat di mobile (tanpa hamburger), pakai layout vertikal:
 
-```css
-@media (max-width: 639px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 12px;
-  }
-}
-```
+> Lanjutan bagian ini ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian E: Responsive Navbar (Hamburger Menu)" (Blok berikutnya). Coba tulis sendiri dulu.
 
 ### Verifikasi
 
@@ -452,26 +327,9 @@ Kalau mau menu tetap terlihat di mobile (tanpa hamburger), pakai layout vertikal
 
 ### Pola Kode
 
-```css
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: #1e293b;
-  color: white;
-  position: relative; /* mobile default */
-  z-index: 100;
-}
-
-@media (min-width: 1024px) {
-  .navbar {
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian F: Sticky Header di Desktop".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -524,23 +382,9 @@ Gambar sering jadi masalah responsive: gambar dengan width fixed akan **melebihi
 </div>
 ```
 
-```css
-/* Semua gambar dalam card: tidak pernah lebih besar dari card */
-.responsive-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-/* Gallery image: selalu isi container, di-crop */
-.gallery-img {
-  width: 100%;
-  height: 200px; /* fixed height */
-  object-fit: cover; /* crop, jangan distorsi */
-  border-radius: 8px;
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian G: Responsive Image".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Yang Terjadi di Browser
 
@@ -576,30 +420,9 @@ Font size juga perlu responsif. Teks yang terlalu kecil di desktop membuat user 
 
 ### Pola Kode
 
-```css
-/* Default: mobile */
-body {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #1e293b;
-}
-
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
-
-/* Tablet */
-@media (min-width: 640px) {
-  body { font-size: 15px; }
-  h1 { font-size: 2rem; }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  body { font-size: 16px; }
-  h1 { font-size: 2.5rem; }
-}
-```
+> **Tulis versimu dulu.** Belum ketemu? Coba dari penjelasan dan "Wajib Ada di Kode Kamu" di atas. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Responsive Design — Bagian H: Responsive Typography".
+>
+> Pertanyaan pemandu: property apa saja yang kamu butuhkan di tiap selector, dan mana yang cukup dipasang di parent saja? Ubah satu property sekali waktu dan lihat bedanya di browser.
 
 ### Alternatif: Fluid Typography dengan `clamp()`
 
