@@ -45,8 +45,10 @@ Di akhir latihan, kamu akan bisa baca kode seperti `data.filter(x => x.nilai > 8
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan & lihat hint snippet** — pahami konsep dan pola yang akan dipakai
-2. **Ketik dari 0** — buat file `07-callback-higher-order.js`, ketik sendiri (JANGAN copy-paste). Hint yang ada hanya **potongan kecil**, bukan kode jadi utuh
+2. **Ketik sendiri** — buka salinan starter `07-callback-higher-order.js` (lihat catatan di bawah), ketik sendiri (JANGAN copy-paste). Hint yang ada hanya **potongan kecil**, bukan kode jadi utuh
 3. **Verifikasi** — jalankan dengan `node 07-callback-higher-order.js` dan cek semua output sesuai checklist
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/07-callback-higher-order.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`07-callback-higher-order.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi utuh**. Tujuannya agar kamu terbiasa **berpikir dan menyusun** kode dari potongan-potongan kecil yang kamu pahami. Ini skill inti programmer: bukan mengetik cepat, tapi **membaca kode orang lain lalu memodifikasinya sesuai kebutuhan**.
 
@@ -680,7 +682,7 @@ Sebelum lanjut ke soal 08, cek semua ini:
 
 ## Cara Submit
 
-1. Simpan file sebagai `07-callback-higher-order.js` di folder `code/`
+1. Pastikan kodemu tersimpan di salinan starter `latihan-saya/02-javascript/minggu-XX/07-callback-higher-order.js`
 2. Jalankan dengan `node 07-callback-higher-order.js` di terminal
 3. Cek output untuk semua 7 bagian (A sampai G)
 4. Bandingkan hasil `myMap`/`myFilter`/`myReduce` dengan built-in — harusnya **identik**

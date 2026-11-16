@@ -18,7 +18,7 @@ Setelah selesai, kamu akan punya:
 | 02 | [Modul dan Require](soal/02-modul-dan-require.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/02-modul-dan-require.js` (plus `calculator.js` dan `greeting.js` buatanmu) | 45 menit |
 | 03 | [Control Flow](soal/03-control-flow.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/03-control-flow.js` | 45 menit |
 | 04 | [Package.json & npm](soal/04-package-json.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/04-package-json.js` (berisi langkah). Project-nya dibuat di folder baru, misalnya `latihan-saya/03-backend/minggu-08/projectku/` | 60 menit |
-| 05 | [Module System](soal/05-module-system.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/05-module-system.js` (berisi kerangka). Soal minta folder `05-modules/` berisi `utils.js`, `math.js`, `index.js` | 60 menit |
+| 05 | [Module System](soal/05-module-system.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/05-module-system.js` (lembar kerja berisi `TODO(human)`). Folder `05-modules/` berisi `math.js`, `utils.js`, `index.js` kamu buat sendiri di folder kerjamu, bukan di repo | 60 menit |
 | 06 | [Event Emitter](soal/06-event-emitter.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/06-event-emitter.js` | 60 menit |
 | 07 | [Streams](soal/07-streams.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/07-streams.js` | 60-90 menit |
 | 08 | [Buffer & Binary](soal/08-buffer-binary.md) | `LEVEL-2-Backend-Node-Express/materi-praktikum/01-latihan-nodejs/code/08-buffer-binary.js` | 45-60 menit |
@@ -27,14 +27,17 @@ Setelah selesai, kamu akan punya:
 
 Estimasi di atas perkiraan, karena soal di folder ini tidak mencantumkan waktu.
 
-**Penting soal 08 dan 10:** file starter-nya sudah berisi kode yang jalan. Jangan cuma menjalankannya.
-Tugas aslimu ada di bagian "Cara Submit" soal: soal 08 minta fungsi encode gambar ke base64, soal 10
-minta path builder dan system info reporter JSON. Kerjakan bagian itu dari nol.
+**Penting soal 08, 09, dan 10:** bagian atas file starter berisi demo yang sudah jalan (supaya kamu bisa melihat
+contoh output). Jangan cuma menjalankannya. Tugas aslimu ada di `TODO(human)` dan di bagian "Cara Submit" soal:
+soal 08 minta fungsi `gambarKeBase64`, soal 09 minta `worker.js` + `fork`, soal 10 minta path builder dan
+`system-report.js` (JSON). Kerjakan bagian itu dari nol.
+
+Kalau macet total, ada `solusi-jangan-dibuka-dulu.md` di folder ini. Baca aturannya di bagian atas file itu dulu.
 
 ### Di mana menulis kodenya?
 
-Kalau ikut aturan [latihan-saya](../../../latihan-saya/README.md), buat folder seperti
-`latihan-saya/03-backend/minggu-08/` dan salin starter ke sana. File pendukung (`data.txt`,
+Ikuti aturan [latihan-saya](../../../latihan-saya/README.md): buat folder seperti
+`latihan-saya/03-backend/minggu-08/`, salin starter ke sana dengan nama file yang sama, lalu kerjakan di salinan. File pendukung (`data.txt`,
 `calculator.js`, `worker.js`) ditaruh di folder yang sama.
 
 ---

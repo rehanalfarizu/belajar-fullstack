@@ -71,8 +71,10 @@ baca kode seperti `function getBio({ nama, alamat: { kota } })` tanpa bingung.
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan & lihat hint snippet** — pahami konsep dan pola yang akan dipakai
-2. **Ketik dari 0** — buat file `06-object-destructuring.js`, ketik sendiri (JANGAN copy-paste). Hint yang ada hanya **potongan kecil**, bukan kode jadi utuh
+2. **Ketik sendiri** — buka salinan starter `06-object-destructuring.js` (lihat catatan di bawah), ketik sendiri (JANGAN copy-paste). Hint yang ada hanya **potongan kecil**, bukan kode jadi utuh
 3. **Verifikasi** — jalankan dengan `node 06-object-destructuring.js` dan cek semua output sesuai checklist
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/06-object-destructuring.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`06-object-destructuring.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi utuh**. Tujuannya agar kamu terbiasa
 **berpikir dan menyusun** kode dari potongan-potongan kecil yang kamu pahami.
@@ -152,7 +154,7 @@ mahasiswa.hobi[0];     // "Coding" (array index)
 
 ### Cara Mengetik dari 0
 
-1. Buat file `06-object-destructuring.js`
+1. Buka salinan starter `06-object-destructuring.js` (bukan bikin file baru)
 2. Di paling atas, tulis `const mahasiswa = { ... }` dengan 5 property
 3. Di bawahnya, tulis 5 `console.log` untuk 5 akses berbeda (dot, bracket,
    nested, array index)
@@ -584,7 +586,7 @@ Sebelum lanjut ke soal 07, cek semua ini:
 
 ## Cara Submit
 
-1. Simpan sebagai `06-object-destructuring.js` di folder `soal/`
+1. Pastikan kodemu tersimpan di salinan starter `latihan-saya/02-javascript/minggu-XX/06-object-destructuring.js` (jangan simpan di folder `soal/`)
 2. Jalankan: `node 06-object-destructuring.js`
 3. Cek output console — pastikan semua `console.log` menampilkan nilai benar
 4. Coba mutate `mahasiswa.umur = 99` lalu print `mhsBaru.umur` — pastikan

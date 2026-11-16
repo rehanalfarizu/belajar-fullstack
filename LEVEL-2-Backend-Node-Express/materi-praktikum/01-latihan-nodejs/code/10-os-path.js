@@ -60,17 +60,16 @@ console.log(JSON.stringify(path.parse(filePath), null, 2));
 
 
 // ============================================================
-// Real-world: Cross-platform path builder
+// TODO(human): Cross-platform path builder (TUGAS INTI SOAL INI)
 // ============================================================
-// function getConfigPath() {
-//   return path.join(os.homedir(), ".config", "myapp", "config.json");
-// }
-//
-// function getDataDir() {
-//   return os.platform() === "win32"
-//     ? "C:\\data"
-//     : "/var/data";
-// }
+// Lihat "Cara Submit" di soal/10-os-path.md.
+// Buat fungsi getConfigPath(namaApp) dan getDataDir(namaApp) yang:
+// - mengembalikan path yang benar di macOS, Linux, dan Windows
+//   (jangan menulis "/" atau "\\" manual; biarkan modul path yang menyambung)
+// - memakai os.homedir() atau os.tmpdir() sebagai titik awal, bukan path tetap
+// Petunjuk: pikirkan folder mana yang boleh ditulis user biasa di semua OS.
+// Selesai kalau: memanggil fungsinya dengan "myapp" menghasilkan path absolut
+// (path.isAbsolute === true) yang berakhir dengan nama appmu.
 
 
 // ============================================================
@@ -85,3 +84,15 @@ Object.entries(interfaces).forEach(([name, addrs]) => {
     }
   });
 });
+
+
+// ============================================================
+// TODO(human): System info reporter JSON
+// ============================================================
+// JANGAN taruh di file ini, karena file ini mencetak banyak teks demo
+// dan akan merusak JSON-nya. Buat file baru `system-report.js` yang HANYA
+// mencetak satu objek JSON (platform, arch, jumlah CPU, RAM, hostname, dst).
+// Selesai kalau:
+//   node system-report.js > info.json
+//   node -e "JSON.parse(require('fs').readFileSync('info.json','utf8'))"
+// berjalan tanpa error.

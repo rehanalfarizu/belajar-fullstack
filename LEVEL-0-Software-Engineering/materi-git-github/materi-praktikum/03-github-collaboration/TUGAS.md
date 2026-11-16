@@ -32,12 +32,12 @@ berisi daftar langkah dalam bentuk komentar. Pakai sebagai peta, bukan untuk di-
 Estimasi di atas perkiraan, karena soal tidak mencantumkan waktu.
 
 **Penting sebelum mulai:** GitHub tidak mengizinkan kamu mem-fork repo milikmu sendiri ke akun yang sama.
-Jadi Persiapan + SOAL 1 di soal tidak bisa dijalankan persis seperti tertulis kalau kamu sendirian.
+Karena itu soal sudah ditulis dengan dua jalur (A dan B), dan kamu cukup memilih satu.
 Pilih salah satu:
 
-- **Berdua dengan teman (paling mirip dunia kerja):** teman membuat repo `latihan-kontribusi`, kamu
+- **Jalur A, berdua dengan teman (paling mirip dunia kerja):** teman membuat repo `latihan-kontribusi`, kamu
   fork repo milik teman. Teman yang me-review dan merge PR-mu. Lalu tukar peran.
-- **Sendirian:** lewati fork. Clone repo milikmu sendiri, kerjakan SOAL 3-5 (PR dari branch ke `main`
+- **Jalur B, sendirian:** lewati fork. Clone repo milikmu sendiri, kerjakan SOAL 3-5 (PR dari branch ke `main`
   di repo yang sama). Lalu latih fork sungguhan di repo latihan publik yang memang dibuat untuk pemula,
   misalnya [first-contributions](https://github.com/firstcontributions/first-contributions).
 

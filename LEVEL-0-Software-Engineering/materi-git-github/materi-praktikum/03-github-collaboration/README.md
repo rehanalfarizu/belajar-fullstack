@@ -19,6 +19,9 @@ Setelah menyelesaikan modul ini, kamu akan mampu:
 4. Experimen → fork repo lain, buat PR
 ```
 
+Catatan: kamu tidak bisa mem-fork repo milikmu sendiri. Soal menyediakan Jalur A (fork repo teman) dan
+Jalur B (sendirian: clone, branch, lalu PR ke `main` di repo yang sama). Pilih salah satu.
+
 ---
 
 ## Konsep Kolaborasi di GitHub

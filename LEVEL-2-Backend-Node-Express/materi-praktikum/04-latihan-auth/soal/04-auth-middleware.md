@@ -8,7 +8,8 @@ Soal ini menguji kemampuan membuat middleware autentikasi yang memverifikasi tok
 
 - [ ] Membuat middleware `authenticateToken` yang mengekstrak header `Authorization: Bearer <token>`
 - [ ] Memverifikasi token menggunakan `jwt.verify()`
-- [ ] Jika token tidak ada atau invalid, return 401 Unauthorized
+- [ ] Jika token tidak ada, invalid, atau kedaluwarsa, return 401 Unauthorized (identitasmu tidak bisa dibuktikan)
+- [ ] Aturan pegangan: 401 = belum terbukti siapa kamu; 403 = sudah terbukti siapa kamu, tapi role/izinmu tidak cukup. Soal ini tidak punya route berbasis role, jadi tidak ada respons 403
 - [ ] Jika valid, simpan data user ke `req.user` dan panggil `next()`
 - [ ] Menerapkan middleware ke route GET `/protected` dan GET `/profile`
 - [ ] Route GET `/public` TIDAK menggunakan middleware autentikasi
@@ -29,6 +30,6 @@ GET /protected (tanpa token)
 GET /protected (dengan token valid)
 -> 200: { "message": "Selamat datang di area terproteksi!", "user": { "userId": 1, "email": "..." } }
 
-GET /protected (dengan token invalid)
--> 403: { "error": "Forbidden", "message": "Token tidak valid" }
+GET /protected (dengan token invalid atau kedaluwarsa)
+-> 401: { "error": "Unauthorized", "message": "Token tidak valid" }
 ```

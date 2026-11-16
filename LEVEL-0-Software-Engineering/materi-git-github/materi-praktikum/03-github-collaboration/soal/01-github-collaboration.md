@@ -12,28 +12,44 @@ Kamu akan berkontribusi ke repository orang lain (atau repository latihan) mengg
 
 ## Persiapan
 
-1. Login ke GitHub
-2. Buka https://github.com
-3. Buat repository baru bernama `latihan-kontribusi` (Public, ✅ Add README)
+GitHub **tidak mengizinkan kamu mem-fork repo milikmu sendiri** ke akun yang sama. Jadi ada dua jalur. Pilih satu dulu, dan ikuti catatan "Jalur A" atau "Jalur B" di setiap soal.
+
+**Jalur A: berdua dengan teman (paling mirip dunia kerja)**
+
+1. Temanmu membuat repository `latihan-kontribusi` di akunnya (Public, centang Add README).
+2. Kamu mem-fork repo itu. Temanmu yang me-review dan me-merge PR-mu.
+3. Setelah selesai, tukar peran.
+
+**Jalur B: sendirian**
+
+1. Buat repository `latihan-kontribusi` di akunmu (Public, centang Add README).
+2. Lewati fork. Kamu clone repo itu langsung, lalu buat PR dari branch ke `main` di repo yang sama.
+3. Fork sungguhan dilatih terpisah di repo latihan publik untuk pemula, misalnya [first-contributions](https://github.com/firstcontributions/first-contributions).
+
+Di bawah, `USERNAME` adalah pemilik repo yang kamu clone: akunmu sendiri di Jalur B, atau **akunmu** (hasil fork) di Jalur A. `PEMILIK_ASLI` adalah akun temanmu di Jalur A.
 
 ---
 
 ## Soal
 
-### SOAL 1: Fork Repository
+### SOAL 1: Fork Repository (Jalur A saja)
 
 ```bash
-# 1. Buka repository latihan-kontribusi di GitHub
-#    https://github.com/USERNAME/latihan-kontribusi
+# 1. Buka repository milik temanmu di GitHub
+#    https://github.com/PEMILIK_ASLI/latihan-kontribusi
 
 # 2. Klik tombol "Fork" di kanan atas
-#    Repository sekarang ada di akun kamu:
+#    Repository sekarang ada juga di akunmu:
 #    https://github.com/USERNAME/latihan-kontribusi
 ```
 
+**Jalur B:** lewati soal ini. Tulis di catatanmu satu kalimat: kenapa kamu tidak bisa mem-fork repo milikmu sendiri, dan apa bedanya fork dengan branch.
+
 ---
 
-### SOAL 2: Clone Repository Fork
+### SOAL 2: Clone Repository
+
+Jalur A: clone fork-mu. Jalur B: clone repo milikmu sendiri.
 
 ```bash
 # 1. Clone repository fork ke komputer
@@ -42,7 +58,7 @@ git clone https://github.com/USERNAME/latihan-kontribusi.git
 # 2. Masuk ke folder
 cd latihan-kontribusi
 
-# 3. Lihat remote — seharusnya menunjuk ke fork kita
+# 3. Lihat remote — seharusnya menunjuk ke repo yang kamu clone (fork-mu di Jalur A)
 git remote -v
 ```
 
@@ -75,7 +91,7 @@ EOF
 git add saran.txt
 git commit -m "docs: tambahkan file saran aplikasi"
 
-# 4. Push branch ke fork kita
+# 4. Push branch ke origin (fork-mu di Jalur A, repo sendiri di Jalur B)
 git push -u origin feature/saran-app
 ```
 
@@ -94,7 +110,9 @@ git push -u origin feature/saran-app
 # 3. Isi Pull Request:
 #    - Title: "docs: tambahkan file saran aplikasi"
 #    - Description: "Saya menambahkan file saran untuk perbaikan aplikasi"
-#    - Base repository: USERNAME/latihan-kontribusi
+#    - Base repository:
+#        Jalur A: PEMILIK_ASLI/latihan-kontribusi (repo temanmu)
+#        Jalur B: USERNAME/latihan-kontribusi (repo yang sama)
 #    - Base branch: main
 #    - Head repository: USERNAME/latihan-kontribusi
 #    - Head branch: feature/saran-app
@@ -104,14 +122,16 @@ git push -u origin feature/saran-app
 
 ---
 
-### SOAL 5: Merge Pull Request (Sebagai Owner)
+### SOAL 5: Review dan Merge Pull Request
+
+Jalur A: temanmu yang menjadi owner dan me-merge PR-mu. Jalur B: kamu sendiri owner-nya.
 
 ```bash
 # Sebagai owner repository:
-# 1. Buka https://github.com/USERNAME/latihan-kontribusi
+# 1. Buka repository di GitHub
 # 2. Klik tab "Pull requests"
 # 3. Klik PR yang baru dibuat
-# 4. Review perubahan
+# 4. Buka tab "Files changed", tulis minimal satu komentar di baris tertentu
 # 5. Klik "Merge pull request"
 # 6. Klik "Confirm merge"
 # 7. Branch sudah masuk ke main!
@@ -121,9 +141,11 @@ git push -u origin feature/saran-app
 
 ## Bonus: Setup Upstream (Sinkronisasi dengan Repo Original)
 
+Hanya bermakna kalau kamu punya fork (Jalur A, atau latihan di first-contributions). Di Jalur B murni, `origin` sudah repo aslinya, jadi cukup `git pull`.
+
 ```bash
 # 1. Tambahkan remote upstream (repo original)
-git remote add upstream https://github.com/ORIGINAL_OWNER/latihan-kontribusi.git
+git remote add upstream https://github.com/PEMILIK_ASLI/latihan-kontribusi.git
 
 # 2. Sinkronkan dengan repo original
 git fetch upstream
@@ -141,13 +163,13 @@ git push origin main
 ## Ringkasan Workflow
 
 ```
-1. FORK    → Salin repo orang lain ke akun kita
+1. FORK    → Salin repo orang lain ke akun kita (Jalur A; di Jalur B dilewati)
 2. CLONE   → Download ke komputer
 3. BRANCH  → Buat branch baru
 4. EDIT    → Ubah kode
 5. COMMIT  → Simpan perubahan
-6. PUSH    → Kirim ke fork kita
-7. PR      → Minta merge ke repo original
+6. PUSH    → Kirim ke fork kita (Jalur B: ke repo sendiri)
+7. PR      → Minta merge ke repo original (Jalur B: ke main repo yang sama)
 8. REVIEW  → Owner review & merge
 ```
 
@@ -156,11 +178,11 @@ git push origin main
 ## Checklist
 
 ```
-□ Fork repository berhasil
+□ Jalur A: fork repository teman berhasil. Jalur B: soal 1 dilewati dan alasannya tertulis
 □ Clone fork ke komputer berhasil
-□ git remote -v menampilkan origin yang benar
+□ git remote -v menampilkan origin yang benar (fork-mu di Jalur A, repo sendiri di Jalur B)
 □ Branch feature/saran-app berhasil dibuat
 □ File saran.txt di-commit dan di-push
 □ Pull Request berhasil dibuat di GitHub
-□ Pull Request berhasil di-merge
+□ Pull Request punya minimal satu komentar review, lalu berhasil di-merge
 ```

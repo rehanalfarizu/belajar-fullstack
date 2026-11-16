@@ -9,7 +9,7 @@
  * Requirements:
  * - Middleware authenticateToken -> ekstrak Bearer token dari header
  * - Verifikasi token dengan jwt.verify()
- * - Jika token invalid/tdk ada -> 401/403
+ * - Jika token tidak ada/invalid/kedaluwarsa -> 401 (role tidak cukup baru 403)
  * - Jika valid -> req.user = decoded, next()
  * - Route GET /protected -> pakai middleware
  * - Route GET /public    -> tidak pakai middleware
@@ -68,5 +68,5 @@ app.listen(PORT, () => {
 // GET /public (tanpa token) -> 200: { "message": "Halaman publik - semua orang bisa akses" }
 // GET /protected (tanpa token) -> 401: { "error": "Unauthorized", "message": "Token diperlukan" }
 // GET /protected (token valid) -> 200: { "message": "Selamat datang di area terproteksi!", "user": { "userId": 1, "email": "..." } }
-// GET /protected (token invalid) -> 403: { "error": "Forbidden", "message": "Token tidak valid" }
+// GET /protected (token invalid) -> 401: { "error": "Unauthorized", "message": "Token tidak valid" }
 // ============================================================

@@ -64,7 +64,10 @@ worker.on("message", msg => console.log("Worker:", msg));
 ---
 
 ## Cara Submit
-1. Simpan sebagai `09-child-process.js`
-2. Jalankan command: `ls`, `node -v`, `echo "Hello"`
-3. BUAT worker script (`worker.js`) dan fork dari main
-4. COBA IPC: kirim pesan dari main ke worker dan sebaliknya
+
+Starter: `code/09-child-process.js`. `exec` dan `spawn` di starter sudah berupa demo yang jalan. **`worker.js` tidak disediakan**, kamu yang membuatnya.
+
+1. Salin starter ke `latihan-saya/03-backend/minggu-08/09-child-process.js` (nama sama).
+2. Jalankan dulu apa adanya, baca outputnya, lalu coba `ls`, `node -v`, dan `echo "Hello"` lewat `exec`.
+3. Buat `worker.js` di folder yang sama dengan salinan starter, lalu isi `TODO(human) 3` di starter untuk `fork` worker itu.
+4. Uji IPC dua arah: pesan dari induk sampai ke worker, balasan worker tercetak di induk, program berhenti sendiri.

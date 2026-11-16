@@ -100,12 +100,17 @@ sudah disanitasi), aman. Kalau tidak tahu asalnya, jangan.
 
 ### Kapan `{!! !!}` boleh?
 
-- HTML yang **kamu sendiri** hasilkan dan isinya sudah di-escape. Contoh
-  pola yang benar untuk teks multi-baris: escape dulu, baru ubah baris baru:
+- HTML yang **kamu sendiri** hasilkan di server, dan bagian yang berasal
+  dari user sudah di-escape lebih dulu. Contoh: lencana status tugas di
+  aplikasi kampus. Teksnya dari daftar tetap, labelnya dari mahasiswa:
 
-  ```blade
-  {!! nl2br(e($catatan)) !!}
+  ```php
+  // di helper/controller, bukan di Blade
+  $lencana = '<span class="lencana">' . e($label) . '</span>';
   ```
+
+  Aturannya: **escape bagian dari user dulu, baru rangkai HTML buatanmu.**
+  Urutan terbalik (rangkai, lalu escape) merusak HTML-nya sendiri.
 
 - HTML rich text dari user yang **sudah disanitasi di server** dengan
   library HTML purifier berbasis allowlist tag. `strip_tags()` atau regex
@@ -135,13 +140,13 @@ maupun sebelum dirender.
 ```blade
 {{-- BERBAHAYA: tanda kutip di data bisa menutup string --}}
 <script>const kota = '{!! $kota !!}';</script>
-
-{{-- AMAN: Laravel meng-encode sebagai JSON yang aman di dalam <script> --}}
-<script>const kota = {{ Js::from($kota) }};</script>
 ```
 
-`Js::from()` menghasilkan JSON dengan karakter `<`, `>`, `'`, `&` di-encode,
-jadi `</script>` di dalam data tidak bisa menutup tag script.
+Ada dua cara aman: taruh data di atribut `data-*` (di-escape `{{ }}`) lalu
+baca dari JavaScript lewat `dataset`, atau pakai helper JSON bawaan Laravel
+untuk konteks `<script>`. Cari nama helper-nya di bagian "Rendering JSON"
+dokumentasi Blade, lalu pikirkan kenapa JSON yang di-encode dengan benar
+tidak bisa menutup tag `</script>` lebih awal.
 
 ### Ringkasan konteks
 
@@ -150,7 +155,7 @@ jadi `</script>` di dalam data tidak bisa menutup tag script.
 | Isi tag | `<p>...</p>` | `{{ }}` |
 | Atribut biasa | `title="..."` | `{{ }}` (selalu dalam tanda kutip) |
 | Atribut URL | `href`, `src` | cek skema + `{{ }}` |
-| Dalam `<script>` | `const x = ...` | `Js::from()` / `@json` |
+| Dalam `<script>` | `const x = ...` | atribut `data-*` atau helper JSON Laravel |
 | Dalam CSS | `style="..."` | hindari data user sama sekali |
 
 **Kenapa penting untuk kerja:** XSS konsisten masuk daftar celah paling
@@ -429,10 +434,10 @@ belum menjalankan salah satu perintah itu.
 | Kesalahan | Akibat | Perbaikan |
 |---|---|---|
 | `{!! $input_user !!}` | XSS | `{{ }}` |
-| `nl2br($teks)` tanpa `e()` | XSS lewat deskripsi | `{!! nl2br(e($teks)) !!}` |
-| `e(nl2br($teks))` | `<br />` tampil sebagai teks | escape dulu, baru `nl2br` |
+| Merangkai HTML dengan data user tanpa `e()` | XSS lewat bagian yang dirangkai | `e()` bagian user dulu, baru rangkai |
+| `e()` dipanggil setelah HTML dirangkai | Tag buatanmu tampil sebagai teks | escape dulu, baru rangkai |
 | `href="{{ $url_user }}"` tanpa cek skema | `javascript:` XSS | allowlist `http/https` |
-| String data user di dalam `<script>` | XSS konteks JS | `Js::from()` |
+| String data user di dalam `<script>` | XSS konteks JS | `data-*` atau helper JSON Laravel |
 | Query Eloquent di Blade | N+1, susah dites | ambil data di controller |
 | `@can` dianggap keamanan | Akses ilegal lewat request langsung | policy di server |
 | Lupa `@csrf` lalu mematikan CSRF | Form bisa dipalsukan | tambahkan `@csrf` |
@@ -459,7 +464,7 @@ HTML asli yang dikirim server, bukan tampilan yang sudah dirender.
 ## 12. Latihan Berpikir (Tanpa Kode)
 
 1. Data apa saja di toko online yang berasal dari user? (Petunjuk: lebih banyak dari yang kamu kira, termasuk query string dan nama file upload.)
-2. Kamu butuh deskripsi produk dengan **bold** dan **list**. Langkah apa yang harus ada di server sebelum boleh pakai `{!! !!}`?
+2. Kamu butuh kolom "tentang saya" di profil mahasiswa dengan **bold** dan **list**. Langkah apa yang harus ada di server sebelum boleh pakai `{!! !!}`?
 3. Kenapa `@can` di view tidak cukup untuk keamanan, tapi tetap berguna?
 4. Komponen kartu produk dipakai 100 kali di satu halaman. Di mana kamu memastikan relasi `category` tidak di-query 100 kali?
 

@@ -22,9 +22,10 @@ Setelah selesai, kamu akan punya:
 
 Estimasi di atas perkiraan, karena soal tidak mencantumkan waktu.
 
-**Catatan soal 04:** bagian "Persyaratan" bilang token invalid dibalas `401`, tapi "Expected Output"
-menulis `403`. Jangan asal pilih. Baca arti `401 Unauthorized` dan `403 Forbidden` di MDN, putuskan
-sendiri, lalu tulis alasanmu di jurnal.
+**Catatan soal 04:** token tidak ada, invalid, atau kedaluwarsa dibalas `401`. Kode `403` dipakai kalau
+identitasmu sudah terbukti tapi role-mu tidak cukup. Soal ini belum punya route berbasis role, jadi cuma `401`
+yang muncul. Baca arti `401 Unauthorized` dan `403 Forbidden` di MDN, lalu tulis dengan kata-katamu sendiri di
+jurnal kenapa token palsu itu 401 dan bukan 403.
 
 ### Persiapan sekali saja
 

@@ -4,67 +4,28 @@
 const { EventEmitter } = require("events");
 
 // ============================================================
-// Custom EventEmitter Class
+// TODO(human): Custom EventEmitter Class — Logger
 // ============================================================
-// class Logger extends EventEmitter {
-//   info(msg) {
-//     console.log("[INFO]", msg);
-//     this.emit("log", { level: "info", msg, time: new Date() });
-//   }
-//
-//   warn(msg) {
-//     console.warn("[WARN]", msg);
-//     this.emit("log", { level: "warn", msg, time: new Date() });
-//   }
-//
-//   error(msg) {
-//     console.error("[ERROR]", msg);
-//     this.emit("log", { level: "error", msg, time: new Date() });
-//   }
-// }
-//
-// const logger = new Logger();
-//
-// // Handler 1: semua logs
-// logger.on("log", entry => {
-//   console.log("Handler 1 - Log:", JSON.stringify(entry));
-// });
-//
-// // Handler 2: hanya error
-// logger.on("log", entry => {
-//   if (entry.level === "error") {
-//     console.log("Handler 2 - ERROR DETECTED:", entry.msg);
-//   }
-// });
-//
-// logger.info("Server started");
-// logger.warn("Low memory");
-// logger.error("Database connection failed");
+// Buat class Logger yang extends EventEmitter dengan method info, warn, error.
+// - Setiap method mencetak pesan berlabel ([INFO], [WARN], [ERROR]) ke console
+// - Setiap method juga emit event "log" dengan objek { level, msg, time }
+// Lalu pasang dua listener pada event "log":
+// - Listener 1: mencetak semua log sebagai JSON
+// - Listener 2: hanya bereaksi kalau level === "error"
+// Panggil logger.info, logger.warn, logger.error satu kali masing-masing.
+// Selesai kalau: 3 log tercetak oleh Listener 1, dan hanya log error yang
+// memicu Listener 2. Cek dengan logger.listenerCount("log") bernilai 2.
+// Ingat: listener harus dipasang SEBELUM emit.
 
 
 // ============================================================
-// FileWatcher dengan EventEmitter
+// TODO(human): FileWatcher dengan EventEmitter (bonus)
 // ============================================================
-// class FileWatcher extends EventEmitter {
-//   constructor(filename) {
-//     super();
-//     this.filename = filename;
-//     this.watch();
-//   }
-//
-//   watch() {
-//     fs.watch(this.filename, (eventType) => {
-//       if (eventType === "change") {
-//         this.emit("change", { file: this.filename, time: new Date() });
-//       }
-//     });
-//   }
-// }
-//
-// const watcher = new FileWatcher("data.txt");
-// watcher.on("change", ({ file, time }) => {
-//   console.log(`${file} diubah pada ${time}`);
-// });
+// Buat class FileWatcher yang extends EventEmitter. Constructor menerima nama
+// file, lalu memantaunya dengan fs.watch (baca dokumentasi fs.watch; jangan
+// lupa require("fs")). Saat file berubah, emit event "change" berisi
+// { file, time }.
+// Selesai kalau: mengedit file yang dipantau mencetak pesan dari listener "change".
 
 
 // ============================================================

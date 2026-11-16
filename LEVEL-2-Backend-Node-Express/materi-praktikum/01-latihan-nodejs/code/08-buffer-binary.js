@@ -16,7 +16,7 @@ console.log("From array:", buf3.toString("utf-8")); // "Hello"
 
 
 // ============================================================
-// TODO: Buffer Operations
+// TODO(human): Buffer Operations
 // ============================================================
 // buf.toString("utf-8") — convert back to string
 // buf.length — size in bytes
@@ -47,13 +47,12 @@ console.log("From base64:", decodedB64);
 
 
 // ============================================================
-// TODO: Slice & Concatenate
+// TODO(human): Slice & Concatenate
 // ============================================================
-// const sub = buf.slice(0, 5);
-// console.log("Slice:", sub.toString());
-//
-// const combined = Buffer.concat([buf1, buf2]);
-// console.log("Combined length:", combined.length);
+// - Ambil 5 byte pertama dari `buf`, ubah ke string, cetak.
+// - Gabungkan buf1 dan buf2, cetak panjangnya.
+// Tebak dulu angkanya sebelum menjalankan. Selesai kalau tebakanmu benar.
+// (Sebagai perbandingan setelah mencoba sendiri: solusi-jangan-dibuka-dulu.md)
 
 
 // ============================================================
@@ -94,3 +93,21 @@ console.log("Nama decoded:", Buffer.from(nama.toString("hex"), "hex").toString("
 
 // Test 2: Bandingkan 2 strings via buffer
 console.log("Byte comparison:", Buffer.from("apple").compare(Buffer.from("banana"))); // -1
+
+
+// ============================================================
+// TODO(human): Fungsi gambarKeBase64 (TUGAS INTI SOAL INI)
+// ============================================================
+// Lihat "Cara Submit" di soal/08-buffer-binary.md.
+// - Buat fungsi gambarKeBase64(pathFile) yang mengembalikan string base64
+//   dari isi file gambar.
+// - Petunjuk: baca file TANPA encoding supaya hasilnya Buffer, bukan string.
+//   Cek dokumentasi fs.readFileSync untuk tahu kapan hasilnya Buffer.
+// - Uji dengan gambar PNG kecil (di bawah 10 KB) apa saja.
+//
+// Selesai kalau:
+// 1. Hasilnya sama dengan keluaran `base64 -i gambar.png` di terminal
+//    (macOS; di Linux `base64 gambar.png`), mengabaikan karakter baris baru.
+// 2. Path yang salah tidak membuat program crash tanpa penjelasan:
+//    tangkap errornya dan cetak pesan yang jelas.
+// 3. Buffer.from(hasil, "base64").equals(isiFileAsli) bernilai true.

@@ -37,9 +37,11 @@ klasifikasi apa saja (nilai huruf, kategori usia, tier pengguna, dst).
 Untuk setiap bagian di bawah, alurnya:
 
 1. **Baca penjelasan** — pahami konsep dan kenapa dipakai
-2. **Ketik dari 0** — buka `code/02-cek-bilangan.js`, cari `TODO(human)`,
+2. **Ketik dari 0** — buka salinan starter `02-cek-bilangan.js` (lihat catatan di bawah), cari `TODO(human)`,
    lalu ketik sendiri (JANGAN copy-paste)
 3. **Verifikasi** — cek hasilmu dengan panduan verifikasi
+
+> **Di mana mengerjakannya:** starter sudah ada di `LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/02-cek-bilangan.js`. Sesuai aturan [latihan-saya](../../../../latihan-saya/README.md), salin file itu ke `latihan-saya/02-javascript/minggu-XX/` dengan nama yang sama (`02-cek-bilangan.js`), lalu kerjakan di salinan itu. Semua perintah `node` di soal ini dijalankan terhadap salinanmu.
 
 Kamu **tidak akan diberi kode jadi**. Tujuannya agar kamu terbiasa **berpikir
 sebelum mengetik** dan **membiasakan diri dengan sintaks JavaScript**. Ini skill
@@ -397,9 +399,9 @@ Sebelum lanjut ke soal 03, cek semua ini:
    (Bagian D)
 4. (Bonus) Isi bagian loop angka 1-20 (Bagian E)
 5. Save (Cmd+S / Ctrl+S)
-6. Buka terminal di folder `code/`, jalanin: `node 02-cek-bilangan.js`
+6. Buka terminal di folder salinanmu (`latihan-saya/02-javascript/minggu-XX/`), jalankan: `node 02-cek-bilangan.js`
 7. Cek output sesuai dengan verifikasi
-8. Kalau PASS, lanjut ke `soal/03-kalkulator-sederhana.md`
+8. Kalau PASS, lanjut ke `soal/03-fizzbuzz.md`
 
 ---
 

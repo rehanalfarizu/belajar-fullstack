@@ -27,15 +27,19 @@ Setelah selesai, kamu akan punya:
 
 Total kira-kira 9-13 jam.
 
-**Catatan soal 01, 05, 06, 07:** teks soalnya bilang "buat file baru". File starter dengan nama yang sama
-sebenarnya sudah ada di `code/` (tabel di atas). Pakai starter itu, atau mulai dari file kosong kalau
-mau latihan lebih berat. Dua-duanya boleh, yang penting kamu yang mengetik.
+Kolom "File yang kamu edit" menunjuk ke **starter** di `code/`. Starter itu bahan, jangan diedit langsung.
 
 ### Di mana menulis kodenya?
 
-Kalau ikut aturan [latihan-saya](../../../latihan-saya/README.md), salin starter ke folder mingguanmu
-dengan nama yang sama (misalnya `latihan-saya/02-javascript/minggu-03/03-fizzbuzz.js`), lalu kerjakan
-di sana. Semua perintah `node` di bawah tinggal diganti path-nya.
+Satu aturan untuk semua soal 01-10, sesuai [latihan-saya](../../../latihan-saya/README.md):
+
+1. Buat folder mingguan kalau belum ada, misalnya `latihan-saya/02-javascript/minggu-03/`.
+2. Salin starter dari `code/` ke folder itu dengan **nama file yang sama** (contoh:
+   `latihan-saya/02-javascript/minggu-03/03-fizzbuzz.js`).
+3. Kerjakan `TODO(human)` di salinan itu. Perintah `node` di soal dijalankan terhadap salinanmu.
+
+Sebagian soal (01, 05, 06, 07) bilang "buat file baru" di teksnya. Maksudnya: ketik isinya sendiri, jangan
+copy-paste. Tetap mulai dari salinan starter dengan nama file yang sama.
 
 ---
 
@@ -95,7 +99,7 @@ isi variabel. Atau pakai tab **Run and Debug** di VS Code.
 
 ## Cara Mengecek Hasil Sendiri
 
-Jalankan dari root repo (atau ganti path kalau kamu kerja di `latihan-saya/`):
+Contoh menjalankan starter dari root repo (untuk salinanmu di `latihan-saya/`, ganti path-nya):
 
 ```bash
 node LEVEL-1-Fundamental-Web/materi-praktikum/03-latihan-javascript/code/01-kalkulator-sederhana.js

@@ -7,11 +7,13 @@ engineering, Git, terminal, dan environment sebelum masuk ke web.
 
 ```
 LEVEL-0 STRUKTUR:
-├── materi-teori/ → CS fundamental, Git, software engineering, membaca dokumen
-├── materi-praktikum/ → latihan membaca ERD, PRD, dan API
-├── software/   → Cara install & setup setiap software
-├── tutorial/   → Panduan step-by-step untuk workflow tertentu
-└── README.md   → (kamu di sini)
+├── materi-teori/      → CS fundamental, Git, software engineering, kode rapi
+├── materi-praktikum/  → latihan membaca dokumen (ERD, PRD, API) dan refactor kode rapi
+├── materi-git-github/ → modul Git & GitHub lengkap (teori + 3 praktikum)
+├── software/          → 10 panduan install & setup software
+├── tutorial/          → 3 tutorial: dev environment, kolaborasi Git, command line
+├── materi-tutorial/   → 1 tutorial setup dev environment (versi lain)
+└── README.md          → (kamu di sini)
 ```
 
 ---
@@ -52,11 +54,11 @@ Sepuluh software esensial yang membentuk toolset seorang fullstack developer:
 
 ## 📚 Tutorial (3 File)
 
-Tiga tutorial praktis untuk mengintegrasikan semua software:
+Tiga tutorial praktis di folder `tutorial/` untuk mengintegrasikan semua software:
 
-1. **Dev Environment Setup** — output: semua tools berjalan dan terkonfigurasi.
-2. **Git Collaboration Workflow** — output: bisa berkolaborasi via GitHub PR.
-3. **Command Line Mastery** — output: 50+ command baru dikuasai.
+1. **Dev Environment Setup** (`tutorial/01-dev-environment-setup.md`) — output: semua tools berjalan dan terkonfigurasi.
+2. **Git Collaboration Workflow** (`tutorial/02-git-collaboration-workflow.md`) — output: bisa berkolaborasi via GitHub PR.
+3. **Command Line Mastery** (`tutorial/03-command-line-mastery.md`) — output: 50+ command baru dikuasai.
 
 ---
 

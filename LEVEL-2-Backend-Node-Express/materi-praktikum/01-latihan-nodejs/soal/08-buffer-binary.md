@@ -68,7 +68,11 @@ console.log(decoded); // Hello, 世界!
 ---
 
 ## Cara Submit
-1. Simpan sebagai `08-buffer-binary.js`
-2. Jalankan — test semua conversions
-3. COBA base64 encoding untuk file gambar kecil
-4. BUAT fungsi yang encode image ke base64 string
+
+Starter: `code/08-buffer-binary.js`. Bagian atas starter sudah berisi demo yang jalan, supaya kamu bisa melihat bentuk Buffer. **Tugas aslimu ada di bagian `TODO(human)`**, terutama yang paling bawah.
+
+1. Salin starter ke `latihan-saya/03-backend/minggu-08/08-buffer-binary.js` (nama sama).
+2. Isi `TODO(human)` Buffer Operations dan Slice & Concatenate. Tebak output dulu, baru jalankan.
+3. Tulis fungsi `gambarKeBase64(pathFile)` yang mengembalikan string base64 isi file gambar (kriteria selesai ada di komentar starter).
+4. Uji dengan gambar PNG kecil, bandingkan dengan `base64 -i gambar.png` di terminal (macOS).
+5. Coba path yang tidak ada. Program harus memberi pesan jelas, bukan crash tanpa penjelasan.
