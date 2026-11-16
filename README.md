@@ -37,14 +37,14 @@ Gunakan Node.js 24 LTS untuk lingkungan utama. Package ini menerima Node
 
 | Tahap | Fokus | Bukti kelulusan |
 |---|---|---|
-| [Level 0](LEVEL-0-Software-Engineering/) | CS, terminal, Git, problem solving, engineering | mampu menelusuri request end-to-end dan melakukan debugging berbasis hipotesis |
-| [Level 1](LEVEL-1-Fundamental-Web/) | HTML, CSS, JavaScript, TypeScript | website accessible/responsive dan program typed tanpa `any` |
-| [Level 2 Node](LEVEL-2-Backend-Node-Express/) | Node, Express, SQL, MongoDB, auth | REST API tervalidasi, teruji, memakai transaction dan authorization |
-| [Level 2 Laravel](LEVEL-2-Backend-Laravel/) | PHP, Laravel, Blade, Eloquent, API | alternatif backend; pilih ini atau Node sebagai fokus pertama |
-| [Level 3 React](LEVEL-3-Frontend-React/) | component, hooks, router, state, form | SPA dengan loading/error/empty state, accessibility, dan test |
-| [Level 3 Vue](LEVEL-3-Frontend-Vue/) | Composition API, Router, Pinia, HTTP | alternatif frontend; pilih ini atau React sebagai fokus pertama |
-| [Level 4](LEVEL-4-Fullstack-Integration/) | contract, cookies/CORS, auth, Next.js, deployment, security | aplikasi end-to-end dengan cookie `HttpOnly`, CI, migration, dan rollback |
-| [Level 5](LEVEL-5-Expert-Level/) | performance, testing, Docker, CI/CD, realtime, design, reliability | proyek terukur dengan SLO, observability, load test, runbook, dan threat model |
+| [Level 0](level-0-dasar-engineering/) | CS, terminal, Git, problem solving, engineering | mampu menelusuri request end-to-end dan melakukan debugging berbasis hipotesis |
+| [Level 1](level-1-dasar-web/) | HTML, CSS, JavaScript, TypeScript | website accessible/responsive dan program typed tanpa `any` |
+| [Level 2 Node](level-2-backend-nodejs/) | Node, Express, SQL, MongoDB, auth | REST API tervalidasi, teruji, memakai transaction dan authorization |
+| [Level 2 Laravel](level-2-backend-laravel/) | PHP, Laravel, Blade, Eloquent, API | alternatif backend; pilih ini atau Node sebagai fokus pertama |
+| [Level 3 React](level-3-frontend-react/) | component, hooks, router, state, form | SPA dengan loading/error/empty state, accessibility, dan test |
+| [Level 3 Vue](level-3-frontend-vue/) | Composition API, Router, Pinia, HTTP | alternatif frontend; pilih ini atau React sebagai fokus pertama |
+| [Level 4](level-4-fullstack-integrasi/) | contract, cookies/CORS, auth, Next.js, deployment, security | aplikasi end-to-end dengan cookie `HttpOnly`, CI, migration, dan rollback |
+| [Level 5](level-5-expert/) | performance, testing, Docker, CI/CD, realtime, design, reliability | proyek terukur dengan SLO, observability, load test, runbook, dan threat model |
 
 | [Modul Keamanan Web](modul-keamanan-web/) | OWASP Top 10, validasi, SQL injection, auth, XSS/CSRF, konfigurasi | audit keamanan aplikasi sendiri + laporan temuan dan perbaikan |
 
@@ -57,14 +57,14 @@ sekaligus sering memberi ilusi kemajuan tetapi mengurangi kedalaman.
 
 Setiap level sekarang memiliki latihan mandiri tanpa solusi:
 
-- [Level 0](LEVEL-0-Software-Engineering/SELF_PROBLEM_SOLVING.md)
-- [Level 1](LEVEL-1-Fundamental-Web/SELF_PROBLEM_SOLVING.md)
-- [Level 2 Node](LEVEL-2-Backend-Node-Express/SELF_PROBLEM_SOLVING.md) atau
-  [Laravel](LEVEL-2-Backend-Laravel/SELF_PROBLEM_SOLVING.md)
-- [Level 3 React](LEVEL-3-Frontend-React/SELF_PROBLEM_SOLVING.md) atau
-  [Vue](LEVEL-3-Frontend-Vue/SELF_PROBLEM_SOLVING.md)
-- [Level 4](LEVEL-4-Fullstack-Integration/SELF_PROBLEM_SOLVING.md)
-- [Level 5](LEVEL-5-Expert-Level/SELF_PROBLEM_SOLVING.md)
+- [Level 0](level-0-dasar-engineering/SELF_PROBLEM_SOLVING.md)
+- [Level 1](level-1-dasar-web/SELF_PROBLEM_SOLVING.md)
+- [Level 2 Node](level-2-backend-nodejs/SELF_PROBLEM_SOLVING.md) atau
+  [Laravel](level-2-backend-laravel/SELF_PROBLEM_SOLVING.md)
+- [Level 3 React](level-3-frontend-react/SELF_PROBLEM_SOLVING.md) atau
+  [Vue](level-3-frontend-vue/SELF_PROBLEM_SOLVING.md)
+- [Level 4](level-4-fullstack-integrasi/SELF_PROBLEM_SOLVING.md)
+- [Level 5](level-5-expert/SELF_PROBLEM_SOLVING.md)
 
 ## Arti folder
 
@@ -119,6 +119,6 @@ tetap memerlukan dependency sendiri, test runtime, database, dan threat model.
   rate limiting, logging yang tidak membocorkan secret, dan backup yang diuji.
 - Contoh kode vulnerable hanya untuk latihan security dan harus diberi label jelas.
 
-Mulai dari [Level 0](LEVEL-0-Software-Engineering/) jika benar-benar baru, atau
+Mulai dari [Level 0](level-0-dasar-engineering/) jika benar-benar baru, atau
 gunakan placement test pada [Panduan Belajar](PANDUAN_BELAJAR.md) jika sudah punya
 pengalaman.

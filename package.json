@@ -5,8 +5,8 @@
   "description": "Kurikulum belajar fullstack dari fundamental hingga expert",
   "scripts": {
     "validate": "node scripts/validate-curriculum.mjs && npm run validate:html && npm run validate:types",
-    "validate:html": "html-validate \"LEVEL-1-Fundamental-Web/**/*.html\"",
-    "validate:types": "tsc --strict --noEmit --lib ES2023,DOM \"LEVEL-1-Fundamental-Web/materi-praktikum/04-latihan-typescript/code/01-product-catalog.ts\" \"LEVEL-1-Fundamental-Web/materi-praktikum/04-latihan-typescript/contoh/01-product-catalog.ts\"",
+    "validate:html": "html-validate \"level-1-dasar-web/**/*.html\"",
+    "validate:types": "tsc --strict --noEmit --lib ES2023,DOM \"level-1-dasar-web/materi-praktikum/04-latihan-typescript/code/01-product-catalog.ts\" \"level-1-dasar-web/materi-praktikum/04-latihan-typescript/contoh/01-product-catalog.ts\"",
     "audit": "node scripts/validate-curriculum.mjs --verbose"
   },
   "engines": {

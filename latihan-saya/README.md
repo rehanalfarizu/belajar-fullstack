@@ -5,7 +5,7 @@ Folder `LEVEL-*` adalah bahan: dibaca, tidak diedit. Dengan begitu bahan tetap
 bersih, dan riwayat Git di folder ini menunjukkan perjalanan belajarmu.
 
 Panduan menulis kode dan menyusun folder:
-[Kode yang Rapi dan Folder yang Teratur](../LEVEL-0-Software-Engineering/materi-teori/06-kode-rapi-dan-struktur-folder.md).
+[Kode yang Rapi dan Folder yang Teratur](../level-0-dasar-engineering/materi-teori/06-kode-rapi-dan-struktur-folder.md).
 
 ## Struktur
 
@@ -75,7 +75,7 @@ output → tulis kode dari file kosong → coba input aneh.
 
 1. Jalankan sekali lagi, pastikan tidak error.
 2. Format dengan Prettier.
-3. Cek [checklist sebelum commit](../LEVEL-0-Software-Engineering/materi-teori/06-kode-rapi-dan-struktur-folder.md#6-checklist-sebelum-commit).
+3. Cek [checklist sebelum commit](../level-0-dasar-engineering/materi-teori/06-kode-rapi-dan-struktur-folder.md#6-checklist-sebelum-commit).
 4. Commit dengan format `jenis: ringkasan`, misalnya
    `feat: soal 03 fizzbuzz dengan validasi input`.
 5. Tulis entri jurnal di **paling atas** `JURNAL.md`, termasuk **Mulai dari**.
