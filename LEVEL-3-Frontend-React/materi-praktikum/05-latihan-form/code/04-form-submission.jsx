@@ -17,39 +17,8 @@ import { useState, useEffect, useRef } from "react";
 //   2. Jika gagal → rollback (hapus dari list) + restore form
 //   3. Form di-reset setelah submit berhasil
 //
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   const newComment = { id: `C${Date.now()}`, author: form.author, content: form.content, timestamp: Date.now(), likes: 0, likedByUser: false };
-//   setComments(prev => [newComment, ...prev]);
-//   setForm({ author: "", content: "" });
-//   try {
-//     await simulateApiCall();
-//     setSubmitStatus({ type: "success", message: "Komentar berhasil dikirim" });
-//   } catch (err) {
-//     setComments(prev => prev.filter(c => c.id !== newComment.id));
-//     setForm({ author: newComment.author, content: newComment.content });
-//     setSubmitStatus({ type: "error", message: err.message });
-//   }
-// };
 //
-// function simulateApiCall(shouldFail = false) {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       if (shouldFail || Math.random() < 0.1) reject(new Error("Network error"));
-//       else resolve();
-//     }, 800);
-//   });
-// }
 //
-// function getRelativeTime(timestamp) {
-//   const diff = Date.now() - timestamp;
-//   const minutes = Math.floor(diff / 60000);
-//   if (minutes < 1) return "Baru saja";
-//   if (minutes < 60) return `${minutes} menit lalu`;
-//   const hours = Math.floor(minutes / 60);
-//   if (hours < 24) return `${hours} jam lalu`;
-//   return `${Math.floor(hours / 24)} hari lalu`;
-// }
 // ============================================================
 
 function simulateApiCall(shouldFail = false) {
@@ -166,17 +135,8 @@ export function CommentSection() {
 // };
 //
 // Cascading Logic:
-//   const handleCountryChange = (country) => {
-//     setForm(prev => ({ ...prev, country, province: "", city: "", district: "" }));
-//   };
 //
-//   const handleProvinceChange = (province) => {
-//     setForm(prev => ({ ...prev, province, city: "", district: "" }));
-//   };
 //
-//   const handleCityChange = (city) => {
-//     setForm(prev => ({ ...prev, city, district: "" }));
-//   };
 //
 // Computed options:
 //   const countryOptions = Object.keys(LOCATION_DATA);

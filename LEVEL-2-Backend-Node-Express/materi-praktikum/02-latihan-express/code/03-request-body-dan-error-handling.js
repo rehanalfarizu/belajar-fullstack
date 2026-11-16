@@ -25,17 +25,9 @@ const PORT = 3000;
 // ============================================================
 // CUSTOM ERROR CLASS
 // TODO(human): Buat kelas ValidationError yang extends Error
-// class ValidationError extends Error {
-//   constructor(message) {
-//     super(message);
-//     this.name = 'ValidationError';
-//     this.statusCode = 400;
-//   }
-// }
 
 // ============================================================
 // MIDDLEWARE: JSON Parser
-// app.use(express.json());
 
 // ============================================================
 // VALIDATION HELPER
@@ -59,16 +51,7 @@ const PORT = 3000;
 
 // ============================================================
 // CENTRALIZED ERROR HANDLER
-// TODO(human): app.use((err, req, res, next) => {
-// console.error('Error:', err.message);
-//   if (err instanceof ValidationError) {
-//     return res.status(err.statusCode).json({ error: err.name, message: err.message });
-//   }
-//   if (err instanceof TypeError) {
-//     return res.status(500).json({ error: 'TypeError', message: err.message });
-//   }
-//   res.status(500).json({ error: 'InternalServerError', message: 'Terjadi kesalahan server' });
-// });
+// TODO(human): tulis app.use sesuai soal
 
 app.listen(PORT, () => {
   console.log(`Server berjalan di http://localhost:${PORT}`);

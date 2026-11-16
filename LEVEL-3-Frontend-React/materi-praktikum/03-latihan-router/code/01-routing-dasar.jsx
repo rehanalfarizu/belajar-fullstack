@@ -64,19 +64,6 @@ export function NotFoundPage() {
 //   3. Links: Home (/), About (/about), Portfolio (/portfolio), Contact (/contact)
 //   4. Styling: horizontal list, spacing, active color highlight
 //
-// function Navbar() {
-//   return (
-//     <nav className="navbar">
-//       <div className="nav-brand">ReactPortal</div>
-//       <ul className="nav-links">
-//         <li><NavLink to="/" end>Home</NavLink></li>
-//         <li><NavLink to="/about">About</NavLink></li>
-//         <li><NavLink to="/portfolio">Portfolio</NavLink></li>
-//         <li><NavLink to="/contact">Contact</NavLink></li>
-//       </ul>
-//     </nav>
-//   );
-// }
 // ============================================================
 
 export function Navbar() {
@@ -87,19 +74,6 @@ export function Navbar() {
 // ============================================================
 // TODO: Layout Component (with Outlet for nested routes)
 // ============================================================
-// export function Layout() {
-//   return (
-//     <div className="layout">
-//       <Navbar />
-//       <main className="main-content">
-//         <Outlet />
-//       </main>
-//       <footer className="footer">
-//         <p>&copy; 2024 ReactPortal. All rights reserved.</p>
-//       </footer>
-//     </div>
-//   );
-// }
 // ============================================================
 
 export function Layout() {
@@ -110,21 +84,6 @@ export function Layout() {
 // ============================================================
 // TODO: App Router Setup
 // ============================================================
-// export function AppRouter() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<Layout />}>
-//           <Route index element={<HomePage />} />
-//           <Route path="about" element={<AboutPage />} />
-//           <Route path="portfolio" element={<PortfolioPage />} />
-//           <Route path="contact" element={<ContactPage />} />
-//           <Route path="*" element={<NotFoundPage />} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
 // ============================================================
 
 export function AppRouter() {

@@ -7,28 +7,6 @@ import { useState, useEffect, useRef, useMemo } from "react";
 // ============================================================
 // TODO: useLocalStorage
 // ============================================================
-// function useLocalStorage(key, initialValue) {
-//   const [value, setValue] = useState(() => {
-//     if (typeof window === "undefined") return initialValue;
-//     try {
-//       const stored = window.localStorage.getItem(key);
-//       return stored !== null ? JSON.parse(stored) : initialValue;
-//     } catch { return initialValue; }
-//   });
-//
-//   useEffect(() => {
-//     if (typeof window === "undefined") return;
-//     try {
-//       if (value === null || value === undefined) {
-//         window.localStorage.removeItem(key);
-//       } else {
-//         window.localStorage.setItem(key, JSON.stringify(value));
-//       }
-//     } catch (err) { console.warn("localStorage write failed:", err); }
-//   }, [key, value]);
-//
-//   return [value, setValue];
-// }
 // ============================================================
 
 function useLocalStorage(key, initialValue) {
@@ -40,16 +18,6 @@ function useLocalStorage(key, initialValue) {
 // ============================================================
 // TODO: useDebounce
 // ============================================================
-// function useDebounce(value, delay = 500) {
-//   const [debouncedValue, setDebouncedValue] = useState(value);
-//
-//   useEffect(() => {
-//     const timer = setTimeout(() => setDebouncedValue(value), delay);
-//     return () => clearTimeout(timer);
-//   }, [value, delay]);
-//
-//   return debouncedValue;
-// }
 // ============================================================
 
 function useDebounce(value, delay = 500) {
@@ -60,13 +28,6 @@ function useDebounce(value, delay = 500) {
 // ============================================================
 // TODO: usePrevious
 // ============================================================
-// function usePrevious(value) {
-//   const ref = useRef();
-//   useEffect(() => {
-//     ref.current = value;
-//   }, [value]);
-//   return ref.current;
-// }
 // ============================================================
 
 function usePrevious(value) {
@@ -79,21 +40,6 @@ function usePrevious(value) {
 // ============================================================
 // TODO: useIntersectionObserver
 // ============================================================
-// function useIntersectionObserver(options = {}) {
-//   const [isIntersecting, setIsIntersecting] = useState(false);
-//   const ref = useRef(null);
-//
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(([entry]) => {
-//       setIsIntersecting(entry.isIntersecting);
-//     }, options);
-//
-//     if (ref.current) observer.observe(ref.current);
-//     return () => observer.disconnect();
-//   }, [options.threshold, options.rootMargin]);
-//
-//   return [ref, isIntersecting];
-// }
 // ============================================================
 
 function useIntersectionObserver(options = {}) {
@@ -105,21 +51,6 @@ function useIntersectionObserver(options = {}) {
 // ============================================================
 // TODO: useMediaQuery
 // ============================================================
-// function useMediaQuery(query) {
-//   const [matches, setMatches] = useState(
-//     () => typeof window !== "undefined" ? window.matchMedia(query).matches : false
-//   );
-//
-//   useEffect(() => {
-//     const mediaQuery = window.matchMedia(query);
-//     const handler = (event) => setMatches(event.matches);
-//
-//     mediaQuery.addEventListener("change", handler);
-//     return () => mediaQuery.removeEventListener("change", handler);
-//   }, [query]);
-//
-//   return matches;
-// }
 // ============================================================
 
 function useMediaQuery(query) {
@@ -130,22 +61,6 @@ function useMediaQuery(query) {
 // ============================================================
 // TODO: useOnClickOutside
 // ============================================================
-// function useOnClickOutside(ref, handler) {
-//   useEffect(() => {
-//     const listener = (event) => {
-//       if (!ref.current || ref.current.contains(event.target)) return;
-//       handler(event);
-//     };
-//
-//     document.addEventListener("mousedown", listener);
-//     document.addEventListener("touchstart", listener);
-//
-//     return () => {
-//       document.removeEventListener("mousedown", listener);
-//       document.removeEventListener("touchstart", listener);
-//     };
-//   }, [ref, handler]);
-// }
 // ============================================================
 
 function useOnClickOutside(ref, handler) {

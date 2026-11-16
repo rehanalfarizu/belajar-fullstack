@@ -24,7 +24,6 @@ const app = express();
 const PORT = 3000;
 
 // TODO(human): Aktifkan middleware express.json() untuk parsing JSON body
-// app.use(express.json());
 
 // TODO(human): Route GET / -> kembalikan { message: "Selamat datang di Express.js Server!" }
 // app.get('/', (req, res) => { ... });

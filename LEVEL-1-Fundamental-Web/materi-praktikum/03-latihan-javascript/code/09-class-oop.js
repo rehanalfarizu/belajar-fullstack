@@ -6,101 +6,28 @@
 // ============================================================
 // TODO 1: Class Person (base class)
 // ============================================================
-// class Person {
-//   constructor(nama, email) {
-//     this.nama = nama;
-//     this.email = email;
-//   }
-//
-//   greet() {
-//     return `Halo, saya ${this.nama}`;
-//   }
-//
-//   getInfo() {
-//     return `${this.nama} (${this.email})`;
-//   }
-// }
-
 
 // ============================================================
 // TODO 2: Class Student (extends Person)
 // ============================================================
-// class Student extends Person {
-//   constructor(nama, email, nim, jurusan) {
-//     // TODO: panggil super(nama, email)
-//
-//     this.nim = nim;
-//     this.jurusan = jurusan;
-//     this.nilai = [];
-//   }
-//
-//   // Override greet - tambahkan info student
-//   greet() {
-//     // TODO: panggil super.greet() + info NIM
-//   }
-//
-//   tambahNilai(n) {
-//     // TODO: push ke this.nilai
-//   }
-//
-//   getRataNilai() {
-//     // TODO: reduce + length, handle if empty
-//   }
-//
-//   getGrade() {
-//     // TODO:
-//     // >= 85 → "A"
-//     // >= 75 → "B"
-//     // >= 65 → "C"
-//     // >= 50 → "D"
-//     // < 50  → "E"
-//   }
-// }
-
+// TODO: panggil super(nama, email)
+// TODO: panggil super.greet() + info NIM
+// TODO: push ke this.nilai
+// TODO: reduce + length, handle if empty
+// TODO:
 
 // ============================================================
 // TODO 3: Static Methods
 // ============================================================
-// class Student {
-//   static createRandom() {
-//     const nama = ["Andi", "Budi", "Citra", "Dewi"];
-//     const rand = nama[Math.floor(Math.random() * nama.length)];
-//     return new Student(rand, `${rand.toLowerCase()}@email.com`, "12345", "Informatika");
-//   }
-//
-//   static createBatch(dataArray) {
-//     // TODO: map dataArray ke Student instances
-//   }
-// }
-
+// TODO: map dataArray ke Student instances
 
 // ============================================================
 // TODO 4: Class Course
 // ============================================================
-// class Course {
-//   constructor(nama, dosen) {
-//     this.nama = nama;
-//     this.dosen = dosis;
-//     this.mahasiswa = [];
-//   }
-//
-//   tambahMahasiswa(student) {
-//     // TODO: push student ke this.mahasiswa
-//   }
-//
-//   hapusMahasiswa(nim) {
-//     // TODO: filter out student dengan nim ini
-//   }
-//
-//   getRataKelas() {
-//     // TODO: rata-rata semua mahasiswa
-//   }
-//
-//   getMahasiswaLulus() {
-//     // TODO: filter this.mahasiswa dengan getRataNilai >= 60
-//   }
-// }
-
+// TODO: push student ke this.mahasiswa
+// TODO: filter out student dengan nim ini
+// TODO: rata-rata semua mahasiswa
+// TODO: filter this.mahasiswa dengan getRataNilai >= 60
 
 // ============================================================
 // TEST
@@ -117,7 +44,6 @@
 // const course = new Course("Web Development", "Dr. Smith");
 // course.tambahMahasiswa(andi);
 // console.log(course.getRataKelas());
-
 
 // ============================================================
 // CONTOH OUTPUT:
