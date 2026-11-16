@@ -11,8 +11,11 @@ sesuai README modul.
 
 ## Mulai di sini
 
-0. Buka [Peta Belajar](PETA-BELAJAR.md) untuk melihat urutan dan mencatat status
-   tiap topik, lalu pakai [Catatan Harian](CATATAN-HARIAN.md) setiap selesai sesi.
+0. Ikuti [Jadwal 12 Minggu](JADWAL-12-MINGGU.md) untuk urutan dan tanggalnya,
+   baca aturan pemakaian AI di bagian atasnya, lalu isi
+   [Peta Padanan](PETA-PADANAN.md) sambil belajar. Buka [Peta Belajar](PETA-BELAJAR.md)
+   untuk mencatat status tiap topik, dan pakai [Catatan Harian](CATATAN-HARIAN.md)
+   setiap selesai sesi.
    Setiap folder latihan punya `TUGAS.md` (apa yang dikerjakan dan di file mana)
    dan `CHECKLIST.md` (cek jujur "aku sudah bisa...").
 1. Baca [Panduan Belajar](PANDUAN_BELAJAR.md).
