@@ -36,14 +36,22 @@ Setelah selesai, kamu punya:
 
 ### Catatan jujur soal starter
 
-- `code/02` dan `code/03` punya fungsi berawalan **`working...`** di bagian
-  bawah file (misalnya `workingSanitizeHTML`, `workingParseId`). Itu jawaban.
-  Saat menyalin, berhenti membaca sebelum bagian itu. Bandingkan setelah
+- Semua starter sekarang berisi `TODO(human)` dengan petunjuk dan **"Selesai
+  kalau"**. Jawaban lengkap ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka setelah
   punyamu jalan.
-- `code/02` menyuruh install `csurf`. Paket itu sudah **deprecated** (tidak
-  dirawat lagi). Jangan dipakai di proyek baru. Pahami konsep token CSRF-nya,
-  lalu cari alternatif yang masih dirawat atau implementasi sendiri seperti di
-  TODO.
+- `code/02` dan `code/03` sengaja menyertakan contoh kode **rentan** (endpoint
+  komentar tanpa sanitasi, query string yang disusun dengan template). Itu untuk
+  diserang dan dianalisis. Jangan dipakai di aplikasi nyata.
+- **`csurf` sudah deprecated** (diarsipkan, tidak dirawat; npm menampilkan pesan
+  deprecated). Jangan dipakai. Pahami dulu konsep token CSRF lewat TODO di
+  `code/02` (token acak, header kustom, perbandingan aman waktu), lalu untuk
+  produksi bandingkan paket yang masih dirawat: `csrf-csrf` (signed
+  double-submit cookie, tanpa state server, versi 4.x; mewajibkan
+  `cookie-parser` dan menuntut kamu menyediakan `getSecret` serta
+  `getSessionIdentifier`) dan `csrf-sync` (synchronizer token untuk aplikasi
+  bersesi, versi 4.x). Baca README resminya di npm/GitHub; opsi berubah antar
+  versi. Kombinasikan dengan cookie `SameSite`.
 - `code/03` membuat koneksi PostgreSQL ke `DATABASE_URL`. Kamu butuh database
   lokal dengan tabel `users` untuk benar-benar menjalankannya.
 - `code/03` memakai `ssl: { rejectUnauthorized: false }` untuk production. Itu
@@ -66,7 +74,7 @@ buatanmu.
 # misalnya di latihan-saya/05-fullstack/security/
 npm init -y
 npm install express zod dotenv          # soal 01
-npm install dompurify jsdom helmet      # soal 02
+npm install helmet cookie-parser        # soal 02 (+ dompurify jsdom bila memilih sanitizer HTML)
 npm install pg                          # soal 03 (butuh PostgreSQL jalan)
 npm install express-rate-limit morgan winston   # soal 04
 node 02-xss-csrf.js

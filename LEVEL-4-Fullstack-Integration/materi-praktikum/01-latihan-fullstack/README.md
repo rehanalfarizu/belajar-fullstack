@@ -7,30 +7,38 @@ Memahami cara membangun komunikasi antara frontend (React) dan backend (Express)
 
 ## Struktur Folder
 
-```
+```text
 01-latihan-fullstack/
 ├── soal/
-│   ├── 01-rest-principles.md
 │   ├── 02-api-design.md
 │   ├── 03-fetch-axios.md
 │   └── 04-auth-middleware.md
 ├── code/
 │   ├── 01-rest-principles.js
 │   ├── 02-api-design.js
+│   ├── 02-rest-api-crud.js
+│   ├── 03-fetch-axios.js
 │   ├── 03-pagination-filter.js
 │   └── 04-auth-middleware.js
-└── README.md
+├── README.md
+├── TUGAS.md
+├── CHECKLIST.md
+└── solusi-jangan-dibuka-dulu.md
 ```
 
 ---
 
 ## Daftar Latihan
 
+Soal 01 dan bonus pagination tidak punya file soal; panduannya ada di
+`TODO(human)` di dalam starter.
+
 | # | Judul | File Soal | File Code |
 |---|-------|-----------|-----------|
-| 01 | REST Principles | `01-rest-principles.md` | `01-rest-principles.js` |
+| 01 | REST Principles | (tidak ada, lihat TODO di starter) | `01-rest-principles.js` |
 | 02 | API Design Best Practices | `02-api-design.md` | `02-api-design.js` |
-| 03 | Pagination& Filter | `03-pagination-filter.md` | `03-pagination-filter.js` |
+| 03 | Fetch & Axios (+ CRUD backend) | `03-fetch-axios.md` | `02-rest-api-crud.js` (backend), `03-fetch-axios.js` (frontend) |
+| Bonus | Pagination & Filter | (tidak ada, lihat TODO di starter) | `03-pagination-filter.js` |
 | 04 | Auth Middleware (JWT) | `04-auth-middleware.md` | `04-auth-middleware.js` |
 
 ---
@@ -62,28 +70,29 @@ npm install express cors dotenv jsonwebtoken bcryptjs axios
 ```bash
 node code/01-rest-principles.js      # port 3001
 node code/02-api-design.js           # port 3001
-node code/03-pagination-filter.js     # port 3001
-node code/04-auth-middleware.js       # port 3001
+node code/02-rest-api-crud.js        # port 3001
+node code/03-pagination-filter.js    # port 3001
+node code/04-auth-middleware.js      # port 3001 (butuh .env berisi JWT_SECRET)
 ```
 
 ### 4. Test API dengan curl
 ```bash
-# GET all
-curl http://localhost:3001/api/users
+# GET all (latihan 01)
+curl -i http://localhost:3001/api/users
 
-# POST create
-curl -X POST http://localhost:3001/api/users \
+# POST create (latihan 01)
+curl -i -X POST http://localhost:3001/api/users \
   -H "Content-Type: application/json" \
   -d '{"name":"Alice","email":"alice@test.com","role":"user"}'
 
-# Login (latihan 04)
-curl -X POST http://localhost:3001/api/auth/login \
+# Ambil token percobaan (latihan 04)
+curl -X POST http://localhost:3001/api/auth/token \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"admin123"}'
+  -d '{"email":"admin@example.com"}'
 
-# Protected route
-curl http://localhost:3001/api/auth/me \
-  -H "Authorization: Bearer <access_token>"
+# Route terproteksi (latihan 04)
+curl -i http://localhost:3001/api/protected/profile \
+  -H "Authorization: Bearer <token>"
 ```
 
 ### 5. Frontend (React)
@@ -104,8 +113,10 @@ server: { proxy: { '/api': 'http://localhost:3001' } }
 
 1. Baca soal di `soal/XX-*.md`
 2. Baca template code di `code/XX-*.js`
-3. Lengkapi bagian `TODO(human)` — bagian utama untuk dikerjakan
-4. Solution lengkap ada di comment setelah setiap `TODO(human)`
+3. Lengkapi bagian `TODO(human)` — bagian utama untuk dikerjakan. Tiap TODO
+   punya "Selesai kalau" sebagai kriteria uji
+4. Jawaban lengkap ada di `solusi-jangan-dibuka-dulu.md`. Buka SETELAH
+   mencoba sendiri dan mencatat kebuntuanmu di jurnal
 5. Jalankan server dan test dengan curl atau Postman
 6. Bangun frontend sesuai instruksi di section FRONTEND
 

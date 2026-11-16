@@ -49,7 +49,7 @@ Centang dengan jujur. Di keamanan, "kayaknya aman" sama dengan "belum dicek".
 - [ ] Error ke client tidak membocorkan stack trace, nama tabel, atau query
       (baca [Konfigurasi Aman](../../../modul-keamanan-web/07-konfigurasi-aman/README.md))
 - [ ] Aku mengecek apakah sebuah paket masih dirawat sebelum memakainya (contoh:
-      `csurf` sudah deprecated)
+      `csurf` sudah deprecated; penggantinya `csrf-csrf` atau `csrf-sync`)
 - [ ] Aku mencatat kejadian keamanan (login gagal, 403, 429) di log, tanpa
       menyimpan password atau token di log
 

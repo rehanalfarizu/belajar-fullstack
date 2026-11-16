@@ -33,36 +33,7 @@ Buat sistem dengan 3 role dan enforce permission di middleware.
 
 ## Contoh Code
 
-```javascript
-// Role middleware
-function authorize(...allowedRoles) {
-  return (req, res, next) => {
-    if (!req.user) {
-      return res.status(401).json({ error: "Login dulu" });
-    }
-    if (!allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({
-        error: `Akses ditolak. Butuh role: ${allowedRoles.join(", ")}`
-      });
-    }
-    next();
-  };
-}
-
-// Routes
-app.get("/api/posts", (req, res) => res.json(posts));
-
-app.post("/api/posts", authMiddleware, authorize("user", "admin"), (req, res) => {
-  const newPost = { id: Date.now(), ...req.body, authorId: req.user.id };
-  posts.push(newPost);
-  res.status(201).json(newPost);
-});
-
-app.delete("/api/posts/:id", authMiddleware, authorize("admin"), (req, res) => {
-  posts = posts.filter(p => p.id !== parseInt(req.params.id));
-  res.json({ message: "Post dihapus" });
-});
-```
+Contoh jawaban sengaja tidak ditaruh di sini. Tulis sendiri dulu berdasarkan checklist di atas. Setelah punyamu jalan, bandingkan dengan [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
 
 ---
 

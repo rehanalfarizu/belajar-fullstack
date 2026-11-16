@@ -47,7 +47,7 @@ Centang dengan jujur. Kalau cuma jalan "karena kebetulan", belum dicentang.
 - [ ] Origin CORS dan atribut cookie diatur lewat environment, bukan hardcode
       (baca [Konfigurasi Aman](../../../modul-keamanan-web/07-konfigurasi-aman/README.md))
 - [ ] Aku tidak me-log isi cookie, token, atau password ke Console
-- [ ] Aku menulis kode sendiri dulu sebelum membuka blok `SOLUSI`
+- [ ] Aku menulis kode sendiri dulu sebelum membuka file `solusi-jangan-dibuka-dulu.md`
 
 ---
 

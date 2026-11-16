@@ -33,29 +33,22 @@ Setelah selesai, kamu punya satu server Express (boleh tumbuh dari soal 01 sampa
 | 04 | `soal/04-role-based-access.md` | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-auth/code/04-role-based-access.js` | 90 menit |
 | 05 | `soal/05-cors-security-headers.md` | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-auth/code/05-cors-security-headers.js` | 60–90 menit |
 
-### Catatan jujur soal starter di folder ini
+### Catatan soal starter di folder ini
 
-Starter di sini **bukan** file kosong dengan TODO. Kebanyakan sudah berisi
-jawaban:
+Semua file `code/` berisi kerangka dengan `TODO(human)`: petunjuk (bukan
+jawaban) dan **"Selesai kalau"** yang bisa kamu uji sendiri dengan `curl`.
+Jawaban lengkap sudah dipindahkan ke
+[solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md).
 
-- `code/01`: TODO ada di atas, tapi di bawahnya ada bagian
-  **"Full Implementation (uncomment untuk test)"**.
-- `code/02` dan `code/04`: TODO hanya berupa komentar, lalu langsung diikuti
-  **"Full Implementation"** yang aktif.
-- `code/03`: tidak ada TODO sama sekali. Isinya implementasi lengkap.
-- `code/05`: konfigurasi CORS/Helmet/rate limit sudah ditulis, hanya
-  di-comment.
-- Setiap file soal juga punya bagian **"Contoh Code"** yang berisi kode jawaban.
+Cara kerjanya:
 
-Jadi cara kerjanya begini:
-
-1. Baca bagian **Tujuan** dan **Syarat (Checklist)** di soal saja. Berhenti
-   sebelum "Contoh Code".
-2. Tulis server-mu **dari file kosong** (`server.js`), memakai checklist soal
-   sebagai spesifikasi. Lihat starter hanya bagian TODO-nya untuk tahu nama
-   endpoint.
-3. Setelah punyamu lolos semua cek di bawah, baru buka "Full Implementation" dan
-   "Contoh Code". Bandingkan keputusan, catat di jurnal.
+1. Baca bagian **Tujuan** dan **Syarat (Checklist)** di soal.
+2. Salin starter jadi `server.js` dan isi `TODO(human)` satu per satu. Uji tiap
+   langkah dengan `curl` sebelum lanjut.
+3. Kalau buntu, ikuti tangga "Petunjuk Kalau Macet" di bawah dulu. Baru setelah
+   punyamu lolos semua cek (atau buntu lebih dari 30 menit dan sudah mencatat
+   kebuntuanmu di jurnal), buka file solusi. Jangan salin; ketik ulang dan
+   bandingkan keputusan desainnya.
 
 ---
 
@@ -71,7 +64,7 @@ npm install helmet express-rate-limit   # untuk soal 05
 node server.js
 ```
 
-Buat file `.env` di folder itu:
+Buat file `.env` di folder itu (contoh isi ada di [.env.example](.env.example)):
 
 ```bash
 JWT_SECRET=isi-dengan-teks-acak-minimal-32-karakter
@@ -80,11 +73,10 @@ PORT=3001
 ```
 
 - Cara membuat teks acak: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`.
-- Starter `02` dan `03` sengaja **gagal start** kalau secret kurang dari 32
+- Starter `01` sampai `04` sengaja **gagal start** kalau secret kurang dari 32
   karakter. Itu fitur, bukan bug.
-- Starter `02`, `03`, dan `04` membaca `process.env` tapi tidak memuat `dotenv`
-  (hanya `01` dan `05` yang memuatnya). Kalau secret terbaca kosong, cek apakah
-  `.env` benar-benar dimuat.
+- Semua starter memuat `dotenv` di bagian atas. Kalau secret terbaca kosong, cek
+  apakah `.env` ada di folder tempat kamu menjalankan `node`.
 - Masukkan `.env` ke `.gitignore` **sebelum** commit pertama.
 
 ---

@@ -3,7 +3,7 @@
 Belum tahu topiknya? Baca [README.md](README.md) dulu.
 
 Folder ini **tidak punya `soal/`**. Tugas di bawah disusun dari komentar TODO di
-file `code/`. Prasyarat: [01-latihan-fullstack](../01-latihan-fullstack/TUGAS.md)
+file `code/`. Prasyarat (urutan: fullstack dulu, lalu auth): [01-latihan-fullstack](../01-latihan-fullstack/TUGAS.md)
 dan [01-latihan-auth](../01-latihan-auth/TUGAS.md) sudah selesai.
 
 ## Hasil Akhir yang Diharapkan
@@ -31,19 +31,22 @@ Tidak ada file soal, jadi kolom "Tugas" merujuk ke TODO di file.
 | No | Tugas | File di folder ini | Kamu menulis di | Estimasi |
 | --- | --- | --- | --- | --- |
 | 0 | Ubah backend ke cookie `HttpOnly` (TODO baris atas di file 03) | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/03-protected-routes.jsx` (bagian BACKEND, hanya daftar syarat) | Server dari `01-latihan-auth` milikmu | 120 menit |
-| 1 | Pahami client axios | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/01-axios-client.js` (sudah jadi, tanpa TODO) | `client/src/lib/api.js` (ketik ulang, jangan copy-paste) | 45 menit |
-| 2 | Pahami auth service versi fetch | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/02-jwt-client-side.js` (sudah jadi, tanpa TODO) | Catatan di jurnal + `client/src/lib/authService.js` (opsional) | 30 menit |
+| 1 | Tulis client axios | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/01-axios-client.js` (daftar TODO) | `client/src/lib/api.js` | 45 menit |
+| 2 | Tulis auth service versi fetch | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/02-jwt-client-side.js` (daftar TODO) | Catatan di jurnal + `client/src/lib/authService.js` (opsional) | 30 menit |
 | 3 | AuthContext dasar + route guard + LoginPage + Navbar | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/03-protected-routes.jsx` | `client/src/context/AuthContext.jsx`, `client/src/components/ProtectedRoute.jsx`, `GuestRoute.jsx`, `AdminRoute.jsx`, `RoleRoute.jsx` (bonus), `Navbar.jsx`, `client/src/pages/LoginPage.jsx`, `Profile.jsx`, `client/src/App.jsx` | 150 menit |
 | 4 | RBAC backend + frontend | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/04-role-based-access.jsx` | Backend: middleware `requireRole`, `requireMinRole`. Frontend: `client/src/components/HasRole.jsx`, `client/src/pages/AdminPanel.jsx`, `Dashboard.jsx`, update `Navbar.jsx` dan AuthContext | 150 menit |
-| 5 | Bandingkan AuthContext-mu | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/05-auth-context-complete.jsx` (sudah jadi) | Catatan perbandingan di jurnal | 30 menit |
+| 5 | Matangkan AuthContext-mu | `LEVEL-4-Fullstack-Integration/materi-praktikum/02-latihan-auth-fullstack/code/05-auth-context-complete.jsx` (daftar TODO) | `client/src/context/AuthContext.jsx` + catatan perbandingan di jurnal | 30 menit |
 
 ### Catatan jujur soal file di folder ini
 
-- File `01`, `02`, dan `05` sudah berisi kode lengkap (tanpa TODO). Itu bahan
-  bacaan, bukan jawaban yang disalin.
-- File `03` dan `04` punya blok komentar **`SOLUSI:`** di bawah setiap TODO.
-  Saat membaca TODO, berhenti di baris `SOLUSI:`. Buka bagian itu hanya setelah
-  versimu jalan.
+- Semua file `code/` (`01` sampai `05`) sekarang berisi daftar `TODO(human)`
+  tanpa jawaban. File `01`, `02`, dan `05` dulu implementasi penuh; kodenya
+  dipindahkan ke solusi.
+- File `03` dan `04` sekarang berisi daftar `TODO(human)` dengan petunjuk dan
+  **"Selesai kalau"**, tanpa jawaban. Kode lengkapnya ada di
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka hanya
+  setelah versimu jalan, atau buntu lebih dari 30 menit dan kebuntuanmu sudah
+  kamu catat di jurnal.
 - Backend dari `01-latihan-auth` mengembalikan token di **body JSON** (Bearer).
   Folder ini butuh token di **cookie**. Mengubahnya adalah Tugas 0, dan itu
   bagian penting dari belajarnya.
@@ -92,8 +95,8 @@ Panduan Vite: [Install React dan Vite](../../../LEVEL-3-Frontend-React/software/
    - `/auth/logout` menghapus cookie;
    - CORS: origin `http://localhost:5173` + `credentials: true`.
    Uji dengan curl (lihat bagian cek) **sebelum** menyentuh React.
-2. **Tugas 1 dan 2 (baca)** — untuk setiap fungsi, tulis satu kalimat di jurnal:
-   "fungsi ini ada untuk ...". Jawab juga: kenapa interceptor 401 tidak langsung
+2. **Tugas 1 dan 2** — tulis client axios dan auth service. Untuk setiap fungsi,
+   tulis satu kalimat di jurnal: "fungsi ini ada untuk ...". Jawab juga: kenapa interceptor 401 tidak langsung
    redirect ke `/login`?
 3. **Tugas 3** — urutan yang disarankan:
    1. AuthContext dengan tiga status: `loading`, `authenticated`, `guest`.
@@ -103,8 +106,9 @@ Panduan Vite: [Install React dan Vite](../../../LEVEL-3-Frontend-React/software/
 4. **Tugas 4** — isi dulu tabel permission di bagian bawah file `04` versi
    role-mu. Lalu backend (`requireRole`, `requireMinRole`), baru frontend
    (`HasRole`, Dashboard, AdminPanel).
-5. **Tugas 5** — bandingkan AuthContext-mu dengan file `05`. Apa yang dia tangani
-   dan kamu belum (misalnya event `auth:unauthorized`, status `error`)?
+5. **Tugas 5** — matangkan AuthContext-mu mengikuti TODO di file `05` (status
+   `error`, event `auth:unauthorized`, logout yang selalu mereset state). Setelah
+   jalan, bandingkan dengan solusi dan catat bedanya.
 
 ---
 
@@ -191,4 +195,4 @@ Hapus `cookies.txt` setelah selesai dan jangan di-commit.
 ## Setelah Selesai
 
 Isi [CHECKLIST.md](CHECKLIST.md). Tulis di jurnal: satu hal di
-`05-auth-context-complete.jsx` yang kamu tidak kepikiran, dan kenapa itu penting.
+`solusi-jangan-dibuka-dulu.md` (bagian AuthContext) yang kamu tidak kepikiran, dan kenapa itu penting.

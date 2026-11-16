@@ -69,7 +69,9 @@ Bayangkan kamu masuk gedung kantor.
 ├── TUGAS.md         ← apa yang dikerjakan, di file mana
 ├── CHECKLIST.md     ← cek jujur "aku sudah bisa..."
 ├── soal/            ← 5 soal
-└── code/            ← 5 starter (beberapa sudah berisi implementasi, baca TUGAS.md)
+├── code/            ← 5 starter berisi kerangka dan TODO(human)
+├── .env.example     ← contoh isi .env (salin jadi .env, jangan di-commit)
+└── solusi-jangan-dibuka-dulu.md  ← jawaban lengkap, buka SETELAH mencoba sendiri
 ```
 
 ## Mulai dari Mana?

@@ -39,7 +39,8 @@ Mempelajari dan mengimplementasikan praktik keamanan web: input validation, prot
 - Server Express sudah berjalan
 - Install dependencies:
   ```bash
-  npm install zod helmet express-rate-limit cors csurf
+  npm install zod helmet express-rate-limit cors cookie-parser
+  # CSRF: csurf sudah deprecated. Lihat catatan di TUGAS.md (csrf-csrf / csrf-sync)
   # atau sesuai kebutuhan setiap soal
   ```
 

@@ -28,26 +28,25 @@ Setelah selesai, kamu punya:
 
 | No | Soal | Starter yang diedit (salinannya) | Estimasi |
 | --- | --- | --- | --- |
-| 01 | Tidak ada file soal (lihat catatan) | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/01-rest-principles.js` | 60 menit |
+| 01 | Tidak ada file soal; TODO di dalam starter sudah cukup sebagai soal | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/01-rest-principles.js` | 60 menit |
 | 02 | `soal/02-api-design.md` | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/02-api-design.js` | 90 menit |
-| 03 | `soal/03-fetch-axios.md` | Backend: `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/02-rest-api-crud.js`. Frontend: file baru di proyek Vite (`src/api/postsFetch.js`, `src/api/postsAxios.js`) | 120–150 menit |
+| 03 | `soal/03-fetch-axios.md` | Backend: `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/02-rest-api-crud.js`. Frontend: `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/03-fetch-axios.js` (salin ke `src/api/` di proyek Vite) | 120–150 menit |
 | Bonus | Tidak ada file soal | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/03-pagination-filter.js` | 90 menit |
-| 04 | `soal/04-auth-middleware.md` | File baru `auth-middleware.js` (lihat catatan) | 90 menit |
+| 04 | `soal/04-auth-middleware.md` | `LEVEL-4-Fullstack-Integration/materi-praktikum/01-latihan-fullstack/code/04-auth-middleware.js` | 90 menit |
 
-### Catatan: README folder ini tidak sesuai isi folder
+### Catatan soal dan starter di folder ini
 
-- README menyebut `soal/01-rest-principles.md` dan `soal/03-pagination-filter.md`.
-  Dua file itu **tidak ada**. Untuk starter 01, TODO di dalam file sudah cukup
-  jelas sebagai soal.
-- `soal/03-fetch-axios.md` menyuruh membuka `code/03-fetch-axios.js`, dan
-  `soal/04-auth-middleware.md` menyuruh membuka `code/04-auth-middleware.js`.
-  Dua file itu **tidak ada**. Buat sendiri di proyekmu.
+- Penomoran starter dan soal tidak sejajar sempurna. Starter `01` dan bonus
+  pagination memang **tidak punya file soal**; panduannya ada di `TODO(human)`
+  di dalam file.
+- Semua starter berisi kerangka dengan `TODO(human)`: petunjuk dan **"Selesai
+  kalau"** yang bisa kamu uji dengan `curl`. Jawaban lengkap `02-rest-api-crud.js`
+  dan `03-pagination-filter.js` sudah dipindahkan ke
+  [solusi-jangan-dibuka-dulu.md](solusi-jangan-dibuka-dulu.md). Buka hanya setelah
+  punyamu jalan, atau buntu lebih dari 30 menit dan kebuntuanmu sudah kamu
+  catat di jurnal.
 - Untuk soal 04, kamu boleh mulai dari salinan server `code/01-rest-principles.js`
   (yang sudah kamu kerjakan) lalu tambahkan middleware.
-- `code/02-rest-api-crud.js` dan `code/03-pagination-filter.js` berisi blok
-  komentar **`SOLUSI:`** tepat di bawah setiap TODO. Saran: setelah menyalin
-  file, hapus semua blok `SOLUSI` dari salinanmu **tanpa membacanya**. Buka lagi
-  file asli hanya setelah punyamu jalan.
 
 ---
 
@@ -61,7 +60,7 @@ di `package.json` proyek backend-mu.
 mkdir api && cd api
 npm init -y
 npm install express cors dotenv jsonwebtoken
-cp <path-starter>/01-rest-principles.js ./server.js
+cp <path-starter>/01-rest-principles.js ./server.js   # atau starter lain
 node server.js          # jalan di http://localhost:3001
 ```
 

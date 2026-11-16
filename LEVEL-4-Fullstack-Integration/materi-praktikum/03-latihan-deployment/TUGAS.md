@@ -34,9 +34,10 @@ Setelah selesai, kamu punya:
   program. Hampir setiap TODO langsung diikuti jawabannya dalam blok komentar.
   Jadi: baca judul TODO saja, tutup file, tulis versimu di proyekmu, baru
   bandingkan.
-- Contoh `vercel.json` di starter 01 memakai format lama (`builds` dan `routes`).
-  Dokumentasi Vercel sekarang memakai `rewrites`. Cek dokumentasi resmi, jangan
-  percaya contoh begitu saja. Ini latihan bagus: membaca dokumentasi terbaru.
+- Contoh `vercel.json` di starter 01 sudah diperbarui ke format terkini
+  (`rewrites` dengan `source`/`destination`; `builds`, `routes`, dan `version`
+  adalah format lama). Tetap cek dokumentasi resmi Vercel sebelum memakainya,
+  karena konfigurasi platform sering berubah.
 - Soal 04 menyuruh membuka `code/04-environment-vars.js`, dan file itu memang
   ada. Aman.
 - Kerjakan **soal 04 lebih dulu** kalau kamu belum rapi soal `.env`. Soal 01–03

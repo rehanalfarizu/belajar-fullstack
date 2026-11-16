@@ -29,59 +29,7 @@ Buat sistem dengan access token (short-lived) dan refresh token (long-lived).
 
 ## Contoh Code
 
-```javascript
-const refreshTokens = []; // store refresh tokens
-
-app.post("/api/auth/login", async (req, res) => {
-  // ... verify email/password ...
-
-  const accessToken = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "15m" }
-  );
-
-  const refreshToken = jwt.sign(
-    { id: user.id },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-
-  refreshTokens.push(refreshToken);
-
-  res.json({ accessToken, refreshToken });
-});
-
-app.post("/api/auth/refresh", (req, res) => {
-  const { refreshToken } = req.body;
-
-  if (!refreshTokens.includes(refreshToken)) {
-    return res.status(403).json({ error: "Refresh token invalid" });
-  }
-
-  try {
-    const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
-    const user = users.find(u => u.id === decoded.id);
-
-    const newAccessToken = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "15m" }
-    );
-
-    res.json({ accessToken: newAccessToken });
-  } catch (error) {
-    res.status(403).json({ error: "Refresh token expired" });
-  }
-});
-
-app.post("/api/auth/logout", (req, res) => {
-  const { refreshToken } = req.body;
-  const index = refreshTokens.indexOf(refreshToken);
-  if (index > -1) refreshTokens.splice(index, 1);
-  res.json({ message: "Logout berhasil" });
-});
-```
+Contoh jawaban sengaja tidak ditaruh di sini. Tulis sendiri dulu berdasarkan checklist di atas. Setelah punyamu jalan, bandingkan dengan [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
 
 ---
 

@@ -1,251 +1,133 @@
 // ============================================================
-// 02 — XSS & CSRF PREVENTION
-// Sanitization, CSP headers, and CSRF token implementation
+// 02 — XSS & CSRF
 // ============================================================
-// Install: npm install dompurify jsdom helmet csurf
-// For Node < 18: npm install node-fetch@2
-// Usage: See usage examples at the bottom of this file
+// Starter ini berisi kerangka + TODO(human). Versi RENTAN sengaja ada untuk
+// diserang; versi AMAN kamu tulis sendiri.
+// Jawaban lengkap ada di ../solusi-jangan-dibuka-dulu.md (buka SETELAH
+// punyamu jalan, atau benar-benar buntu).
+//
+// Install : npm install express helmet cookie-parser dotenv
+//           (+ dompurify jsdom jika kamu memilih sanitasi HTML)
+// Catatan : paket `csurf` sudah DEPRECATED (diarsipkan, tidak dirawat) — jangan
+//           dipakai. Pahami polanya, lalu tulis sendiri seperti TODO di bawah.
+//           Untuk produksi, pakai paket yang masih dirawat: `csrf-csrf` (signed
+//           double-submit cookie, tanpa state server) atau `csrf-sync`
+//           (synchronizer token, untuk aplikasi bersesi). Baca README-nya.
+// ============================================================
 
+const crypto = require('crypto');
 const express = require('express');
 const helmet = require('helmet');
 require('dotenv').config();
 
 // ============================================================
-// PART 1: XSS PREVENTION — HTML Sanitization
+// BAGIAN 1 — XSS
 // ============================================================
 
-// TODO 1: sanitizeHTML function using DOMPurify
-// - Allow tags: b, i, p, br, ul, ol, li, strong, em, a, blockquote
-// - Allow attributes: href (for a tag only, must start with http/https)
-// - Strip all event handlers (onclick, onerror, onload, etc.)
-// - Strip javascript: URLs
+// TODO(human): sanitizeHTML(dirty)
+// Petunjuk : Dua strategi berbeda: (a) escape semua karakter spesial HTML, atau
+//            (b) allowlist tag/atribut tertentu dengan library sanitizer
+//            (cek dokumentasi DOMPurify, perhatikan juga bagaimana memakainya
+//            di Node). Pilih satu, tulis alasanmu di jurnal.
+//            Yang harus mati: event handler (onerror, onclick), URL
+//            `javascript:`, tag <script>.
+// Selesai kalau: '<img src=x onerror=alert(1)>' dan '<script>alert(1)</script>'
+//            tidak lagi bisa mengeksekusi script saat dirender.
+function sanitizeHTML(dirty) {}
 
-function sanitizeHTML(dirty) {
-  // TODO: Use DOMPurify to sanitize
-  // DOMPurify.toStaticMarkup(dirty, { ALLOWED_TAGS: [...], ALLOWED_ATTR: [...] })
-  // Return sanitized string
-}
-
-// TODO 2: sanitizeInput function — text input sanitization
-// - Trim whitespace
-// - Remove null bytes
-// - Remove/replace control characters
-// - Max length 10000 chars
-function sanitizeInput(input) {
-  // TODO: Handle non-string inputs
-  // TODO: Trim
-  // TODO: Remove null bytes (\0)
-  // TODO: Max length check
-  // TODO: Return sanitized string
-}
+// TODO(human): sanitizeInput(input)
+// Petunjuk : Bukan string -> aman; buang spasi tepi dan karakter null; batasi
+//            panjang (10.000).
+// Selesai kalau: input 1 juta karakter dipotong dan "\0" hilang.
+function sanitizeInput(input) {}
 
 // ============================================================
-// PART 2: CSP HEADERS
+// BAGIAN 2 — CSP (Content-Security-Policy)
 // ============================================================
 
-// TODO 3: Helmet CSP configuration
-const cspConfig = {
-  // TODO: default-src: 'self'
-  // TODO: script-src: 'self' (no 'unsafe-inline')
-  // TODO: style-src: 'self' 'unsafe-inline' (needed for some CSS-in-JS)
-  // TODO: img-src: 'self' data: (data: for base64 images)
-  // TODO: connect-src: 'self' (AJAX/WebSocket destinations)
-  // TODO: font-src: 'self'
-  // TODO: object-src: 'none' (no Flash/object embeds)
-  // TODO: frame-ancestors: 'none' (prevent clickjacking)
-  // TODO: form-action: 'self' (restrict form submissions)
-  // TODO: base-uri: 'self'
-  // TODO: upgrade-insecure-requests: (only in production)
-};
+// TODO(human): konfigurasi CSP untuk Helmet.
+// Petunjuk : Mulai dari "semua hanya dari asal sendiri" lalu longgarkan hanya
+//            kalau ada alasan. Pikirkan: script, style, img (data: untuk gambar
+//            base64?), connect, font, object, frame-ancestors (anti
+//            clickjacking), form-action, base-uri. Cek nama direktif dan format
+//            opsi di dokumentasi Helmet untuk versi yang terpasang.
+// Selesai kalau: `curl -i` menampilkan header Content-Security-Policy, dan
+//            kamu bisa menjelaskan fungsi tiap direktif yang kamu pilih.
+const cspConfig = {};
 
 // ============================================================
-// PART 3: CSRF TOKEN
+// BAGIAN 3 — CSRF (token tulis-sendiri, hanya untuk BELAJAR konsep)
 // ============================================================
 
-const crypto = require('crypto');
-const csrfTokens = new Map(); // sessionId → { token, expiresAt }
+const csrfTokens = new Map(); // sessionId -> { token, expiresAt }
 
-// TODO 4: Generate CSRF token
-// - Generate: crypto.randomBytes(32).toString('hex')
-// - Store in Map with sessionId key
-// - Expires in 1 hour
-// - Return token
-function generateCSRFToken(sessionId = 'default-session') {
-  // TODO: Generate random token
-  // TODO: Store in Map with expiry (Date.now() + 3600000)
-  // TODO: Return token
-}
+// TODO(human): generateCSRFToken(sessionId)
+// Petunjuk : Token acak yang tak bisa ditebak (modul `crypto`, 32 byte), simpan
+//            per sesi dengan masa kedaluwarsa (misalnya 1 jam), kembalikan.
+// Selesai kalau: dua pemanggilan berbeda menghasilkan token berbeda.
+function generateCSRFToken(sessionId = 'default-session') {}
 
-// TODO 5: Validate CSRF token
-// - Get stored token from Map
-// - Check if expired
-// - Use timing-safe comparison (crypto.timingSafeEqual)
-// - Return boolean
-function validateCSRFToken(sessionId, token) {
-  // TODO: Get stored data
-  // TODO: Check expiry
-  // TODO: Timing-safe compare
-  // TODO: Return true/false
-}
+// TODO(human): validateCSRFToken(sessionId, token)
+// Petunjuk : Token ada? Belum kedaluwarsa? Bandingkan dengan cara yang tahan
+//            serangan timing (cari `crypto.timingSafeEqual`; perhatikan
+//            syaratnya soal panjang buffer).
+// Selesai kalau: token benar true; token salah/kedaluwarsa/undefined false
+//            tanpa melempar error.
+function validateCSRFToken(sessionId, token) {}
 
-// TODO 6: CSRF middleware
-// - Skip for GET, HEAD, OPTIONS (safe methods)
-// - For POST/PUT/PATCH/DELETE:
-//   - Get token from header (X-CSRF-Token) or body (_csrf)
-//   - Validate against stored token
-//   - If invalid: 403 Forbidden
-//   - If valid: next()
-function csrfMiddleware(req, res, next) {
-  // TODO: Check if safe method → skip
-  // TODO: Extract token from header/body
-  // TODO: Validate token
-  // TODO: If invalid → res.status(403).json({ error: 'CSRF token tidak valid' })
-  // TODO: If valid → next()
-}
+// TODO(human): csrfMiddleware(req, res, next)
+// Petunjuk : Method aman (GET/HEAD/OPTIONS) dilewati. Method yang mengubah data
+//            butuh token dari header kustom. Kenapa header kustom lebih baik
+//            daripada token di body untuk API yang dipanggil JavaScript?
+// Selesai kalau: POST tanpa token -> 403; POST dengan token valid -> lanjut.
+function csrfMiddleware(req, res, next) {}
 
 // ============================================================
-// PART 4: SameSite Cookie
+// BAGIAN 4 — Cookie aman
 // ============================================================
 
-// TODO 7: Secure cookie setter
-// - httpOnly: true (prevents JS access — important!)
-// - secure: true in production, auto in development
-// - sameSite: 'strict' (blocks all cross-site requests)
-//   or 'lax' (allows top-level navigation, blocks CSRF POST)
-// - maxAge: 7 days in ms
-function setSecureCookie(res, name, value) {
-  // TODO: res.cookie(name, value, { httpOnly, secure, sameSite, maxAge })
-}
+// TODO(human): setSecureCookie(res, name, value)
+// Petunjuk : Tiga atribut penting: httpOnly (apa yang dicegah?), secure
+//            (kapan wajib?), sameSite (bandingkan strict vs lax, kapan
+//            butuh none?). Tentukan juga umur cookie.
+// Selesai kalau: header Set-Cookie di curl -i memuat atribut yang kamu pilih
+//            dan kamu bisa menjelaskan tiap atribut.
+function setSecureCookie(res, name, value) {}
 
 // ============================================================
-// WORKING IMPLEMENTATION (uncomment to use)
-// ============================================================
-
-// Simple sanitize without DOMPurify (basic escape)
-function workingSanitizeHTML(dirty) {
-  if (typeof dirty !== 'string') return '';
-  return dirty
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
-}
-
-// Helmet working config
-function applySecurityHeaders(app) {
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", 'data:'],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'"],
-        objectSrc: ["'none'"],
-        frameAncestors: ["'none'"],
-        formAction: ["'self'"],
-        baseUri: ["'self'"],
-      },
-    },
-    frameguard: { action: 'deny' },
-    xContentTypeOptions: true,
-    xDnsPrefetchControl: { allow: false },
-    hsts: {
-      maxAge: 31536000,
-      includeSubDomains: true,
-      preload: true,
-    },
-  }));
-}
-
-// CSRF working implementation
-const csrfStore = new Map();
-
-function workingGenerateCSRFToken(sessionId = 'anon') {
-  const token = crypto.randomBytes(32).toString('hex');
-  csrfStore.set(sessionId, {
-    token,
-    expiresAt: Date.now() + 3600000,
-  });
-  return token;
-}
-
-function workingValidateCSRFToken(sessionId, token) {
-  const stored = csrfStore.get(sessionId);
-  if (!stored) return false;
-  if (Date.now() > stored.expiresAt) {
-    csrfStore.delete(sessionId);
-    return false;
-  }
-  if (token !== stored.token) return false;
-  return true;
-}
-
-function workingCsrfMiddleware(req, res, next) {
-  const safeMethods = ['GET', 'HEAD', 'OPTIONS'];
-  if (safeMethods.includes(req.method)) return next();
-
-  const sessionId = req.headers['x-session-id'] || 'anon';
-  const token = req.headers['x-csrf-token'] || req.body?._csrf;
-
-  if (!workingValidateCSRFToken(sessionId, token)) {
-    return res.status(403).json({
-      error: 'CSRF token tidak valid atau expired',
-      code: 'CSRF_ERROR',
-    });
-  }
-  next();
-}
-
-// ============================================================
-// DEMONSTRATION SERVER
+// SERVER DEMO
 // ============================================================
 
 const app = express();
 app.use(express.json());
+// TODO(human): pasang Helmet dengan cspConfig-mu.
 
-// Apply security headers
-applySecurityHeaders(app);
-
-// CSRF token endpoint
 app.get('/api/csrf-token', (req, res) => {
-  const sessionId = req.headers['x-session-id'] || 'anon';
-  const token = workingGenerateCSRFToken(sessionId);
-  res.json({ token });
+  // TODO(human): keluarkan token untuk sesi ini (identifikasi sesi dengan
+  // cara yang kamu pilih — sadari bahwa header buatan klien tidak aman untuk
+  // identitas sesi di aplikasi nyata).
+  res.status(501).json({ error: 'Belum diimplementasikan' });
 });
 
-// Insecure endpoint (no sanitization) — for demonstration
+// RENTAN SENGAJA — jangan dicontoh di aplikasi nyata. Untuk berlatih menyerang.
 app.post('/api/comments/insecure', (req, res) => {
-  // This is vulnerable! Do not use in production
   res.json({ message: 'Comment stored (INSECURE)', original: req.body.content });
 });
 
-// Secure endpoint (with sanitization)
-app.post('/api/comments', workingCsrfMiddleware, (req, res) => {
-  const sanitized = workingSanitizeHTML(req.body.content || '');
-  res.json({ message: 'Comment stored securely', sanitized });
-});
+// TODO(human): POST /api/comments versi AMAN — pasang csrfMiddleware, lalu
+// sanitasi konten sebelum dikembalikan.
+// Selesai kalau: tanpa token -> 403; dengan token + payload XSS -> hasil
+//            sudah dinetralkan.
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', security: 'enabled' });
+  res.json({ status: 'ok' });
 });
 
 const PORT = process.env.PORT || 3001;
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Security server running at http://localhost:${PORT}`);
-    console.log('Test CSRF:');
-    console.log('  1. GET /api/csrf-token → copy token');
-    console.log('  2. POST /api/comments -H "X-CSRF-Token: <token>" -d \'{"content":"hello"}\'');
   });
 }
 
-module.exports = {
-  sanitizeHTML: workingSanitizeHTML,
-  generateCSRFToken: workingGenerateCSRFToken,
-  validateCSRFToken: workingValidateCSRFToken,
-  csrfMiddleware: workingCsrfMiddleware,
-  applySecurityHeaders,
-};
+module.exports = { app, sanitizeHTML, sanitizeInput, generateCSRFToken, validateCSRFToken, csrfMiddleware, setSecureCookie };

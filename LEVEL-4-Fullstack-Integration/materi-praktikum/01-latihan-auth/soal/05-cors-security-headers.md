@@ -34,40 +34,7 @@ Konfigurasi keamanan server: CORS, helmet, rate limiting.
 
 ## Contoh Code
 
-```javascript
-const cors = require("cors");
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-
-// CORS
-const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:3000"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-};
-app.use(cors(corsOptions));
-
-// Helmet
-app.use(helmet());
-
-// Global rate limit
-const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 menit
-  max: 100,
-  message: { error: "Too many requests, coba lagi nanti" },
-});
-app.use(globalLimiter);
-
-// Auth rate limit (lebih strict)
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
-  message: { error: "Terlalu banyak percobaan login" },
-});
-app.use("/api/auth/login", authLimiter);
-app.use("/api/auth/register", authLimiter);
-```
+Contoh jawaban sengaja tidak ditaruh di sini. Tulis sendiri dulu berdasarkan checklist di atas. Setelah punyamu jalan, bandingkan dengan [solusi-jangan-dibuka-dulu.md](../solusi-jangan-dibuka-dulu.md).
 
 ---
 

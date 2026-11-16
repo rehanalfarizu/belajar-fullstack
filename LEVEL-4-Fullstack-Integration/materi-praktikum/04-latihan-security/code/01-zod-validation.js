@@ -1,204 +1,84 @@
 // ============================================================
-// 01 — ZOD VALIDATION
-// Input validation middleware for Express using Zod
+// 01 — VALIDASI INPUT DENGAN ZOD
 // ============================================================
-// Install: npm install zod
-// Usage: import { z } from 'zod'; then create schemas below
+// Starter ini sengaja berisi kerangka + TODO(human). Tulis isinya sendiri.
+// Jawaban lengkap ada di ../solusi-jangan-dibuka-dulu.md (buka SETELAH
+// punyamu jalan, atau benar-benar buntu).
+//
+// Install : npm install zod
+// Catatan : API Zod berubah antar versi mayor (misalnya cara menulis validasi
+//           email). Cek `npm ls zod` lalu baca dokumentasi di zod.dev untuk
+//           versi yang terpasang, jangan menebak dari contoh lama.
+// File ini hanya berisi fungsi/skema; uji lewat skrip kecil atau server buatanmu.
+// ============================================================
 
 const { z } = require('zod');
 
-// ============================================================
-// TODO 1: User Registration Schema
-// ============================================================
-const userRegistrationSchema = z.object({
-  // TODO: email — must be valid email format
-  // TODO: password — min 8 chars, must have uppercase AND number (regex)
-  // TODO: name — min 2 chars, max 100 chars, trimmed
-});
+// TODO(human): skema registrasi user.
+// Petunjuk : email berformat valid; password minimal 8 karakter dan wajib
+//            mengandung huruf besar DAN angka; name 2-100 karakter tanpa spasi
+//            di tepi.
+// Selesai kalau: "a@b.com" + "Abcdefg1" + "Budi" lolos; password tanpa angka,
+//            tanpa huruf besar, atau terlalu pendek ditolak, masing-masing
+//            dengan pesan yang jelas.
+const userRegistrationSchema = z.object({});
 
-// ============================================================
-// TODO 2: User Login Schema
-// ============================================================
-const userLoginSchema = z.object({
-  // TODO: email — valid email format
-  // TODO: password — min 1 char (any non-empty)
-});
+// TODO(human): skema login.
+// Petunjuk : Kenapa aturan password di login boleh lebih longgar daripada di
+//            registrasi? (Jawab di jurnal.)
+// Selesai kalau: email salah format ditolak, password kosong ditolak.
+const userLoginSchema = z.object({});
 
-// ============================================================
-// TODO 3: Post Creation Schema
-// ============================================================
-const postSchema = z.object({
-  // TODO: title — min 3 chars, max 255 chars
-  // TODO: content — min 10 chars (or allow empty string?)
-  // TODO: tags — optional array of strings, each max 50 chars, max 10 tags
-  // TODO: status — optional, enum: 'draft' | 'published', default: 'draft'
-});
+// TODO(human): skema membuat post.
+// Petunjuk : title 3-255 karakter; content minimal 10 karakter; tags opsional
+//            (array string, tiap tag maks 50 karakter, maks 10 tag); status
+//            hanya draft | published, default draft.
+// Selesai kalau: tanpa `status` hasilnya draft; 11 tag ditolak.
+const postSchema = z.object({});
 
-// ============================================================
-// TODO 4: Order Schema (nested objects)
-// ============================================================
-const orderSchema = z.object({
-  // TODO: productId — positive integer
-  // TODO: quantity — integer between 1 and 99
-  // TODO: shippingAddress — object:
-  //   - street: min 5 chars
-  //   - city: min 2 chars
-  //   - postalCode: regex matching 5 digits (e.g., "12345")
-});
+// TODO(human): skema order dengan objek bersarang.
+// Petunjuk : productId bilangan bulat positif; quantity bilangan bulat 1-99;
+//            shippingAddress berisi street (min 5), city (min 2), postalCode
+//            (tepat 5 digit, berupa string).
+// Selesai kalau: quantity 1.5, 0, dan 100 ditolak; postalCode "1234a" ditolak.
+const orderSchema = z.object({});
 
-// ============================================================
-// TODO 5: Validation helper function
-// ============================================================
-function validate(schema, data) {
-  // TODO: try schema.safeParse(data)
-  // TODO: if success: return { success: true, data: result.data }
-  // TODO: if fail: return { success: false, errors: result.error.flatten().fieldErrors }
-}
+// TODO(human): fungsi validate(schema, data).
+// Petunjuk : Pakai varian parse yang TIDAK melempar exception (cek dokumentasi
+//            Zod). Kembalikan { success: true, data } atau
+//            { success: false, errors } dengan errors per field.
+// Selesai kalau: input salah tidak membuat program crash dan pesan error
+//            dikelompokkan per field.
+function validate(schema, data) {}
 
-// ============================================================
-// TODO 6: Validation middleware factory
-// ============================================================
-// function validateBody(schema) {
-//   return (req, res, next) => {
-//     // TODO: validate(req.body) using the helper above
-//     // TODO: if !success: return res.status(400).json({ errors })
-//     // TODO: if success: req.validatedBody = data, next()
-//   };
-// }
+// TODO(human): validateBody(schema) — middleware pabrik untuk Express.
+// Petunjuk : Pakai validate() di atas. Gagal -> 400 + daftar error. Berhasil ->
+//            simpan data bersih di sebuah properti req dan lanjut. Kenapa
+//            handler sebaiknya memakai data hasil validasi, bukan req.body
+//            mentah?
+// Selesai kalau: handler tidak pernah jalan untuk body tidak valid.
+function validateBody(schema) {}
 
-// ============================================================
-// TODO 7: Query param validation (for pagination, etc.)
-// ============================================================
-function validatePaginationParams(query) {
-  // TODO: parse page (default 1, min 1)
-  // TODO: parse limit (default 10, min 1, max 100)
-  // TODO: return { page, limit } as numbers
-}
+// TODO(human): validatePagination(query) — page dan limit dari query string.
+// Petunjuk : Query string selalu string. page default 1 (min 1), limit default
+//            10 (1-100). Apa yang terjadi pada "abc", "-5", "1e9", ""?
+// Selesai kalau: semua input aneh menghasilkan angka aman, bukan NaN.
+function validatePagination(query) {}
 
-// ============================================================
-// TODO 8: Sanitization — clean input before validation
-// ============================================================
-function sanitizeInput(input) {
-  if (typeof input !== 'string') return input;
-  return input
-    .trim()           // Remove leading/trailing whitespace
-    .replace(/\0/g, '') // Remove null bytes
-    .slice(0, 10000);  // Max length: 10k chars
-}
-
-// ============================================================
-// WORKING IMPLEMENTATION (uncomment to use)
-// ============================================================
-
-// User registration schema (working)
-const workingUserSchema = z.object({
-  email: z.string().email('Format email tidak valid'),
-  password: z
-    .string()
-    .min(8, 'Password minimal 8 karakter')
-    .regex(/[A-Z]/, 'Password harus mengandung huruf besar')
-    .regex(/[0-9]/, 'Password harus mengandung angka'),
-  name: z.string().min(2, 'Nama minimal 2 karakter').max(100).trim(),
-});
-
-// Post schema (working)
-const workingPostSchema = z.object({
-  title: z.string().min(3, 'Judul minimal 3 karakter').max(255),
-  content: z.string().min(10, 'Konten minimal 10 karakter'),
-  tags: z.array(z.string().max(50)).max(10).optional().default([]),
-  status: z.enum(['draft', 'published']).default('draft'),
-});
-
-// Order schema (working)
-const workingOrderSchema = z.object({
-  productId: z.number().int().positive('Product ID harus bilangan bulat positif'),
-  quantity: z.number().int().min(1).max(99, 'Quantity maksimal 99'),
-  shippingAddress: z.object({
-    street: z.string().min(5, 'Alamat minimal 5 karakter'),
-    city: z.string().min(2, 'Kota minimal 2 karakter'),
-    postalCode: z.string().regex(/^\d{5}$/, 'Kode pos harus 5 digit'),
-  }),
-});
-
-// Validation function (working)
-function workingValidate(schema, data) {
-  const result = schema.safeParse(data);
-  if (result.success) {
-    return { success: true, data: result.data };
-  }
-  return {
-    success: false,
-    errors: result.error.flatten().fieldErrors,
-  };
-}
-
-// Validation middleware (working)
-function workingValidateBody(schema) {
-  return (req, res, next) => {
-    const result = workingValidate(schema, req.body);
-    if (!result.success) {
-      return res.status(400).json({ errors: result.errors });
-    }
-    req.validatedBody = result.data;
-    next();
-  };
-}
-
-// Pagination (working)
-function workingValidatePagination(query) {
-  const page = Math.max(1, parseInt(query.page || '1', 10) || 1);
-  const limit = Math.min(100, Math.max(1, parseInt(query.limit || '10', 10) || 10));
-  return { page, limit };
-}
-
-// ============================================================
-// USAGE IN EXPRESS
-// ============================================================
-/*
-const express = require('express');
-const app = express();
-app.use(express.json());
-
-// Apply validation to routes
-app.post('/api/auth/register',
-  workingValidateBody(workingUserSchema),
-  (req, res) => {
-    // req.validatedBody is guaranteed to be valid here
-    const { email, password, name } = req.validatedBody;
-    // ... create user
-  }
-);
-
-app.post('/api/posts',
-  workingValidateBody(workingPostSchema),
-  (req, res) => {
-    const { title, content, tags, status } = req.validatedBody;
-    // ... create post
-  }
-);
-
-app.get('/api/posts',
-  (req, res, next) => {
-    req.pagination = workingValidatePagination(req.query);
-    next();
-  },
-  (req, res) => {
-    const { page, limit } = req.pagination;
-    // ... fetch posts
-  }
-);
-*/
+// TODO(human): sanitizeInput(input) — bersihkan string sebelum validasi.
+// Petunjuk : Bukan string -> kembalikan apa adanya. Buang spasi tepi, karakter
+//            null (\0), dan batasi panjang (misalnya 10.000). Pikirkan kenapa
+//            batas panjang itu penting (hint: DoS).
+// Selesai kalau: "  hai\0  " menjadi "hai"; string 1 juta karakter dipotong.
+function sanitizeInput(input) {}
 
 module.exports = {
-  userRegistrationSchema: workingUserSchema,
-  userLoginSchema: z.object({
-    email: z.string().email(),
-    password: z.string().min(1),
-  }),
-  postSchema: workingPostSchema,
-  orderSchema: workingOrderSchema,
-  validate: workingValidate,
-  validateBody: workingValidateBody,
-  validatePagination: workingValidatePagination,
+  userRegistrationSchema,
+  userLoginSchema,
+  postSchema,
+  orderSchema,
+  validate,
+  validateBody,
+  validatePagination,
   sanitizeInput,
 };
