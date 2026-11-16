@@ -279,3 +279,25 @@ Untuk setiap bab, jawab tanpa melihat catatan:
 
 Lanjutkan ke [praktikum](../materi-praktikum/README.md) setelah mampu menjelaskan
 alur request dari route sampai response.
+
+---
+
+## Materi Teori Lengkap per Topik
+
+Ringkasan di atas dijabarkan per topik, searah dengan praktikum. Versi yang
+dituju: **Laravel 13** (butuh PHP 8.3+); semuanya juga berlaku di Laravel 12.
+
+| # | Teori | Praktikum |
+|---|---|---|
+| 01 | [PHP Dasar Modern](01-php-dasar/README.md) | [Praktikum 01](../materi-praktikum/01-php-dasar/README.md) |
+| 02 | [Setup Laravel](02-setup-laravel/README.md) | [Praktikum 02](../materi-praktikum/02-setup-laravel/README.md) |
+| 03 | [Routing dan Controller](03-routing-controller/README.md) | [Praktikum 03](../materi-praktikum/03-routing-controller/README.md) |
+| 04 | [Blade Template](04-blade-template/README.md) | [Praktikum 04](../materi-praktikum/04-blade-template/README.md) |
+| 05 | [Database dan Migration](05-database-migration/README.md) | [Praktikum 05](../materi-praktikum/05-database-migration/README.md) |
+| 06 | [Eloquent ORM](06-eloquent-orm/README.md) | [Praktikum 06](../materi-praktikum/06-eloquent-orm/README.md) |
+| 07 | [Form dan Validasi](07-form-validasi/README.md) | [Praktikum 07](../materi-praktikum/07-form-validasi/README.md) |
+| 08 | [Autentikasi dan Otorisasi](08-autentikasi/README.md) | [Praktikum 08](../materi-praktikum/08-autentikasi/README.md) |
+| 09 | [REST API](09-rest-api/README.md) | [Praktikum 09](../materi-praktikum/09-rest-api/README.md) |
+| 10 | [Deploy dan Hosting](10-deploy-hosting/README.md) | [Praktikum 10](../materi-praktikum/10-deploy-hosting/README.md) |
+
+Tambahan: [Performance dan Security](02-performance-security.md).
