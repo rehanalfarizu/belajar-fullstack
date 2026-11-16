@@ -77,13 +77,15 @@ jalankan blok-nya. Kalau salah, jalankan blok `else`.
 2. Cari komentar `TODO 1: cekGanjilGenap(n)`
 3. **Pikirkan dulu**: kalau `n % 2 === 0` itu genap, apa yang terjadi kalau
    `n % 2 !== 0`? (Jawabannya: ganjil)
-4. Ketik `function cekGanjilGenap(n) {`
-5. Ketik `if (n % 2 === 0) {`
-6. Di dalam blok, ketik `return "Genap";`
-7. Tutup `}` untuk if, lalu ketik `else {`
-8. Di dalam else, ketik `return "Ganjil";`
-9. Tutup `}` untuk else, lalu `}` untuk function
-10. Save (Cmd+S / Ctrl+S)
+4. Tulis function `cekGanjilGenap` dengan satu parameter
+5. Pakai `if` untuk kondisi sisa bagi 2 sama dengan nol, dan `return` string "Genap"
+6. Cabang `else` meng-`return` "Ganjil"
+7. Tutup function
+8. Save (Cmd+S / Ctrl+S)
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 02 — Bagian A: Fungsi `cekGanjilGenap(n)`".
+>
+> Pertanyaan pemandu: operator apa yang memberi sisa bagi, dan kenapa cabang `else` cukup tanpa kondisi kedua?
 
 ### Yang Terjadi di Kode
 
@@ -140,12 +142,15 @@ itu salah.
 1. Cari komentar `TODO 2: cekPositifNegatif(n)`
 2. **Pikirkan dulu urutan**: mana yang harus dicek duluan? (Hint: yang paling
    spesifik)
-3. Ketik `function cekPositifNegatif(n) {`
-4. Ketik `if (n === 0) { return "Nol"; }`
-5. Di bawahnya, ketik `else if (n > 0) { return "Positif"; }`
-6. Di bawahnya, ketik `else { return "Negatif"; }`
-7. Tutup `}` untuk function
-8. Save dan coba
+3. Tulis function `cekPositifNegatif` dengan satu parameter
+4. Cek kasus nol lebih dulu dan `return` "Nol"
+5. Lalu cek positif dengan `else if` dan `return` "Positif"
+6. Sisanya cabang `else` yang `return` "Negatif"
+7. Save dan coba
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 02 — Bagian B: Fungsi `cekPositifNegatif(n)`".
+>
+> Pertanyaan pemandu: kalau cek `n > 0` ditaruh paling atas, angka 0 jatuh ke cabang mana, dan kenapa itu salah?
 
 ### Yang Terjadi di Kode
 
@@ -203,15 +208,17 @@ Untuk dapetin akar kuadrat, pakai `Math.sqrt(n)`. Hasilnya bisa desimal
 1. Cari komentar `TODO 3: cekPrima(n)`
 2. **Pikirkan dulu**: kenapa `n < 2` langsung false? (Karena 0 dan 1 bukan
    prima)
-3. Ketik `function cekPrima(n) {`
-4. Ketik `if (n < 2) { return false; }` (paling atas, sebelum loop)
-5. Ketik `const batas = Math.floor(Math.sqrt(n));`
-6. Ketik `for (let i = 2; i <= batas; i++) {`
-7. Di dalam loop, ketik `if (n % i === 0) { return false; }`
-8. Tutup `}` untuk if, lalu `}` untuk for
-9. Setelah loop, ketik `return true;`
-10. Tutup `}` untuk function
-11. Save dan coba
+3. Tulis function `cekPrima` dengan satu parameter
+4. Tolak dulu angka di bawah 2 dengan `return false` (paling atas, sebelum loop)
+5. Hitung batas pembagi: akar kuadrat dari `n`, dibulatkan ke bawah
+6. Loop pembagi dari 2 sampai batas itu
+7. Di dalam loop, kalau `n` habis dibagi `i`, langsung `return false`
+8. Setelah loop selesai tanpa ketemu pembagi, `return true`
+9. Save dan coba
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 02 — Bagian C: Fungsi `cekPrima(n)`".
+>
+> Pertanyaan pemandu: kenapa cukup mengecek pembagi sampai akar kuadrat `n`, dan kenapa `return true` ada di luar loop?
 
 ### Yang Terjadi di Kode
 
@@ -274,8 +281,12 @@ untuk gabung string.
 
 1. Lihat blok `TEST` di bagian bawah file
 2. Cari baris `console.log(\`Ganjil/Genap: ${/* panggil fungsi */}\`);`
-3. **Hapus** komentar `/* panggil fungsi */` dan ganti dengan `cekGanjilGenap(angka)`
-4. Ulangi untuk baris `Positif/Negatif` dan `Prima`
+3. **Hapus** komentar `/* panggil fungsi */` dan ganti dengan pemanggilan fungsi `cekGanjilGenap` yang diberi `angka`
+4. Ulangi untuk baris `Positif/Negatif` dan `Prima` dengan fungsi masing-masing
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 02 — Bagian D: Panggil Semua Fungsi".
+>
+> Pertanyaan pemandu: fungsi mana yang cocok untuk label tiap baris `console.log`?
 5. Save, lalu jalanin file-nya di terminal: `node code/02-cek-bilangan.js`
 
 ### Yang Terjadi di Kode
@@ -327,12 +338,13 @@ Ini juga latihan bagus buat **format string** dengan template literal dan
 1. Cari komentar `BONUS: TEST BERBAGAI ANGKA` di bawah file
 2. **Pikirkan dulu**: range loop `for` dari `-1` sampai `20`. Berapa
    kondisinya? (Hint: `i <= 20`)
-3. Ketik `for (let i = -1; i <= 20; i++) {`
-4. Di dalam loop, ketik `console.log` yang menampilkan nomor dan hasil
-   ketiga function
-5. Contoh format:
-   `console.log(\`${i}: ${cekGanjilGenap(i)} | ${cekPositifNegatif(i)} | Prima: ${cekPrima(i)}\`);`
-6. Tutup `}` untuk loop
+3. Tulis loop `for` dengan `i` mulai dari -1 sampai 20
+4. Di dalam loop, `console.log` satu baris berformat `nomor: hasil1 | hasil2 | Prima: hasil3` (template literal yang memanggil ketiga function)
+5. Tutup loop
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 02 — Bagian E (Bonus): Loop untuk Cek Banyak Angka".
+>
+> Pertanyaan pemandu: apa tiga bagian di dalam kurung `for`, dan bagaimana menyisipkan hasil function ke dalam template literal?
 7. Save dan jalanin ulang
 
 ### Yang Terjadi di Kode

@@ -203,7 +203,7 @@ Token itu cuma untuk latihan lokal. Jangan ditempel ke file yang di-commit.
 ## Cara Submit
 
 1. Controller dan policy yang sudah aman
-2. Migration `user_id` + relasi di model `User` dan `Product`
+2. Migration `user_id` (hanya kalau kolomnya belum ada dari topik 06) + relasi di model `User` dan `Product`
 3. `tests/Feature/PenjualProductAccessTest.php` mencakup seluruh matriks
 4. `catatan-08.md`: bukti bug sebelum, keputusan 403/404, jawaban Refleksi
 

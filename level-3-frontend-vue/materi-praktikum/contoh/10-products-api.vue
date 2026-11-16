@@ -10,7 +10,8 @@ let controller;
 
 async function loadProducts() {
   controller?.abort();
-  controller = new AbortController();
+  const current = new AbortController();
+  controller = current;
   loading.value = true;
   error.value = null;
 
@@ -21,19 +22,25 @@ async function loadProducts() {
 
   try {
     const response = await fetch(`/api/products?${query}`, {
-      signal: controller.signal,
+      signal: current.signal,
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const body = await response.json();
+    if (current.signal.aborted) return;
     products.value = body.data ?? [];
   } catch (cause) {
-    if (cause instanceof DOMException && cause.name === 'AbortError') return;
+    if (current.signal.aborted) return;
     error.value = cause instanceof Error ? cause.message : 'Gagal memuat produk.';
   } finally {
-    if (!controller.signal.aborted) loading.value = false;
+    if (!current.signal.aborted) loading.value = false;
   }
 }
 
+// Didaftarkan sebelum watcher pemuat: dalam satu flush, page sudah 1 saat
+// pemuat jalan, jadi mengganti pencarian di halaman 3 hanya kirim 1 request.
+watch(search, () => {
+  page.value = 1;
+});
 watch([page, search], loadProducts, { immediate: true });
 onUnmounted(() => controller?.abort());
 </script>

@@ -26,7 +26,7 @@ Setelah menyelesaikan soal ini, kamu akan mampu:
 
 ## Briefing
 
-Halaman `/katalog` sudah jalan di lokal dengan 5 produk. Setelah toko punya 500
+Halaman `/produk-cari` sudah jalan di lokal dengan 5 produk. Setelah toko punya 500
 produk, halaman itu butuh 3 detik untuk terbuka, dan log database penuh query
 `select * from categories where id = ?` yang berulang ratusan kali.
 
@@ -65,7 +65,7 @@ Pakai `code/03-scope-search-aman.php`. Bagian model punya scope `search` yang
 - [ ] Kasus `min > max` ditangani sesuai keputusanmu dan alasannya tertulis
 - [ ] Scope bisa dirangkai: `Product::search('a')->priceBetween(1, 500000)->get()` jalan
 
-### Endpoint `/katalog`
+### Endpoint `/produk-cari`
 
 - [ ] Jumlah query **sebelum** diperbaiki tercatat (angka nyata, bukan tebakan)
 - [ ] Sesudah diperbaiki, jumlah query **tidak bertambah** walaupun jumlah produk bertambah
@@ -93,10 +93,10 @@ Pakai `code/03-scope-search-aman.php`. Bagian model punya scope `search` yang
 ```
 
 ```bash
-curl -s "http://127.0.0.1:8000/katalog?q=a&min=100000&max=500000" | head -c 300
+curl -s "http://127.0.0.1:8000/produk-cari?q=a&min=100000&max=500000" | head -c 300
 # {"current_page":1,"data":[{"name":"...","price":...,"category":"..."}, ...],"per_page":20, ...}
 
-curl -i "http://127.0.0.1:8000/katalog?min=abc"
+curl -i "http://127.0.0.1:8000/produk-cari?min=abc"
 # HTTP/1.1 302 Found   (atau 422 kalau pakai header Accept: application/json)
 ```
 
@@ -147,7 +147,7 @@ Untuk kondisi opsional, cari method `when()` di dokumentasi Query Builder
 
 ### Data Uji dengan Factory
 
-Buat `ProductFactory` dan `CategoryFactory` (`php artisan make:factory`). Di
+Buat `ProductFactory` dan `CategoryFactory` (`php artisan make:factory`). Jangan lupa `use HasFactory;` di model supaya `Product::factory()` dikenali. Di
 `DatabaseSeeder`, buat beberapa kategori lalu banyak produk yang masing-masing
 memilih salah satu kategori itu.
 
@@ -159,7 +159,7 @@ memilih salah satu kategori itu.
 php -l app/Models/Product.php
 php -l app/Http/Controllers/KatalogController.php
 php artisan migrate:fresh --seed     # HANYA di lokal
-php artisan route:list --path=katalog
+php artisan route:list --path=produk-cari
 php artisan tinker
 ```
 
@@ -178,9 +178,9 @@ count(DB::getQueryLog());
 Lewat HTTP (jalankan `php artisan serve` di terminal lain):
 
 ```bash
-curl -s -H "Accept: application/json" "http://127.0.0.1:8000/katalog?q=a"            # 200
-curl -s -H "Accept: application/json" "http://127.0.0.1:8000/katalog?min=abc" -o /dev/null -w "%{http_code}\n"  # 422
-curl -s -H "Accept: application/json" "http://127.0.0.1:8000/katalog?page=2" | head -c 200
+curl -s -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari?q=a"            # 200
+curl -s -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari?min=abc" -o /dev/null -w "%{http_code}\n"  # 422
+curl -s -H "Accept: application/json" "http://127.0.0.1:8000/produk-cari?page=2" | head -c 200
 ```
 
 ---

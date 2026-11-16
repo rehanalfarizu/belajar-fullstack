@@ -33,14 +33,14 @@ Integration test di React Testing Library berarti:
 MSW (Mock Service Worker) intercepts requests di level network, bukan di level function. Ini membuat test lebih realistis karena browser thinks it's making real requests.
 
 ```js
-// Handler
+// Handler (contoh domain lain: daftar artikel)
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 const handlers = [
-  http.get('/api/products', () => {
+  http.get('/api/articles', () => {
     return HttpResponse.json([
-      { id: 1, name: 'Product 1', price: 100000 },
+      { id: 1, title: 'Artikel Pertama', author: 'Sari' },
     ]);
   }),
 ];
@@ -48,26 +48,25 @@ const handlers = [
 export const server = setupServer(...handlers);
 ```
 
+Handler untuk `/api/products` dan endpoint lain di soal ini kamu tulis sendiri di Bagian A. Belum ketemu? Solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — Teori: Handler MSW untuk `/api/products`*.
+
 ### Arrange-Act-Assert in Integration Tests
 
 ```jsx
-describe('Product Listing Page', () => {
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
+describe('Article List Page', () => {
+  it('loads and displays articles', async () => {
+    // Arrange: render halaman (server MSW sudah menyala)
+    renderWithProviders(<ArticleListPage />);
 
-  it('loads and displays products', async () => {
-    // Arrange — setup done in beforeAll
-    renderWithProviders(<ProductListingPage />);
+    // Act: user menunggu loading selesai
 
-    // Act
-    // User waits for loading...
-
-    // Assert
-    expect(await screen.findByText('Product 1')).toBeInTheDocument();
+    // Assert: data dari API muncul di layar
+    expect(await screen.findByText('Artikel Pertama')).toBeInTheDocument();
   });
 });
 ```
+
+Contoh di atas memakai domain artikel. Menyalakan, mereset, dan menutup server di `beforeAll`/`afterEach`/`afterAll` ada di Bagian A langkah 4, dan test untuk halaman produk kamu tulis sendiri di Bagian B. Belum ketemu? Solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian *03-integration-testing — Teori: Test AAA "loads and displays products"*.
 
 ---
 

@@ -68,7 +68,8 @@ final class ProductResource extends JsonResource
 /*
  * TODO(human) di file lain (tidak ada starter, tulis sendiri):
  *
- * 1. Migration tambahan: harga_modal, catatan_internal, user_id di tabel products.
+ * 1. Migration tambahan: harga_modal, catatan_internal di tabel products.
+ *    (user_id sudah ada dari topik 06; cek dulu, jangan ditambah dua kali.)
  * 2. app/Models/Product.php: tambahkan $hidden untuk 3 kolom internal.
  * 3. app/Http/Resources/CategoryResource.php: hanya id, name, slug.
  * 4. Controller API: ganti return model mentah dengan Resource.

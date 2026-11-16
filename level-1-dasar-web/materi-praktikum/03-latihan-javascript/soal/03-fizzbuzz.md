@@ -81,11 +81,15 @@ menjadi 30.
 
 1. Salin `code/03-fizzbuzz.js` ke `latihan-saya/02-javascript/minggu-XX/03-fizzbuzz.js`, lalu buka salinannya di VS Code
 2. Cari bagian yang ditandai `TODO: fizzBuzz(limit = 100)`
-3. Ketik `function fizzBuzz(limit = 100) {`
+3. Tulis function `fizzBuzz` dengan satu parameter `limit` yang bernilai default 100
 4. Tutup dengan `}` di akhir body
 5. Save, jalankan `node 03-fizzbuzz.js` — harusnya **belum error** dan
    menampilkan `undefined` atau pesan error "fizzBuzz is not defined" (itu
    wajar, fungsinya masih kosong)
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 03 — Bagian A: Function Declaration & Default Parameter".
+>
+> Pertanyaan pemandu: bagaimana menulis nilai default parameter, dan apa yang terjadi kalau function dipanggil tanpa argumen?
 
 ### Verifikasi
 
@@ -123,10 +127,14 @@ Untuk FizzBuzz, kita mau loop dari 1 sampai `limit` (inklusif). Artinya:
 ### Cara Mengetik dari 0
 
 1. Di dalam `function fizzBuzz(limit = 100) {`, tekan Enter untuk baris baru
-2. Ketik `for (let i = 1; i <= limit; i++) {`
+2. Tulis loop `for` dengan `i` dari 1 sampai `limit` (inklusif)
 3. Tekan Enter, tambah `}` untuk menutup loop
 4. Save dan jalankan — belum ada output, tapi loop sudah jalan (uji dengan
    tambah `console.log(i)` di dalam loop **sementara** lalu hapus lagi)
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 03 — Bagian B: Loop `for` dari 1 sampai `limit`".
+>
+> Pertanyaan pemandu: tiap bagian kurung `for` (awal, kondisi, langkah) mengatur apa, dan kenapa kondisinya `<=`, bukan `<`?
 
 ### Verifikasi
 
@@ -163,13 +171,15 @@ hasil.push(2);             // hasil = ["pertama", 2]
 
 ### Cara Mengetik dari 0
 
-1. Di dalam fungsi, **sebelum** `for` loop, tambah baris:
-   `const hasil = [];`
-2. Di dalam `for` loop (antara `{` dan `}` loop), tambah:
-   `hasil.push(i);`
-3. Setelah loop, tambah: `return hasil;`
+1. Di dalam fungsi, **sebelum** `for` loop, siapkan array kosong bernama `hasil`
+2. Di dalam `for` loop, tambahkan `i` ke `hasil`
+3. Setelah loop, `return` array itu
 4. Jalankan `node 03-fizzbuzz.js` — output harus berupa array angka 1..30:
    `[ 1, 2, 3, ..., 30 ]`
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 03 — Bagian C: Array Kosong & `array.push()`".
+>
+> Pertanyaan pemandu: kenapa array harus dibuat sebelum loop, dan apa yang terjadi kalau dibuat di dalam loop?
 
 ### Verifikasi
 
@@ -349,14 +359,17 @@ number!).
 
 ### Cara Mengetik dari 0
 
-1. Tambah logika di bagian TEST (bukan di dalam fungsi `fizzBuzz`):
-   `const inputLimit = process.argv[2];`
+1. Tambah logika di bagian TEST (bukan di dalam fungsi `fizzBuzz`): ambil argumen pertama dari command line lewat `process.argv`
 2. Tambah validasi: kalau `inputLimit` ada dan bukan `NaN`, pakai itu;
    kalau tidak, pakai `100`
 3. Jalankan:
    - `node 03-fizzbuzz.js` → default 100
    - `node 03-fizzbuzz.js 50` → 50 elemen
    - `node 03-fizzbuzz.js abc` → error message atau fallback ke 100
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 03 — Bagian G (Bonus): Baca Argument dari Command Line".
+>
+> Pertanyaan pemandu: di indeks berapa `process.argv` menyimpan argumen pertama dari user, dan apa isi dua indeks sebelumnya?
 
 ### Verifikasi
 

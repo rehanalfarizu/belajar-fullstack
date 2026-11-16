@@ -76,39 +76,15 @@ curl http://backend:5000/api/health
 
 **1. Create Custom Network**
 
-```bash
-# Buat network untuk aplikasi
-docker network create --driver bridge app-network
-
-# Verifikasi
-docker network ls
-docker network inspect app-network
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — A1. Create Custom Network".
+>
+> Pertanyaan pemandu: perintah apa yang membuat network bridge dengan nama pilihanmu, dan perintah apa untuk melihat daftar serta detailnya?
 
 **2. Connect Containers to Network**
 
-```bash
-# Jalankan PostgreSQL di network
-docker run -d \
-  --network app-network \
-  --name postgres \
-  -e POSTGRES_DB=myapp \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=secret \
-  postgres:15-alpine
-
-# Jalankan backend di network
-docker run -d \
-  --network app-network \
-  --name backend \
-  -e DATABASE_URL=postgresql://admin:secret@postgres:5432/myapp \
-  -p 5000:5000 \
-  my-backend:1.0
-
-# Verifikasi konektivitas
-docker exec backend ping -c 3 postgres
-docker exec backend psql -h postgres -U admin -d myapp -c "SELECT 1;"
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — A2. Connect Containers to Network".
+>
+> Pertanyaan pemandu: flag apa yang menempatkan container ke network tertentu, dan hostname apa yang dipakai backend untuk mencapai database di network yang sama?
 
 **3. Internal vs External Access**
 
@@ -121,70 +97,27 @@ Demonstrasikan:
 
 **1. Named Volume untuk Database**
 
-```bash
-# Buat named volume
-docker volume create --driver local pgdata
-
-# Mount ke PostgreSQL container
-docker run -d \
-  --name postgres \
-  -v pgdata:/var/lib/postgresql/data \
-  postgres:15-alpine
-
-# Verifikasi data persistence
-docker exec postgres psql -U postgres -c "CREATE TABLE test (id SERIAL PRIMARY KEY);"
-docker restart postgres
-docker exec postgres psql -U postgres -c "SELECT * FROM test;"  # Data masih ada!
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — B1. Named Volume untuk Database".
+>
+> Pertanyaan pemandu: bagaimana membuktikan data tetap ada setelah container di-restart, dan flag apa yang menghubungkan volume ke path data PostgreSQL?
 
 **2. Bind Mount untuk Development**
 
-```bash
-# Bind mount source code untuk hot reload
-docker run -d \
-  --name frontend-dev \
-  -v $(pwd)/src:/app/src \
-  -p 3000:3000 \
-  my-frontend:dev
-
-# Verifikasi perubahan kode langsung terlihat
-echo "// dev comment" >> src/App.jsx
-docker exec frontend-dev cat /app/src/App.jsx # Comment harus terlihat
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — B2. Bind Mount untuk Development".
+>
+> Pertanyaan pemandu: apa beda sintaks `-v` untuk named volume dan bind mount, dan bagaimana kamu membuktikan perubahan di host langsung terlihat di container?
 
 **3. tmpfs untuk Sensitive Data**
 
-```bash
-# tmpfs mount untuk secrets
-docker run -d \
-  --name backend \
-  --tmpfs /run/secrets \
-  -e SECRET_PATH=/run/secrets/api-key \
-  my-backend:1.0
-
-# Verifikasi secrets tidak ada di disk
-docker exec backend ls /run/secrets
-docker inspect backend --format='{{json .Mounts}}' | jq
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — B3. tmpfs untuk Sensitive Data".
+>
+> Pertanyaan pemandu: flag apa yang membuat direktori hidup hanya di memori, dan bagaimana kamu membuktikan isinya tidak ada di disk?
 
 **4. Volume Backup& Restore**
 
-```bash
-# Backup
-docker run --rm \
-  -v pgdata:/data \
-  -v $(pwd):/backup \
-  alpine \
-  tar czf /backup/pgdata-backup.tar.gz -C /data .
-
-# Restore
-docker volume create pgdata-new
-docker run --rm \
-  -v pgdata-new:/data \
-  -v $(pwd):/backup \
-  alpine \
-  tar xzf /backup/pgdata-backup.tar.gz -C /data
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — B4. Volume Backup & Restore".
+>
+> Pertanyaan pemandu: container sementara apa yang bisa me-mount volume dan folder host sekaligus untuk membuat arsip, dan bagaimana arah sebaliknya untuk restore?
 
 ### Bagian C — Environment Variables (20 menit)
 
@@ -199,44 +132,23 @@ docker run --rm \
 
 **2. ENV in Dockerfile**
 
-```dockerfile
-# ENV di Dockerfile — baked into image (perlu rebuild untuk change)
-ENV NODE_ENV=production
-ENV PORT=5000
-
-# Bisa di-override saat runtime
-# docker run -e PORT=8080 myapp:1.0
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — C2. ENV in Dockerfile".
+>
+> Pertanyaan pemandu: instruksi Dockerfile apa untuk nilai default, dan bagaimana menimpanya saat container dijalankan?
 
 **3. Environment File (.env)**
 
-```bash
-# .env file
-DATABASE_URL=postgresql://admin:secret@localhost:5432/myapp
-API_KEY=your-api-key-here
-LOG_LEVEL=info
-
-# Load dengan --env-file
-docker run --env-file .env my-backend:1.0
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — C3. Environment File (.env)".
+>
+> Pertanyaan pemandu: format file `.env` itu bagaimana, dan flag apa yang memuatnya ke container?
 
 **4. Security: Secrets vs ENV**
 
 Demonstrasikan security concern:
 
-```bash
-# BAD: Secrets di ENV (visible di docker inspect)
-docker run -e API_KEY=super-secret-key myapp:1.0
-docker inspect container_id  # API_KEY visible!
-
-# GOOD: Secrets dari file
-echo "super-secret-key" > /run/secrets/api-key
-docker run --tmpfs /run/secrets:ro myapp:1.0
-docker exec container_id cat /run/secrets/api-key  # Butuh access ke container
-
-# BETTER: Docker Secrets (Swarm mode)
-echo "super-secret-key" | docker secret create api_key -
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — C4. Security: Secrets vs ENV".
+>
+> Pertanyaan pemandu: lewat perintah apa nilai ENV bisa dibaca orang lain, dan alternatif apa yang tidak meninggalkan jejak itu?
 
 **5. Production Environment Checklist**
 
@@ -263,34 +175,15 @@ Dari semua command di atas, buat `docker-compose.yml`:
 
 **2. Test dengan docker-compose**
 
-```bash
-# Start all services
-docker compose up -d
-
-# Verify all services running
-docker compose ps
-
-# Verify networking
-docker compose exec backend ping -c 3 postgres
-
-# View logs
-docker compose logs -f backend
-
-# Stop all services
-docker compose down
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — D2. Test dengan docker-compose".
+>
+> Pertanyaan pemandu: perintah compose apa untuk menyalakan, memeriksa status, menjalankan perintah di service, melihat log, dan mematikan semuanya?
 
 **3. Volume dalam docker-compose**
 
-```yaml
-volumes:
-  pgdata:
-    driver: local
-services:
-  postgres:
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — D3. Volume dalam docker-compose".
+>
+> Pertanyaan pemandu: di bagian mana volume dideklarasikan, dan di bagian mana service memakainya?
 
 ### Bagian E — Troubleshooting (20 menit)
 
@@ -299,52 +192,48 @@ services:
 Simulasikan dan debug masalah:
 
 **Issue 1: "Could not resolve host"**
-```bash
-# Cause: Container tidak di network yang sama
-docker run --rm postgres:15-alpine psql -h backend -U admin
-# Error: could not translate host name "backend" to address
 
-# Solution: Connect ke network yang benar
-docker network connect app-network container_id
-docker network disconnect wrong-network container_id
-```
+Penyebab: container tidak di network yang sama.
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — E1. Could not resolve host".
+>
+> Pertanyaan pemandu: gejalanya error `could not translate host name "backend" to address`. Container yang tidak berada di network yang sama tidak bisa memakai nama satu sama lain, jadi perintah `docker network` apa yang memperbaikinya?
 
 **Issue 2: "Connection refused"**
-```bash
-# Cause: Port mismatch atau service belum ready
-# Check: Apakah service listen di port yang benar?
-docker exec backend netstat -tlnp
-# Check: Apakah service sudah started?
-docker compose logs backend | grep "listening"
-```
+
+Penyebab: port tidak cocok, atau service belum siap.
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — E2. Connection refused".
+>
+> Pertanyaan pemandu: dua hal apa yang harus kamu periksa kalau koneksi ditolak, dan lewat perintah apa kamu memeriksanya?
 
 **2. Volume Issues**
 
 **Issue: "Permission denied"**
-```bash
-# Cause: File ownership mismatch
-docker exec postgres ls -la /var/lib/postgresql/data
-# Solution: Set ownership
-docker run --rm -v pgdata:/data alpine chown -R postgres:postgres /data
-```
+
+Penyebab: pemilik file tidak cocok.
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — E3. Permission denied pada volume".
+>
+> Pertanyaan pemandu: bagaimana melihat pemilik file di dalam volume, dan siapa yang seharusnya memilikinya?
 
 **Issue: "Volume mount failed"**
-```bash
-# Cause: Path tidak ada atau permission
-docker run -v /nonexistent/path:/data alpine  # Error!
-# Solution: Buat path atau gunakan named volume
-```
+
+Penyebab: path host tidak ada atau tidak punya izin.
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — E4. Volume mount failed".
+>
+> Pertanyaan pemandu: kenapa path yang tidak ada gagal di-mount, dan apa alternatif yang tidak bergantung pada path host?
 
 **3. ENV Issues**
 
 **Issue: "Variable not set"**
-```bash
-# Debug: Check environment variables
-docker exec container_id env | grep YOUR_VAR
 
-# Check: Apakah ENV di Dockerfile sudah di-set?
-docker inspect container_id --format='{{json .Config.Env}}'
-```
+Gejala: aplikasi tidak menemukan variabel yang diharapkan.
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-volume-networking — E5. Variable not set".
+>
+> Pertanyaan pemandu: perintah apa untuk melihat daftar environment di dalam container yang sedang jalan, dan apa untuk melihat konfigurasi `Env` dari container?
 
 ---
 

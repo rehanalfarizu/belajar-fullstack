@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Product extends Model
 {
+    // Wajib supaya Product::factory() di seeder dan test bisa dipakai.
+    use HasFactory;
+
     protected $fillable = [
         'category_id',
         'name',

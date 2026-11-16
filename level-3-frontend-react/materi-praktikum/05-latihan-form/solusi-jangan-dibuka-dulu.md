@@ -51,7 +51,7 @@ function validateField(name, value, allValues = {}) {
       return null;
   }
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 103–118 (sebelum diubah)
@@ -72,7 +72,7 @@ function getPasswordStrength(password) {
   if (score <= 5) return { score, label: "Kuat", color: "#22c55e" };
   return { score, label: "Sangat Kuat", color: "#16a34a" };
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 146–162 (sebelum diubah)
@@ -94,7 +94,7 @@ Fitur:
   3. Password strength meter visual (bar)
   4. Bio character counter: "X / 200 karakter"
   5. Submit attempt: semua field ditandai touched
-============================================================
+// ============================================================
 ```
 
 ### Baris 277–291 (sebelum diubah)
@@ -114,7 +114,7 @@ function validateAddress(form) {
   }
   return errors;
 }
-============================================================
+// ============================================================
 ```
 
 ## 03-async-dan-multistep.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -143,7 +143,7 @@ function checkUsernameAvailable(username) {
     }, 800);
   });
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 71–114 (sebelum diubah)
@@ -192,7 +192,7 @@ function SignupForm() {
     </form>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 144–190 (sebelum diubah)
@@ -244,7 +244,7 @@ function UsernameInput() {
     </div>
   );
 }
-============================================================
+// ============================================================
 ```
 
 ### Baris 214–249 (sebelum diubah)
@@ -285,7 +285,7 @@ Usage:
     validate,
     async (values) => { await simulateApiCall(values); }
   );
-============================================================
+// ============================================================
 ```
 
 ## 04-form-submission.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -322,7 +322,7 @@ Computed options:
 
 Postal code auto-fill:
   const postalCodes = { Indonesia: { "DKI Jakarta": "10", "Jawa Barat": "40", ... }, ... };
-============================================================
+// ============================================================
 ```
 
 ## 02-validasi-per-field.jsx — `function validateField` (implementasi yang tadinya ada di starter)

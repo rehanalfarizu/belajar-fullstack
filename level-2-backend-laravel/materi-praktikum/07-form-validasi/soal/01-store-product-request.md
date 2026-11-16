@@ -14,6 +14,14 @@ Validasi:
 Gunakan `validated()` saat membuat model. Tambahkan pesan error Indonesia yang
 berguna tanpa membocorkan detail internal.
 
+## Catatan Otorisasi
+
+Policy `Product` baru dibuat di topik 08. Selama belum ada, ubah `authorize()`
+di `StoreProductRequest` jadi `return true;` sementara, supaya payload valid
+bisa sampai `201` (starter mengembalikan `false`, jadi semua request kena `403`).
+Setelah topik 08 selesai, kembali ke sini dan ganti dengan pengecekan policy
+`create`. Itu jawaban akhirnya.
+
 ## Kasus Uji
 
 - Payload valid menghasilkan `201`.

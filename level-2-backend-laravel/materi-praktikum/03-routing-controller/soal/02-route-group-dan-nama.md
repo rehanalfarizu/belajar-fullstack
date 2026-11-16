@@ -136,7 +136,9 @@ Pikirkan sendiri regex untuk slug: huruf kecil, angka, tanda minus.
 - Redirect `301` artinya "pindah permanen". Browser dan Google akan
   mengingatnya. `302` artinya "sementara".
 - Fallback menangkap URL yang tidak cocok dengan route mana pun. Karena
-  router mencocokkan dari atas ke bawah, fallback harus di bawah.
+  router mencocokkan dari atas ke bawah, tulis fallback di bawah (Laravel juga
+  selalu mencoba fallback paling akhir). Fallback di `routes/web.php` ikut
+  menangkap URL `/api/...` yang tidak dikenal, jadi balasannya JSON ini juga.
 
 ---
 
@@ -174,7 +176,7 @@ curl -i -H "Accept: application/json" http://127.0.0.1:8000/ngawur
 
 ## Catatan Penting
 
-- ⚠️ **Fallback yang ditaruh di tengah file** akan "menelan" route di bawahnya. Selalu taruh paling akhir.
+- ⚠️ **Taruh fallback paling akhir** di file supaya mudah dibaca. Ingat juga: fallback web ikut menangkap `/api/...` yang tidak dikenal.
 - ⚠️ **Tanpa header `Accept: application/json`**, `abort(404)` merender halaman HTML. Itu normal. Test pakai `getJson()`.
 - 💡 `php artisan route:list -v` menampilkan middleware tiap route. Berguna buat soal 03.
 - 📚 Baca juga [teori routing & controller](../../../materi-teori/03-routing-controller/README.md).

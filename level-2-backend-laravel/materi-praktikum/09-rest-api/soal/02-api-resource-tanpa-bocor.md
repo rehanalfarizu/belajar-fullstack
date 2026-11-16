@@ -49,7 +49,7 @@ sama untuk semua route `api/*`.
 
 ### Persiapan Data
 
-- [ ] Tabel `products` punya kolom tambahan `harga_modal` (unsigned big integer), `catatan_internal` (text, nullable), dan `user_id` (foreign key ke `users`, nullable)
+- [ ] Tabel `products` punya kolom tambahan `harga_modal` (unsigned big integer), `catatan_internal` (text, nullable), dan `user_id` (foreign key ke `users`, nullable; kolom ini sudah ada dari topik 06, cek dulu sebelum menambah)
 - [ ] Minimal 3 produk di database (lewat seeder atau `tinker`), minimal 1 dengan `stock = 0`
 
 ### `ProductResource`

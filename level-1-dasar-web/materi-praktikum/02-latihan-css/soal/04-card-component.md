@@ -74,22 +74,9 @@ Card pada dasarnya adalah **container** dengan styling minimal:
 
 ### Pola Kode
 
-```html
-<div class="card">
-  <h3>Judul Card</h3>
-  <p>Ini konten di dalam card. Padding membuat teks tidak nempel ke tepi.</p>
-</div>
-```
-
-```css
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* bayangan halus */
-  max-width: 320px; /* batas lebar */
-}
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Card Component — Bagian A: Anatomi Card & Base Style".
+>
+> Pertanyaan pemandu: dari lima property di "Wajib Ada", mana yang membuat kotak tampak terangkat, dan apa yang terjadi kalau `padding`-nya kamu hapus? Coba di DevTools.
 
 ### Yang Terjadi di Browser
 

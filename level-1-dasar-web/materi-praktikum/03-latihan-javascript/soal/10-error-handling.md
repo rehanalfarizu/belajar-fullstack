@@ -166,19 +166,7 @@ kalau input tidak valid.
 Prinsipnya: **fungsi yang menemukan masalah → throw error**. **Fungsi yang
 menangkap masalah → try/catch**.
 
-Contoh pattern:
-
-```javascript
-function validasiUsia(usia) {
-  if (typeof usia !== "number" || isNaN(usia)) {
-    throw new ValidationError("Usia harus angka");
-  }
-  if (usia < 0 || usia > 150) {
-    throw new ValidationError(`Usia tidak valid: ${usia}`);
-  }
-  return true;
-}
-```
+Pola umumnya ada di blok "Pola Kode" di bawah. Untuk `validasiUsia`, urutan pengecekannya begini:
 
 - Cek tipe dulu (jangan langsung cek nilai)
 - Kalau invalid, **lempar** `ValidationError` dengan pesan spesifik
@@ -198,6 +186,10 @@ function validasiUsia(usia) {
 3. Lanjut `validasiEmail` — pelajari regex-nya: `"huruf/angka + @ + huruf/angka + . + huruf/angka"`
 4. Lanjut `validasiPassword` — tiga cek berurutan: panjang → ada angka → ada huruf
 5. Save
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi `validasiUsia` ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "10 Error Handling — Bagian C: Fungsi Validasi Tunggal (`validasiUsia`)".
+>
+> Pertanyaan pemandu: kenapa tipe dicek sebelum rentang, dan apa yang terjadi kalau `usia` berupa `NaN`?
 
 > **Tips regex**: `[^\s@]+` artinya "satu atau lebih karakter yang BUKAN spasi dan BUKAN `@`". Simpelnya: regex ini validasi format email standar.
 
@@ -319,7 +311,7 @@ Pola: **try kecil di tiap field → kumpulkan pesan → throw satu error besar**
 
 1. Cari `TODO 3: validasiRegistrasi`
 2. Uncomment, lalu ketik ulang
-3. Mulai dengan `const errors = [];`
+3. Mulai dengan menyiapkan array kosong untuk menampung pesan error
 4. Tambah blok `try/catch` untuk `validasiUsia`, `validasiEmail`,
    `validasiPassword`
 5. Di akhir, cek `if (errors.length > 0)` lalu throw

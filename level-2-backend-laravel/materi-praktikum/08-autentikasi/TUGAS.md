@@ -45,7 +45,7 @@ php artisan migrate
 php artisan serve
 ```
 
-Soal 03 juga butuh kolom `products.user_id` — langkahnya ada di Bagian C.
+Soal 03 juga butuh kolom `products.user_id`. Kolom ini kemungkinan sudah ada dari topik 06 (Soal 02). Cek dulu di Bagian C.
 
 ---
 
@@ -92,14 +92,13 @@ Soal 03 juga butuh kolom `products.user_id` — langkahnya ada di Bagian C.
 
 ### Langkah
 
-1. Tambah kolom pemilik:
+1. Cek dulu apakah kolom pemilik sudah ada (dari topik 06, Soal 02):
 
    ```bash
-   php artisan make:migration add_user_id_to_products_table
-   php artisan migrate
+   php artisan tinker --execute="dump(Schema::hasColumn('products', 'user_id'));"
    ```
 
-   (isi migration: foreign key `user_id` ke `users` — kamu sudah belajar ini di topik 05)
+   Kalau `true`, lewati langkah ini. Jangan menambah kolom yang sama dua kali, nanti migration error `duplicate column name`. Kalau `false`, buat migration baru (`php artisan make:migration add_user_id_to_products_table`) berisi foreign key `user_id` ke `users` (nullable), lalu `php artisan migrate`.
 2. Tambah relasi `User::products()` dan `Product::user()`
 3. Salin controller dari starter (masih rentan), daftarkan route di `routes/api.php` dengan prefix `penjual` dan middleware `auth:sanctum`
 4. **Reproduksi bug**: buat user A, B, admin di tinker; buat produk milik A; pakai token B untuk PATCH produk A. Catat hasilnya
@@ -197,7 +196,7 @@ toko-latihan/
 ├── resources/views/auth/login.blade.php               ← Soal 02
 ├── resources/views/dashboard.blade.php                ← Soal 02
 ├── database/migrations/..._add_role_to_users_table.php
-├── database/migrations/..._add_user_id_to_products_table.php
+├── database/migrations/..._add_user_id_to_products_table.php   ← hanya kalau kolomnya belum ada dari topik 06
 ├── tests/Feature/SesiTest.php                         ← Soal 02
 ├── tests/Feature/PenjualProductAccessTest.php         ← Soal 03
 └── catatan-08.md                                      ← bukti IDOR + refleksi

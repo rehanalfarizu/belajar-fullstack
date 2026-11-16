@@ -16,7 +16,7 @@ Conditional patterns yang harus digunakan:
 2. Ternary: isLoggedIn ? <Dashboard /> : <LoginForm />
 3. Logical AND: user.role === "admin" && <AdminPanel />
 4. Logical OR: displayName || "Guest User"
-============================================================
+// ============================================================
 ```
 
 ## 08-custom-hooks.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -32,7 +32,7 @@ const [value, setValue] = useState(() => {
     return initialValue;
   }
 });
-============================================================
+// ============================================================
 ```
 
 ## 09-react-router-dasar.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -48,7 +48,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
     <Route path="/contact" element={<Contact />} />
   </Routes>
 </BrowserRouter>
-============================================================
+// ============================================================
 ```
 
 ### Baris 67–75 (sebelum diubah)
@@ -62,7 +62,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 Bonus: NavLink dengan active class
 <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
-============================================================
+// ============================================================
 ```
 
 ## 10-context-api.jsx (blok jawaban yang tadinya dikomentari di starter)
@@ -84,7 +84,7 @@ Komponen:
 - ProductCatalog: list produk dengan addToCart
 - CartDrawer: slide-out cart dengan useCart()
 - Dashboard: user info + admin panel (jika role === "admin")
-============================================================
+// ============================================================
 ```
 
 ## 02-props-dan-state Soal 01 — JSX Layout

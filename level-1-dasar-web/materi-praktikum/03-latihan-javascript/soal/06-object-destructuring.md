@@ -128,20 +128,20 @@ Ada **dua cara** mengakses property:
 1. **Dot notation** — `obj.key`: lebih ringkas, lebih umum
 2. **Bracket notation** — `obj["key"]`: pakai string, berguna kalau key dinamis
 
-```javascript
-const mahasiswa = {
-  nama: "Andi Wijaya",
-  umur: 21,
-  jurusan: "Informatika",
-  alamat: { kota: "Jakarta", provinsi: "DKI Jakarta" },
-  hobi: ["Coding", "Gaming", "Membaca"]
-};
+Contoh di domain lain (kamu tinggal menerapkan polanya ke `mahasiswa`):
 
-mahasiswa.nama;        // "Andi Wijaya" (dot notation)
-mahasiswa["nama"];     // "Andi Wijaya" (bracket notation)
-mahasiswa.alamat.kota; // "Jakarta" (nested)
-mahasiswa.hobi[0];     // "Coding" (array index)
+```javascript
+const buku = { judul: "Laskar Pelangi", penulis: { nama: "Andrea Hirata" }, tag: ["novel", "anak"] };
+
+buku.judul;          // dot notation
+buku["judul"];       // bracket notation
+buku.penulis.nama;   // nested
+buku.tag[0];         // array index
 ```
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Object & Destructuring — Bagian A: Object Literal & Property Access".
+>
+> Pertanyaan pemandu: mana akses yang pakai titik, mana yang pakai kurung siku, dan kapan kurung siku jadi satu-satunya pilihan?
 
 ### Wajib Ada di Kode Kamu
 
@@ -195,12 +195,16 @@ Tiga baris jadi satu. Destructuring juga punya fitur tambahan:
 - **Function parameter** — destructuring di parameter fungsi
 
 ```javascript
-const { nama, umur } = mahasiswa;                  // nama = "Andi"
-const { nama: namaMhs } = mahasiswa;               // namaMhs = "Andi"
-const { ipk = 0 } = mahasiswa;                     // ipk = 0 (default)
-const { alamat: { kota } } = mahasiswa;            // kota = "Jakarta"
-function getBio({ nama, umur }) { ... }            // destructuring di param
+const { judul, tahun } = buku;            // judul = "Laskar Pelangi"
+const { judul: j } = buku;                // alias: j = "Laskar Pelangi"
+const { rating = 0 } = buku;              // default: rating = 0
+const { penulis: { nama } } = buku;       // nested: nama = "Andrea Hirata"
+function ringkas({ judul, tahun }) { ... } // destructuring di param
 ```
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Object & Destructuring — Bagian B: Destructuring Assignment (Object)".
+>
+> Pertanyaan pemandu: untuk tiap baris di atas, apa nama variabel yang terbentuk, dan apa yang terjadi kalau property-nya tidak ada di object?
 
 ### Wajib Ada di Kode Kamu
 
@@ -395,19 +399,23 @@ Object punya **method statis** untuk diubah jadi array:
 Ini berguna untuk **iterasi** dengan `for...of` atau method array lain.
 
 ```javascript
-const mahasiswa = { nama: "Andi", umur: 21, jurusan: "Informatika" };
+const produk = { nama: "Pensil", harga: 3000, stok: 120 };
 
-Object.keys(mahasiswa);    // ["nama", "umur", "jurusan"]
-Object.values(mahasiswa);  // ["Andi", 21, "Informatika"]
-Object.entries(mahasiswa); // [["nama","Andi"], ["umur",21], ["jurusan","Informatika"]]
+Object.keys(produk);    // ["nama", "harga", "stok"]
+Object.values(produk);  // ["Pensil", 3000, 120]
+Object.entries(produk); // [["nama","Pensil"], ["harga",3000], ["stok",120]]
 
-for (const [key, value] of Object.entries(mahasiswa)) {
+for (const [key, value] of Object.entries(produk)) {
   console.log(`${key}: ${value}`);
 }
-// nama: Andi
-// umur: 21
-// jurusan: Informatika
+// nama: Pensil
+// harga: 3000
+// stok: 120
 ```
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Object & Destructuring — Bagian F: Object Methods (keys, values, entries)".
+>
+> Pertanyaan pemandu: bentuk array seperti apa yang dihasilkan `entries`, dan kenapa `for...of` dengan destructuring cocok untuk membongkarnya?
 
 ### Wajib Ada di Kode Kamu
 
@@ -509,18 +517,14 @@ mahasiswa** yang informatif. Data: 4 mahasiswa dengan `nama`, `jurusan`,
 ### Cara Mengetik dari 0
 
 1. Di paling bawah file, buat `const mahasiswas = [ ... ]` dengan 4 object
-2. Pakai `mahasiswas.map(({ nama, jurusan, nilai }, i) => ...)` untuk list
-3. Pakai `mahasiswas.filter(({ nilai }) => nilai >= 70)` lalu map nama
-4. Pakai `mahasiswas.reduce((best, curr) => curr.nilai > best.nilai ? curr :
-   best)` untuk cari max
-5. Pakai `reduce` untuk group by `jurusan`:
-   ```javascript
-   mahasiswas.reduce((acc, { jurusan }) => {
-     acc[jurusan] = (acc[jurusan] || 0) + 1;
-     return acc;
-   }, {});
-   ```
+2. Untuk list, pakai `map` dengan destructuring di parameter callback, dan gunakan argumen kedua untuk nomor urut
+3. Untuk yang lulus, `filter` dengan destructuring `nilai` di parameter, lalu `map` ke nama saja
+4. Untuk nilai tertinggi, `reduce` tanpa nilai awal: callback membandingkan dua mahasiswa dan mengembalikan yang nilainya lebih besar
+5. Untuk laporan per jurusan, `reduce` dengan nilai awal object kosong. Key-nya diambil dari `jurusan` (bracket notation), nilainya hitungan yang naik satu tiap ketemu jurusan itu. Apa yang jadi nilai awal hitungan kalau key belum ada?
 
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "06 Object & Destructuring — Bagian H: Mini Project — Student Report".
+>
+> Pertanyaan pemandu: di tiap langkah `reduce`, apa isi `acc` dan apa yang dikembalikan callback, dan kenapa callback wajib `return acc`?
 ### Verifikasi
 
 - [ ] List menampilkan 4 baris bernomor urut

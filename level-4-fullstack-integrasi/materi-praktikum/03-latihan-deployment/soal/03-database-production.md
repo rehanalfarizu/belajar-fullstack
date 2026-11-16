@@ -149,17 +149,17 @@ if (env === 'development') {
 
 ## Environment Variables Checklist
 
-```bash
-# Development (.env)
-DATABASE_URL=postgresql://postgres:password@localhost:5432/myapp_dev
-JWT_SECRET=dev_secret_do_not_use_in_production
-NODE_ENV=development
+Variabel yang dibutuhkan: `DATABASE_URL`, `JWT_SECRET`, dan `NODE_ENV`. Tulis sendiri dua daftar:
 
-# Production (.env — di Railway dashboard, BUKAN di file)
-DATABASE_URL=<from Railway PostgreSQL plugin>
-JWT_SECRET=<generate: openssl rand -hex 32>
-NODE_ENV=production
-```
+| Variabel | Nilai di development | Nilai di production |
+|----------|----------------------|---------------------|
+| `DATABASE_URL` | ? | ? |
+| `JWT_SECRET` | ? | ? |
+| `NODE_ENV` | ? | ? |
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-database-production — Environment Variables Checklist".
+>
+> Pertanyaan pemandu: di mana tiap variabel disimpan di development dan di production, dan kenapa `JWT_SECRET` production tidak boleh sama dengan yang di development?
 
 ---
 

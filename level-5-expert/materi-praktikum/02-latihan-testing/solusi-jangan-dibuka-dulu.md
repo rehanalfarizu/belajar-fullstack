@@ -2579,3 +2579,63 @@ it('shows Suspense fallback during lazy loading', () => {
   expect(screen.getByRole('progressbar')).toBeInTheDocument();
 });
 ````
+
+
+## 03-integration-testing — Teori: Handler MSW untuk `/api/products`
+
+```js
+// Handler
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+
+const handlers = [
+  http.get('/api/products', () => {
+    return HttpResponse.json([
+      { id: 1, name: 'Product 1', price: 100000 },
+    ]);
+  }),
+];
+
+export const server = setupServer(...handlers);
+```
+
+
+## 03-integration-testing — Teori: Test AAA "loads and displays products"
+
+```jsx
+describe('Product Listing Page', () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
+  it('loads and displays products', async () => {
+    // Arrange — setup done in beforeAll
+    renderWithProviders(<ProductListingPage />);
+
+    // Act
+    // User waits for loading...
+
+    // Assert
+    expect(await screen.findByText('Product 1')).toBeInTheDocument();
+  });
+});
+```
+
+
+## 01-unit-testing — Teori: contoh AAA `calculateDiscount`
+
+```js
+describe('calculateDiscount', () => {
+  it('should return 10% discount for orders above 1M', () => {
+    // Arrange
+    const price = 1_500_000;
+    const expectedDiscount = 0.10;
+
+    // Act
+    const result = calculateDiscount(price);
+
+    // Assert
+    expect(result).toBe(expectedDiscount);
+  });
+});
+```

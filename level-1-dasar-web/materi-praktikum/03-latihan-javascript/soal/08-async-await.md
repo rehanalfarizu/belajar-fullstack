@@ -125,11 +125,15 @@ independen** — tidak perlu menunggu satu-satu (sequential) kalau bisa paralel.
 
 1. Cari blok `// TODO 2: Promise.all()` (sekitar baris 22)
 2. Aktifkan komentarnya
-3. Ketik `delay(ms)` — ingat: `setTimeout(() => resolve(ms), ms)`. Parameter
+3. Tulis `delay(ms)` yang mengembalikan Promise: setelah menunggu `ms` milidetik (pakai `setTimeout`), panggil `resolve` dengan `ms`. Parameter
    `ms` di-resolve sebagai **nilai** Promise
-4. Ketik pemanggilan `Promise.all([...])` dengan **3** delay berbeda
+4. Panggil `Promise.all` dengan array berisi **3** delay berbeda
 5. Jalankan file. Total waktu harus **~2 detik** (yang terlama), bukan 3.5 detik
    (penjumlahan) — itu bukti paralel
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 08 — Bagian B: Promise.all() untuk Paralel".
+>
+> Pertanyaan pemandu: di mana `setTimeout` memanggil `resolve`, dan kenapa total waktu `Promise.all` sama dengan yang terlama, bukan jumlahnya?
 
 ### Yang Terjadi di Layar
 
@@ -174,14 +178,17 @@ harus panggil `.json()` untuk parse body JSON.
 
 1. Cari blok `// TODO 3: Async/Await function` (sekitar baris 33)
 2. Aktifkan komentarnya
-3. Ketik `async function fetchUser(id) { ... }`
-4. Baris pertama: `const response = await fetch(...)` — pakai template literal
+3. Tulis function `async` bernama `fetchUser` dengan parameter `id`
+4. Baris pertama: `await` hasil `fetch` ke endpoint user — pakai template literal
    dengan backtick `` ` `` dan `${id}`
-5. Baris kedua: parse JSON
-6. `return user`
-7. Untuk tes, tambahkan di akhir file:
-   `fetchUser(1).then(u => console.log(u.name, u.email))`
+5. Baris kedua: parse JSON (juga perlu `await`)
+6. `return` hasil parse
+7. Untuk tes, panggil `fetchUser(1)` di akhir file dan cetak nama & email lewat `.then`
 8. Jalankan. Harusnya muncul nama & email user id-1
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 08 — Bagian C: Fungsi `async` / `await` + `fetch`".
+>
+> Pertanyaan pemandu: kenapa `fetch` dan `.json()` sama-sama butuh `await`, dan apa yang dikembalikan function `async` ke pemanggilnya?
 
 ### Yang Terjadi di Layar
 
@@ -288,12 +295,15 @@ Bedanya:
 
 1. Cari blok `// TODO 5: Async Arrow Function` (sekitar baris 62)
 2. Aktifkan komentarnya
-3. Ketik `const fetchUsersAsync = async () => {`
-4. Isi body: `const res = await fetch(...)` → `const users = await res.json()` →
-   `return users`
-5. Tutup dengan `};`
-6. Untuk tes: `fetchUsersAsync().then(arr => console.log(arr.length))`
+3. Tulis `fetchUsersAsync` sebagai arrow function `async` tanpa parameter
+4. Isi body: `await` fetch daftar user → `await` parse JSON → `return` hasilnya
+5. Tutup arrow function
+6. Untuk tes: panggil `fetchUsersAsync()` dan cetak jumlah elemennya lewat `.then`
 7. Jalankan. Harusnya `10`
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 08 — Bagian E: Async Arrow Function".
+>
+> Pertanyaan pemandu: di mana kata kunci `async` diletakkan pada arrow function, dan apa bedanya dengan function biasa?
 
 ### Verifikasi
 
@@ -338,13 +348,9 @@ Skill yang diasah:
 
 ### Pola Kode (opsional, jangan copy-paste)
 
-```javascript
-const aktif = users.filter(u => u.isActive === true);
-const ringkas = aktif.map(u => ({ /* field-field yang kamu mau */ }));
-ringkas.sort((a, b) => /* comparator */);
-if (ringkas.length === 0) throw new Error("...");
-return ringkas;
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "Soal 08 — Bagian F (Bonus): `processUserData(users)`".
+>
+> Pertanyaan pemandu: urutan langkah apa yang kamu butuhkan (saring, ubah bentuk, urutkan, validasi), dan method array mana untuk tiap langkah?
 
 ### Verifikasi
 

@@ -183,9 +183,8 @@ Di constructor subclass:
 >
 > Pertanyaan pemandu: input apa yang masuk, output apa yang harus keluar, dan langkah apa di tengahnya? Tulis dulu langkahnya sebagai komentar, baru ubah jadi kode.
 
-- `reduce((acc, n) => acc + n, 0)` &mdash; jumlahkan semua elemen, mulai dari
-  `0`
-- Bagi dengan `this.nilai.length` &mdash; dapat rata-rata
+- Jumlahkan semua elemen `this.nilai` dengan `reduce`. Apa nilai awal yang aman?
+- Bagi hasilnya dengan banyaknya elemen &mdash; dapat rata-rata
 
 ### Verifikasi
 
@@ -228,15 +227,17 @@ const andi = new Student(...);  // bukan: andi.createRandom()
 
 1. Cari blok `TODO 3: Static Methods` di `code/09-class-oop.js`
 2. Untuk `createRandom()`:
-   - Bikin array nama: `["Andi", "Budi", "Citra", "Dewi"]`
-   - Pilih random: `nama[Math.floor(Math.random() * nama.length)]`
-   - Return `new Student(nama, email, nim, jurusan)` dengan data yang
-     sudah di-generate
+   - Siapkan array berisi beberapa nama
+   - Pilih satu indeks acak (kombinasi `Math.random()`, `Math.floor`, dan panjang array)
+   - Return `new Student(...)` dengan data yang sudah di-generate
 3. Untuk `createBatch(dataArray)`:
-   - Pakai `dataArray.map(d => new Student(d.nama, d.email, d.nim, d.jurusan))`
+   - Ubah tiap object di array menjadi instance `Student` (method array apa yang mengubah 1-ke-1?)
    - Return hasilnya
 4. Hapus `//` di depan baris yang sudah kamu implementasi
 
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "09 Class & OOP — Bagian C: Static Methods".
+>
+> Pertanyaan pemandu: kenapa `this` di method `static` bukan instance, dan bagaimana kamu memastikan indeks acak tidak pernah keluar dari array?
 ### Yang Terjadi
 
 Saat `Student.createRandom()` dipanggil:
@@ -288,16 +289,13 @@ bukan "is-a" seperti inheritance).
 2. Tulis constructor &mdash; `this.mahasiswa = []` di sini penting, kalau
    lupa nanti `tambahMahasiswa` error
 3. Untuk `tambahMahasiswa(student)`: satu baris `this.mahasiswa.push(student)`
-4. Untuk `hapusMahasiswa(nim)`: pakai `filter`
-   ```javascript
-   this.mahasiswa = this.mahasiswa.filter(m => m.nim !== nim);
-   ```
+4. Untuk `hapusMahasiswa(nim)`: pakai `filter` untuk menyisakan yang NIM-nya berbeda, lalu simpan hasilnya kembali ke `this.mahasiswa`
 5. Untuk `getRataKelas()`:
    - Map dulu `getRataNilai()` tiap mahasiswa
    - Lalu hitung rata-rata dari hasil map (bisa pakai `reduce`)
    - Handle case kosong
 6. Untuk `getMahasiswaLulus()`:
-   - Filter `this.mahasiswa.filter(m => m.getRataNilai() >= 60)`
+   - Saring `this.mahasiswa` berdasarkan `getRataNilai()` dan ambang 60
    - Return hasilnya
 
 ### Pola Kode: Filter Array of Objects

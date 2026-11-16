@@ -9,7 +9,7 @@ declare(strict_types=1);
  *
  * FILE 2 (di komentar paling bawah) → salin ke:
  *   toko-latihan/app/Http/Controllers/KatalogController.php
- *   lalu daftarkan route: Route::get('/katalog', [KatalogController::class, 'index']);
+ *   lalu daftarkan route: Route::get('/produk-cari', [KatalogController::class, 'index']);
  *
  * !!! SENGAJA RENTAN dan SENGAJA LAMBAT !!!
  *   - scopeSearch menempel input ke whereRaw (SQL injection)

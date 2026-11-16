@@ -16,6 +16,9 @@ final class UpdateProductRequest extends FormRequest
     {
         $product = $this->route('product');
 
+        // Versi akhir (butuh ProductPolicy dari topik 08). Sebelum topik 08,
+        // pakai `return true;` sementara supaya validasi bisa diuji.
+
         // Route model binding sudah mengubah {product} jadi model Product.
         if (! $product instanceof Product) {
             return false;

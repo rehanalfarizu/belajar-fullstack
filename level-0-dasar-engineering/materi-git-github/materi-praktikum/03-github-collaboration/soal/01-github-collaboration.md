@@ -51,16 +51,11 @@ Di bawah, `USERNAME` adalah pemilik repo yang kamu clone: akunmu sendiri di Jalu
 
 Jalur A: clone fork-mu. Jalur B: clone repo milikmu sendiri.
 
-```bash
-# 1. Clone repository fork ke komputer
-git clone https://github.com/USERNAME/latihan-kontribusi.git
+Clone repository (fork-mu di Jalur A, repo milikmu sendiri di Jalur B) ke komputer, masuk ke foldernya, lalu lihat remote yang terdaftar. Seharusnya `origin` menunjuk ke repo yang kamu clone.
 
-# 2. Masuk ke folder
-cd latihan-kontribusi
-
-# 3. Lihat remote — seharusnya menunjuk ke repo yang kamu clone (fork-mu di Jalur A)
-git remote -v
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "GitHub Collaboration — SOAL 2: Clone Repository".
+>
+> Pertanyaan pemandu: dari mana kamu mendapat URL untuk clone, dan perintah apa yang menampilkan daftar remote?
 
 **Expected output:**
 ```
@@ -72,28 +67,11 @@ origin  https://github.com/USERNAME/latihan-kontribusi.git (push)
 
 ### SOAL 3: Buat Branch dan Edit
 
-```bash
-# 1. Buat branch baru
-git checkout -b feature/saran-app
+Buat branch `feature/saran-app` dan pindah ke sana, buat file `saran.txt` berisi judul "Saran Aplikasi" dan tiga saran (dark mode, tampilan mobile, notifikasi email), commit dengan pesan "docs: tambahkan file saran aplikasi", lalu push branch ke `origin` dengan upstream.
 
-# 2. Buat file saran.txt
-cat > saran.txt << 'EOF'
-# Saran Aplikasi
-
-Berikut saran untuk meningkatkan aplikasi:
-
-1. Tambahkan fitur dark mode
-2. Perbaiki tampilan mobile
-3. Tambahkan notifikasi email
-EOF
-
-# 3. Add + Commit
-git add saran.txt
-git commit -m "docs: tambahkan file saran aplikasi"
-
-# 4. Push branch ke origin (fork-mu di Jalur A, repo sendiri di Jalur B)
-git push -u origin feature/saran-app
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "GitHub Collaboration — SOAL 3: Buat Branch dan Edit".
+>
+> Pertanyaan pemandu: kenapa kamu bekerja di branch baru dan bukan langsung di `main`, dan apa yang muncul di GitHub setelah push?
 
 ---
 
@@ -143,20 +121,11 @@ Jalur A: temanmu yang menjadi owner dan me-merge PR-mu. Jalur B: kamu sendiri ow
 
 Hanya bermakna kalau kamu punya fork (Jalur A, atau latihan di first-contributions). Di Jalur B murni, `origin` sudah repo aslinya, jadi cukup `git pull`.
 
-```bash
-# 1. Tambahkan remote upstream (repo original)
-git remote add upstream https://github.com/PEMILIK_ASLI/latihan-kontribusi.git
+Tambahkan repo original sebagai remote kedua bernama `upstream`, ambil perubahannya, gabungkan ke `main` lokal, lalu push `main` ke fork-mu.
 
-# 2. Sinkronkan dengan repo original
-git fetch upstream
-
-# 3. Merge perubahan dari upstream ke main lokal
-git checkout main
-git merge upstream/main
-
-# 4. Push ke fork kita
-git push origin main
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "GitHub Collaboration — SOAL Bonus: Setup Upstream".
+>
+> Pertanyaan pemandu: apa bedanya `fetch` dan `pull`, dan kenapa remote kedua dinamai `upstream`, bukan `origin`?
 
 ---
 

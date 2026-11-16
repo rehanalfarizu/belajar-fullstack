@@ -117,18 +117,9 @@ Analisis: Apakah ada module yang salah ditandai sebagai `sideEffects: false` pad
 
 Untuk setiap library besar yang kamu pakai, implementasikan selective imports:
 
-```js
-// BAD — import seluruh library
-import _ from 'lodash';
-const sorted = _.sortBy(items, 'name');
-
-// GOOD — import fungsi spesifik (tree-shakeable)
-import sortBy from 'lodash/sortBy';
-const sorted = sortBy(items, 'name');
-
-// BETTER — import individual functions (lodash-es)
-import { sortBy } from 'lodash-es';
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-bundle-optimization — B2. Selective Imports".
+>
+> Pertanyaan pemandu: kenapa `import _ from 'lodash'` membuat seluruh library ikut ke bundle, dan dua cara apa yang membuat bundler hanya membawa satu fungsi? Bandingkan ukuran di treemap sebelum dan sesudah.
 
 Audit 5 library terbesar dan tuliskan perubahan import yang diperlukan.
 
@@ -146,15 +137,9 @@ npm install --save-dev purgecss
 
 Identifikasi komponen yang bagus untuk lazy loading:
 
-```jsx
-// BEFORE — selalu di-load
-import HeavyChart from './components/HeavyChart';
-import AdminPanel from './components/AdminPanel';
-
-// AFTER — hanya di-load saat dibutuhkan
-const HeavyChart = lazy(() => import('./components/HeavyChart'));
-const AdminPanel = lazy(() => import('./components/AdminPanel'));
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-bundle-optimization — C1. Manual Dynamic Imports".
+>
+> Pertanyaan pemandu: apa yang membedakan `import` statis dari `import()` dinamis, dan kenapa komponen hasil `lazy` harus dibungkus `<Suspense>`?
 
 Implementasikan `lazy()` + `<Suspense>` untuk:
 - Halaman Admin
@@ -166,13 +151,9 @@ Implementasikan `lazy()` + `<Suspense>` untuk:
 
 Konfigurasi React Router untuk route-based code splitting:
 
-```jsx
-// Contoh: setiap route jadi chunk terpisah
-<Route
-  path="/dashboard"
-  element={<Suspense fallback={<Spinner />}><Dashboard /></Suspense>}
-/>
-```
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "03-bundle-optimization — C2. Route-Based Splitting".
+>
+> Pertanyaan pemandu: di level mana `lazy` dan `<Suspense>` paling pas dipasang supaya tiap route jadi chunk sendiri, dan di mana fallback-nya muncul?
 
 Analisis: Berapa banyak chunk yang dibuat? Berapa ukuran masing-masing?
 

@@ -69,7 +69,7 @@ topik 08. Kalau belum, kerjakan dulu.
 
 ### Langkah
 
-1. **Lihat masalahnya dulu.** Buat migration kolom `harga_modal`, `catatan_internal`, `user_id`. Isi data. Sementara buat `show()` yang `return $product;` lalu curl. Catat kolom yang bocor di `CATATAN-09.md`
+1. **Lihat masalahnya dulu.** Buat migration kolom `harga_modal` dan `catatan_internal`, plus `user_id` kalau belum ada dari topik 06 (cek dulu, jangan menambah kolom yang sama dua kali). Isi data. Sementara buat `show()` yang `return $product;` lalu curl. Catat kolom yang bocor di `CATATAN-09.md`
 2. Salin `code/02-product-resource.php` ke `app/Http/Resources/ProductResource.php`
 3. Buat `CategoryResource` dengan `php artisan make:resource CategoryResource`
 4. Kerjakan `TODO(human)` di resource, model (`$hidden`), controller, dan `bootstrap/app.php`

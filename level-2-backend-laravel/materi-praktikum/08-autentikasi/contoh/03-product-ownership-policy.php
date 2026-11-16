@@ -92,6 +92,9 @@ final class ProductPolicy
 
 /*
 --- Migration: tambah pemilik produk ---
+// Kolom user_id sudah dibuat di topik 06 (Soal 02). Cek dulu:
+//   Schema::hasColumn('products', 'user_id')
+// Kalau true, LEWATI migration ini (menambah dua kali = error duplicate column).
 php artisan make:migration add_user_id_to_products_table
 
 Schema::table('products', function (Blueprint $table) {

@@ -78,14 +78,9 @@ bisa minta input.
 
 Cara setup-nya:
 
+Setup `rl` (dari `require('readline')` sampai `createInterface` dengan `input` dan `output`) adalah tugasmu di bagian ini. Setelah `rl` jadi, pola tanya-jawabnya begini:
+
 ```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,   // baca dari keyboard
-  output: process.stdout  // tulis ke layar
-});
-
 rl.question('Pertanyaan: ', (jawaban) => {
   console.log('Kamu jawab: ' + jawaban);
   rl.close(); // tutup readline setelah selesai
@@ -102,29 +97,24 @@ modifikasi array yang sama.
 
 ### Wajib Ada di Kode Kamu
 
-- `const readline = require('readline');` di paling atas
-- `const rl = readline.createInterface({ input: process.stdin, output: process.stdout });`
+- Import module `readline` bawaan Node.js di paling atas
+- Buat interface `rl` yang membaca dari `process.stdin` dan menulis ke `process.stdout`
 - Deklarasi `const todos = [...]` berisi 3 object awal dengan properti `id`, `task`, `done`
 - `id` bertipe number, `task` string, `done` boolean `false`
 
-Contoh data awal (jangan copy paste, pikirkan sendiri):
-
-```javascript
-const todos = [
-  { id: 1, task: 'Belajar JavaScript', done: false },
-  { id: 2, task: 'Buat project portfolio', done: true },
-  { id: 3, task: 'Latihan coding', done: false }
-];
-```
+Tiga todo awalnya bebas, asal ada yang `done: true` dan ada yang `done: false` supaya tampilan `[x]` dan `[ ]` bisa kamu uji.
 
 ### Cara Mengetik dari 0
 
 1. Buka salinan starter `05-todo-list-cli.js` (bukan bikin file baru; lihat catatan di atas)
-2. Baris pertama: `const readline = require('readline');`
+2. Baris pertama: import module `readline`
 3. Bikin `rl` dengan `readline.createInterface`
 4. Di bawahnya, deklarasi `const todos` dengan 3 object awal
 5. Save (Cmd+S / Ctrl+S) — belum ada output apa-apa, ini normal
 
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian A: Konsep `readline` & Setup Awal".
+>
+> Pertanyaan pemandu: module apa yang harus di-import, opsi apa yang dibutuhkan `createInterface`, dan kenapa `todos` dideklarasikan di luar semua function?
 ### Verifikasi
 
 - [ ] File bisa dijalankan dengan `node 05-todo-list-cli.js` tanpa error
@@ -173,14 +163,18 @@ Logikanya:
 
 1. Di bawah deklarasi `todos`, ketik `function tampilkanTodos() {`
 2. Cek `if (todos.length === 0)` dulu — cetak `"Tidak ada tugas"` lalu `return`
-3. Cetak header: `console.log(\`=== ${todos.length} Todo ===\`);`
-4. Loop `for (let i = 0; i < todos.length; i++) {`
-5. Di dalam loop, bikin variabel `const status = todos[i].done ? '[x]' : '[ ]';`
-6. Cetak dengan template literal: `console.log(\`${i + 1}. ${status} ${todos[i].task}\`);`
+3. Cetak header dengan jumlah todo (template literal)
+4. Loop dengan `for` dari indeks 0 sampai sebelum `todos.length`
+5. Di dalam loop, tentukan teks status (`[x]` atau `[ ]`) dari `done`. Operator apa yang cocok untuk memilih satu dari dua nilai?
+6. Cetak nomor urut (indeks + 1), status, dan judul tugas dalam satu baris
 7. Tutup `}` loop
 8. Setelah loop, cetak statistik (total, selesai, belum)
 9. Tutup `}` function
 10. Panggil `tampilkanTodos()` sementara di bawah function untuk tes
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian B: Fungsi `tampilkanTodos()`".
+>
+> Pertanyaan pemandu: kenapa nomor urut yang dicetak bukan `id`, dan di titik mana dalam function array kosong harus ditangani?
 
 ### Verifikasi
 
@@ -221,13 +215,17 @@ langsung. Cari ID terbesar, baru tambah 1.
 ### Cara Mengetik dari 0
 
 1. Di bawah `tampilkanTodos`, ketik `function tambahTodos(task) {`
-2. Cek validasi: `if (!task || task.trim() === '')`
-3. Di dalam if, `return "Error: Task tidak boleh kosong";`
-4. Hitung ID baru: `const newId = todos.length === 0 ? 1 : Math.max(...todos.map(t => t.id)) + 1;`
-5. Push: `todos.push({ id: newId, task: task.trim(), done: false });`
+2. Cek validasi: task kosong atau hanya spasi harus ditolak (dua kondisi, satu `if`)
+3. Di dalam `if`, `return` string pesan error (jangan `console.log` di dalam function)
+4. Hitung ID baru: ID terbesar yang ada + 1, dan jaga kasus `todos` kosong
+5. Tambahkan object todo baru ke `todos` dengan `done: false`
 6. Return string konfirmasi
 7. Tutup `}` function
-8. Tes: `console.log(tambahTodos("Coba coba"));` lalu `tampilkanTodos();`
+8. Tes: cetak hasil `tambahTodos("Coba coba")`, lalu panggil `tampilkanTodos()`
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian C: Fungsi `tambahTodos(task)`".
+>
+> Pertanyaan pemandu: kalau todo dengan ID 2 pernah dihapus, kenapa `todos.length + 1` bisa menghasilkan ID yang bentrok?
 
 ### Verifikasi
 
@@ -266,12 +264,16 @@ posisi itu.
 ### Cara Mengetik dari 0
 
 1. Di bawah `tambahTodos`, ketik `function hapusTodos(id) {`
-2. `const index = todos.findIndex(t => t.id === id);`
-3. `if (index === -1) { return \`Error: ID ${id} tidak ditemukan\`; }`
-4. `const [deleted] = todos.splice(index, 1);` — destructuring ambil item pertama
-5. `return \`Tugas '${deleted.task}' dihapus\`;`
+2. Cari posisi todo dengan ID tersebut di array. Method apa yang mengembalikan indeks, bukan elemennya?
+3. Kalau tidak ketemu (hasilnya `-1`), `return` pesan error
+4. Hapus satu elemen di posisi itu dengan `splice`. `splice` mengembalikan array, jadi ambil elemen pertamanya dengan destructuring
+5. `return` pesan konfirmasi yang menyebut judul tugas yang dihapus
 6. Tutup `}` function
-7. Tes: `console.log(hapusTodos(2));` lalu `tampilkanTodos();`
+7. Tes: cetak hasil `hapusTodos(2)`, lalu panggil `tampilkanTodos()`
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian D: Fungsi `hapusTodos(id)`".
+>
+> Pertanyaan pemandu: apa nilai balik `findIndex` kalau tidak ada yang cocok, dan kenapa harus dicek sebelum `splice`?
 
 ### Verifikasi
 
@@ -309,12 +311,16 @@ ditemukan.
 ### Cara Mengetik dari 0
 
 1. Di bawah `hapusTodos`, ketik `function selesaiTodos(id) {`
-2. `const todo = todos.find(t => t.id === id);`
-3. `if (!todo) { return \`Error: ID ${id} tidak ditemukan\`; }`
-4. `todo.done = true;`
-5. `return \`Tugas '${todo.task}' ditandai selesai\`;`
+2. Cari object todo dengan ID tersebut (kali ini kamu butuh elemennya, bukan indeksnya)
+3. Kalau tidak ketemu, `return` pesan error
+4. Ubah `done` pada object itu jadi `true`. Kenapa tidak perlu menyentuh array `todos` lagi?
+5. `return` pesan konfirmasi yang menyebut judul tugas
 6. Tutup `}` function
-7. Tes: `console.log(selesaiTodos(1));` lalu `tampilkanTodos();`
+7. Tes: cetak hasil `selesaiTodos(1)`, lalu panggil `tampilkanTodos()`
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian E: Fungsi `selesaiTodos(id)`".
+>
+> Pertanyaan pemandu: apa bedanya hasil `find` dan `findIndex`, dan kenapa mengubah properti object hasil `find` ikut mengubah isi `todos`?
 
 ### Verifikasi
 
@@ -358,16 +364,19 @@ dapat **jumlah** (number, bukan array). Ini untuk statistik.
 ### Cara Mengetik dari 0
 
 1. Di bawah `selesaiTodos`, ketik `function belumSelesai() {`
-2. `const filtered = todos.filter(t => !t.done);`
-3. `if (filtered.length === 0) { console.log("Tidak ada tugas yang belum selesai"); return; }`
-4. Cetak header: `console.log(\`=== ${filtered.length} Belum Selesai ===\`);`
+2. Saring `todos` yang belum selesai ke variabel `filtered`
+3. Kalau `filtered` kosong, cetak pesan "Tidak ada tugas yang belum selesai" lalu `return`
+4. Cetak header yang memuat jumlah todo belum selesai
 5. Loop `for` dan cetak setiap todo (boleh copy dari `tampilkanTodos` dan modifikasi)
 6. Tutup `}` function
-7. Di bawahnya, ketik `function jumlahSelesai() {`
-8. `return todos.filter(t => t.done).length;`
+7. Di bawahnya, buat function `jumlahSelesai()`
+8. `return` jumlah todo yang `done`-nya `true` (saring dulu, lalu ambil panjangnya)
 9. Tutup `}` function
-10. Tes: `console.log("Selesai: " + jumlahSelesai()); belumSelesai();`
+10. Tes: cetak hasil `jumlahSelesai()`, lalu panggil `belumSelesai()`
 
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian F: Fungsi `belumSelesai()` & `jumlahSelesai()`".
+>
+> Pertanyaan pemandu: `filter` mengembalikan array, jadi apa yang harus kamu lakukan supaya `jumlahSelesai()` mengembalikan angka?
 ### Verifikasi
 
 - [ ] `belumSelesai()` menampilkan todo yang `done === false`
@@ -429,16 +438,19 @@ di akhir (kecuali `Keluar`) panggil `tampilkanMenu()` lagi.
 2. Cetak header menu (7 baris + garis)
 3. `rl.question('Pilih menu (1-7): ', (pilihan) => {`
 4. `switch (pilihan) {`
-5. Untuk case `'1'`: `case '1': tampilkanTodos(); tampilkanMenu(); break;`
-6. Untuk case `'2'` (lebih kompleks, ada nested question):
-   `case '2': rl.question('Masukkan tugas: ', (task) => { console.log(tambahTodos(task)); tampilkanMenu(); }); return;`
-7. Ulangi pola untuk case `3` dan `4` (minta ID, parseInt, panggil function)
-8. Case `'5'`: panggil `belumSelesai()`, lalu `tampilkanMenu()`
-9. Case `'6'`: cetak statistik dengan `console.log`, lalu `tampilkanMenu()`
-10. Case `'7'`: `rl.close(); break;`
-11. `default: console.log('Pilihan tidak valid'); tampilkanMenu();`
+5. Untuk case `'1'`: panggil function tampil, lalu panggil `tampilkanMenu()` lagi supaya menu muncul kembali
+6. Untuk case `'2'` (lebih kompleks, ada pertanyaan bersarang): minta input task dengan `rl.question` lagi, cetak hasil `tambahTodos`, lalu panggil `tampilkanMenu()` di dalam callback. Kenapa `tampilkanMenu()` tidak boleh ditaruh setelah `rl.question` di luar callback?
+7. Ulangi pola untuk case `3` dan `4` (minta ID, `parseInt`, panggil function)
+8. Case `'5'`: panggil `belumSelesai()`, lalu menu lagi
+9. Case `'6'`: cetak statistik dengan `console.log`, lalu menu lagi
+10. Case `'7'`: tutup `rl`. Menu tidak dipanggil lagi, jadi program selesai
+11. `default`: cetak pesan pilihan tidak valid, lalu menu lagi
 12. Tutup `});` (untuk question) dan `}` (untuk function)
 13. **Penting**: panggil `tampilkanMenu();` di paling bawah file agar program mulai
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "05 Todo List CLI — Bagian G: Menu Interaktif".
+>
+> Pertanyaan pemandu: `rl.question` itu asynchronous, jadi di titik mana tiap case harus memanggil `tampilkanMenu()` supaya menu muncul setelah jawaban diproses, bukan sebelumnya?
 
 ### Verifikasi
 

@@ -57,7 +57,7 @@ Mereka adalah potongan class Laravel. Kamu harus menaruhnya di dalam project Lar
 ### Langkah
 
 1. `php artisan make:request StoreProductRequest`
-2. Bandingkan dengan starter `code/01-store-product-request.php`, isi `rules()` dan `messages()`
+2. Bandingkan dengan starter `code/01-store-product-request.php`, isi `rules()` dan `messages()`. Policy baru ada di topik 08, jadi sementara buat `authorize()` mengembalikan `true` (starter-nya `false`, semua request kena `403`). Ganti dengan policy setelah topik 08
 3. Pakai di `ProductController@store` dengan type-hint `StoreProductRequest $request`
 4. Simpan dengan `Product::create($request->validated())`
 
@@ -77,7 +77,7 @@ Mereka adalah potongan class Laravel. Kamu harus menaruhnya di dalam project Lar
 2. Salin isi TODO dari `code/02-update-product-request.php`
 3. Daftarkan route `PATCH /products/{product}` di `routes/api.php` dengan middleware `auth:sanctum`
    (atau di `routes/web.php` dengan middleware `auth` kalau kamu memakai form)
-4. Isi `authorize()`, `prepareForValidation()`, `rules()`, `after()`, `attributes()`
+4. Isi `authorize()`, `prepareForValidation()`, `rules()`, `after()`, `attributes()`. Untuk `authorize()`: sebelum policy topik 08 ada, pakai `true` sementara, lalu ganti dengan policy
 5. Tulis `tests/Feature/UpdateProductTest.php`
 
 ### Verifikasi
@@ -144,7 +144,8 @@ php artisan route:list --path=latihan
 
 # 3. Buat satu kategori untuk uji manual
 php artisan tinker
->>> App\Models\Category::create(['name' => 'Aksesoris'])
+>>> App\Models\Category::create(['name' => 'Aksesoris', 'slug' => 'aksesoris'])   // slug wajib (kolom NOT NULL)
+# Catat id yang tampil. Kalau bukan 1 (misal kategori dari seeder topik 05 sudah ada), ganti "category_id" di dua curl di bawah.
 
 # 4. Harus 422 (harga negatif)
 curl -i -X POST http://127.0.0.1:8000/api/latihan/products \

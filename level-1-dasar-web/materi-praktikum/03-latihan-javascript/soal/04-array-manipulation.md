@@ -108,21 +108,14 @@ kalau mau data asli tetap utuh).
 
 1. Salin `code/04-array-manipulation.js` ke `latihan-saya/02-javascript/minggu-XX/04-array-manipulation.js`, lalu buka salinannya di VS Code
 2. Cari komentar `TODO A1: data mahasiswa`
-3. Ketik deklarasi array dengan 6 object literal:
-   ```javascript
-   const mahasiswa = [
-     { nama: "Andi",  nilai: 85 },
-     { nama: "Budi",  nilai: 72 },
-     { nama: "Citra", nilai: 90 },
-     { nama: "Dewi",  nilai: 65 },
-     { nama: "Eko",   nilai: 78 },
-     { nama: "Fira",  nilai: 95 },
-   ];
-   ```
-4. Untuk push, simpan hasil ke variabel: `const tambahMahasiswa = [...mahasiswa, { nama: "Gita", nilai: 88 }];`
-   (perhatikan: pakai spread, bukan `push` langsung — ini cara **non-mutasi**)
-5. Untuk pop, ambil semua kecuali terakhir: `const kurangMahasiswa = mahasiswa.slice(0, -1);`
+3. Ketik deklarasi array berisi 6 object literal (`nama` dan `nilai`) sesuai daftar di atas
+4. Untuk "push", simpan hasilnya ke variabel baru tanpa memutasi `mahasiswa` (petunjuk: spread operator)
+5. Untuk "pop", ambil semua elemen kecuali yang terakhir ke variabel baru (petunjuk: `slice` dengan indeks negatif)
 6. Save dan jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian A: Data Awal dan `push` / `pop`".
+>
+> Pertanyaan pemandu: kenapa hasil `push` yang kamu simpan ke variabel baru tidak mengubah `mahasiswa.length`, dan apa bedanya dengan memanggil `mahasiswa.push(...)` langsung?
 
 ### Yang Terjadi di Kode
 
@@ -176,12 +169,14 @@ Untuk data mahasiswa, kita bisa pakai `map` untuk:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO B: map -- Transformasi`
-2. Untuk `namaList`, ketik:
-   `const namaList = mahasiswa.map(m => m.nama);`
-3. Untuk `nilaiDouble`, kamu bisa `map` ke `mahasiswa.map(m => m.nilai * 2)`
-   atau kalau mau object utuh: `mahasiswa.map(m => ({ nama: m.nama, nilai: m.nilai * 2 }))`
-4. Untuk `mahasiswaNilaiDouble`, pakai pola object di atas
+2. Untuk `namaList`, tentukan apa yang dikembalikan callback `map` untuk tiap mahasiswa (cukup satu property)
+3. Untuk `nilaiDouble`, callback mengembalikan angka hasil perhitungan dari `nilai`
+4. Untuk `mahasiswaNilaiDouble`, callback mengembalikan object baru. Hati-hati: kalau callback arrow langsung mengembalikan object literal, `{ ... }` harus dibungkus apa supaya tidak dianggap blok kode?
 5. Save, jalankan, cek output di terminal
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian B: `map` — Transformasi 1-to-1".
+>
+> Pertanyaan pemandu: apa yang harus dikembalikan callback `map` supaya panjang array hasil sama dengan aslinya, dan kenapa object literal di arrow function butuh tanda kurung?
 
 ### Yang Terjadi di Kode
 
@@ -238,10 +233,14 @@ Untuk mahasiswa, kita bisa filter:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO C: filter -- Penyaringan`
-2. Ketik `const lulus = mahasiswa.filter(m => m.nilai >= 75);`
-3. Di bawahnya, `const remidi = mahasiswa.filter(m => m.nilai < 60);`
-4. Di bawahnya, `const cumlaude = mahasiswa.filter(m => m.nilai >= 90);`
+2. Untuk `lulus`, tulis kondisi boolean di callback `filter` berdasarkan ambang 75
+3. Untuk `remidi`, pakai pola yang sama dengan ambang dan arah perbandingan yang berbeda
+4. Untuk `cumlaude`, pakai pola yang sama lagi dengan ambang 90
 5. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian C: `filter` — Penyaringan Elemen".
+>
+> Pertanyaan pemandu: kondisi apa yang harus bernilai `true` supaya sebuah elemen lolos, dan kenapa `remidi` kosong untuk data ini?
 
 ### Yang Terjadi di Kode
 
@@ -292,10 +291,14 @@ Format: `array.find((elemen) => boolean)`. Begitu ketemu yang cocok, dia
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO D: find -- Pencarian`
-2. Ketik `const cariEko = mahasiswa.find(m => m.nama === "Eko");`
-3. Ketik `const nilaiDiAtas80 = mahasiswa.find(m => m.nilai > 80);`
-4. Ketik `const cariZara = mahasiswa.find(m => m.nama === "Zara");`
+2. Untuk `cariEko`, tulis callback `find` yang membandingkan `nama` dengan "Eko"
+3. Untuk `nilaiDiAtas80`, callback membandingkan `nilai` dengan 80
+4. Untuk `cariZara`, pakai pola yang sama dengan nama yang tidak ada di data
 5. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian D: `find` — Pencarian".
+>
+> Pertanyaan pemandu: `find` mengembalikan satu elemen atau array, dan apa yang kamu dapat kalau tidak ada yang cocok?
 
 ### Yang Terjadi di Kode
 
@@ -356,14 +359,14 @@ Untuk mahasiswa, kita bisa hitung:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO E: reduce -- Akumulasi`
-2. Ketik `const totalNilai = mahasiswa.reduce((sum, m) => sum + m.nilai, 0);`
-3. Ketik `const rataRata = totalNilai / mahasiswa.length;`
-4. Untuk total lulus, ada 2 cara:
-   - **Cara 1**: filter dulu, baru reduce:
-     `const totalLulus = mahasiswa.filter(m => m.nilai >= 75).reduce((sum, m) => sum + m.nilai, 0);`
-   - **Cara 2**: reduce langsung dengan kondisi:
-     `const totalLulus = mahasiswa.reduce((sum, m) => m.nilai >= 75 ? sum + m.nilai : sum, 0);`
+2. Untuk `totalNilai`, pikirkan apa yang jadi akumulator, apa nilai awalnya, dan apa yang ditambahkan di tiap langkah
+3. Untuk `rataRata`, cukup bagi total dengan jumlah elemen
+4. Untuk total lulus, ada 2 cara: (1) saring dulu dengan `filter`, baru `reduce`; (2) satu `reduce` saja dengan kondisi di dalam callback
 5. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian E: `reduce` — Akumulasi".
+>
+> Pertanyaan pemandu: apa yang jadi akumulator, nilai awalnya, dan apa yang dikembalikan callback di setiap langkah? Coba jalankan di kertas dengan 3 data pertama.
 
 ### Yang Terjadi di Kode
 
@@ -422,12 +425,14 @@ Bedanya dengan `filter`/`find`:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO F: some & every`
-2. Ketik `const adaRemidi = mahasiswa.some(m => m.nilai < 60);`
-3. Ketik `const adaSempurna = mahasiswa.some(m => m.nilai === 100);`
-4. Ketik `const semuaLulus = mahasiswa.every(m => m.nilai >= 60);`
-5. Untuk "semua di atas rata-rata", kamu butuh `rataRata` dari Bagian E:
-   `const semuaDiAtasRata = mahasiswa.every(m => m.nilai > rataRata);`
-6. Save, jalankan
+2. Untuk `adaRemidi` dan `adaSempurna`, pakai `some` dengan kondisi yang sesuai
+3. Untuk `semuaLulus`, pakai `every` dengan ambang kelulusan 60
+4. Untuk "semua di atas rata-rata", kamu butuh `rataRata` dari Bagian E, lalu pakai `every` dengan perbandingan ke nilai itu
+5. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian F: `some` dan `every`".
+>
+> Pertanyaan pemandu: `some` berhenti di elemen pertama yang cocok, sedangkan `every` berhenti di elemen pertama yang gagal. Apa hasilnya pada array kosong?
 
 ### Yang Terjadi di Kode
 
@@ -485,11 +490,13 @@ Untuk mahasiswa, kita urutkan:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO G: sort -- Pengurutan`
-2. Untuk urut nama, ketik:
-   `const urutNama = [...mahasiswa].sort((a, b) => a.nama.localeCompare(b.nama));`
-3. Untuk urut nilai descending, ketik:
-   `const urutNilai = [...mahasiswa].sort((a, b) => b.nilai - a.nilai);`
+2. Untuk urut nama, buat copy array dulu, lalu urutkan dengan comparator yang membandingkan string (lihat catatan `localeCompare` di bawah)
+3. Untuk urut nilai descending, comparator mengembalikan angka negatif kalau `a` harus di depan `b`. Rumus apa yang membuat nilai besar di depan?
 4. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian G: `sort` — Pengurutan".
+>
+> Pertanyaan pemandu: kalau comparator mengembalikan angka negatif, positif, atau nol, apa artinya untuk urutan `a` dan `b`?
 5. **PENTING**: cek `mahasiswa[0].nama` setelah sort — harus tetap "Andi" (artinya array asli tidak berubah)
 
 ### Yang Terjadi di Kode
@@ -552,21 +559,13 @@ Untuk mahasiswa, kita coba dua chaining:
 ### Cara Mengetik dari 0
 
 1. Cari komentar `TODO H: Chaining`
-2. Ketik:
-   ```javascript
-   const namaLulusSorted = mahasiswa
-     .filter(m => m.nilai >= 75)
-     .map(m => m.nama)
-     .sort();
-   ```
-3. Untuk top 3, kamu bisa pakai `slice(0, 3)` setelah sort:
-   ```javascript
-   const top3Nama = [...mahasiswa]
-     .sort((a, b) => b.nilai - a.nilai)
-     .slice(0, 3)
-     .map(m => m.nama);
-   ```
+2. Untuk `namaLulusSorted`, rangkai: saring yang lulus, ambil namanya saja, lalu urutkan A-Z (tiap method di baris baru)
+3. Untuk `top3Nama`, mulai dari copy array, urutkan berdasarkan nilai descending, ambil 3 teratas, lalu ambil namanya saja
 4. Save, jalankan
+
+> Belum ketemu? Tulis dulu versimu. Kalau benar-benar buntu, solusi ada di [`../solusi-jangan-dibuka-dulu.md`](../solusi-jangan-dibuka-dulu.md), bagian "04 Array Manipulation — Bagian H: Chaining".
+>
+> Pertanyaan pemandu: di tiap titik rangkaian, array apa yang sedang dipegang, dan apa yang akan terjadi kalau urutan `map` dan `filter` ditukar?
 
 ### Yang Terjadi di Kode
 

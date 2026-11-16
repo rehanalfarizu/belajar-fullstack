@@ -90,3 +90,18 @@ const getApiBaseUrl = () => {
   return 'http://localhost:3001/api'; // fallback
 };
 ````
+
+
+## 03-database-production — Environment Variables Checklist
+
+```bash
+# Development (.env)
+DATABASE_URL=postgresql://postgres:password@localhost:5432/myapp_dev
+JWT_SECRET=dev_secret_do_not_use_in_production
+NODE_ENV=development
+
+# Production (.env — di Railway dashboard, BUKAN di file)
+DATABASE_URL=<from Railway PostgreSQL plugin>
+JWT_SECRET=<generate: openssl rand -hex 32>
+NODE_ENV=production
+```

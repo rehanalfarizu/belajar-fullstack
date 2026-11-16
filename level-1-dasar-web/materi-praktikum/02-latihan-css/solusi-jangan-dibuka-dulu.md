@@ -191,6 +191,26 @@ tr:nth-child(even) {
 ```
 
 
+## 04 Card Component — Bagian A: Anatomi Card & Base Style
+
+```html
+<div class="card">
+  <h3>Judul Card</h3>
+  <p>Ini konten di dalam card. Padding membuat teks tidak nempel ke tepi.</p>
+</div>
+```
+
+```css
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* bayangan halus */
+  max-width: 320px; /* batas lebar */
+}
+```
+
+
 ## 04 Card Component — Bagian B: Layout Container dengan Flexbox
 
 ```css
